@@ -1,8 +1,9 @@
 package org.kwstudios.play.ragemode.commands;
 
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
+import org.kwstudios.play.ragemode.toolbox.MapChecker;
 
 public class PlayerJoin {
 	
@@ -12,7 +13,6 @@ public class PlayerJoin {
 	private String label;
 	private String[] args;
 	private FileConfiguration fileConfiguration;
-	private boolean isRageModeMap = false;
 	
 	public PlayerJoin(Player player, String label, String[] args, FileConfiguration fileConfiguration){
 		this.player = player;
@@ -23,12 +23,15 @@ public class PlayerJoin {
 	}
 	
 	private void doPlayerJoin(){
-		if(!fileConfiguration.isSet(GAME_PATH + "." + args[1])){
-			player.sendMessage(ChatColor.YELLOW + args[1] + ChatColor.DARK_RED + " is not a valid RageMode Map.");
-			isRageModeMap = false;
-		}else{
-			isRageModeMap = true;
+		MapChecker mapChecker = new MapChecker(args[1], fileConfiguration);
+		if(mapChecker.isValid()){
+			String world = ConfigFactory.getString(GAME_PATH + "." + args[1] + ".lobby", "world", fileConfiguration);			
+			int lobbyX = ConfigFactory.getInt(GAME_PATH + "." + args[1] + ".lobby", "x", fileConfiguration);
+			int lobbyY = ConfigFactory.getInt(GAME_PATH + "." + args[1] + ".lobby", "y", fileConfiguration);
+			int lobbyZ = ConfigFactory.getInt(GAME_PATH + "." + args[1] + ".lobby", "y", fileConfiguration);
 			
+		}else{
+			player.sendMessage(mapChecker.getMessage());
 		}
 	}
 

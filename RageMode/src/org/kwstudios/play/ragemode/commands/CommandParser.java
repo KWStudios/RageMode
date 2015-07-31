@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 public class CommandParser {
 	
 	private Player player;
+	@SuppressWarnings("unused")
 	private Command command;
 	private String label;
 	private String[] args;
@@ -39,9 +40,11 @@ public class CommandParser {
 	private void parseFirstArg(){
 		switch (args[0].toLowerCase()){
 		case "add":
-			AddGame addGame = new AddGame(player, label, args, fileConfiguration);
+			new AddGame(player, label, args, fileConfiguration);
 			break;
-			
+		case "lobby":
+			new AddLobby(player, label, args, fileConfiguration);
+			break;
 		default:
 			player.sendMessage(ChatColor.DARK_RED + "This is not a valid RageMode command! Type /help ragemode for more help.");
 			break;

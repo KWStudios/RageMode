@@ -45,6 +45,15 @@ public class ConfigFactory {
 //		save();
 	}
 	
+	public static double getDouble(String path, String key, FileConfiguration fileConfiguration) {
+		return fileConfiguration.getDouble(path + "." + key);
+	}
+
+	public static void setDouble(String path, String key, double value, FileConfiguration fileConfiguration) {
+		fileConfiguration.set(path + "." + key, value);
+//		save();
+	}
+	
 	public static Set<String> getKeysUnderPath(String path, boolean deep, FileConfiguration fileConfiguration){
 		Set<String> keys = fileConfiguration.getConfigurationSection(path).getKeys(deep);
 		return keys;

@@ -45,6 +45,12 @@ public class CommandParser {
 		case "lobby":
 			new AddLobby(player, label, args, fileConfiguration);
 			break;
+		case "addspawn":
+			new AddSpawn(player, label, args, fileConfiguration);
+			break;
+		case "join":
+			new PlayerJoin(player, label, args, fileConfiguration);
+			break;
 		default:
 			player.sendMessage(ChatColor.DARK_RED + "This is not a valid RageMode command! Type /help ragemode for more help.");
 			break;

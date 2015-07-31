@@ -44,6 +44,7 @@ public class PluginLoader extends JavaPlugin{
 		Player player = (Player)sender;
 		
 		CommandParser commandParser = new CommandParser(player, command, label, args, getConfig());
+		
 		if(!commandParser.isCommand()){
 			return false;
 		}

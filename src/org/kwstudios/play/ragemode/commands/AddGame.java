@@ -31,7 +31,7 @@ public class AddGame {
 			return;
 		}
 
-		if (fileConfiguration.get("settings.games." + args[1]) == "") {
+		if (fileConfiguration.isSet("settings.games." + args[1])) {
 			player.sendMessage(ChatColor.DARK_RED + args[1] + " already exists.");
 			return;
 		}

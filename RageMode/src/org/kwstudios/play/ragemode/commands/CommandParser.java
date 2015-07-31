@@ -26,11 +26,24 @@ public class CommandParser {
 	
 	private void checkCommand(){
 		switch (label.toLowerCase()) {
-		case "setlobby":
+		case "rm":
+			parseFirstArg();
 			break;
 
 		default:
 			isCommand = false;
+			break;
+		}
+	}
+	
+	private void parseFirstArg(){
+		switch (args[0].toLowerCase()){
+		case "add":
+			AddGame addGame = new AddGame(player, label, args, fileConfiguration);
+			break;
+			
+		default:
+			player.sendMessage(ChatColor.DARK_RED + "This is not a valid RageMode command! Type /help ragemode for more help.");
 			break;
 		}
 	}

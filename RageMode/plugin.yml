@@ -1,0 +1,11 @@
+name: RageMode
+main: org.kwstudios.play.ragemode.loader.PluginLoader
+version: 0.1Alpha
+
+commands:
+  rm:
+    description: Main command!
+    aliases: ['ragemode', 'kwragemode']
+    permission: ragemode.rm
+    permission-message: You may not use that command!
+    

@@ -47,14 +47,17 @@ public class PlayerList {
 				* (GetGames.getOverallMaxPlayers(fileConfiguration) + 1);
 		int playersPerGame = GetGames.getOverallMaxPlayers(fileConfiguration);
 		while (i <= imax) {
-			if (list[i].equals(game)) {
-				n = i;
-				while (n < GetGames.getMaxPlayers(game, fileConfiguration)) {
-					players[n] = list[n];
-					n++;
+			if(list[i] != null) {
+				if (list[i].equals(game)) {
+					n = i;
+					while (n < GetGames.getMaxPlayers(game, fileConfiguration)) {
+						players[n] = list[n];
+						n++;
+					}
 				}
+			i = i + playersPerGame;	
 			}
-			i = i + playersPerGame;
+			
 		}
 		return players;
 	}

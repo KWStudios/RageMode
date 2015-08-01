@@ -22,7 +22,7 @@ public class PluginLoader extends JavaPlugin{
 		logger.info(pluginDescriptionFile.getName() + " was loaded successfully! (Version: " + pluginDescriptionFile.getVersion() + ")" );
 		//getConfig().options().copyDefaults(true);
 		//saveConfig();
-		PlayerList playerList = new PlayerList(getConfig());
+		new PlayerList(getConfig());
 	}
 
 	@Override

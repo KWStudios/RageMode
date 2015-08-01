@@ -139,7 +139,7 @@ public class PlayerList {
 	public static boolean isGameRunning(String game) {
 		int i = 0;
 		int imax = runningGames.length;
-		while(i <= imax) {
+		while(i < imax) {
 			if(runningGames[i].equals(game)) {
 				return true;
 			}

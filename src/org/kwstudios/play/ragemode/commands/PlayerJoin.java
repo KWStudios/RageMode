@@ -30,6 +30,10 @@ public class PlayerJoin {
 	}
 	
 	private void doPlayerJoin(){
+		if(args.length < 2) {
+			player.sendMessage(ChatColor.DARK_RED + "Missing arguments! Usage: /rm join <GameName>");
+			return;
+		}
 		MapChecker mapChecker = new MapChecker(args[1], fileConfiguration);
 		if(mapChecker.isValid()){
 			String world = ConfigFactory.getString(GAME_PATH + "." + args[1] + ".lobby", "world", fileConfiguration);			

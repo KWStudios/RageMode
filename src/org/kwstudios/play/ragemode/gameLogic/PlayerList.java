@@ -59,7 +59,7 @@ public class PlayerList {
 		int kickposition;
 		int imax = GetGames.getConfigGamesCount(fileConfiguration)*(GetGames.getOverallMaxPlayers(fileConfiguration)+1);
 		int playersPerGame = GetGames.getOverallMaxPlayers(fileConfiguration);
-		while(i <= imax) {
+		while(i < imax) {
 			if(player.getUniqueId().toString().equals(list[i])) {
 				player.sendMessage("You are already in a game. You can leave it by typing /rm leave .");
 				return false;
@@ -67,7 +67,7 @@ public class PlayerList {
 			i++;
 		}
 		i = 0;
-		while(i <= imax) {
+		while(i < imax) {
 			if(list[i].equals(game)) {
 				n = i;
 				while(n <= GetGames.getMaxPlayers(game, fileConfiguration)) {

@@ -25,7 +25,7 @@ public class GetGames {
 	public static String[] getGameNames(FileConfiguration fileConfiguration) {
 		String[] names = new String[getConfigGamesCount(fileConfiguration)];
 		
-		names = (String[]) ConfigFactory.getKeysUnderPath("settings.games", false, fileConfiguration).toArray();
+		ConfigFactory.getKeysUnderPath("settings.games", false, fileConfiguration).toArray(names);
 		return names;
 	}
 	

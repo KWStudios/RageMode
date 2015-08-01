@@ -38,6 +38,7 @@ public class GetGames {
 			x = ConfigFactory.getInt("settings.games." + names[i], "maxplayers", fileConfiguration);
 			if(n < x) 
 				n = x;
+			i++;
 		}
 		return n;
 	}

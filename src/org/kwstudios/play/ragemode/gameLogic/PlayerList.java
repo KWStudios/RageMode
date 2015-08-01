@@ -51,6 +51,7 @@ public class PlayerList {
 				n = i;
 				while (n < GetGames.getMaxPlayers(game, fileConfiguration)) {
 					players[n] = list[n];
+					n++;
 				}
 			}
 			i = i + playersPerGame;

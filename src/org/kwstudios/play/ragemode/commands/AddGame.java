@@ -23,6 +23,10 @@ public class AddGame {
 	}
 
 	private void addGametoConfig() {
+		if(args.length < 3) {
+			player.sendMessage(ChatColor.DARK_RED + "Missing arguments!");
+			return;
+		}
 		int x;
 		try {
 			x = Integer.parseInt(args[2]);
@@ -37,10 +41,11 @@ public class AddGame {
 		}
 
 		ConfigFactory.setString("settings.games", args[1], "", fileConfiguration);
-
 		ConfigFactory.setInt("settings.games." + args[1], "maxplayers", Integer.parseInt(args[2]), fileConfiguration);
-
 		ConfigFactory.setString("settings.games." + args[1], "world", player.getWorld().getName(), fileConfiguration);
+		
+		player.sendMessage(ChatColor.DARK_GREEN + "The game " + ChatColor.DARK_AQUA + args[1]
+				+ ChatColor.DARK_GREEN + " was added successfully!");
 		return;
 	}
 

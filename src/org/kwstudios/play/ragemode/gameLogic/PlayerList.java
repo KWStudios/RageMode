@@ -163,6 +163,7 @@ public class PlayerList {
 						if (oldLocations.getFromFirstObject(n) == player) {
 							player.teleport(oldLocations.getFromSecondObject(n));
 						}
+						n++;
 					}
 					list[i] = null;
 					return true;
@@ -195,12 +196,14 @@ public class PlayerList {
 		while (i < imax) {
 			if (runningGames[i].equals(game))
 				return false;
+			i++;
 		}
 		i = 0;
 		while (i < imax) {
 			if (runningGames[i] == null) {
 				runningGames[i] = game;
 			}
+			i++;
 		}
 		return false;
 	}

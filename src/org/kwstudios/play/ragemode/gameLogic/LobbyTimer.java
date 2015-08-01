@@ -2,7 +2,9 @@ package org.kwstudios.play.ragemode.gameLogic;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
 
@@ -35,10 +37,16 @@ public class LobbyTimer {
 
 	private void sendTimerMessages() {
 		Timer t = new Timer();
+		
+		int totalTimerMillis = secondsRemaining * 1000;
 
 		t.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
 				System.out.println("10 seconds passed");
+				for(int i=0; i < playerUUIDs.length; i++){
+					Bukkit.getPlayer(UUID.fromString(playerUUIDs[i])).sendMessage("10 seconds passed");
+				}
+				
 			}
 		}, 0, 10000);
 

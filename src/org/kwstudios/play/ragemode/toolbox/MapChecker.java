@@ -12,7 +12,7 @@ public class MapChecker {
 	private String gameName;
 	private FileConfiguration fileConfiguration;
 	private boolean isValid = false;
-	String message;
+	String message = "";
 	int maxPlayers;
 
 	public MapChecker(String gameName, FileConfiguration fileConfiguration) {
@@ -64,16 +64,16 @@ public class MapChecker {
 	private void checkLobby() {
 		if (!fileConfiguration.isSet(GAME_PATH + "." + gameName + "." + "lobby")) {
 			message = ChatColor.DARK_RED + "The lobby was not set yet for " + ChatColor.DARK_AQUA + gameName
-					+ ". Set it with /rm lobby [game name]";
+					+ ChatColor.DARK_RED + ". Set it with /rm lobby [game name]";
 			isValid = false;
 		} else {
 			String thisPath = GAME_PATH + "." + gameName + "." + "lobby";
 			if (fileConfiguration.isSet(thisPath + ".x") && fileConfiguration.isSet(thisPath + ".y")
 					&& fileConfiguration.isSet(thisPath + ".z") && fileConfiguration.isSet(thisPath + ".world")) {
-				if (ConfigFactory.getString(thisPath, "world", fileConfiguration) != "") {
-					if (ConfigFactory.getInt(thisPath, "x", fileConfiguration) != -32500000
-							&& ConfigFactory.getInt(thisPath, "y", fileConfiguration) != -32500000
-							&& ConfigFactory.getInt(thisPath, "z", fileConfiguration) != -32500000) {
+				if (!ConfigFactory.getString(thisPath, "world", fileConfiguration).isEmpty()) {
+					if (isInt(ConfigFactory.getString(thisPath, "x", fileConfiguration))
+							&& isInt(ConfigFactory.getString(thisPath, "y", fileConfiguration))
+							&& isInt(ConfigFactory.getString(thisPath, "z", fileConfiguration))) {
 						isValid = true;
 					} else {
 						message = ChatColor.DARK_RED
@@ -81,7 +81,13 @@ public class MapChecker {
 						isValid = false;
 						return;
 					}
+				} else {
+					message = ChatColor.DARK_RED + "The world key can't be empty. Ask an Admin to check the config.yml";
+					isValid = false;
 				}
+			} else {
+				message = ChatColor.DARK_RED + "The lobby was not set properly. Ask an Admin to check the config.yml";
+				isValid = false;
 			}
 		}
 	}
@@ -92,9 +98,9 @@ public class MapChecker {
 			Set<String> spawnNames = ConfigFactory.getKeysUnderPath(path + ".spawns", false, fileConfiguration);
 			if (spawnNames.size() >= maxPlayers) {
 				for (String s : spawnNames) {
-					if (ConfigFactory.getInt(path + ".spawns." + s, "x", fileConfiguration) != -32500000
-							&& ConfigFactory.getInt(path + ".spawns." + s, "y", fileConfiguration) != -32500000
-							&& ConfigFactory.getInt(path + ".spawns." + s, "z", fileConfiguration) != -32500000) {
+					if (isInt(ConfigFactory.getString(path + ".spawns." + s, "x", fileConfiguration))
+							&& isInt(ConfigFactory.getString(path + ".spawns." + s, "y", fileConfiguration))
+							&& isInt(ConfigFactory.getString(path + ".spawns." + s, "z", fileConfiguration))) {
 						isValid = true;
 					} else {
 						message = ChatColor.DARK_RED + "One or more spawns are not set properly!";
@@ -111,6 +117,15 @@ public class MapChecker {
 			message = ChatColor.DARK_RED + "In " + gameName + " are no spawns configured!";
 			isValid = false;
 		}
+	}
+
+	private boolean isInt(String string) {
+		try {
+			Integer.parseInt(string);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 
 	public boolean isValid() {

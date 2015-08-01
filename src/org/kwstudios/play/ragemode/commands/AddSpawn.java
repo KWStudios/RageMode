@@ -40,7 +40,7 @@ public class AddSpawn {
 		ConfigFactory.setInt("settings.games." + args[1] + ".spawns." + Integer.toString(i), "z", player.getLocation().getBlockZ(), fileConfiguration);
 		ConfigFactory.setDouble("settings.games." + args[1] + ".spawns." + Integer.toString(i), "yaw", player.getLocation().getYaw(), fileConfiguration);
 		ConfigFactory.setDouble("settings.games." + args[1] + ".spawns." + Integer.toString(i), "pitch", player.getLocation().getPitch(), fileConfiguration);
-		player.sendMessage(ChatColor.DARK_GREEN + "Spawn " + Integer.toString(i) + "for the game " + ChatColor.DARK_AQUA + args[1]
+		player.sendMessage(ChatColor.DARK_GREEN + "Spawn " + Integer.toString(i) + " for the game " + ChatColor.DARK_AQUA + args[1]
 				+ ChatColor.DARK_GREEN + " was set successfully!");
 	}
 

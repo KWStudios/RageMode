@@ -41,5 +41,18 @@ public class GetGames {
 		}
 		return n;
 	}
+	
+	public static boolean isGameExistent(String game, FileConfiguration fileConfiguration) {
+		int i = 0;
+		int imax = getConfigGamesCount(fileConfiguration);
+		String[] games = getGameNames(fileConfiguration);
+		while(i < imax) {
+			if(games[i].equals(game)) {
+				return true;
+			}
+		}
+		return false;
+			
+	}
 
 }

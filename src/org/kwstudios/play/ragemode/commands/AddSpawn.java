@@ -25,6 +25,10 @@ public class AddSpawn {
 	}
 	
 	private void addSpawnToConfig() {
+		if(args.length < 2) {
+			player.sendMessage(ChatColor.DARK_RED + "Missing arguments! Usage: /rm addspawn <GameName>");
+			return;
+		}
 		int i = 1;
 		if(!fileConfiguration.isSet("settings.games." + args[1])) {
 			player.sendMessage(ChatColor.DARK_RED + args[1] + " doesn't exist.");

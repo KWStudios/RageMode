@@ -49,7 +49,7 @@ public class PlayerList {
 		while (i <= imax) {
 			if(list[i] != null) {
 				if (list[i].equals(game)) {
-					n = i;
+					n = i + 1;
 					while (n < GetGames.getMaxPlayers(game, fileConfiguration)) {
 						players[n] = list[n];
 						n++;
@@ -102,7 +102,7 @@ public class PlayerList {
 									+ ChatColor.DARK_AQUA + game
 									+ ChatColor.WHITE + ".");
 
-							if (getPlayersInGame(game).length >= 2) {
+							if (getPlayersInGame(game).length == 2) {
 								new LobbyTimer(game, getPlayersInGame(game),
 										fileConfiguration);
 							}
@@ -130,7 +130,7 @@ public class PlayerList {
 					playerToKick
 							.sendMessage("You were kicked out of the Game to make room for a VIP.");
 
-					if (getPlayersInGame(game).length >= 2) {
+					if (getPlayersInGame(game).length == 2) {
 						new LobbyTimer(game, getPlayersInGame(game),
 								fileConfiguration);
 					}
@@ -159,7 +159,7 @@ public class PlayerList {
 				if (player.getUniqueId().toString().equals(list[i])) {
 					player.sendMessage("You left your current Game");
 
-					while (n <= oldLocations.getFirstLength()) {
+					while (n < oldLocations.getFirstLength()) {
 						if (oldLocations.getFromFirstObject(n) == player) {
 							player.teleport(oldLocations.getFromSecondObject(n));
 						}

@@ -29,6 +29,7 @@ public class CommandParser {
 		switch (label.toLowerCase()) {
 		case "rm":
 			parseFirstArg();
+			isCommand = true;
 			break;
 
 		default:

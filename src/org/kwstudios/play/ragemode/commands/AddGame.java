@@ -26,7 +26,7 @@ public class AddGame {
 		int x;
 		try {
 			x = Integer.parseInt(args[2]);
-		} catch (NumberFormatException i) {
+		} catch (Exception e) {
 			player.sendMessage(ChatColor.DARK_RED + args[2] + " is not a number.");
 			return;
 		}

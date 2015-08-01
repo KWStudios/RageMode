@@ -34,7 +34,7 @@ public class GetGames {
 		int n = 0;
 		int x;
 		String[] names = getGameNames(fileConfiguration);
-		while(i <= getGameNames(fileConfiguration).length) {
+		while(i < names.length) {
 			x = ConfigFactory.getInt("settings.games." + names[i], "maxplayers", fileConfiguration);
 			if(n < x) 
 				n = x;
@@ -51,6 +51,7 @@ public class GetGames {
 			if(games[i].equals(game)) {
 				return true;
 			}
+			i++;
 		}
 		return false;
 			

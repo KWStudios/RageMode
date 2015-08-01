@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.kwstudios.play.ragemode.gameLogic.PlayerList;
 import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
 
 public class AddGame {
@@ -24,7 +25,7 @@ public class AddGame {
 
 	private void addGametoConfig() {
 		if(args.length < 3) {
-			player.sendMessage(ChatColor.DARK_RED + "Missing arguments!");
+			player.sendMessage(ChatColor.DARK_RED + "Missing arguments! Usage: /rm add <GameName> <MaxPlayers>");
 			return;
 		}
 		int x;
@@ -43,6 +44,8 @@ public class AddGame {
 		ConfigFactory.setString("settings.games", args[1], "", fileConfiguration);
 		ConfigFactory.setInt("settings.games." + args[1], "maxplayers", Integer.parseInt(args[2]), fileConfiguration);
 		ConfigFactory.setString("settings.games." + args[1], "world", player.getWorld().getName(), fileConfiguration);
+		
+		PlayerList.updateListSize(fileConfiguration);
 		
 		player.sendMessage(ChatColor.DARK_GREEN + "The game " + ChatColor.DARK_AQUA + args[1]
 				+ ChatColor.DARK_GREEN + " was added successfully!");

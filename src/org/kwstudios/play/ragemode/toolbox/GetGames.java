@@ -14,12 +14,32 @@ public class GetGames {
 		}
 	}
 	
-	public static int GetMaxPlayers(String game, FileConfiguration fileConfiguration) {
-		if(!fileConfiguration.isSet("settings.games." + game))
+	public static int getMaxPlayers(String game, FileConfiguration fileConfiguration) {
+		if(!fileConfiguration.isSet("settings.games." + game + ".maxplayers"))
 			return -1;
 		else {
 			return ConfigFactory.getInt("settings.games." + game, "maxplayers", fileConfiguration);
 		}
+	}
+	
+	public static String[] getGameNames(FileConfiguration fileConfiguration) {
+		String[] names = new String[getConfigGamesCount(fileConfiguration)];
+		
+		names = (String[]) ConfigFactory.getKeysUnderPath("settings.games", false, fileConfiguration).toArray();
+		return names;
+	}
+	
+	public static int getOverallMaxPlayers(FileConfiguration fileConfiguration) {
+		int i = 0;
+		int n = 0;
+		int x;
+		String[] names = getGameNames(fileConfiguration);
+		while(i <= getGameNames(fileConfiguration).length) {
+			x = ConfigFactory.getInt("settings.games." + names[i], "maxplayers", fileConfiguration);
+			if(n < x) 
+				n = x;
+		}
+		return n;
 	}
 
 }

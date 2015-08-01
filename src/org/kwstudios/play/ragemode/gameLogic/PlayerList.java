@@ -100,7 +100,7 @@ public class PlayerList {
 							list[n] = player.getUniqueId().toString();
 							player.sendMessage("You joined "
 									+ ChatColor.DARK_AQUA + game
-									+ ChatColor.WHITE + ".");
+									+ ChatColor.WHITE + "." + Integer.toString(getPlayersInGame(game).length));
 
 							if (getPlayersInGame(game).length == 2) {
 								new LobbyTimer(game, getPlayersInGame(game),

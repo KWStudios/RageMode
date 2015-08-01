@@ -55,9 +55,8 @@ public class PlayerList {
 						n++;
 					}
 				}
-			i = i + playersPerGame;	
 			}
-			
+		    i = i + playersPerGame;		
 		}
 		return players;
 	}

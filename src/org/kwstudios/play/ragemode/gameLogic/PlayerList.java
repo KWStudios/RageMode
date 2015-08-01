@@ -20,12 +20,18 @@ public class PlayerList {
 	private static String[] runningGames = new String[1];
 
 	public PlayerList(FileConfiguration fileConfiguration) {
+		int i = 0;
+		int imax = GetGames.getConfigGamesCount(fileConfiguration);
+		String[] games = GetGames.getGameNames(fileConfiguration);
 		PlayerList.fileConfiguration = fileConfiguration;
 		list = Arrays
 				.copyOf(list,
 						GetGames.getConfigGamesCount(fileConfiguration)
 								* (GetGames
 										.getOverallMaxPlayers(fileConfiguration) + 1));
+		while(i < imax) {
+			list[i*GetGames.getOverallMaxPlayers(fileConfiguration)] = games[i];
+		}
 		runningGames = Arrays.copyOf(runningGames,
 				GetGames.getConfigGamesCount(fileConfiguration));
 	}

@@ -51,7 +51,7 @@ public class PlayerList {
 				if (list[i].equals(game)) {
 					n = i + 1;
 					while (n < GetGames.getMaxPlayers(game, fileConfiguration)) {
-						if(players[n] == null)
+						if(list[n] == null)
 							break;
 						players[n] = list[n];
 						n++;

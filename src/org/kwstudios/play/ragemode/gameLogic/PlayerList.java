@@ -140,8 +140,10 @@ public class PlayerList {
 		int i = 0;
 		int imax = runningGames.length;
 		while(i < imax) {
-			if(runningGames[i].equals(game)) {
-				return true;
+			if(runningGames[i] != null) {
+				if(runningGames[i].equals(game)) {
+					return true;
+				}
 			}
 			i++;
 		}

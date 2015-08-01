@@ -85,7 +85,7 @@ public class PlayerList {
 		int playersPerGame = GetGames.getOverallMaxPlayers(fileConfiguration);
 		while (i < imax) {
 			if (player.getUniqueId().toString().equals(list[i])) {
-				player.sendMessage("You are already in a game. You can leave it by typing /rm leave .");
+				player.sendMessage("You are already in a game. You can leave it by typing /rm leave");
 				return false;
 			}
 			i++;
@@ -155,17 +155,20 @@ public class PlayerList {
 				* (GetGames.getOverallMaxPlayers(fileConfiguration) + 1);
 
 		while (i < imax) {
-			if (player.getUniqueId().toString().equals(list[i])) {
-				player.sendMessage("You left your current Game");
+			if(list[i] != null) {
+				if (player.getUniqueId().toString().equals(list[i])) {
+					player.sendMessage("You left your current Game");
 
-				while (n <= oldLocations.getFirstLength()) {
-					if (oldLocations.getFromFirstObject(n) == player) {
-						player.teleport(oldLocations.getFromSecondObject(n));
+					while (n <= oldLocations.getFirstLength()) {
+						if (oldLocations.getFromFirstObject(n) == player) {
+							player.teleport(oldLocations.getFromSecondObject(n));
+						}
 					}
+					list[i] = null;
+					return true;
 				}
-				list[i] = null;
-				return true;
 			}
+			i++;
 		}
 		return false;
 	}

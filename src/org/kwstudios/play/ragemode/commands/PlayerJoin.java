@@ -1,5 +1,6 @@
 package org.kwstudios.play.ragemode.commands;
 
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
@@ -29,6 +30,8 @@ public class PlayerJoin {
 			int lobbyX = ConfigFactory.getInt(GAME_PATH + "." + args[1] + ".lobby", "x", fileConfiguration);
 			int lobbyY = ConfigFactory.getInt(GAME_PATH + "." + args[1] + ".lobby", "y", fileConfiguration);
 			int lobbyZ = ConfigFactory.getInt(GAME_PATH + "." + args[1] + ".lobby", "y", fileConfiguration);
+			
+			player.sendMessage(ChatColor.DARK_GREEN + "The game was set up successfully!");
 			
 		}else{
 			player.sendMessage(mapChecker.getMessage());

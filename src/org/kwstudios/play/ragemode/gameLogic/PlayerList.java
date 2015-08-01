@@ -49,11 +49,11 @@ public class PlayerList {
 		while (i <= imax) {
 			if(list[i] != null) {
 				if (list[i].equals(game)) {
-					n = i + 1;
+					n = i;
 					while (n < GetGames.getMaxPlayers(game, fileConfiguration)) {
-						if(list[n] == null)
+						if(list[n + 1] == null)
 							break;
-						players[n] = list[n];
+						players[n] = list[n + 1];
 						n++;
 					}
 					players = Arrays.copyOf(players, n);

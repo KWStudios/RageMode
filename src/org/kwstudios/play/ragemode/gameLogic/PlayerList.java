@@ -31,6 +31,7 @@ public class PlayerList {
 										.getOverallMaxPlayers(fileConfiguration) + 1));
 		while(i < imax) {
 			list[i*GetGames.getOverallMaxPlayers(fileConfiguration)] = games[i];
+			i++;
 		}
 		runningGames = Arrays.copyOf(runningGames,
 				GetGames.getConfigGamesCount(fileConfiguration));

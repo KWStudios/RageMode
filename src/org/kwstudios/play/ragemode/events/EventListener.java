@@ -19,11 +19,11 @@ public class EventListener implements Listener{
 	public void onPlayerQuit(PlayerQuitEvent event) {
 		Player player = event.getPlayer();
 		
-		Bukkit.broadcastMessage("Ragemode noticed that " + player.getName() + " disconnected.");
+//		Bukkit.broadcastMessage("Ragemode noticed that " + player.getName() + " disconnected.");
 		
 		if(PlayerList.isPlayerPlaying(event.getPlayer().getUniqueId().toString())) {
 			if(PlayerList.removePlayer(player)) {
-				Bukkit.broadcastMessage(player.getName() + " was removed successfully.");
+//				Bukkit.broadcastMessage(player.getName() + " was removed successfully.");
 			}
 			
 		}

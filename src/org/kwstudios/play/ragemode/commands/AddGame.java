@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
 import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
+import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 
 public class AddGame {
 
@@ -25,19 +26,19 @@ public class AddGame {
 
 	private void addGametoConfig() {
 		if(args.length < 3) {
-			player.sendMessage(ChatColor.DARK_RED + "Missing arguments! Usage: /rm add <GameName> <MaxPlayers>");
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED + "Missing arguments! Usage: /rm add <GameName> <MaxPlayers>");
 			return;
 		}
 		int x;
 		try {
 			x = Integer.parseInt(args[2]);
 		} catch (Exception e) {
-			player.sendMessage(ChatColor.DARK_RED + args[2] + " is not a number.");
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED + args[2] + " is not a number.");
 			return;
 		}
 
 		if (fileConfiguration.isSet("settings.games." + args[1])) {
-			player.sendMessage(ChatColor.DARK_RED + args[1] + " already exists.");
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED + args[1] + " already exists.");
 			return;
 		}
 
@@ -47,7 +48,7 @@ public class AddGame {
 		
 		PlayerList.updateListSize(fileConfiguration);
 		
-		player.sendMessage(ChatColor.DARK_GREEN + "The game " + ChatColor.DARK_AQUA + args[1]
+		player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_GREEN + "The game " + ChatColor.DARK_AQUA + args[1]
 				+ ChatColor.DARK_GREEN + " was added successfully!");
 		return;
 	}

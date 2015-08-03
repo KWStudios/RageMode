@@ -10,6 +10,7 @@ import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 import org.kwstudios.play.ragemode.toolbox.GetGames;
 import org.kwstudios.play.ragemode.toolbox.TableList;
 
@@ -79,7 +80,7 @@ public class PlayerList {
 	public static boolean addPlayer(Player player, String game,
 			FileConfiguration fileConfiguration) {
 		if (isGameRunning(game)) {
-			player.sendMessage("This Game is already running.");
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "This Game is already running.");
 			return false;
 		}
 
@@ -93,7 +94,7 @@ public class PlayerList {
 		while (i < imax) {
 			if(list[i] != null) {
 				if (player.getUniqueId().toString().equals(list[i])) {
-					player.sendMessage("You are already in a game. You can leave it by typing /rm leave");
+					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You are already in a game. You can leave it by typing /rm leave");
 					return false;
 				}
 			}
@@ -108,7 +109,7 @@ public class PlayerList {
 					while (n <= GetGames.getMaxPlayers(game, fileConfiguration)) {
 						if (list[n] == null) {
 							list[n] = player.getUniqueId().toString();
-							player.sendMessage("You joined "
+							player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You joined "
 									+ ChatColor.DARK_AQUA + game
 									+ ChatColor.WHITE + ".");
 
@@ -157,16 +158,16 @@ public class PlayerList {
 					
 					list[kickposition] = player.getUniqueId().toString();
 					playerToKick
-							.sendMessage("You were kicked out of the Game to make room for a VIP.");
+							.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You were kicked out of the Game to make room for a VIP.");
 
 					if (getPlayersInGame(game).length == 2) {
 						new LobbyTimer(game, getPlayersInGame(game),
 								fileConfiguration);
 					}
-					player.sendMessage("You joined " + ChatColor.DARK_AQUA + game + ChatColor.WHITE + ".");
+					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You joined " + ChatColor.DARK_AQUA + game + ChatColor.WHITE + ".");
 					return true;
 				} else {
-					player.sendMessage("This Game is already full!");
+					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "This Game is already full!");
 					return false;
 				}
 
@@ -174,7 +175,7 @@ public class PlayerList {
 			i = i + playersPerGame;
 		}
 
-		player.sendMessage("The game you wish to join wasn't found.");
+		player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "The game you wish to join wasn't found.");
 		return false;
 	}
 
@@ -187,7 +188,7 @@ public class PlayerList {
 		while (i < imax) {
 			if(list[i] != null) {
 				if (player.getUniqueId().toString().equals(list[i])) {
-					player.sendMessage("You left your current Game");
+					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You left your current Game");
 
 					while (n < oldLocations.getFirstLength()) {
 						if (oldLocations.getFromFirstObject(n) == player) {
@@ -213,7 +214,7 @@ public class PlayerList {
 			}
 			i++;
 		}
-		player.sendMessage("The fact that you are not in a game caused a Problem while trying to remove you from that game.");
+		player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "The fact that you are not in a game caused a Problem while trying to remove you from that game.");
 		return false;
 	}
 

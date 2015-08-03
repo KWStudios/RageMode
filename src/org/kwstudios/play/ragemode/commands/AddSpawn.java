@@ -7,6 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
+import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 
 public class AddSpawn {
 	
@@ -26,12 +27,12 @@ public class AddSpawn {
 	
 	private void addSpawnToConfig() {
 		if(args.length < 2) {
-			player.sendMessage(ChatColor.DARK_RED + "Missing arguments! Usage: /rm addspawn <GameName>");
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED + "Missing arguments! Usage: /rm addspawn <GameName>");
 			return;
 		}
 		int i = 1;
 		if(!fileConfiguration.isSet("settings.games." + args[1])) {
-			player.sendMessage(ChatColor.DARK_RED + args[1] + " doesn't exist.");
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED + args[1] + " doesn't exist.");
 			return;
 		}
 				
@@ -44,7 +45,7 @@ public class AddSpawn {
 		ConfigFactory.setInt("settings.games." + args[1] + ".spawns." + Integer.toString(i), "z", player.getLocation().getBlockZ(), fileConfiguration);
 		ConfigFactory.setDouble("settings.games." + args[1] + ".spawns." + Integer.toString(i), "yaw", player.getLocation().getYaw(), fileConfiguration);
 		ConfigFactory.setDouble("settings.games." + args[1] + ".spawns." + Integer.toString(i), "pitch", player.getLocation().getPitch(), fileConfiguration);
-		player.sendMessage(ChatColor.DARK_GREEN + "Spawn " + Integer.toString(i) + " for the game " + ChatColor.DARK_AQUA + args[1]
+		player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_GREEN + "Spawn " + Integer.toString(i) + " for the game " + ChatColor.DARK_AQUA + args[1]
 				+ ChatColor.DARK_GREEN + " was set successfully!");
 	}
 

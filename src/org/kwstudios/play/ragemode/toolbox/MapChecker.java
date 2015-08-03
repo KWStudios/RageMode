@@ -30,7 +30,8 @@ public class MapChecker {
 
 	private void checkMapName() {
 		if (!fileConfiguration.isSet(ConstantHolder.GAME_PATH + "." + gameName)) {
-			message = ChatColor.YELLOW + gameName + ChatColor.DARK_RED + " is not a valid RageMode Map.";
+			message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.YELLOW + gameName + ChatColor.DARK_RED
+					+ " is not a valid RageMode Map.";
 			isValid = false;
 		} else {
 			isValid = true;
@@ -40,7 +41,7 @@ public class MapChecker {
 	private void checkBasics() {
 		String path = ConstantHolder.GAME_PATH + "." + gameName;
 		if (!fileConfiguration.isSet(path + ".maxplayers") || !fileConfiguration.isSet(path + ".world")) {
-			message = ChatColor.DARK_RED
+			message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED
 					+ "The worldname or the maxplayers are not set. Please contact an Admin for further information.";
 			isValid = false;
 		} else {
@@ -49,11 +50,12 @@ public class MapChecker {
 				if (maxPlayers != -32500000) {
 					isValid = true;
 				} else {
-					message = ChatColor.DARK_RED + "The maxplayers value for " + gameName + " is not set properly.";
+					message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED + "The maxplayers value for "
+							+ gameName + " is not set properly.";
 					isValid = false;
 				}
 			} else {
-				message = ChatColor.DARK_RED + "The world name can't be empty!";
+				message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED + "The world name can't be empty!";
 				isValid = false;
 			}
 		}
@@ -61,8 +63,8 @@ public class MapChecker {
 
 	private void checkLobby() {
 		if (!fileConfiguration.isSet(ConstantHolder.GAME_PATH + "." + gameName + "." + "lobby")) {
-			message = ChatColor.DARK_RED + "The lobby was not set yet for " + ChatColor.DARK_AQUA + gameName
-					+ ChatColor.DARK_RED + ". Set it with /rm lobby [game name]";
+			message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED + "The lobby was not set yet for "
+					+ ChatColor.DARK_AQUA + gameName + ChatColor.DARK_RED + ". Set it with /rm lobby [game name]";
 			isValid = false;
 		} else {
 			String thisPath = ConstantHolder.GAME_PATH + "." + gameName + "." + "lobby";
@@ -74,17 +76,19 @@ public class MapChecker {
 							&& isInt(ConfigFactory.getString(thisPath, "z", fileConfiguration))) {
 						isValid = true;
 					} else {
-						message = ChatColor.DARK_RED
+						message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED
 								+ "The lobby coordinates were not set properly. Ask an Admin to check the config.yml";
 						isValid = false;
 						return;
 					}
 				} else {
-					message = ChatColor.DARK_RED + "The world key can't be empty. Ask an Admin to check the config.yml";
+					message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED
+							+ "The world key can't be empty. Ask an Admin to check the config.yml";
 					isValid = false;
 				}
 			} else {
-				message = ChatColor.DARK_RED + "The lobby was not set properly. Ask an Admin to check the config.yml";
+				message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED
+						+ "The lobby was not set properly. Ask an Admin to check the config.yml";
 				isValid = false;
 			}
 		}
@@ -101,18 +105,20 @@ public class MapChecker {
 							&& isInt(ConfigFactory.getString(path + ".spawns." + s, "z", fileConfiguration))) {
 						isValid = true;
 					} else {
-						message = ChatColor.DARK_RED + "One or more spawns are not set properly!";
+						message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED
+								+ "One or more spawns are not set properly!";
 						isValid = false;
 						break;
 					}
 				}
 			} else {
-				message = ChatColor.DARK_RED
+				message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED
 						+ "The number of spawns must be greater than or equal the maxplayers value!";
 				isValid = false;
 			}
 		} else {
-			message = ChatColor.DARK_RED + "In " + gameName + " are no spawns configured!";
+			message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED + "In " + gameName
+					+ " are no spawns configured!";
 			isValid = false;
 		}
 	}

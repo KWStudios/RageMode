@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -53,6 +54,7 @@ public class PlayerJoin {
 				PlayerList.oldInventories.addToBoth(player, player.getInventory());
 				player.getInventory().clear();
 				player.teleport(lobbyLocation);
+				player.setGameMode(GameMode.SURVIVAL);
 				String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_GREEN + player.getName()
 						+ ChatColor.BLUE + " joined the game.";
 				GameBroadcast.broadcastToGame(args[1], message);

@@ -24,6 +24,7 @@ public class LobbyTimer {
 		this.gameName = gameName;
 		this.playerUUIDs = playerUUIDs;
 		this.fileConfiguration = fileConfiguration;
+		PlayerList.setGameRunning(gameName);
 		getSecondsToWait();
 		sendTimerMessages();
 	}
@@ -59,9 +60,12 @@ public class LobbyTimer {
 										+ ChatColor.BLUE + " seconds.");
 					}
 					totalMessagesBeforeTen--;
-				} else {
+					if(totalMessagesBeforeTen == 0){
+						this.cancel();
+						startTimerFromTen();
+					}
+				} else if(PlayerList.getPlayersInGame(gameName).length < 2){
 					this.cancel();
-					startTimerFromTen();
 				}
 			}
 		}, 0, 10000);

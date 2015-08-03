@@ -165,6 +165,7 @@ public class PlayerList {
 					while (n < oldLocations.getFirstLength()) {
 						if (oldLocations.getFromFirstObject(n) == player) {
 							player.teleport(oldLocations.getFromSecondObject(n));
+							oldLocations.removeFromBoth(n);
 						}
 						n++;
 					}
@@ -207,6 +208,36 @@ public class PlayerList {
 				runningGames[i] = game;
 			}
 			i++;
+		}
+		return false;
+	}
+	
+	public static boolean setGameNotRunning(String game) {
+		if (!GetGames.isGameExistent(game, fileConfiguration))
+			return false;
+		
+		int i = 0;
+		int imax = GetGames.getConfigGamesCount(fileConfiguration);
+		
+		while (i < imax) {
+			if (runningGames[i].equals(game)) {
+				runningGames[i] = null;
+				return true;			
+			}
+			i++;
+		}
+		return false;				
+	}
+
+	public static boolean isPlayerPlaying(String player) {
+		int i = 0;
+		int imax = list.length;
+		
+		while(i < imax) {
+			if(list[i].equals(player)) {
+				return true;
+			}
+			i++;			
 		}
 		return false;
 	}

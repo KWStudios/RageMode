@@ -9,6 +9,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.kwstudios.play.ragemode.toolbox.GetGames;
 import org.kwstudios.play.ragemode.toolbox.TableList;
 
@@ -17,6 +18,7 @@ public class PlayerList {
 	private static String[] list = new String[1]; // [Gamemane,Playername x
 													// overallMaxPlayers,Gamename,...]
 	public static TableList<Player, Location> oldLocations = new TableList<Player, Location>();
+	public static TableList<Player, Inventory> oldInventories = new TableList<Player, Inventory>();
 	private static String[] runningGames = new String[1];
 
 	public PlayerList(FileConfiguration fileConfiguration) {
@@ -106,7 +108,7 @@ public class PlayerList {
 							list[n] = player.getUniqueId().toString();
 							player.sendMessage("You joined "
 									+ ChatColor.DARK_AQUA + game
-									+ ChatColor.WHITE + "." + Integer.toString(getPlayersInGame(game).length));
+									+ ChatColor.WHITE + ".");
 
 							if (getPlayersInGame(game).length == 2) {
 								new LobbyTimer(game, getPlayersInGame(game),
@@ -117,21 +119,40 @@ public class PlayerList {
 						n++;
 					}
 				}
-				if (player.hasPermission("rm.vip")) {
+				if (player.hasPermission("rm.vip") && hasRoomForVIP(game)) {
 					Random random = new Random();
-					kickposition = random.nextInt(GetGames.getMaxPlayers(game,
-							fileConfiguration) - 1);
-					kickposition = kickposition + 1 + i;
-					n = 0;
-					Player playerToKick = Bukkit.getPlayer(UUID
-							.fromString(list[kickposition]));
+					boolean isVIP = false;
+					Player playerToKick;
+					
+					do {
+						kickposition = random.nextInt(GetGames.getMaxPlayers(game,
+								fileConfiguration) - 1);
+						kickposition = kickposition + 1 + i;
+						n = 0;
+						playerToKick = Bukkit.getPlayer(UUID
+								.fromString(list[kickposition]));	
+						isVIP = playerToKick.hasPermission("rm.vip");
+					} while (isVIP);
+						
 					while (n <= oldLocations.getFirstLength()) {
 						if (oldLocations.getFromFirstObject(n) == playerToKick) {
 							playerToKick.teleport(oldLocations
 									.getFromSecondObject(n));
+							oldLocations.removeFromBoth(n);
 						}
 						n++;
 					}
+					
+					n = 0;
+					
+					while (n <= oldInventories.getFirstLength()) {
+						if (oldInventories.getFromFirstObject(n) == playerToKick) {
+							playerToKick.getInventory().setContents(oldInventories.getFromSecondObject(n).getContents());
+							oldInventories.removeFromBoth(n);
+						}
+						n++;
+					}
+					
 					list[kickposition] = player.getUniqueId().toString();
 					playerToKick
 							.sendMessage("You were kicked out of the Game to make room for a VIP.");
@@ -140,6 +161,7 @@ public class PlayerList {
 						new LobbyTimer(game, getPlayersInGame(game),
 								fileConfiguration);
 					}
+					player.sendMessage("You joined " + ChatColor.DARK_AQUA + game + ChatColor.WHITE + ".");
 					return true;
 				} else {
 					player.sendMessage("This Game is already full!");
@@ -172,12 +194,24 @@ public class PlayerList {
 						}
 						n++;
 					}
+					
+					n = 0;
+					
+					while (n <= oldInventories.getFirstLength()) {
+						if (oldInventories.getFromFirstObject(n) == player) {
+							player.getInventory().setContents(oldInventories.getFromSecondObject(n).getContents());
+							oldInventories.removeFromBoth(n);
+						}
+						n++;
+					}					
+					
 					list[i] = null;
 					return true;
 				}
 			}
 			i++;
 		}
+		player.sendMessage("The fact that you are not in a game caused a Problem while trying to remove you from that game.");
 		return false;
 	}
 
@@ -248,5 +282,26 @@ public class PlayerList {
 			i++;			
 		}
 		return false;
+	}
+	
+	public static boolean hasRoomForVIP(String game) {
+		String[] players = getPlayersInGame(game);
+		int i = 0;
+		int imax = players.length;
+		int vipsInGame = 0;
+		
+		while(i < imax) {
+			if(players[i] != null) {
+				if(Bukkit.getPlayer(UUID.fromString(players[i])).hasPermission("rm.vip")) {
+					vipsInGame++;
+				}
+			}
+			i++;
+		}
+		
+		if(vipsInGame == players.length) {
+			return false;
+		}
+	return true;
 	}
 }

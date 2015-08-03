@@ -28,7 +28,7 @@ public class AddLobby {
 		if (args.length >= 2) {
 			String gameName = args[1];
 			if (!fileConfiguration.isSet(GAMES_PATH + "." + gameName)) {
-				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "This game was not set yet! Set it with"
+				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "This game was not set yet! Set it with "
 						+ ChatColor.DARK_RED + "/rm add [name]");
 				return;
 			} else {

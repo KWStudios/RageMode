@@ -16,8 +16,6 @@ import org.kwstudios.play.ragemode.toolbox.MapChecker;
 
 public class PlayerJoin {
 
-	private static final String GAME_PATH = "settings.games";
-
 	private Player player;
 	@SuppressWarnings("unused")
 	private String label;
@@ -39,10 +37,10 @@ public class PlayerJoin {
 		}
 		MapChecker mapChecker = new MapChecker(args[1], fileConfiguration);
 		if (mapChecker.isValid()) {
-			String world = ConfigFactory.getString(GAME_PATH + "." + args[1] + ".lobby", "world", fileConfiguration);
-			int lobbyX = ConfigFactory.getInt(GAME_PATH + "." + args[1] + ".lobby", "x", fileConfiguration);
-			int lobbyY = ConfigFactory.getInt(GAME_PATH + "." + args[1] + ".lobby", "y", fileConfiguration);
-			int lobbyZ = ConfigFactory.getInt(GAME_PATH + "." + args[1] + ".lobby", "y", fileConfiguration);
+			String world = ConfigFactory.getString(ConstantHolder.GAME_PATH + "." + args[1] + ".lobby", "world", fileConfiguration);
+			int lobbyX = ConfigFactory.getInt(ConstantHolder.GAME_PATH + "." + args[1] + ".lobby", "x", fileConfiguration);
+			int lobbyY = ConfigFactory.getInt(ConstantHolder.GAME_PATH + "." + args[1] + ".lobby", "y", fileConfiguration);
+			int lobbyZ = ConfigFactory.getInt(ConstantHolder.GAME_PATH + "." + args[1] + ".lobby", "y", fileConfiguration);
 			Location lobbyLocation = new Location(Bukkit.getWorld(world), lobbyX, lobbyY, lobbyZ);
 
 			Location playerLocation = player.getLocation();

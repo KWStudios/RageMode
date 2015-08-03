@@ -87,10 +87,13 @@ public class PlayerList {
 				* (GetGames.getOverallMaxPlayers(fileConfiguration) + 1);
 		int playersPerGame = GetGames.getOverallMaxPlayers(fileConfiguration);
 		while (i < imax) {
-			if (player.getUniqueId().toString().equals(list[i])) {
-				player.sendMessage("You are already in a game. You can leave it by typing /rm leave");
-				return false;
+			if(list[i] != null) {
+				if (player.getUniqueId().toString().equals(list[i])) {
+					player.sendMessage("You are already in a game. You can leave it by typing /rm leave");
+					return false;
+				}
 			}
+
 			i++;
 		}
 		i = 0;
@@ -220,10 +223,13 @@ public class PlayerList {
 		int imax = GetGames.getConfigGamesCount(fileConfiguration);
 		
 		while (i < imax) {
-			if (runningGames[i].equals(game)) {
-				runningGames[i] = null;
-				return true;			
+			if (list[i] != null) {
+				if (runningGames[i].equals(game)) {
+					runningGames[i] = null;
+					return true;			
+				}				
 			}
+
 			i++;
 		}
 		return false;				
@@ -234,8 +240,10 @@ public class PlayerList {
 		int imax = list.length;
 		
 		while(i < imax) {
-			if(list[i].equals(player)) {
-				return true;
+			if(list[i] != null) {
+				if(list[i].equals(player)) {
+					return true;
+				}				
 			}
 			i++;			
 		}

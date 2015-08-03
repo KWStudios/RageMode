@@ -62,6 +62,11 @@ public class TableList<S1, S2> {
 		secondList.add(e2);
 	}
 	
+	public void removeFromBoth(int index){
+		firstList.remove(index);
+		secondList.remove(index);
+	}
+	
 	public int getLength(){
 		if(firstList.size() >= secondList.size()){
 			return firstList.size();

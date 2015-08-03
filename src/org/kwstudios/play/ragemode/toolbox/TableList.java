@@ -5,8 +5,8 @@ import java.util.List;
 
 public class TableList<S1, S2> {
 	
-	List<S1> firstList;
-	List<S2> secondList;
+	ArrayList<S1> firstList;
+	ArrayList<S2> secondList;
 	
 	public TableList(){
 		createLists();
@@ -65,6 +65,8 @@ public class TableList<S1, S2> {
 	public void removeFromBoth(int index){
 		firstList.remove(index);
 		secondList.remove(index);
+		firstList.trimToSize();
+		secondList.trimToSize();
 	}
 	
 	public int getLength(){

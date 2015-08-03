@@ -24,6 +24,7 @@ public class LobbyTimer {
 	private String[] playerUUIDs;
 	private FileConfiguration fileConfiguration;
 	private int secondsRemaining;
+	private Timer t;
 
 	public LobbyTimer(String gameName, String[] playerUUIDs, FileConfiguration fileConfiguration) {
 		this.gameName = gameName;
@@ -44,15 +45,15 @@ public class LobbyTimer {
 	}
 
 	private void sendTimerMessages() {
-		Timer t = new Timer();
+		t = new Timer();
 		
-		ScheduledExecutorService ses = Executors.newScheduledThreadPool(10);
-		ses.scheduleAtFixedRate(new Runnable() {
-		    @Override
-		    public void run() {
-		        // do some work
-		    }
-		}, 0, 10000, TimeUnit.MILLISECONDS);  // execute every x seconds
+//		ScheduledExecutorService ses = Executors.newScheduledThreadPool(10);
+//		ses.scheduleAtFixedRate(new Runnable() {
+//		    @Override
+//		    public void run() {
+//		        // do some work
+//		    }
+//		}, 0, 10000, TimeUnit.MILLISECONDS);  // execute every x seconds
 		
 
 		int totalTimerMillis = ((int) (((secondsRemaining * 1000) + 5000) / 10000)) * (10000);
@@ -71,18 +72,19 @@ public class LobbyTimer {
 					}
 					totalMessagesBeforeTen--;
 				}else{
+					startTimerFromTen();
 					this.cancel();
-					//startTimerFromTen();
 				}
 			}
 		}, 0, 10000);
-		
+	}
+	
+	private void startTimerFromTen(){
 		t.scheduleAtFixedRate(new TimerTask(){
 			@Override
 			public void run() {
 				
 			}}, 0, 1000);
-
 	}
 
 	private boolean isInt(String string) {

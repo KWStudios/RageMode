@@ -55,6 +55,12 @@ public class CommandParser {
 		case "leave":
 			new PlayerLeave(player, label, args, fileConfiguration);
 			break;
+		case "remove":
+			new RemoveGame(player, label, args, fileConfiguration);
+			break;
+		case "list":
+			new ListGames(player, label, args, fileConfiguration);
+			break;
 		default:
 			player.sendMessage(ChatColor.DARK_RED + "This is not a valid RageMode command! Type /help ragemode for more help.");
 			break;

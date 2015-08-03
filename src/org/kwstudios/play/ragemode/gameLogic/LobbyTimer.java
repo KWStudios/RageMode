@@ -37,18 +37,33 @@ public class LobbyTimer {
 
 	private void sendTimerMessages() {
 		Timer t = new Timer();
-		
-		int totalTimerMillis = secondsRemaining * 1000;
+
+		int totalTimerMillis = ((int) (((secondsRemaining * 1000) + 5000) / 10000)) * (10000);
+		if (totalTimerMillis == 0) {
+			totalTimerMillis = 10000;
+		}
+		final int timeMillisForLoop = totalTimerMillis;
 
 		t.scheduleAtFixedRate(new TimerTask() {
+			private int totalMessagesBeforeTen = timeMillisForLoop / 10000;
 			public void run() {
-				System.out.println("10 seconds passed");
-				for(int i=0; i < playerUUIDs.length; i++){
-					Bukkit.getPlayer(UUID.fromString(playerUUIDs[i])).sendMessage("10 seconds passed");
+				if (totalMessagesBeforeTen > 0) {
+					System.out.println("10 seconds passed");
+					for (int i = 0; i < playerUUIDs.length; i++) {
+						Bukkit.getPlayer(UUID.fromString(playerUUIDs[i])).sendMessage("10 seconds passed");
+					}
+					totalMessagesBeforeTen--;
+				}else{
+					this.cancel();
 				}
-				
 			}
 		}, 0, 10000);
+		
+		t.scheduleAtFixedRate(new TimerTask(){
+			@Override
+			public void run() {
+				
+			}}, 0, 1000);
 
 	}
 

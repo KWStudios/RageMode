@@ -7,8 +7,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 public class MapChecker {
 
-	private static final String GAME_PATH = "settings.games";
-
 	private String gameName;
 	private FileConfiguration fileConfiguration;
 	private boolean isValid = false;
@@ -31,7 +29,7 @@ public class MapChecker {
 	}
 
 	private void checkMapName() {
-		if (!fileConfiguration.isSet(GAME_PATH + "." + gameName)) {
+		if (!fileConfiguration.isSet(ConstantHolder.GAME_PATH + "." + gameName)) {
 			message = ChatColor.YELLOW + gameName + ChatColor.DARK_RED + " is not a valid RageMode Map.";
 			isValid = false;
 		} else {
@@ -40,7 +38,7 @@ public class MapChecker {
 	}
 
 	private void checkBasics() {
-		String path = GAME_PATH + "." + gameName;
+		String path = ConstantHolder.GAME_PATH + "." + gameName;
 		if (!fileConfiguration.isSet(path + ".maxplayers") || !fileConfiguration.isSet(path + ".world")) {
 			message = ChatColor.DARK_RED
 					+ "The worldname or the maxplayers are not set. Please contact an Admin for further information.";
@@ -62,12 +60,12 @@ public class MapChecker {
 	}
 
 	private void checkLobby() {
-		if (!fileConfiguration.isSet(GAME_PATH + "." + gameName + "." + "lobby")) {
+		if (!fileConfiguration.isSet(ConstantHolder.GAME_PATH + "." + gameName + "." + "lobby")) {
 			message = ChatColor.DARK_RED + "The lobby was not set yet for " + ChatColor.DARK_AQUA + gameName
 					+ ChatColor.DARK_RED + ". Set it with /rm lobby [game name]";
 			isValid = false;
 		} else {
-			String thisPath = GAME_PATH + "." + gameName + "." + "lobby";
+			String thisPath = ConstantHolder.GAME_PATH + "." + gameName + "." + "lobby";
 			if (fileConfiguration.isSet(thisPath + ".x") && fileConfiguration.isSet(thisPath + ".y")
 					&& fileConfiguration.isSet(thisPath + ".z") && fileConfiguration.isSet(thisPath + ".world")) {
 				if (!ConfigFactory.getString(thisPath, "world", fileConfiguration).isEmpty()) {
@@ -93,7 +91,7 @@ public class MapChecker {
 	}
 
 	private void checkSpawns() {
-		String path = GAME_PATH + "." + gameName;
+		String path = ConstantHolder.GAME_PATH + "." + gameName;
 		if (fileConfiguration.isSet(path + ".spawns")) {
 			Set<String> spawnNames = ConfigFactory.getKeysUnderPath(path + ".spawns", false, fileConfiguration);
 			if (spawnNames.size() >= maxPlayers) {

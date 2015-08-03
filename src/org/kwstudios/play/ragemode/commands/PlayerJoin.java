@@ -9,6 +9,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
 import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
+import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 import org.kwstudios.play.ragemode.toolbox.MapChecker;
 
 public class PlayerJoin {
@@ -48,10 +49,12 @@ public class PlayerJoin {
 			
 			if(PlayerList.addPlayer(player, args[1], fileConfiguration)){
 				PlayerList.oldLocations.addToBoth(player, playerLocation);
+				PlayerList.oldInventories.addToBoth(player, player.getInventory());
+				player.getInventory().clear();
 				player.teleport(lobbyLocation);
-				logger.info(ChatColor.DARK_AQUA + "[RageMode] " + ChatColor.DARK_GREEN + player.getName() + " joined the RageMode game " + args[1] + ".");
+				logger.info(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_GREEN + player.getName() + " joined the RageMode game " + args[1] + ".");
 			}else{
-				logger.info(ChatColor.DARK_AQUA + "[RageMode] " + ChatColor.DARK_RED + player.getName() + " could not join the RageMode game " + args[1] + ".");
+				logger.info(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED + player.getName() + " could not join the RageMode game " + args[1] + ".");
 			}
 			
 		}else{

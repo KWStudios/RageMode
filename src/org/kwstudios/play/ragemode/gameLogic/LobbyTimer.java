@@ -5,10 +5,10 @@ import java.util.TimerTask;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
-
-import com.google.common.util.concurrent.ExecutionError;
+import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 
 public class LobbyTimer {
 
@@ -52,15 +52,16 @@ public class LobbyTimer {
 
 			public void run() {
 				if (totalMessagesBeforeTen > 0 && PlayerList.getPlayersInGame(gameName).length >= 2) {
-					System.out.println("10 seconds passed");
 					for (int i = 0; i < playerUUIDs.length; i++) {
-						Bukkit.getPlayer(UUID.fromString(playerUUIDs[i]))
-								.sendMessage(Integer.toString(totalMessagesBeforeTen) + " to go.");
+						Bukkit.getPlayer(UUID.fromString(playerUUIDs[i])).sendMessage(
+								ConstantHolder.RAGEMODE_PREFIX + ChatColor.BLUE + "This round will start in "
+										+ ChatColor.YELLOW + Integer.toString(totalMessagesBeforeTen * 10)
+										+ ChatColor.BLUE + " seconds.");
 					}
 					totalMessagesBeforeTen--;
 				} else {
-					startTimerFromTen();
 					this.cancel();
+					startTimerFromTen();
 				}
 			}
 		}, 0, 10000);
@@ -73,17 +74,22 @@ public class LobbyTimer {
 			@Override
 			public void run() {
 				if (timesToSendMessage > 0 && PlayerList.getPlayersInGame(gameName).length >= 2) {
-					System.out.println("10 seconds passed");
 					for (int i = 0; i < playerUUIDs.length; i++) {
-						Bukkit.getPlayer(UUID.fromString(playerUUIDs[i]))
-								.sendMessage(Integer.toString(timesToSendMessage) + " to go.");
+						Bukkit.getPlayer(UUID.fromString(playerUUIDs[i])).sendMessage(
+								ConstantHolder.RAGEMODE_PREFIX + ChatColor.BLUE + "This round will start in "
+										+ ChatColor.YELLOW + Integer.toString(timesToSendMessage)
+										+ ChatColor.BLUE + " seconds.");
 					}
 					timesToSendMessage--;
+				} else if (timesToSendMessage == 0 && PlayerList.getPlayersInGame(gameName).length >= 2) {
+					this.cancel();
+					new GameLoader(gameName, fileConfiguration);
 				} else {
 					this.cancel();
 				}
 			}
 		}, 0, 1000);
+
 	}
 
 	private boolean isInt(String string) {

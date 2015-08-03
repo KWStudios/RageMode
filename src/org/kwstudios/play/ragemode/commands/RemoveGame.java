@@ -9,8 +9,8 @@ import org.kwstudios.play.ragemode.toolbox.GetGames;
 
 public class RemoveGame {
 	public RemoveGame(Player player, String label, String[] args, FileConfiguration fileConfiguration) {
-		if(args[2] != null) {
-			String game = args[2];
+		if(args.length < 2) {
+			String game = args[1];
 			
 			if(!GetGames.isGameExistent(game, fileConfiguration)) {
 				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED + "Don't remove nonexistent games!");

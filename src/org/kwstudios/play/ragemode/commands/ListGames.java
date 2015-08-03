@@ -20,7 +20,7 @@ public class ListGames {
 				player.sendMessage(i + 1 + ".) " + games[i] + ChatColor.GOLD.toString() + ChatColor.ITALIC.toString() + " running");
 			}
 			else {
-				player.sendMessage(i + 1 + ".) " + games[i] + ChatColor.GRAY + "idle");
+				player.sendMessage(i + 1 + ".) " + games[i] + ChatColor.GRAY + " idle");
 			}
 			i++;
 		}

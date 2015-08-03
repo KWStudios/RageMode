@@ -23,6 +23,7 @@ public class RemoveGame {
 				}
 				else {
 					fileConfiguration.set("settings.games." + game, null);
+					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "The game " + game + " was removed successfully.");
 				}			
 			}
 		}

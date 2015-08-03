@@ -3,12 +3,6 @@ package org.kwstudios.play.ragemode.gameLogic;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.TimeUnit;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -46,15 +40,6 @@ public class LobbyTimer {
 
 	private void sendTimerMessages() {
 		t = new Timer();
-		
-//		ScheduledExecutorService ses = Executors.newScheduledThreadPool(10);
-//		ses.scheduleAtFixedRate(new Runnable() {
-//		    @Override
-//		    public void run() {
-//		        // do some work
-//		    }
-//		}, 0, 10000, TimeUnit.MILLISECONDS);  // execute every x seconds
-		
 
 		int totalTimerMillis = ((int) (((secondsRemaining * 1000) + 5000) / 10000)) * (10000);
 		if (totalTimerMillis == 0) {
@@ -64,27 +49,41 @@ public class LobbyTimer {
 
 		t.scheduleAtFixedRate(new TimerTask() {
 			private int totalMessagesBeforeTen = timeMillisForLoop / 10000;
+
 			public void run() {
 				if (totalMessagesBeforeTen > 0 && PlayerList.getPlayersInGame(gameName).length >= 2) {
 					System.out.println("10 seconds passed");
 					for (int i = 0; i < playerUUIDs.length; i++) {
-						Bukkit.getPlayer(UUID.fromString(playerUUIDs[i])).sendMessage("10 seconds passed");
+						Bukkit.getPlayer(UUID.fromString(playerUUIDs[i]))
+								.sendMessage(Integer.toString(totalMessagesBeforeTen) + " to go.");
 					}
 					totalMessagesBeforeTen--;
-				}else{
+				} else {
 					startTimerFromTen();
 					this.cancel();
 				}
 			}
 		}, 0, 10000);
 	}
-	
-	private void startTimerFromTen(){
-		t.scheduleAtFixedRate(new TimerTask(){
+
+	private void startTimerFromTen() {
+		t.scheduleAtFixedRate(new TimerTask() {
+			private int timesToSendMessage = 9;
+
 			@Override
 			public void run() {
-				
-			}}, 0, 1000);
+				if (timesToSendMessage > 0 && PlayerList.getPlayersInGame(gameName).length >= 2) {
+					System.out.println("10 seconds passed");
+					for (int i = 0; i < playerUUIDs.length; i++) {
+						Bukkit.getPlayer(UUID.fromString(playerUUIDs[i]))
+								.sendMessage(Integer.toString(timesToSendMessage) + " to go.");
+					}
+					timesToSendMessage--;
+				} else {
+					this.cancel();
+				}
+			}
+		}, 0, 1000);
 	}
 
 	private boolean isInt(String string) {

@@ -9,7 +9,7 @@ import org.kwstudios.play.ragemode.toolbox.GetGames;
 
 public class ListGames {
 	public ListGames(Player player, String label, String[] args, FileConfiguration fileConfiguration) {
-		String[] games = GetGames.getGameNames(fileConfiguration);
+		String[] games = GetGames.getGameNames(fileConfiguration);  //TODO Test if there are keys or not. -> NullPointerException
 		int i = 0;
 		int imax = games.length;
 		

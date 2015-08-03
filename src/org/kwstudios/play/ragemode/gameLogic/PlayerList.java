@@ -40,8 +40,10 @@ public class PlayerList {
 	}
 
 	public static String[] getPlayersInGame(String game) {
-		String[] players = new String[GetGames.getMaxPlayers(game,
-				fileConfiguration)];
+		int maxPlayers = GetGames.getMaxPlayers(game, fileConfiguration);
+		if(maxPlayers == -1)
+			return null;
+		String[] players = new String[maxPlayers];
 
 		int i = 0;
 		int n;

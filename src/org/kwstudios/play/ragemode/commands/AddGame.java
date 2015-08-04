@@ -46,7 +46,6 @@ public class AddGame {
 		ConfigFactory.setInt("settings.games." + args[1], "maxplayers", Integer.parseInt(args[2]), fileConfiguration);
 		ConfigFactory.setString("settings.games." + args[1], "world", player.getWorld().getName(), fileConfiguration);
 		
-		PlayerList.updateListSize(fileConfiguration);
 		
 		player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_GREEN + "The game " + ChatColor.DARK_AQUA + args[1]
 				+ ChatColor.DARK_GREEN + " was added successfully!");

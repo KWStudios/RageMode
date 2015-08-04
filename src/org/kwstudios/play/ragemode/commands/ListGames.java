@@ -9,20 +9,26 @@ import org.kwstudios.play.ragemode.toolbox.GetGames;
 
 public class ListGames {
 	public ListGames(Player player, String label, String[] args, FileConfiguration fileConfiguration) {
-		String[] games = GetGames.getGameNames(fileConfiguration);  //TODO Test if there are keys or not. -> NullPointerException
-		int i = 0;
-		int imax = games.length;
-		
-		player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "Listing all available ragemode games...");
-		
-		while(i < imax) {
-			if(PlayerList.isGameRunning(games[i])) {
-				player.sendMessage(i + 1 + ".) " + games[i] + ChatColor.GOLD.toString() + ChatColor.ITALIC.toString() + " running");
-			}
-			else {
-				player.sendMessage(i + 1 + ".) " + games[i] + ChatColor.GRAY + " idle");
-			}
-			i++;
+		if(GetGames.getGameNames(fileConfiguration) != null) {
+			String[] games = GetGames.getGameNames(fileConfiguration);
+			int i = 0;
+			int imax = games.length;
+			
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "Listing all available ragemode games...");
+			
+			while(i < imax) {
+				if(PlayerList.isGameRunning(games[i])) {
+					player.sendMessage(i + 1 + ".) " + games[i] + ChatColor.GOLD.toString() + ChatColor.ITALIC.toString() + " running");
+				}
+				else {
+					player.sendMessage(i + 1 + ".) " + games[i] + ChatColor.GRAY + " idle");
+				}
+				i++;
+			}			
 		}
+		else {
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "There are currently no RageMode maps on this server.");
+		}
+
 	}
 }

@@ -16,8 +16,7 @@ import org.kwstudios.play.ragemode.toolbox.TableList;
 
 public class PlayerList {
 	private static FileConfiguration fileConfiguration;
-	private static String[] list = new String[1]; // [Gamemane,Playername x
-													// overallMaxPlayers,Gamename,...]
+	private static String[] list = new String[1]; // [Gamemane,Playername x overallMaxPlayers,Gamename,...]
 	public static TableList<Player, Location> oldLocations = new TableList<Player, Location>();
 	public static TableList<Player, Inventory> oldInventories = new TableList<Player, Inventory>();
 	private static String[] runningGames = new String[1];
@@ -69,13 +68,15 @@ public class PlayerList {
 		return players;
 	}
 
-	public static void updateListSize(FileConfiguration fileConfiguration) {
+/*	public static void updateListSize(FileConfiguration fileConfiguration) {   //OUTDATED!
+//		TODO
+//		ordentliche, sichere methode eine neue liste mit allen spielern und der richtigen größe zu erhalten erstellen.
 		list = Arrays
 				.copyOf(list,
 						GetGames.getConfigGamesCount(fileConfiguration)
 								* (GetGames
 										.getOverallMaxPlayers(fileConfiguration) + 1));
-	}
+	}*/
 
 	public static boolean addPlayer(Player player, String game,
 			FileConfiguration fileConfiguration) {
@@ -238,8 +239,10 @@ public class PlayerList {
 		int i = 0;
 		int imax = GetGames.getConfigGamesCount(fileConfiguration);
 		while (i < imax) {
-			if (runningGames[i].equals(game))
-				return false;
+			if(runningGames != null) {
+				if (runningGames[i].equals(game))
+					return false;	
+			}
 			i++;
 		}
 		i = 0;
@@ -306,5 +309,19 @@ public class PlayerList {
 			return false;
 		}
 	return true;
+	}
+	
+	public static boolean addGameToList(String game, int maxPlayers) {
+//		TODO
+//		überprüfen ob overallMaxPlayers übertroffen wird, liste updaten.
+//		runninggames ohne datenverlust auf die richtige größe bringen.
+		return false;
+	}
+	
+	public static boolean deleteGameFromList(String game) {
+//		TODO 
+//		eventuell noch enthaltene spieler entfernen, liste updaten.
+//		runninggames ohne datenverlust auf die richtige größe bringen.
+		return false;
 	}
 }

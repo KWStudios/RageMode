@@ -15,7 +15,6 @@ public class PluginLoader extends JavaPlugin{
 
 	@Override
 	public void onEnable() {
-		// TODO Auto-generated method stub
 		super.onEnable();
 		PluginDescriptionFile pluginDescriptionFile = getDescription();
 		Logger logger = Logger.getLogger("Minecraft");
@@ -29,7 +28,6 @@ public class PluginLoader extends JavaPlugin{
 
 	@Override
 	public void onDisable() {
-		// TODO Auto-generated method stub
 		super.onDisable();
 		PluginDescriptionFile pluginDescriptionFile = getDescription();
 		Logger logger = Logger.getLogger("Minecraft");
@@ -39,7 +37,6 @@ public class PluginLoader extends JavaPlugin{
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		// TODO Auto-generated method stub
 		if(!(sender instanceof Player)){
 			sender.sendMessage("You must be a Player!");
 			return false;

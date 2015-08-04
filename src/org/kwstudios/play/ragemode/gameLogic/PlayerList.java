@@ -54,29 +54,24 @@ public class PlayerList {
 			if(list[i] != null) {
 				if (list[i].equals(game)) {
 					n = i;
-					while (n < GetGames.getMaxPlayers(game, fileConfiguration)) {
+					int x = 0;
+					while (n < GetGames.getMaxPlayers(game, fileConfiguration) + i) {
 						if(list[n + 1] == null)
-							break;
-						players[n] = list[n + 1];
-						n++;
+							n++;
+						else {
+							players[x] = list[n + 1];
+							n++;
+							x++;
+						}
+
 					}
-					players = Arrays.copyOf(players, n);
+					players = Arrays.copyOf(players, x);
 				}
 			}
 		    i = i + playersPerGame;		
 		}
 		return players;
 	}
-
-/*	public static void updateListSize(FileConfiguration fileConfiguration) {   //OUTDATED!
-//		TODO
-//		ordentliche, sichere methode eine neue liste mit allen spielern und der richtigen größe zu erhalten erstellen.
-		list = Arrays
-				.copyOf(list,
-						GetGames.getConfigGamesCount(fileConfiguration)
-								* (GetGames
-										.getOverallMaxPlayers(fileConfiguration) + 1));
-	}*/
 
 	public static boolean addPlayer(Player player, String game,
 			FileConfiguration fileConfiguration) {
@@ -189,7 +184,7 @@ public class PlayerList {
 		while (i < imax) {
 			if(list[i] != null) {
 				if (player.getUniqueId().toString().equals(list[i])) {
-					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You left your current Game");
+					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You left your current Game.");
 
 					while (n < oldLocations.getFirstLength()) {
 						if (oldLocations.getFromFirstObject(n) == player) {
@@ -311,17 +306,53 @@ public class PlayerList {
 	return true;
 	}
 	
-	public static boolean addGameToList(String game, int maxPlayers) {
-//		TODO
-//		überprüfen ob overallMaxPlayers übertroffen wird, liste updaten.
-//		runninggames ohne datenverlust auf die richtige größe bringen.
-		return false;
+	public static void addGameToList(String game, int maxPlayers) {
+		if(GetGames.getOverallMaxPlayers(fileConfiguration) < maxPlayers) {
+				String[] oldList = list;
+				list = Arrays.copyOf(list, (GetGames.getConfigGamesCount(fileConfiguration) + 1) * (maxPlayers + 1));
+				int i = 0;
+				int imax = oldList.length;
+				int n = 0;
+				int nmax = (GetGames.getOverallMaxPlayers(fileConfiguration) + 1);
+				
+				while(i < imax) {
+					while(n < nmax + i) {
+						list[n + i] = oldList[n + i];
+						n++;
+					}
+					i = i + maxPlayers + 1;
+					n = i;
+				}
+				
+				list[i] = game;
+		}
+		else {
+			String[] oldList = list;
+			list = Arrays.copyOf(list, (GetGames.getConfigGamesCount(fileConfiguration) + 1) * (maxPlayers + 1));
+			int i = 0;
+			int imax = oldList.length;
+			
+			while(i < imax) {
+				list[i] = oldList[i];
+				i++;
+			}
+			
+			list[i] = game;
+		}
 	}
 	
-	public static boolean deleteGameFromList(String game) {
+	public static void deleteGameFromList(String game) {
 //		TODO 
 //		eventuell noch enthaltene spieler entfernen, liste updaten.
 //		runninggames ohne datenverlust auf die richtige größe bringen.
-		return false;
+		String[] playersInGame = getPlayersInGame(game);
+		if(playersInGame != null) {
+			int i = 0;
+			int imax = playersInGame.length;
+			while(i < imax) {
+				removePlayer(Bukkit.getPlayer(UUID.fromString(playersInGame[i])));
+			}
+			
+		}
 	}
 }

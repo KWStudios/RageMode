@@ -41,7 +41,9 @@ public class AddGame {
 			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED + args[1] + " already exists.");
 			return;
 		}
-
+		
+		PlayerList.addGameToList(args[1], Integer.parseInt(args[2]));
+		
 		ConfigFactory.setString("settings.games", args[1], "", fileConfiguration);
 		ConfigFactory.setInt("settings.games." + args[1], "maxplayers", Integer.parseInt(args[2]), fileConfiguration);
 		ConfigFactory.setString("settings.games." + args[1], "world", player.getWorld().getName(), fileConfiguration);

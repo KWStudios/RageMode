@@ -63,7 +63,6 @@ public class PlayerList {
 							n++;
 							x++;
 						}
-
 					}
 					players = Arrays.copyOf(players, x);
 				}
@@ -232,7 +231,7 @@ public class PlayerList {
 		if (!GetGames.isGameExistent(game, fileConfiguration))
 			return false;
 		int i = 0;
-		int imax = GetGames.getConfigGamesCount(fileConfiguration);
+		int imax = runningGames.length;
 		while (i < imax) {
 			if(runningGames != null) {
 				if (runningGames[i].equals(game))
@@ -264,7 +263,6 @@ public class PlayerList {
 					return true;			
 				}				
 			}
-
 			i++;
 		}
 		return false;				
@@ -328,7 +326,7 @@ public class PlayerList {
 		}
 		else {
 			String[] oldList = list;
-			list = Arrays.copyOf(list, (GetGames.getConfigGamesCount(fileConfiguration) + 1) * (maxPlayers + 1));
+			list = Arrays.copyOf(list, (GetGames.getConfigGamesCount(fileConfiguration) + 1) * (GetGames.getOverallMaxPlayers(fileConfiguration) + 1));
 			int i = 0;
 			int imax = oldList.length;
 			
@@ -339,20 +337,75 @@ public class PlayerList {
 			
 			list[i] = game;
 		}
+		
+		String[] oldRunningGames = runningGames;
+		runningGames = Arrays.copyOf(runningGames, (runningGames.length + 1));
+		int i = 0;
+		int imax = runningGames.length - 1;
+		
+		while(i < imax) {
+			runningGames[i] = oldRunningGames[i];
+			i++;
+		}	
 	}
 	
 	public static void deleteGameFromList(String game) {
 //		TODO 
 //		eventuell noch enthaltene spieler entfernen, liste updaten.
-//		runninggames ohne datenverlust auf die richtige größe bringen.
 		String[] playersInGame = getPlayersInGame(game);
 		if(playersInGame != null) {
 			int i = 0;
 			int imax = playersInGame.length;
 			while(i < imax) {
 				removePlayer(Bukkit.getPlayer(UUID.fromString(playersInGame[i])));
+				i++;
+			}	
+		}
+		int i = 0;
+		int imax = list.length;
+		int gamePos = imax;
+		int nextGamePos = imax;
+		
+		while(i < imax) {
+			if(list[i] != null) {
+				if(list[i].equals(game)) {
+					gamePos = i;
+					int n = 0;
+					int nmax = GetGames.getOverallMaxPlayers(fileConfiguration) + 1;
+					
+					while(n < nmax) {
+						list[n + i] = null;
+						n++;
+					}
+					nextGamePos = i + nmax;
+				}
 			}
-			
+			i++;
+		}
+		i = nextGamePos;
+		
+		while(i < imax) {
+			list[gamePos] = list[i];
+			list[i] = null;
+			i++;
+			gamePos++;
+		}
+		String[] oldList = new String[(GetGames.getConfigGamesCount(fileConfiguration) - 1) * (GetGames.getOverallMaxPlayers(fileConfiguration) + 1)];
+		int g = 0;
+		int gmax = oldList.length;
+		
+		while(g < gmax) {
+			oldList[g] = list[g];
+			g++;
+		}
+		
+		list = Arrays.copyOf(list, oldList.length);
+		
+		g = 0;
+		
+		while(g < gmax) {
+			list[g] = oldList[g];
+			g++;
 		}
 	}
 }

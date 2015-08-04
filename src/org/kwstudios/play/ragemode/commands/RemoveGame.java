@@ -22,8 +22,10 @@ public class RemoveGame {
 					return;
 				}
 				else {
-					fileConfiguration.set("settings.games." + game, null);
 					PlayerList.deleteGameFromList(game);
+					
+					fileConfiguration.set("settings.games." + game, null);
+					
 					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "The game " + game + " was removed successfully.");
 				}			
 			}

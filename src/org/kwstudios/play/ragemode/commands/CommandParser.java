@@ -31,6 +31,10 @@ public class CommandParser {
 			parseFirstArg();
 			isCommand = true;
 			break;
+		case "ragemode":
+			parseFirstArg();
+			isCommand = true;
+			break;
 
 		default:
 			isCommand = false;

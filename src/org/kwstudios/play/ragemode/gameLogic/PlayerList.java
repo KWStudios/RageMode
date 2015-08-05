@@ -195,7 +195,7 @@ public class PlayerList {
 					
 					n = 0;
 					
-					while (n <= oldInventories.getFirstLength()) {
+					while (n < oldInventories.getFirstLength()) {
 						if (oldInventories.getFromFirstObject(n) == player) {
 							player.getInventory().setContents(oldInventories.getFromSecondObject(n).getContents());
 							player.sendMessage("your inventory has been restored");
@@ -234,7 +234,7 @@ public class PlayerList {
 		int i = 0;
 		int imax = runningGames.length;
 		while (i < imax) {
-			if(runningGames != null) {
+			if(runningGames[i] != null) {
 				if (runningGames[i].equals(game))
 					return false;	
 			}

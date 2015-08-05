@@ -198,6 +198,7 @@ public class PlayerList {
 					while (n <= oldInventories.getFirstLength()) {
 						if (oldInventories.getFromFirstObject(n) == player) {
 							player.getInventory().setContents(oldInventories.getFromSecondObject(n).getContents());
+							player.sendMessage("your inventory has been restored");
 							oldInventories.removeFromBoth(n);
 						}
 						n++;

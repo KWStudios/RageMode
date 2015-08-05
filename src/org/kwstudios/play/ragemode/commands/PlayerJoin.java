@@ -40,7 +40,7 @@ public class PlayerJoin {
 			String world = ConfigFactory.getString(ConstantHolder.GAME_PATH + "." + args[1] + ".lobby", "world", fileConfiguration);
 			int lobbyX = ConfigFactory.getInt(ConstantHolder.GAME_PATH + "." + args[1] + ".lobby", "x", fileConfiguration);
 			int lobbyY = ConfigFactory.getInt(ConstantHolder.GAME_PATH + "." + args[1] + ".lobby", "y", fileConfiguration);
-			int lobbyZ = ConfigFactory.getInt(ConstantHolder.GAME_PATH + "." + args[1] + ".lobby", "y", fileConfiguration);
+			int lobbyZ = ConfigFactory.getInt(ConstantHolder.GAME_PATH + "." + args[1] + ".lobby", "z", fileConfiguration);
 			Location lobbyLocation = new Location(Bukkit.getWorld(world), lobbyX, lobbyY, lobbyZ);
 
 			Location playerLocation = player.getLocation();

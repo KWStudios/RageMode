@@ -4,15 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.kwstudios.play.ragemode.items.RageArrow;
+import org.kwstudios.play.ragemode.items.RageBow;
+import org.kwstudios.play.ragemode.items.RageKnife;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 import org.kwstudios.play.ragemode.toolbox.GameBroadcast;
-import org.kwstudios.play.ragemode.toolbox.TableList;
 
 public class GameLoader {
 
@@ -23,6 +24,11 @@ public class GameLoader {
 	public GameLoader(String gameName, FileConfiguration fileConfiguration) {
 		this.gameName = gameName;
 		this.fileConfiguration = fileConfiguration;
+		checkTeleport();
+		setInventories();
+	}
+	
+	private void checkTeleport(){
 		GameSpawnGetter gameSpawnGetter = new GameSpawnGetter(gameName, fileConfiguration);
 		if (gameSpawnGetter.isGameReady()) {
 			gameSpawns = gameSpawnGetter.getSpawnLocations();
@@ -45,6 +51,17 @@ public class GameLoader {
 			Player player = Bukkit.getPlayer(UUID.fromString(players[i]));
 			Location location = gameSpawns.get(i);
 			player.teleport(location);
+		}
+	}
+	
+	private void setInventories(){
+		String[] players = PlayerList.getPlayersInGame(gameName);
+		for (String playerUUID : players) {
+			Player player = Bukkit.getPlayer(UUID.fromString(playerUUID));
+			player.getInventory().addItem(RageBow.getRageBow());
+			player.getInventory().addItem(RageArrow.getRageArrow());
+			player.getInventory().addItem(RageKnife.getRageKnife());
+			//TODO add CombatAxe, change positions to fit to a global standard
 		}
 	}
 

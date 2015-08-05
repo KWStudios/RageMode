@@ -41,6 +41,8 @@ public class AddLobby {
 				ConfigFactory.setDouble(path, "pitch", player.getLocation().getPitch(), fileConfiguration);
 				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_GREEN + "The lobby for the game "
 						+ ChatColor.DARK_AQUA + gameName + ChatColor.DARK_GREEN + " was set successfully!");
+				
+				//TODO use getX() instead of getBlockX() to save the double and be more accurate
 			}
 		} else {
 			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED

@@ -6,7 +6,9 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 
@@ -54,17 +56,17 @@ public class LobbyTimer {
 			public void run() {
 				if (totalMessagesBeforeTen > 0 && PlayerList.getPlayersInGame(gameName).length >= 2) {
 					for (int i = 0; i < playerUUIDs.length; i++) {
-						Bukkit.getPlayer(UUID.fromString(playerUUIDs[i])).sendMessage(
-								ConstantHolder.RAGEMODE_PREFIX + ChatColor.BLUE + "This round will start in "
-										+ ChatColor.YELLOW + Integer.toString(totalMessagesBeforeTen * 10)
-										+ ChatColor.BLUE + " seconds.");
+						Bukkit.getPlayer(UUID.fromString(playerUUIDs[i]))
+								.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.BLUE
+										+ "This round will start in " + ChatColor.YELLOW
+										+ Integer.toString(totalMessagesBeforeTen * 10) + ChatColor.BLUE + " seconds.");
 					}
 					totalMessagesBeforeTen--;
-					if(totalMessagesBeforeTen == 0){
+					if (totalMessagesBeforeTen == 0) {
 						this.cancel();
 						startTimerFromTen();
 					}
-				} else if(PlayerList.getPlayersInGame(gameName).length < 2){
+				} else if (PlayerList.getPlayersInGame(gameName).length < 2) {
 					this.cancel();
 				}
 			}
@@ -79,10 +81,10 @@ public class LobbyTimer {
 			public void run() {
 				if (timesToSendMessage > 0 && PlayerList.getPlayersInGame(gameName).length >= 2) {
 					for (int i = 0; i < playerUUIDs.length; i++) {
-						Bukkit.getPlayer(UUID.fromString(playerUUIDs[i])).sendMessage(
-								ConstantHolder.RAGEMODE_PREFIX + ChatColor.BLUE + "This round will start in "
-										+ ChatColor.YELLOW + Integer.toString(timesToSendMessage)
-										+ ChatColor.BLUE + " seconds.");
+						Bukkit.getPlayer(UUID.fromString(playerUUIDs[i]))
+								.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.BLUE
+										+ "This round will start in " + ChatColor.YELLOW
+										+ Integer.toString(timesToSendMessage) + ChatColor.BLUE + " seconds.");
 					}
 					timesToSendMessage--;
 				} else if (timesToSendMessage == 0 && PlayerList.getPlayersInGame(gameName).length >= 2) {

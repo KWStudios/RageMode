@@ -194,7 +194,7 @@ public class PlayerList {
 					}
 					
 					n = 0;
-					
+//					TODO functional inventory restore.
 					while (n < oldInventories.getFirstLength()) {
 						if (oldInventories.getFromFirstObject(n) == player) {
 							player.getInventory().setContents(oldInventories.getFromSecondObject(n).getContents());

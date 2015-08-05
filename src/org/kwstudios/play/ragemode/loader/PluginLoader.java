@@ -33,6 +33,7 @@ public class PluginLoader extends JavaPlugin{
 		Logger logger = Logger.getLogger("Minecraft");
 		
 		logger.info(pluginDescriptionFile.getName() + " was unloaded successfully! (Version: " + pluginDescriptionFile.getVersion() + ")" );
+//	TODO stop all running games with new stopGame method
 	}
 	
 	@Override

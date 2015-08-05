@@ -4,8 +4,43 @@ version: 0.1Alpha
 
 commands:
   rm:
-    description: Main command!
-    aliases: ['ragemode', 'kwragemode']
+    description: Main command.
+    aliases: ['ragemode']
     permission: ragemode.rm
+    permission-message: You may not use that command!
+  rm add:
+    description: Adds a RageMode map with the given name and the maximum player count.
+    aliases: ['ragemode add']
+    permission: ragemode.rm.admin.add
+    permission-message: You may not use that command!
+  rm lobby:
+    description: Sets the lobby for the given RageMode map to the current position.
+    aliases: ['ragemode lobby']
+    permission: ragemode.rm.admin.lobby
+    permission-message: You may not use that command!
+  rm addspawn:
+    description: Sets a spawn location for the given RageMode map to the current position.
+    aliases: ['ragemode addspawn']
+    permission: ragemode.rm.admin.addspawn
+    permission-message: You may not use that command!
+  rm remove:
+    description: Removes the given RageMode map.
+    aliases: ['ragemode remove']
+    permission: ragemode.rm.admin.remove
+    permission-message: You may not use that command!
+  rm join:
+    description: Joins the given RageMode game.
+    aliases: ['ragemode join']
+    permission: ragemode.rm.join
+    permission-message: You may not use that command!
+  rm leave:
+    description: Leaves the current RageMode game.
+    aliases: ['ragemode leave']
+    permission: ragemode.rm.leave
+    permission-message: You may not use that command!
+  rm list:
+    description: Lists all RageMode maps.
+    aliases: ['ragemode list']
+    permission: ragemode.rm.list
     permission-message: You may not use that command!
     

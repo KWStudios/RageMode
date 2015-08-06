@@ -11,6 +11,7 @@ public class RageKnife {
 		ItemStack knife = new ItemStack(Material.SHEARS);
 		ItemMeta meta = knife.getItemMeta();
 		meta.setDisplayName(ChatColor.GOLD + "RageKnife");
+		knife.setItemMeta(meta);
 		return knife;
 		//TODO set attack level to 20 for the RageKnife
 	}

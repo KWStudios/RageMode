@@ -11,6 +11,7 @@ public class RageArrow {
 		ItemStack arrow = new ItemStack(Material.ARROW);
 		ItemMeta meta = arrow.getItemMeta();
 		meta.setDisplayName(ChatColor.GOLD + "RageArrow");
+		arrow.setItemMeta(meta);
 		return arrow;
 	}
 

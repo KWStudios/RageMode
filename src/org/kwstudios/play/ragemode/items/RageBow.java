@@ -14,6 +14,7 @@ public class RageBow {
 		meta.setDisplayName(ChatColor.GOLD + "RageBow");
 		Enchantment infinity = Enchantment.ARROW_INFINITE;
 		meta.addEnchant(infinity, 1, false);
+		bow.setItemMeta(meta);
 		return bow;
 	}
 	

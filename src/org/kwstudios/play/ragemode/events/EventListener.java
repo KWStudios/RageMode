@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -75,7 +75,8 @@ public class EventListener implements Listener {
 			Bukkit.broadcastMessage("AAA");
 			if(PlayerList.isPlayerPlaying(killer.getUniqueId().toString()) && PlayerList.isPlayerPlaying(victim.getUniqueId().toString())){
 				Bukkit.broadcastMessage("BBB");
-				if(killer.getItemInHand().getItemMeta().getDisplayName().equals("RageKnife")){
+				if(killer.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GOLD + "RageKnife")){
+					//TODO check if "killer.getItemInHand() instanceof MATERIAL.SHEARS" also works (maybe more stable)
 					Bukkit.broadcastMessage("CCC");
 					event.setDamage(25);
 				}
@@ -105,12 +106,12 @@ public class EventListener implements Listener {
 			GameSpawnGetter gameSpawnGetter = new GameSpawnGetter(PlayerList.getPlayersGame(deceased), fileConfiguration);
 			
 			List<Location> spawns = gameSpawnGetter.getSpawnLocations();
-			Location[] aSpawns = (Location[]) spawns.toArray();
+			//Location[] aSpawns = (Location[]) spawns.toArray();    ----> performance optimization
 			
 			Random rand = new Random();
-			int x = rand.nextInt(aSpawns.length - 1);
+			int x = rand.nextInt(spawns.size() - 1);    //----> performance optimization
 
-			deceased.teleport(aSpawns[x]);
+			deceased.teleport(spawns.get(x));    //----> performance optimization
 			deceased.setHealth(20);
 		}
 	}

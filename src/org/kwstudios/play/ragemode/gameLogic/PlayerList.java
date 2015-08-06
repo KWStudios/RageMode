@@ -351,8 +351,7 @@ public class PlayerList {
 	}
 	
 	public static void deleteGameFromList(String game) {
-//		TODO 
-//		eventuell noch enthaltene spieler entfernen, liste updaten.
+//		TODO eventuell noch enthaltene spieler entfernen, liste updaten.
 		String[] playersInGame = getPlayersInGame(game);
 		if(playersInGame != null) {
 			int i = 0;
@@ -428,6 +427,7 @@ public class PlayerList {
 				}
 			}
 		}
+		//TODO fix possible endless loop (i++ missing)
 		return null;
 	}
 }

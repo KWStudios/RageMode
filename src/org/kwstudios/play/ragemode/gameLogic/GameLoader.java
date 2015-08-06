@@ -58,10 +58,11 @@ public class GameLoader {
 		String[] players = PlayerList.getPlayersInGame(gameName);
 		for (String playerUUID : players) {
 			Player player = Bukkit.getPlayer(UUID.fromString(playerUUID));
-			player.getInventory().addItem(RageBow.getRageBow());
-			player.getInventory().addItem(RageArrow.getRageArrow());
-			player.getInventory().addItem(RageKnife.getRageKnife());
-			//TODO add CombatAxe, change positions to fit to a global standard
+			player.getInventory().setItem(0, RageBow.getRageBow());
+			player.getInventory().setItem(1, RageKnife.getRageKnife());
+			player.getInventory().setItem(9, RageArrow.getRageArrow());
+			//see positions here: http://redditpublic.com/images/b/b2/Items_slot_number.png
+			//TODO add CombatAxe
 		}
 	}
 

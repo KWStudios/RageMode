@@ -6,6 +6,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
@@ -34,7 +35,7 @@ public class EventListener implements Listener {
 	}
 
 	@EventHandler
-	public void onProjectileHit(ProjectileHitEvent event) {
+	public void onProjectileHit(ProjectileHitEvent event) {    //RageArrow explosion event
 		if (event.getEntity() instanceof Arrow) {
 			Arrow arrow = (Arrow) event.getEntity();
 			if (arrow.getShooter() instanceof Player) {
@@ -51,6 +52,20 @@ public class EventListener implements Listener {
 				}
 			}
 		}
+	}
+	
+	@EventHandler
+	public void onRageKnifeHit(EntityDamageByEntityEvent event){    //RageKnife hit event
+		if(event.getDamager() instanceof Player && event.getEntity() instanceof Player){
+			Player killer = (Player) event.getDamager();
+			Player victim = (Player) event.getEntity();
+			if(PlayerList.isPlayerPlaying(killer.getUniqueId().toString()) && PlayerList.isPlayerPlaying(victim.getUniqueId().toString())){
+				if(killer.getItemInHand().getItemMeta().getDisplayName().equals("RageKnife")){
+					event.setDamage(25);
+				}
+			}
+		}
+		//TODO add Constant for "RageKnife" for unexpected error preventing
 	}
 
 	// @EventHandler

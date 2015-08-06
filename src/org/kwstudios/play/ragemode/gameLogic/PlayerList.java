@@ -409,4 +409,25 @@ public class PlayerList {
 			g++;
 		}
 	}
+	
+	public static String getPlayersGame(Player player) {
+		String sPlayer = player.getUniqueId().toString();
+		String game = null;
+		
+		int i = 0;
+		int imax = list.length;
+		int playersPerGame = GetGames.getOverallMaxPlayers(fileConfiguration);
+		
+		while(i < imax) {
+			if(list[i] != null) {
+				if((i % (playersPerGame + 1)) == 0) {
+					game = list[i];
+				}
+				if(list[i].equals(sPlayer)) {
+					return game;
+				}
+			}
+		}
+		return null;
+	}
 }

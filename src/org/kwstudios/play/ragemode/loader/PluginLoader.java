@@ -23,7 +23,7 @@ public class PluginLoader extends JavaPlugin{
 		//getConfig().options().copyDefaults(true);
 		//saveConfig();
 		new PlayerList(getConfig());
-		new EventListener(this);
+		new EventListener(this, getConfig());
 	}
 
 	@Override

@@ -1,8 +1,12 @@
 package org.kwstudios.play.ragemode.events;
 
+import java.util.List;
+import java.util.Random;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -11,15 +15,20 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.kwstudios.play.ragemode.gameLogic.GameSpawnGetter;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
 
 public class EventListener implements Listener {
 
-	public EventListener(PluginLoader plugin) {
+	public FileConfiguration fileConfiguration = null;
+	
+	public EventListener(PluginLoader plugin, FileConfiguration fileconfiguration) {
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
+		fileConfiguration = fileconfiguration;
 	}
 
 	@EventHandler
@@ -84,6 +93,25 @@ public class EventListener implements Listener {
 				Bukkit.broadcastMessage("DDD");
 					event.setDamage(25);
 			}
+		}
+	}
+	
+	@EventHandler
+	public void onPlayerDeath(PlayerDeathEvent event) {
+		if(PlayerList.isPlayerPlaying(event.getEntity().getUniqueId().toString())) {
+			Player deceased = (Player) event.getEntity();
+			deceased.getInventory().clear();
+			
+			GameSpawnGetter gameSpawnGetter = new GameSpawnGetter(PlayerList.getPlayersGame(deceased), fileConfiguration);
+			
+			List<Location> spawns = gameSpawnGetter.getSpawnLocations();
+			Location[] aSpawns = (Location[]) spawns.toArray();
+			
+			Random rand = new Random();
+			int x = rand.nextInt(aSpawns.length - 1);
+
+			deceased.teleport(aSpawns[x]);
+			deceased.setHealth(20);
 		}
 	}
 	

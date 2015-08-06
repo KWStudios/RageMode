@@ -1,12 +1,16 @@
 package org.kwstudios.play.ragemode.events;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
@@ -59,14 +63,30 @@ public class EventListener implements Listener {
 		if(event.getDamager() instanceof Player && event.getEntity() instanceof Player){
 			Player killer = (Player) event.getDamager();
 			Player victim = (Player) event.getEntity();
+			Bukkit.broadcastMessage("AAA");
 			if(PlayerList.isPlayerPlaying(killer.getUniqueId().toString()) && PlayerList.isPlayerPlaying(victim.getUniqueId().toString())){
+				Bukkit.broadcastMessage("BBB");
 				if(killer.getItemInHand().getItemMeta().getDisplayName().equals("RageKnife")){
+					Bukkit.broadcastMessage("CCC");
 					event.setDamage(25);
 				}
 			}
 		}
 		//TODO add Constant for "RageKnife" for unexpected error preventing
 	}
+	
+	@EventHandler
+	public void onArrowHitPlayer(EntityDamageEvent event){    //Arrow hit player event
+		if(event.getEntity() instanceof Player && event.getCause().equals(DamageCause.PROJECTILE)){
+			Bukkit.broadcastMessage("HIT");
+			Player victim = (Player) event.getEntity();
+			if(PlayerList.isPlayerPlaying(victim.getUniqueId().toString())){
+				Bukkit.broadcastMessage("DDD");
+					event.setDamage(25);
+			}
+		}
+	}
+	
 
 	// @EventHandler
 	// public void onPlayerDeath(PlayerDeathEvent event) {

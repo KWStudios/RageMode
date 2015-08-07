@@ -22,6 +22,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.kwstudios.play.ragemode.gameLogic.GameSpawnGetter;
@@ -180,6 +181,18 @@ public class EventListener implements Listener {
 			event.setCancelled(true);
 		}
 
+	}
+	
+	@EventHandler
+	public void onCombatAxeThrow(PlayerInteractEvent event) {
+		if(PlayerList.isPlayerPlaying(event.getPlayer().getUniqueId().toString())) {
+			Player thrower = event.getPlayer();
+			if(thrower.getItemInHand() != null && thrower.getItemInHand().getItemMeta() != null && thrower.getItemInHand().getItemMeta().getDisplayName() != null) {
+				if(thrower.getItemInHand().getItemMeta().getDisplayName().equals("Stick")) {
+					thrower.getWorld().createExplosion(thrower.getLocation(), 1f, false);
+				}
+			}
+		}
 	}
 	
 	

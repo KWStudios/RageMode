@@ -83,7 +83,7 @@ public class EventListener implements Listener {
 			Player killer = (Player) event.getDamager();
 			Player victim = (Player) event.getEntity();
 			if(PlayerList.isPlayerPlaying(killer.getUniqueId().toString()) && PlayerList.isPlayerPlaying(victim.getUniqueId().toString())){
-				if(killer.getItemInHand() != null) {
+				if(killer.getItemInHand() != null && killer.getItemInHand().getItemMeta() != null && killer.getItemInHand().getItemMeta().getDisplayName() != null) {
 					if(killer.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GOLD + "RageKnife")){
 						//TODO check if "killer.getItemInHand() instanceof MATERIAL.SHEARS" also works (maybe more stable)
 						event.setDamage(25);

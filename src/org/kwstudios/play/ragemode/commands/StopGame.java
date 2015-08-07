@@ -14,7 +14,7 @@ import org.kwstudios.play.ragemode.toolbox.GetGames;
 public class StopGame {
 	
 	public StopGame(Player player, String label, String[] args, FileConfiguration fileConfiguration) {
-		if(args.length > 2) {
+		if(args.length >= 2) {
 			if(PlayerList.isGameRunning(args[1])) {
 				String[] players = PlayerList.getPlayersInGame(args[1]);
 				if(players != null) {

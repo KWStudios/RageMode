@@ -88,7 +88,7 @@ public class EventListener implements Listener {
 	
 	@EventHandler
 	public void onArrowHitPlayer(EntityDamageEvent event){    //Arrow hit player event
-		if(event.getEntity() instanceof Player/* && event.getCause().equals(DamageCause.PROJECTILE)*/){
+		if(event.getEntity() instanceof Player && event.getCause().equals(DamageCause.PROJECTILE)){
 			Bukkit.broadcastMessage("HIT");
 			Player victim = (Player) event.getEntity();
 			if(PlayerList.isPlayerPlaying(victim.getUniqueId().toString())){
@@ -102,7 +102,6 @@ public class EventListener implements Listener {
 	public void onPlayerDeath(PlayerDeathEvent event) {		//Player autorespawn
 		if(PlayerList.isPlayerPlaying(event.getEntity().getUniqueId().toString())) {
 			Player deceased = (Player) event.getEntity();
-			deceased.getInventory().clear();
 			
 			GameSpawnGetter gameSpawnGetter = new GameSpawnGetter(PlayerList.getPlayersGame(deceased), fileConfiguration);
 			
@@ -112,13 +111,13 @@ public class EventListener implements Listener {
 			Random rand = new Random();
 			int x = rand.nextInt(spawns.size() - 1);    //----> performance optimization
 
-			deceased.teleport(spawns.get(0));    //----> performance optimization
 			deceased.setHealth(20);
+			
+			deceased.teleport(spawns.get(x));    //----> performance optimization
 			
 			deceased.getInventory().setItem(0, RageBow.getRageBow());		//
 			deceased.getInventory().setItem(1, RageKnife.getRageKnife());	//	give him a new set of items
 			deceased.getInventory().setItem(9, RageArrow.getRageArrow());	//
-			deceased.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You were deadened");
 //			TODO give him a CombatAxe
 		}
 	}

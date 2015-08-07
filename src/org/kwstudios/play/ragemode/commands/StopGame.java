@@ -8,6 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
+import org.kwstudios.play.ragemode.toolbox.GameBroadcast;
 import org.kwstudios.play.ragemode.toolbox.GetGames;
 
 
@@ -29,8 +30,7 @@ public class StopGame {
 					}
 				}
 				PlayerList.setGameNotRunning(args[1]);
-//				TODO game Broadcast for close
-				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + args[1] + ChatColor.DARK_GREEN + " has been stopped.");
+				GameBroadcast.broadcastToGame(args[1], ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + args[1] + ChatColor.DARK_GREEN + " has been stopped.");
 			}
 			else {
 				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "This game isn't running.");
@@ -56,7 +56,8 @@ public class StopGame {
 				}
 			}
 			PlayerList.setGameNotRunning(game);
-//			TODO game Broadcast for close
+			GameBroadcast.broadcastToGame(game, ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + game + ChatColor.DARK_GREEN + " has been stopped.");
+
 		}
 	}
 	

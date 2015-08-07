@@ -78,10 +78,13 @@ public class EventListener implements Listener {
 			Player killer = (Player) event.getDamager();
 			Player victim = (Player) event.getEntity();
 			if(PlayerList.isPlayerPlaying(killer.getUniqueId().toString()) && PlayerList.isPlayerPlaying(victim.getUniqueId().toString())){
-				if(killer.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GOLD + "RageKnife")){
-					//TODO check if "killer.getItemInHand() instanceof MATERIAL.SHEARS" also works (maybe more stable)
-					event.setDamage(25);
+				if(killer.getItemInHand() != null) {
+					if(killer.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GOLD + "RageKnife")){
+						//TODO check if "killer.getItemInHand() instanceof MATERIAL.SHEARS" also works (maybe more stable)
+						event.setDamage(25);
+					}					
 				}
+
 			}
 		}
 		//TODO add Constant for "RageKnife" for unexpected error preventing
@@ -116,13 +119,15 @@ public class EventListener implements Listener {
 			
 			deceased.teleport(spawns.get(x));    //----> performance optimization
 			
+			deceased.getInventory().clear();
 			deceased.getInventory().setItem(0, RageBow.getRageBow());		//
 			deceased.getInventory().setItem(1, RageKnife.getRageKnife());	//	give him a new set of items
 			deceased.getInventory().setItem(9, RageArrow.getRageArrow());	//
-
 //			TODO give him a CombatAxe
 		}
 	}
+	
+	
 	
 
 	// @EventHandler

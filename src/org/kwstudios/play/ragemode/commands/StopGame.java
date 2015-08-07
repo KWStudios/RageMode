@@ -79,8 +79,8 @@ public class StopGame {
 					int nmax = players.length;
 					
 					while(n < nmax) {
-						if(players[i] != null) {
-							PlayerList.removePlayer(Bukkit.getPlayer(UUID.fromString(players[i])));
+						if(players[n] != null) {
+							PlayerList.removePlayer(Bukkit.getPlayer(UUID.fromString(players[n])));
 						}
 						n++;
 					}

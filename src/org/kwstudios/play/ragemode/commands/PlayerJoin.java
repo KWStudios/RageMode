@@ -8,6 +8,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
 import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
@@ -44,15 +45,30 @@ public class PlayerJoin {
 			Location lobbyLocation = new Location(Bukkit.getWorld(world), lobbyX, lobbyY, lobbyZ);
 
 			Location playerLocation = player.getLocation();
+			ItemStack[] playerInventory = player.getInventory().getContents();
+			ItemStack[] playerArmor = player.getInventory().getArmorContents();
+			Double playerHealth = player.getHealth();
+			int playerHunger = player.getFoodLevel();
+			GameMode playerGameMode = player.getGameMode();
 
 			Logger logger = Logger.getLogger("Minecraft");
 
 			if (PlayerList.addPlayer(player, args[1], fileConfiguration)) {
 				PlayerList.oldLocations.addToBoth(player, playerLocation);
-				PlayerList.oldInventories.addToBoth(player, player.getInventory());
+				PlayerList.oldInventories.addToBoth(player, playerInventory);
+				PlayerList.oldArmor.addToBoth(player, playerArmor);
+				PlayerList.oldHealth.addToBoth(player, playerHealth);
+				PlayerList.oldHunger.addToBoth(player, playerHunger);
+				PlayerList.oldGameMode.addToBoth(player, playerGameMode);
 				player.getInventory().clear();
 				player.teleport(lobbyLocation);
 				player.setGameMode(GameMode.SURVIVAL);
+				player.setHealth(20);
+				player.setFoodLevel(20);
+				player.getInventory().setHelmet(null);
+				player.getInventory().setChestplate(null);
+				player.getInventory().setLeggings(null);
+				player.getInventory().setBoots(null);
 				String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_GREEN + player.getName()
 						+ ChatColor.BLUE + " joined the game.";
 				GameBroadcast.broadcastToGame(args[1], message);

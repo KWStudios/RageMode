@@ -6,10 +6,11 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 import org.kwstudios.play.ragemode.toolbox.GetGames;
 import org.kwstudios.play.ragemode.toolbox.TableList;
@@ -18,7 +19,12 @@ public class PlayerList {
 	private static FileConfiguration fileConfiguration;
 	private static String[] list = new String[1]; // [Gamemane,Playername x overallMaxPlayers,Gamename,...]
 	public static TableList<Player, Location> oldLocations = new TableList<Player, Location>();
-	public static TableList<Player, Inventory> oldInventories = new TableList<Player, Inventory>();
+	public static TableList<Player, ItemStack[]> oldInventories = new TableList<Player, ItemStack[]>();
+	public static TableList<Player, ItemStack[]> oldArmor = new TableList<Player, ItemStack[]>();
+	public static TableList<Player, Double> oldHealth = new TableList<Player, Double>();
+	public static TableList<Player, Integer> oldHunger = new TableList<Player, Integer>();
+	public static TableList<Player, GameMode> oldGameMode = new TableList<Player, GameMode>();
+	
 	private static String[] runningGames = new String[1];
 
 	public PlayerList(FileConfiguration fileConfiguration) {
@@ -132,7 +138,7 @@ public class PlayerList {
 						isVIP = playerToKick.hasPermission("rm.vip");
 					} while (isVIP);
 						
-					while (n <= oldLocations.getFirstLength()) {
+					while (n <= oldLocations.getFirstLength()) {						//Get him back to his old location.
 						if (oldLocations.getFromFirstObject(n) == playerToKick) {
 							playerToKick.teleport(oldLocations
 									.getFromSecondObject(n));
@@ -143,10 +149,51 @@ public class PlayerList {
 					
 					n = 0;
 					
-					while (n <= oldInventories.getFirstLength()) {
+					while (n <= oldInventories.getFirstLength()) {						//Give him his inventory back.
 						if (oldInventories.getFromFirstObject(n) == playerToKick) {
-							playerToKick.getInventory().setContents(oldInventories.getFromSecondObject(n).getContents());
+							playerToKick.getInventory().clear();
+							playerToKick.getInventory().setContents(oldInventories.getFromSecondObject(n));
 							oldInventories.removeFromBoth(n);
+						}
+						n++;
+					}
+					
+					n = 0;
+					
+					while (n <= oldArmor.getFirstLength()) {							//Give him his armor back.
+						if (oldArmor.getFromFirstObject(n) == playerToKick) {
+							playerToKick.getInventory().setArmorContents(oldArmor.getFromSecondObject(n));
+							oldArmor.removeFromBoth(n);
+						}
+						n++;
+					}
+					
+					n = 0;
+					
+					while (n <= oldHealth.getFirstLength()) {							//Give him his health back.
+						if (oldHealth.getFromFirstObject(n) == playerToKick) {
+							playerToKick.setHealth(oldHealth.getFromSecondObject(n));
+							oldHealth.removeFromBoth(n);
+						}
+						n++;
+					}
+					
+					n = 0;
+					
+					while (n <= oldHunger.getFirstLength()) {							//Give him his hunger back.
+						if (oldHunger.getFromFirstObject(n) == playerToKick) {
+							playerToKick.setFoodLevel(oldHunger.getFromSecondObject(n));
+							oldHunger.removeFromBoth(n);
+						}
+						n++;
+					}
+					
+					n = 0;
+					
+					while (n <= oldGameMode.getFirstLength()) {							//Give him his gamemode back.
+						if (oldGameMode.getFromFirstObject(n) == playerToKick) {
+							playerToKick.setGameMode(oldGameMode.getFromSecondObject(n));
+							oldGameMode.removeFromBoth(n);
 						}
 						n++;
 					}
@@ -185,7 +232,7 @@ public class PlayerList {
 				if (player.getUniqueId().toString().equals(list[i])) {
 					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You left your current Game.");
 
-					while (n < oldLocations.getFirstLength()) {
+					while (n < oldLocations.getFirstLength()) {					//Bring him back to his old location
 						if (oldLocations.getFromFirstObject(n) == player) {
 							player.teleport(oldLocations.getFromSecondObject(n));
 							oldLocations.removeFromBoth(n);
@@ -194,15 +241,56 @@ public class PlayerList {
 					}
 					
 					n = 0;
-//					TODO functional inventory restore.
-					while (n < oldInventories.getFirstLength()) {
+
+					while (n < oldInventories.getFirstLength()) {					//Give him his inventory back
 						if (oldInventories.getFromFirstObject(n) == player) {
-							player.getInventory().setContents(oldInventories.getFromSecondObject(n).getContents());
-							player.sendMessage("your inventory has been restored" + oldInventories.getFromSecondObject(n).toString());
+							player.getInventory().clear();							
+							player.getInventory().setContents(oldInventories.getFromSecondObject(n));
 							oldInventories.removeFromBoth(n);
 						}
 						n++;
-					}					
+					}	
+					
+					n = 0;
+					
+					while (n < oldArmor.getFirstLength()) {
+						if (oldArmor.getFromFirstObject(n) == player) {					//Give him his armor back
+							player.getInventory().setArmorContents(oldArmor.getFromSecondObject(n));
+							oldArmor.removeFromBoth(n);
+						}
+						n++;
+					}
+					
+					n = 0;
+					
+					while (n <= oldHealth.getFirstLength()) {							//Give him his health back.
+						if (oldHealth.getFromFirstObject(n) == player) {
+							player.setHealth(oldHealth.getFromSecondObject(n));
+							oldHealth.removeFromBoth(n);
+						}
+						n++;
+					}
+					
+					n = 0;
+					
+					while (n <= oldHunger.getFirstLength()) {							//Give him his hunger back.
+						if (oldHunger.getFromFirstObject(n) == player) {
+							player.setFoodLevel(oldHunger.getFromSecondObject(n));
+							oldHunger.removeFromBoth(n);
+						}
+						n++;
+					}
+					
+					n = 0;
+					
+					while (n <= oldGameMode.getFirstLength()) {							//Give him his gamemode back.
+						if (oldGameMode.getFromFirstObject(n) == player) {
+							player.setGameMode(oldGameMode.getFromSecondObject(n));
+							oldGameMode.removeFromBoth(n);
+						}
+						n++;
+					}
+					
 					
 					list[i] = null;
 					return true;

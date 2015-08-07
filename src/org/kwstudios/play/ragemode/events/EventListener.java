@@ -119,8 +119,7 @@ public class EventListener implements Listener {
 			deceased.getInventory().setItem(0, RageBow.getRageBow());		//
 			deceased.getInventory().setItem(1, RageKnife.getRageKnife());	//	give him a new set of items
 			deceased.getInventory().setItem(9, RageArrow.getRageArrow());	//
-			
-			deceased.updateInventory();
+
 //			TODO give him a CombatAxe
 		}
 	}

@@ -41,6 +41,25 @@ public class StopGame {
 		}
 	}
 	
+	public static void stopGame(String game) {
+		if(PlayerList.isGameRunning(game)) {
+			String[] players = PlayerList.getPlayersInGame(game);
+			if(players != null) {
+				int i = 0;
+				int imax = players.length;
+				
+				while(i < imax) {
+					if(players[i] != null) {
+						PlayerList.removePlayer(Bukkit.getPlayer(UUID.fromString(players[i])));
+					}
+					i++;
+				}
+			}
+			PlayerList.setGameNotRunning(game);
+//			TODO game Broadcast for close
+		}
+	}
+	
 	public static void stopAllGames(FileConfiguration fileConfiguration, Logger logger) {
 		logger.info("RageMode is searching for games to stop ...");
 		

@@ -65,6 +65,7 @@ public class EventListener implements Listener {
 					double z = location.getZ();
 
 					world.createExplosion(x, y, z, 4f, false, false);
+					arrow.remove();
 					//TODO check if 4f is too strong (4f is TNT strength)
 				}
 			}
@@ -118,6 +119,8 @@ public class EventListener implements Listener {
 			deceased.getInventory().setItem(0, RageBow.getRageBow());		//
 			deceased.getInventory().setItem(1, RageKnife.getRageKnife());	//	give him a new set of items
 			deceased.getInventory().setItem(9, RageArrow.getRageArrow());	//
+			
+			deceased.updateInventory();
 //			TODO give him a CombatAxe
 		}
 	}

@@ -24,6 +24,7 @@ public class GameLoader {
 	public GameLoader(String gameName, FileConfiguration fileConfiguration) {
 		this.gameName = gameName;
 		this.fileConfiguration = fileConfiguration;
+		PlayerList.setGameRunning(gameName);
 		checkTeleport();
 		setInventories();
 		new GameTimer(this.gameName, PlayerList.getPlayersInGame(this.gameName), this.fileConfiguration);

@@ -24,7 +24,6 @@ public class LobbyTimer {
 		this.gameName = gameName;
 		this.playerUUIDs = playerUUIDs;
 		this.fileConfiguration = fileConfiguration;
-		PlayerList.setGameRunning(gameName);
 		getSecondsToWait();
 		sendTimerMessages();
 	}

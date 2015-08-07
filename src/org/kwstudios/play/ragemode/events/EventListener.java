@@ -32,6 +32,7 @@ import org.kwstudios.play.ragemode.gameLogic.PlayerList;
 import org.kwstudios.play.ragemode.gameLogic.RageScores;
 import org.kwstudios.play.ragemode.items.CombatAxe;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
+import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 import org.kwstudios.play.ragemode.toolbox.GameBroadcast;
 
@@ -151,24 +152,34 @@ public class EventListener implements Listener {
 		if(PlayerList.isPlayerPlaying(event.getEntity().getUniqueId().toString())) {
 			Player deceased = (Player) event.getEntity();
 			
+			if(!fileConfiguration.isSet("global.deathmessages")) {
+				ConfigFactory.setBoolean("global", "deathmessages", false, fileConfiguration);			
+			}
+			boolean doDeathBroadcast = ConfigFactory.getBoolean("global", "deathmessages", fileConfiguration);
+			
 			if(deceased.getLastDamage() == 0.0f) {
-				Bukkit.broadcastMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.GREEN + deceased.getName() + ChatColor.DARK_AQUA + " was killed by " + ChatColor.GREEN + deceased.getKiller().getName() + ChatColor.DARK_AQUA + " with a" + ChatColor.GOLD + "CombatAxe" + ChatColor.DARK_AQUA + ".");
-				RageScores.addPointsToPlayer(deceased, deceased.getKiller(), "combataxe");
+				if(doDeathBroadcast)
+					Bukkit.broadcastMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.GREEN + deceased.getName() + ChatColor.DARK_AQUA + " was killed by " + ChatColor.GREEN + deceased.getKiller().getName() + ChatColor.DARK_AQUA + " with a" + ChatColor.GOLD + "CombatAxe" + ChatColor.DARK_AQUA + ".");
+				RageScores.addPointsToPlayer(deceased.getKiller(), deceased, "combataxe");
 			}
 			else if(deceased.getLastDamageCause().getCause().equals(DamageCause.PROJECTILE)) {
-				Bukkit.broadcastMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.GREEN  + deceased.getName() + ChatColor.DARK_AQUA + " was killed by a direct " + ChatColor.GOLD + "arrow" + ChatColor.DARK_AQUA + " hit from " + ChatColor.GREEN + deceased.getKiller().getName() + ChatColor.DARK_AQUA + ".");	
-				RageScores.addPointsToPlayer(deceased, deceased.getKiller(), "ragebow");
+				if(doDeathBroadcast)
+					Bukkit.broadcastMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.GREEN  + deceased.getName() + ChatColor.DARK_AQUA + " was killed by a direct " + ChatColor.GOLD + "arrow" + ChatColor.DARK_AQUA + " hit from " + ChatColor.GREEN + deceased.getKiller().getName() + ChatColor.DARK_AQUA + ".");	
+				RageScores.addPointsToPlayer(deceased.getKiller(), deceased, "ragebow");
 			}
 			else if(deceased.getLastDamageCause().getCause().equals(DamageCause.ENTITY_ATTACK)) {
-				Bukkit.broadcastMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.GREEN  + deceased.getName() + ChatColor.DARK_AQUA + " was killed by " + ChatColor.GOLD + deceased.getKiller().getName() + ChatColor.DARK_AQUA + " with a " + ChatColor.GOLD + "RageKnife" + ChatColor.DARK_AQUA + ".");	
-				RageScores.addPointsToPlayer(deceased, deceased.getKiller(), "rageknife");
+				if(doDeathBroadcast)
+					Bukkit.broadcastMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.GREEN  + deceased.getName() + ChatColor.DARK_AQUA + " was killed by " + ChatColor.GOLD + deceased.getKiller().getName() + ChatColor.DARK_AQUA + " with a " + ChatColor.GOLD + "RageKnife" + ChatColor.DARK_AQUA + ".");	
+				RageScores.addPointsToPlayer(deceased.getKiller(), deceased, "rageknife");
 			}
 			else if(deceased.getLastDamageCause().getCause().equals(DamageCause.BLOCK_EXPLOSION)) {
-				Bukkit.broadcastMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.GREEN  + deceased.getName() + ChatColor.DARK_AQUA + " was " + ChatColor.GOLD + "blown up" + ChatColor.DARK_AQUA + " by " + ChatColor.GREEN + deceased.getKiller().getName() + ChatColor.DARK_AQUA + ".");	
-				RageScores.addPointsToPlayer(deceased, deceased.getKiller(), "explosion");
+				if(doDeathBroadcast)
+					Bukkit.broadcastMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.GREEN  + deceased.getName() + ChatColor.DARK_AQUA + " was " + ChatColor.GOLD + "blown up" + ChatColor.DARK_AQUA + " by " + ChatColor.GREEN + deceased.getKiller().getName() + ChatColor.DARK_AQUA + ".");	
+				RageScores.addPointsToPlayer(deceased.getKiller(), deceased, "explosion");
 			}
 			else {
-				Bukkit.broadcastMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.GREEN  + deceased.getName() + ChatColor.DARK_AQUA + " was killed by something unexpected.");	
+				if(doDeathBroadcast)
+					Bukkit.broadcastMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.GREEN  + deceased.getName() + ChatColor.DARK_AQUA + " was killed by something unexpected.");	
 			}
 			
 			event.setDeathMessage("");

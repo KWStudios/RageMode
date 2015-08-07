@@ -7,6 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
+import org.kwstudios.play.ragemode.gameLogic.RageScores;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 import org.kwstudios.play.ragemode.toolbox.GameBroadcast;
 import org.kwstudios.play.ragemode.toolbox.GetGames;
@@ -55,6 +56,7 @@ public class StopGame {
 					i++;
 				}
 			}
+			RageScores.removePointsForPlayers(players);
 			PlayerList.setGameNotRunning(game);
 			GameBroadcast.broadcastToGame(game, ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + game + ChatColor.DARK_GREEN + " has been stopped.");
 

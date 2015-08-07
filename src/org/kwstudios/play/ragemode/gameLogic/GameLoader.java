@@ -26,6 +26,7 @@ public class GameLoader {
 		this.fileConfiguration = fileConfiguration;
 		checkTeleport();
 		setInventories();
+		new GameTimer(this.gameName, PlayerList.getPlayersInGame(this.gameName), this.fileConfiguration);
 	}
 	
 	private void checkTeleport(){

@@ -24,6 +24,7 @@ import org.kwstudios.play.ragemode.items.RageArrow;
 import org.kwstudios.play.ragemode.items.RageBow;
 import org.kwstudios.play.ragemode.items.RageKnife;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
+import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 
 public class EventListener implements Listener {
 
@@ -75,12 +76,9 @@ public class EventListener implements Listener {
 		if(event.getDamager() instanceof Player && event.getEntity() instanceof Player){
 			Player killer = (Player) event.getDamager();
 			Player victim = (Player) event.getEntity();
-			Bukkit.broadcastMessage("AAA");
 			if(PlayerList.isPlayerPlaying(killer.getUniqueId().toString()) && PlayerList.isPlayerPlaying(victim.getUniqueId().toString())){
-				Bukkit.broadcastMessage("BBB");
 				if(killer.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GOLD + "RageKnife")){
 					//TODO check if "killer.getItemInHand() instanceof MATERIAL.SHEARS" also works (maybe more stable)
-					Bukkit.broadcastMessage("CCC");
 					event.setDamage(25);
 				}
 			}
@@ -90,7 +88,7 @@ public class EventListener implements Listener {
 	
 	@EventHandler
 	public void onArrowHitPlayer(EntityDamageEvent event){    //Arrow hit player event
-		if(event.getEntity() instanceof Player && event.getCause().equals(DamageCause.PROJECTILE)){
+		if(event.getEntity() instanceof Player/* && event.getCause().equals(DamageCause.PROJECTILE)*/){
 			Bukkit.broadcastMessage("HIT");
 			Player victim = (Player) event.getEntity();
 			if(PlayerList.isPlayerPlaying(victim.getUniqueId().toString())){
@@ -114,12 +112,13 @@ public class EventListener implements Listener {
 			Random rand = new Random();
 			int x = rand.nextInt(spawns.size() - 1);    //----> performance optimization
 
-			deceased.teleport(spawns.get(x));    //----> performance optimization
+			deceased.teleport(spawns.get(0));    //----> performance optimization
 			deceased.setHealth(20);
 			
 			deceased.getInventory().setItem(0, RageBow.getRageBow());		//
 			deceased.getInventory().setItem(1, RageKnife.getRageKnife());	//	give him a new set of items
 			deceased.getInventory().setItem(9, RageArrow.getRageArrow());	//
+			deceased.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You were deadened");
 //			TODO give him a CombatAxe
 		}
 	}

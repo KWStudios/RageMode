@@ -358,17 +358,20 @@ public class PlayerList {
 	}
 
 	public static boolean isPlayerPlaying(String player) {
-		int i = 0;
-		int imax = list.length;
-		
-		while(i < imax) {
-			if(list[i] != null) {
-				if(list[i].equals(player)) {
-					return true;
-				}				
-			}
-			i++;			
+		if(player != null) {
+			int i = 0;
+			int imax = list.length;
+			
+			while(i < imax) {
+				if(list[i] != null) {
+					if(list[i].equals(player)) {
+						return true;
+					}				
+				}
+				i++;			
+			}		
 		}
+
 		return false;
 	}
 	

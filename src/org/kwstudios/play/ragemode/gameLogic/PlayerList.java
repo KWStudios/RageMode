@@ -138,7 +138,7 @@ public class PlayerList {
 						isVIP = playerToKick.hasPermission("rm.vip");
 					} while (isVIP);
 						
-					while (n <= oldLocations.getFirstLength()) {						//Get him back to his old location.
+					while (n < oldLocations.getFirstLength()) {						//Get him back to his old location.
 						if (oldLocations.getFromFirstObject(n) == playerToKick) {
 							playerToKick.teleport(oldLocations
 									.getFromSecondObject(n));
@@ -149,7 +149,7 @@ public class PlayerList {
 					
 					n = 0;
 					
-					while (n <= oldInventories.getFirstLength()) {						//Give him his inventory back.
+					while (n < oldInventories.getFirstLength()) {						//Give him his inventory back.
 						if (oldInventories.getFromFirstObject(n) == playerToKick) {
 							playerToKick.getInventory().clear();
 							playerToKick.getInventory().setContents(oldInventories.getFromSecondObject(n));
@@ -160,7 +160,7 @@ public class PlayerList {
 					
 					n = 0;
 					
-					while (n <= oldArmor.getFirstLength()) {							//Give him his armor back.
+					while (n < oldArmor.getFirstLength()) {							//Give him his armor back.
 						if (oldArmor.getFromFirstObject(n) == playerToKick) {
 							playerToKick.getInventory().setArmorContents(oldArmor.getFromSecondObject(n));
 							oldArmor.removeFromBoth(n);
@@ -170,7 +170,7 @@ public class PlayerList {
 					
 					n = 0;
 					
-					while (n <= oldHealth.getFirstLength()) {							//Give him his health back.
+					while (n < oldHealth.getFirstLength()) {							//Give him his health back.
 						if (oldHealth.getFromFirstObject(n) == playerToKick) {
 							playerToKick.setHealth(oldHealth.getFromSecondObject(n));
 							oldHealth.removeFromBoth(n);
@@ -180,7 +180,7 @@ public class PlayerList {
 					
 					n = 0;
 					
-					while (n <= oldHunger.getFirstLength()) {							//Give him his hunger back.
+					while (n < oldHunger.getFirstLength()) {							//Give him his hunger back.
 						if (oldHunger.getFromFirstObject(n) == playerToKick) {
 							playerToKick.setFoodLevel(oldHunger.getFromSecondObject(n));
 							oldHunger.removeFromBoth(n);
@@ -190,7 +190,7 @@ public class PlayerList {
 					
 					n = 0;
 					
-					while (n <= oldGameMode.getFirstLength()) {							//Give him his gamemode back.
+					while (n < oldGameMode.getFirstLength()) {							//Give him his gamemode back.
 						if (oldGameMode.getFromFirstObject(n) == playerToKick) {
 							playerToKick.setGameMode(oldGameMode.getFromSecondObject(n));
 							oldGameMode.removeFromBoth(n);
@@ -263,7 +263,7 @@ public class PlayerList {
 					
 					n = 0;
 					
-					while (n <= oldHealth.getFirstLength()) {							//Give him his health back.
+					while (n < oldHealth.getFirstLength()) {							//Give him his health back.
 						if (oldHealth.getFromFirstObject(n) == player) {
 							player.setHealth(oldHealth.getFromSecondObject(n));
 							oldHealth.removeFromBoth(n);
@@ -273,7 +273,7 @@ public class PlayerList {
 					
 					n = 0;
 					
-					while (n <= oldHunger.getFirstLength()) {							//Give him his hunger back.
+					while (n < oldHunger.getFirstLength()) {							//Give him his hunger back.
 						if (oldHunger.getFromFirstObject(n) == player) {
 							player.setFoodLevel(oldHunger.getFromSecondObject(n));
 							oldHunger.removeFromBoth(n);
@@ -283,7 +283,7 @@ public class PlayerList {
 					
 					n = 0;
 					
-					while (n <= oldGameMode.getFirstLength()) {							//Give him his gamemode back.
+					while (n < oldGameMode.getFirstLength()) {							//Give him his gamemode back.
 						if (oldGameMode.getFromFirstObject(n) == player) {
 							player.setGameMode(oldGameMode.getFromSecondObject(n));
 							oldGameMode.removeFromBoth(n);

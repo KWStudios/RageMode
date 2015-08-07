@@ -31,6 +31,7 @@ import org.kwstudios.play.ragemode.items.RageArrow;
 import org.kwstudios.play.ragemode.items.RageBow;
 import org.kwstudios.play.ragemode.items.RageKnife;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
+import org.kwstudios.play.ragemode.toolbox.GameBroadcast;
 
 public class EventListener implements Listener {
 
@@ -69,7 +70,7 @@ public class EventListener implements Listener {
 					double x = location.getX();
 					double y = location.getY();
 					double z = location.getZ();
-
+					
 					world.createExplosion(x, y, z, 3f, false, false); //original 4f
 					arrow.remove();
 					//TODO check if 4f is too strong (4f is TNT strength)
@@ -92,7 +93,9 @@ public class EventListener implements Listener {
 				}
 			}
 			if(PlayerList.isPlayerPlaying(victim.getUniqueId().toString())) {
+				GameBroadcast.broadcastToGame(PlayerList.getPlayersGame(victim), "GGGG");
 				if(!PlayerList.isGameRunning(PlayerList.getPlayersGame(victim))) {
+					GameBroadcast.broadcastToGame(PlayerList.getPlayersGame(victim), "EEEEE");
 					event.setDamage(0);
 				}
 			}
@@ -120,7 +123,7 @@ public class EventListener implements Listener {
 		}
 	}
 	
-	@EventHandler
+	@EventHandler(priority = EventPriority.LOWEST)
 	public void onArrowHitPlayer(EntityDamageEvent event){    //Arrow hit player event
 		if(event.getEntity() instanceof Player && event.getCause().equals(DamageCause.PROJECTILE)){
 			Bukkit.broadcastMessage("HIT");
@@ -188,7 +191,7 @@ public class EventListener implements Listener {
 		if(PlayerList.isPlayerPlaying(event.getPlayer().getUniqueId().toString())) {
 			Player thrower = event.getPlayer();
 			if(thrower.getItemInHand() != null && thrower.getItemInHand().getItemMeta() != null && thrower.getItemInHand().getItemMeta().getDisplayName() != null) {
-				if(thrower.getItemInHand().getItemMeta().getDisplayName().equals("Stick")) {
+				if(true) {
 					thrower.getWorld().createExplosion(thrower.getLocation(), 1f, false);
 				}
 			}

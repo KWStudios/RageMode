@@ -46,6 +46,8 @@ public class PlayerJoin {
 			double lobbyPitch =  ConfigFactory.getDouble(ConstantHolder.GAME_PATH + "." + args[1] + ".lobby", "pitch", fileConfiguration);
 			
 			Location lobbyLocation = new Location(Bukkit.getWorld(world), lobbyX, lobbyY, lobbyZ);
+			lobbyLocation.setYaw((float) lobbyYaw);
+			lobbyLocation.setPitch((float) lobbyPitch);
 
 			Location playerLocation = player.getLocation();
 			ItemStack[] playerInventory = player.getInventory().getContents();

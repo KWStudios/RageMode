@@ -34,7 +34,11 @@ public class GameSpawnGetter {
 					double spawnX = ConfigFactory.getDouble(path + ".spawns." + spawnName, "x", fileConfiguration);
 					double spawnY = ConfigFactory.getDouble(path + ".spawns." + spawnName, "y", fileConfiguration);
 					double spawnZ = ConfigFactory.getDouble(path + ".spawns." + spawnName, "z", fileConfiguration);
+					double spawnYaw = ConfigFactory.getDouble(path + ".spawns." + spawnName, "yaw", fileConfiguration);
+					double spawnPitch = ConfigFactory.getDouble(path + ".spawns." + spawnName, "pitch", fileConfiguration);
 					Location location = new Location(Bukkit.getWorld(world), spawnX, spawnY, spawnZ);
+					location.setYaw((float) spawnYaw);
+					location.setPitch((float) spawnPitch);
 					spawnLocations.add(location);
 				}
 				isGameReady = true;

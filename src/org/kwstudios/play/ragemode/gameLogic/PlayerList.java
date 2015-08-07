@@ -229,7 +229,7 @@ public class PlayerList {
 
 		while (i < imax) {
 			if(list[i] != null) {
-				if (player.getUniqueId().toString().equals(list[i])) {
+				if (list[i].equals(player.getUniqueId().toString())) {
 					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You left your current Game.");
 
 					while (n < oldLocations.getFirstLength()) {					//Bring him back to his old location

@@ -6,12 +6,11 @@ public class GetGames {
 	
 	public static int getConfigGamesCount(FileConfiguration fileConfiguration) {
 		int n = 0;
-		if(!fileConfiguration.isSet("settings.games"))
+		if(ConfigFactory.getKeysUnderPath("settings.games", false, fileConfiguration) == null) {
 			return 0;
-		else {
+		}
 			n = ConfigFactory.getKeysUnderPath("settings.games", false, fileConfiguration).size();
 			return n;
-		}
 	}
 	
 	public static int getMaxPlayers(String game, FileConfiguration fileConfiguration) {

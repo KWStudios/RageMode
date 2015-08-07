@@ -17,6 +17,8 @@ public class PluginLoader extends JavaPlugin{
 	@Override
 	public void onEnable() {
 		super.onEnable();
+		getConfig().set("settings", "");
+		saveConfig();
 		PluginDescriptionFile pluginDescriptionFile = getDescription();
 		Logger logger = Logger.getLogger("Minecraft");
 		

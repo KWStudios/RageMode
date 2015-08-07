@@ -70,5 +70,6 @@ public class StopGame {
 			}
 		i++;
 		}
+		logger.info(games[i] + "Ragemode: all games stopped!");
 	}
 }

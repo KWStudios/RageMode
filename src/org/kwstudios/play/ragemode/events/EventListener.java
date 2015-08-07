@@ -95,6 +95,7 @@ public class EventListener implements Listener {
 		//TODO add Constant for "RageKnife" for unexpected error preventing
 	}
 	
+	/* NOT WORKING
 	@EventHandler(priority = EventPriority.LOWEST)
 	public void onPlayerTeleport(PlayerTeleportEvent event){
 		Player player = event.getPlayer();
@@ -104,7 +105,7 @@ public class EventListener implements Listener {
 			player.getInventory().setItem(1, RageKnife.getRageKnife());	//	give him a new set of items
 			player.getInventory().setItem(9, RageArrow.getRageArrow());	//
 		}
-	}
+	}*/
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onItemSpawn(PlayerDropItemEvent event){

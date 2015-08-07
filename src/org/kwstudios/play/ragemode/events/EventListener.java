@@ -255,9 +255,15 @@ public class EventListener implements Listener {
 	@EventHandler
 	public void onCommand(PlayerCommandPreprocessEvent event) {
 		if(PlayerList.isPlayerPlaying(event.getPlayer().getUniqueId().toString()) && !event.getPlayer().hasPermission("rm.inGameCommands")) {
-			event.setCancelled(true);
+			if(event.getMessage() != null) {
+				String cmd = event.getMessage().toLowerCase();
+				if(cmd.equals("/rm leave") || cmd.equals("/ragemode leave") || cmd.equals("/rm list") || cmd.equals("/ragemode list")|| cmd.equals("/rm stop") || cmd.equals("/ragemode stop") || cmd.equals("/l") || cmd.equals("/lobby") || cmd.equals("/spawn")) {
+				}
+				else {
+					event.setCancelled(true);				
+				}				
+			}
 		}
-
 	}
 	
 	@EventHandler

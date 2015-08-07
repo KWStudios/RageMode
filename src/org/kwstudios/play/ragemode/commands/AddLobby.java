@@ -34,9 +34,9 @@ public class AddLobby {
 			} else {
 				String path = GAMES_PATH + "." + gameName + "." + "lobby";
 				ConfigFactory.setString(path, "world", player.getWorld().getName(), fileConfiguration);
-				ConfigFactory.setInt(path, "x", player.getLocation().getBlockX(), fileConfiguration);
-				ConfigFactory.setInt(path, "y", player.getLocation().getBlockY(), fileConfiguration);
-				ConfigFactory.setInt(path, "z", player.getLocation().getBlockZ(), fileConfiguration);
+				ConfigFactory.setDouble(path, "x", player.getLocation().getX(), fileConfiguration);
+				ConfigFactory.setDouble(path, "y", player.getLocation().getY(), fileConfiguration);
+				ConfigFactory.setDouble(path, "z", player.getLocation().getZ(), fileConfiguration);
 				ConfigFactory.setDouble(path, "yaw", player.getLocation().getYaw(), fileConfiguration);
 				ConfigFactory.setDouble(path, "pitch", player.getLocation().getPitch(), fileConfiguration);
 				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_GREEN + "The lobby for the game "

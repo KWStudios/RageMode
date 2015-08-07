@@ -40,9 +40,9 @@ public class AddSpawn {
 			i++;
 		}
 		ConfigFactory.setString("settings.games." + args[1] + ".spawns", Integer.toString(i), "", fileConfiguration);
-		ConfigFactory.setInt("settings.games." + args[1] + ".spawns." + Integer.toString(i), "x", player.getLocation().getBlockX(), fileConfiguration);
-		ConfigFactory.setInt("settings.games." + args[1] + ".spawns." + Integer.toString(i), "y", player.getLocation().getBlockY(), fileConfiguration);
-		ConfigFactory.setInt("settings.games." + args[1] + ".spawns." + Integer.toString(i), "z", player.getLocation().getBlockZ(), fileConfiguration);
+		ConfigFactory.setDouble("settings.games." + args[1] + ".spawns." + Integer.toString(i), "x", player.getLocation().getX(), fileConfiguration);
+		ConfigFactory.setDouble("settings.games." + args[1] + ".spawns." + Integer.toString(i), "y", player.getLocation().getY(), fileConfiguration);
+		ConfigFactory.setDouble("settings.games." + args[1] + ".spawns." + Integer.toString(i), "z", player.getLocation().getZ(), fileConfiguration);
 		ConfigFactory.setDouble("settings.games." + args[1] + ".spawns." + Integer.toString(i), "yaw", player.getLocation().getYaw(), fileConfiguration);
 		ConfigFactory.setDouble("settings.games." + args[1] + ".spawns." + Integer.toString(i), "pitch", player.getLocation().getPitch(), fileConfiguration);
 		player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_GREEN + "Spawn " + Integer.toString(i) + " for the game " + ChatColor.DARK_AQUA + args[1]

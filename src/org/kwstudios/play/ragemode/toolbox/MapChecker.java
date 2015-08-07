@@ -69,11 +69,11 @@ public class MapChecker {
 		} else {
 			String thisPath = ConstantHolder.GAME_PATH + "." + gameName + "." + "lobby";
 			if (fileConfiguration.isSet(thisPath + ".x") && fileConfiguration.isSet(thisPath + ".y")
-					&& fileConfiguration.isSet(thisPath + ".z") && fileConfiguration.isSet(thisPath + ".world")) {
+					&& fileConfiguration.isSet(thisPath + ".z") && fileConfiguration.isSet(thisPath + ".world") && fileConfiguration.isSet(thisPath + ".yaw") && fileConfiguration.isSet(thisPath + ".pitch")) {
 				if (!ConfigFactory.getString(thisPath, "world", fileConfiguration).isEmpty()) {
-					if (isInt(ConfigFactory.getString(thisPath, "x", fileConfiguration))
-							&& isInt(ConfigFactory.getString(thisPath, "y", fileConfiguration))
-							&& isInt(ConfigFactory.getString(thisPath, "z", fileConfiguration))) {
+					if (isDouble(ConfigFactory.getString(thisPath, "x", fileConfiguration))
+							&& isDouble(ConfigFactory.getString(thisPath, "y", fileConfiguration))
+							&& isDouble(ConfigFactory.getString(thisPath, "z", fileConfiguration)) && isDouble(ConfigFactory.getString(thisPath, "yaw", fileConfiguration)) && isDouble(ConfigFactory.getString(thisPath, "pitch", fileConfiguration))) {
 						isValid = true;
 					} else {
 						message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED
@@ -100,9 +100,9 @@ public class MapChecker {
 			Set<String> spawnNames = ConfigFactory.getKeysUnderPath(path + ".spawns", false, fileConfiguration);
 			if (spawnNames.size() >= maxPlayers) {
 				for (String s : spawnNames) {
-					if (isInt(ConfigFactory.getString(path + ".spawns." + s, "x", fileConfiguration))
-							&& isInt(ConfigFactory.getString(path + ".spawns." + s, "y", fileConfiguration))
-							&& isInt(ConfigFactory.getString(path + ".spawns." + s, "z", fileConfiguration))) {
+					if (isDouble(ConfigFactory.getString(path + ".spawns." + s, "x", fileConfiguration))
+							&& isDouble(ConfigFactory.getString(path + ".spawns." + s, "y", fileConfiguration))
+							&& isDouble(ConfigFactory.getString(path + ".spawns." + s, "z", fileConfiguration)) && isDouble(ConfigFactory.getString(path + ".spawns." + s, "yaw", fileConfiguration)) && isDouble(ConfigFactory.getString(path + ".spawns." + s, "pitch", fileConfiguration))) {
 						isValid = true;
 					} else {
 						message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED
@@ -123,9 +123,9 @@ public class MapChecker {
 		}
 	}
 
-	private boolean isInt(String string) {
+	private boolean isDouble(String string) {
 		try {
-			Integer.parseInt(string);
+			Double.parseDouble(string);
 		} catch (Exception e) {
 			return false;
 		}

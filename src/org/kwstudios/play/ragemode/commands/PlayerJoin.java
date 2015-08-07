@@ -39,9 +39,12 @@ public class PlayerJoin {
 		MapChecker mapChecker = new MapChecker(args[1], fileConfiguration);
 		if (mapChecker.isValid()) {
 			String world = ConfigFactory.getString(ConstantHolder.GAME_PATH + "." + args[1] + ".lobby", "world", fileConfiguration);
-			int lobbyX = ConfigFactory.getInt(ConstantHolder.GAME_PATH + "." + args[1] + ".lobby", "x", fileConfiguration);
-			int lobbyY = ConfigFactory.getInt(ConstantHolder.GAME_PATH + "." + args[1] + ".lobby", "y", fileConfiguration);
-			int lobbyZ = ConfigFactory.getInt(ConstantHolder.GAME_PATH + "." + args[1] + ".lobby", "z", fileConfiguration);
+			double lobbyX = ConfigFactory.getDouble(ConstantHolder.GAME_PATH + "." + args[1] + ".lobby", "x", fileConfiguration);
+			double lobbyY = ConfigFactory.getDouble(ConstantHolder.GAME_PATH + "." + args[1] + ".lobby", "y", fileConfiguration);
+			double lobbyZ = ConfigFactory.getDouble(ConstantHolder.GAME_PATH + "." + args[1] + ".lobby", "z", fileConfiguration);
+			double lobbyYaw =  ConfigFactory.getDouble(ConstantHolder.GAME_PATH + "." + args[1] + ".lobby", "yaw", fileConfiguration);
+			double lobbyPitch =  ConfigFactory.getDouble(ConstantHolder.GAME_PATH + "." + args[1] + ".lobby", "pitch", fileConfiguration);
+			
 			Location lobbyLocation = new Location(Bukkit.getWorld(world), lobbyX, lobbyY, lobbyZ);
 
 			Location playerLocation = player.getLocation();

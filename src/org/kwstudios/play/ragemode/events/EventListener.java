@@ -151,17 +151,17 @@ public class EventListener implements Listener {
 			
 			if(deceased.getLastDamage() == 0.0f) {
 				Bukkit.broadcastMessage(deceased.getName() + " was killed by a CombatAxe.");
-//				TODO - points for vctim, + points for killer
+//				TODO - points for victim, + points for killer
 			}
-			else if(deceased.getLastDamageCause().equals(DamageCause.PROJECTILE)) {
+			else if(deceased.getLastDamageCause().getCause().equals(DamageCause.PROJECTILE)) {
 				Bukkit.broadcastMessage(deceased.getName() + " was killed by a direct arrow hit.");	
 //				TODO add points for killer
 			}
-			else if(deceased.getLastDamageCause().equals(DamageCause.ENTITY_ATTACK)) {
+			else if(deceased.getLastDamageCause().getCause().equals(DamageCause.ENTITY_ATTACK)) {
 				Bukkit.broadcastMessage(deceased.getName() + " was killed by a RageKnife.");	
 //				TODO add points for killer
 			}
-			else if(deceased.getLastDamageCause().equals(DamageCause.ENTITY_EXPLOSION)) {
+			else if(deceased.getLastDamageCause().getCause().equals(DamageCause.BLOCK_EXPLOSION)) {
 				Bukkit.broadcastMessage(deceased.getName() + " was killed by a explosion.");	
 //				TODO add points for killer
 			}

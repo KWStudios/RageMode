@@ -31,9 +31,9 @@ public class GameSpawnGetter {
 				Set<String> spawnNames = ConfigFactory.getKeysUnderPath(path + ".spawns", false, fileConfiguration);
 				for (String spawnName : spawnNames) {
 					String world = ConfigFactory.getString(path, "world", fileConfiguration);
-					int spawnX = ConfigFactory.getInt(path + ".spawns." + spawnName, "x", fileConfiguration);
-					int spawnY = ConfigFactory.getInt(path + ".spawns." + spawnName, "y", fileConfiguration);
-					int spawnZ = ConfigFactory.getInt(path + ".spawns." + spawnName, "z", fileConfiguration);
+					double spawnX = ConfigFactory.getDouble(path + ".spawns." + spawnName, "x", fileConfiguration);
+					double spawnY = ConfigFactory.getDouble(path + ".spawns." + spawnName, "y", fileConfiguration);
+					double spawnZ = ConfigFactory.getDouble(path + ".spawns." + spawnName, "z", fileConfiguration);
 					Location location = new Location(Bukkit.getWorld(world), spawnX, spawnY, spawnZ);
 					spawnLocations.add(location);
 				}

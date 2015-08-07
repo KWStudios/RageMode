@@ -132,7 +132,7 @@ public class EventListener implements Listener {
 		if(PlayerList.isPlayerPlaying(event.getEntity().getUniqueId().toString())) {
 			Player deceased = (Player) event.getEntity();
 			
-			event.getDrops().clear();
+			event.setKeepInventory(true);
 			GameSpawnGetter gameSpawnGetter = new GameSpawnGetter(PlayerList.getPlayersGame(deceased), fileConfiguration);
 			
 			List<Location> spawns = gameSpawnGetter.getSpawnLocations();

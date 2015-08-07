@@ -36,7 +36,7 @@ public class GameTimer {
 			secondsRemaining = ConfigFactory.getInt("settings", "gametime", fileConfiguration) * 60;
 		} else {
 			secondsRemaining = 300;
-			ConfigFactory.setInt("settings", "lobbydelay", secondsRemaining/60, fileConfiguration);
+			ConfigFactory.setInt("settings", "gametime", secondsRemaining/60, fileConfiguration);
 		}
 	}
 	

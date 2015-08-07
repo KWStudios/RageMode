@@ -32,8 +32,8 @@ public class GameTimer {
 	
 	private void getMinutesToGo() {
 		if (fileConfiguration.isSet(GAME_TIME_PATH)
-				&& isInt(ConfigFactory.getString("settings", "lobbydelay", fileConfiguration))) {
-			secondsRemaining = ConfigFactory.getInt("settings", "lobbydelay", fileConfiguration) * 60;
+				&& isInt(ConfigFactory.getString("settings", "gametime", fileConfiguration))) {
+			secondsRemaining = ConfigFactory.getInt("settings", "gametime", fileConfiguration) * 60;
 		} else {
 			secondsRemaining = 300;
 			ConfigFactory.setInt("settings", "lobbydelay", secondsRemaining/60, fileConfiguration);

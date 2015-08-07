@@ -1,7 +1,6 @@
 package org.kwstudios.play.ragemode.gameLogic;
 
 import java.util.HashMap;
-
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
@@ -42,7 +41,7 @@ public class RageScores {
 			victim.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You were killed by "
 					+ ChatColor.BOLD.toString() + ChatColor.GOLD.toString() + killer.getName()
 					+ ChatColor.BOLD.toString() + ChatColor.DARK_RED.toString() + " -" + axePoints);
-			
+
 			killer.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You now have "
 					+ ChatColor.BOLD.toString() + ChatColor.GOLD.toString() + totalPoints + ChatColor.RESET.toString()
 					+ ChatColor.DARK_AQUA.toString() + " points.");
@@ -57,7 +56,7 @@ public class RageScores {
 
 			victim.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You were killed by "
 					+ ChatColor.BOLD.toString() + ChatColor.GOLD.toString() + killer.getName());
-			
+
 			killer.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You now have "
 					+ ChatColor.BOLD.toString() + ChatColor.GOLD.toString() + totalPoints + ChatColor.RESET.toString()
 					+ ChatColor.DARK_AQUA.toString() + " points.");
@@ -73,7 +72,7 @@ public class RageScores {
 
 			victim.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You were killed by "
 					+ ChatColor.BOLD.toString() + ChatColor.GOLD.toString() + killer.getName());
-			
+
 			killer.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You now have "
 					+ ChatColor.BOLD.toString() + ChatColor.GOLD.toString() + totalPoints + ChatColor.RESET.toString()
 					+ ChatColor.DARK_AQUA.toString() + " points.");
@@ -83,7 +82,17 @@ public class RageScores {
 		}
 	}
 
-	private static int addPoints(Player player, String gameName, int points) { //returns total points
+	public static void removePointsForPlayers(String[] playerUUIDs) {
+		for (String playerUUID : playerUUIDs) {
+			if (playerpoints.containsKey(playerUUID)) {
+				playerpoints.remove(playerUUID);
+			}
+		}
+	}
+
+	private static int addPoints(Player player, String gameName, int points) { // returns
+																				// total
+																				// points
 		String playerUUID = player.getUniqueId().toString();
 		if (playerpoints.containsKey(playerUUID)) {
 			int oldPoints = playerpoints.get(playerUUID);

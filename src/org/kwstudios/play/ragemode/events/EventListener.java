@@ -3,6 +3,8 @@ package org.kwstudios.play.ragemode.events;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.server.v1_8_R3.EntityItem;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -10,6 +12,7 @@ import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Snowball;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -24,14 +27,13 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
 import org.kwstudios.play.ragemode.gameLogic.GameSpawnGetter;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
-import org.kwstudios.play.ragemode.items.RageArrow;
-import org.kwstudios.play.ragemode.items.RageBow;
-import org.kwstudios.play.ragemode.items.RageKnife;
+import org.kwstudios.play.ragemode.items.CombatAxe;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
 import org.kwstudios.play.ragemode.toolbox.GameBroadcast;
+
+
 
 public class EventListener implements Listener {
 
@@ -58,7 +60,7 @@ public class EventListener implements Listener {
 		}
 	}
 
-	@EventHandler
+	@EventHandler(priority = EventPriority.LOWEST)
 	public void onProjectileHit(ProjectileHitEvent event) {    //RageArrow explosion event
 		if (event.getEntity() instanceof Arrow) {
 			Arrow arrow = (Arrow) event.getEntity();
@@ -71,7 +73,7 @@ public class EventListener implements Listener {
 					double y = location.getY();
 					double z = location.getZ();
 					
-					world.createExplosion(x, y, z, 3f, false, false); //original 4f
+					world.createExplosion(x, y, z, 2f, false, false); //original 4f
 					arrow.remove();
 					//TODO check if 4f is too strong (4f is TNT strength)
 				}
@@ -89,13 +91,12 @@ public class EventListener implements Listener {
 					if(killer.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GOLD + "RageKnife")){
 						//TODO check if "killer.getItemInHand() instanceof MATERIAL.SHEARS" also works (maybe more stable)
 						event.setDamage(25);
+//						TODO give the killer +15 points
 					}					
 				}
 			}
 			if(PlayerList.isPlayerPlaying(victim.getUniqueId().toString())) {
-				GameBroadcast.broadcastToGame(PlayerList.getPlayersGame(victim), "GGGG");
 				if(!PlayerList.isGameRunning(PlayerList.getPlayersGame(victim))) {
-					GameBroadcast.broadcastToGame(PlayerList.getPlayersGame(victim), "EEEEE");
 					event.setDamage(0);
 				}
 			}
@@ -123,14 +124,22 @@ public class EventListener implements Listener {
 		}
 	}
 	
-	@EventHandler(priority = EventPriority.LOWEST)
+	@EventHandler
 	public void onArrowHitPlayer(EntityDamageEvent event){    //Arrow hit player event
-		if(event.getEntity() instanceof Player && event.getCause().equals(DamageCause.PROJECTILE)){
-			Bukkit.broadcastMessage("HIT");
-			Player victim = (Player) event.getEntity();
-			if(PlayerList.isPlayerPlaying(victim.getUniqueId().toString())){
-				Bukkit.broadcastMessage("DDD");
-					event.setDamage(25);
+		if(event.getEntity() instanceof Player) {
+			if(event.getCause().equals(DamageCause.PROJECTILE)) {
+				Player victim = (Player) event.getEntity();
+				if(PlayerList.isPlayerPlaying(victim.getUniqueId().toString())){
+					if(event.getDamage() == 0.0d) {
+						event.setDamage(28.34d);
+					}
+					else {
+						event.setDamage(27.114);
+					}
+				}
+			}
+			if(event.getCause().equals(DamageCause.FALL)) {
+				event.setCancelled(true);
 			}
 		}
 	}
@@ -139,6 +148,26 @@ public class EventListener implements Listener {
 	public void onPlayerDeath(PlayerDeathEvent event) {		//Player autorespawn
 		if(PlayerList.isPlayerPlaying(event.getEntity().getUniqueId().toString())) {
 			Player deceased = (Player) event.getEntity();
+			
+			if(deceased.getLastDamage() == 0.0f) {
+				Bukkit.broadcastMessage(deceased.getName() + " was killed by a CombatAxe.");
+//				TODO - points for vctim, + points for killer
+			}
+			else if(deceased.getLastDamageCause().equals(DamageCause.PROJECTILE)) {
+				Bukkit.broadcastMessage(deceased.getName() + " was killed by a direct arrow hit.");	
+//				TODO add points for killer
+			}
+			else if(deceased.getLastDamageCause().equals(DamageCause.ENTITY_ATTACK)) {
+				Bukkit.broadcastMessage(deceased.getName() + " was killed by a RageKnife.");	
+//				TODO add points for killer
+			}
+			else if(deceased.getLastDamageCause().equals(DamageCause.ENTITY_EXPLOSION)) {
+				Bukkit.broadcastMessage(deceased.getName() + " was killed by a explosion.");	
+//				TODO add points for killer
+			}
+			else {
+				Bukkit.broadcastMessage(deceased.getName() + " was killed by something unexpected.");	
+			}
 			
 			event.setKeepInventory(true);
 			GameSpawnGetter gameSpawnGetter = new GameSpawnGetter(PlayerList.getPlayersGame(deceased), fileConfiguration);
@@ -157,7 +186,8 @@ public class EventListener implements Listener {
 			//deceased.getInventory().setItem(0, RageBow.getRageBow());		//
 			//deceased.getInventory().setItem(1, RageKnife.getRageKnife());	//	give him a new set of items
 			//deceased.getInventory().setItem(9, RageArrow.getRageArrow());	//
-//			TODO give him a CombatAxe
+			deceased.getInventory().setItem(2, CombatAxe.getCombatAxe());
+
 		}
 	}
 	
@@ -191,8 +221,9 @@ public class EventListener implements Listener {
 		if(PlayerList.isPlayerPlaying(event.getPlayer().getUniqueId().toString())) {
 			Player thrower = event.getPlayer();
 			if(thrower.getItemInHand() != null && thrower.getItemInHand().getItemMeta() != null && thrower.getItemInHand().getItemMeta().getDisplayName() != null) {
-				if(true) {
-					thrower.getWorld().createExplosion(thrower.getLocation(), 1f, false);
+				if(thrower.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GOLD + "CombatAxe")) {
+					thrower.launchProjectile(Snowball.class);
+					thrower.getInventory().setItemInHand(null);
 				}
 			}
 		}

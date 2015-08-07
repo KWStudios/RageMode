@@ -9,6 +9,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.kwstudios.play.ragemode.items.CombatAxe;
 import org.kwstudios.play.ragemode.items.RageArrow;
 import org.kwstudios.play.ragemode.items.RageBow;
 import org.kwstudios.play.ragemode.items.RageKnife;
@@ -62,6 +63,7 @@ public class GameLoader {
 			Player player = Bukkit.getPlayer(UUID.fromString(playerUUID));
 			player.getInventory().setItem(0, RageBow.getRageBow());
 			player.getInventory().setItem(1, RageKnife.getRageKnife());
+			player.getInventory().setItem(2, CombatAxe.getCombatAxe());
 			player.getInventory().setItem(9, RageArrow.getRageArrow());
 			//see positions here: http://redditpublic.com/images/b/b2/Items_slot_number.png
 			//TODO add CombatAxe

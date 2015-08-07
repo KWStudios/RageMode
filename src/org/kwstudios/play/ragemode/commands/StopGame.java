@@ -87,10 +87,10 @@ public class StopGame {
 					}
 				}
 				PlayerList.setGameNotRunning(games[i]);
-				logger.info(games[i] + "has been stopped.");
+				logger.info(games[i] + " has been stopped.");
 			}
 		i++;
 		}
-		logger.info(games[i] + "Ragemode: all games stopped!");
+		logger.info("Ragemode: all games stopped!");
 	}
 }

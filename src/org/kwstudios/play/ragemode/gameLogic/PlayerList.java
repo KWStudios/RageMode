@@ -198,7 +198,7 @@ public class PlayerList {
 					while (n < oldInventories.getFirstLength()) {
 						if (oldInventories.getFromFirstObject(n) == player) {
 							player.getInventory().setContents(oldInventories.getFromSecondObject(n).getContents());
-							player.sendMessage("your inventory has been restored");
+							player.sendMessage("your inventory has been restored" + oldInventories.getFromSecondObject(n).toString());
 							oldInventories.removeFromBoth(n);
 						}
 						n++;
@@ -351,7 +351,6 @@ public class PlayerList {
 	}
 	
 	public static void deleteGameFromList(String game) {
-//		TODO eventuell noch enthaltene spieler entfernen, liste updaten.
 		String[] playersInGame = getPlayersInGame(game);
 		if(playersInGame != null) {
 			int i = 0;
@@ -426,8 +425,8 @@ public class PlayerList {
 					return game;
 				}
 			}
+		i++;
 		}
-		//TODO fix possible endless loop (i++ missing)
 		return null;
 	}
 }

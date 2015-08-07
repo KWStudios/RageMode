@@ -20,6 +20,9 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.kwstudios.play.ragemode.gameLogic.GameSpawnGetter;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
+import org.kwstudios.play.ragemode.items.RageArrow;
+import org.kwstudios.play.ragemode.items.RageBow;
+import org.kwstudios.play.ragemode.items.RageKnife;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
 
 public class EventListener implements Listener {
@@ -98,7 +101,7 @@ public class EventListener implements Listener {
 	}
 	
 	@EventHandler
-	public void onPlayerDeath(PlayerDeathEvent event) {
+	public void onPlayerDeath(PlayerDeathEvent event) {		//Player autorespawn
 		if(PlayerList.isPlayerPlaying(event.getEntity().getUniqueId().toString())) {
 			Player deceased = (Player) event.getEntity();
 			deceased.getInventory().clear();
@@ -113,6 +116,11 @@ public class EventListener implements Listener {
 
 			deceased.teleport(spawns.get(x));    //----> performance optimization
 			deceased.setHealth(20);
+			
+			deceased.getInventory().setItem(0, RageBow.getRageBow());		//
+			deceased.getInventory().setItem(1, RageKnife.getRageKnife());	//	give him a new set of items
+			deceased.getInventory().setItem(9, RageArrow.getRageArrow());	//
+//			TODO give him a CombatAxe
 		}
 	}
 	

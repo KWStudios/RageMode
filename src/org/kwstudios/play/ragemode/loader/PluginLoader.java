@@ -8,11 +8,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.kwstudios.play.ragemode.commands.CommandParser;
+import org.kwstudios.play.ragemode.commands.StopGame;
 import org.kwstudios.play.ragemode.events.EventListener;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
 
 public class PluginLoader extends JavaPlugin{
-
+	
 	@Override
 	public void onEnable() {
 		super.onEnable();
@@ -32,8 +33,9 @@ public class PluginLoader extends JavaPlugin{
 		PluginDescriptionFile pluginDescriptionFile = getDescription();
 		Logger logger = Logger.getLogger("Minecraft");
 		
+		StopGame.stopAllGames(getConfig(), logger);
+		
 		logger.info(pluginDescriptionFile.getName() + " was unloaded successfully! (Version: " + pluginDescriptionFile.getVersion() + ")" );
-//	TODO stop all running games with new stopGame method
 	}
 	
 	@Override
@@ -43,7 +45,7 @@ public class PluginLoader extends JavaPlugin{
 			return false;
 		}
 		
-		Player player = (Player)sender;
+		Player player = (Player) sender;
 		
 		CommandParser commandParser = new CommandParser(player, command, label, args, getConfig());
 		

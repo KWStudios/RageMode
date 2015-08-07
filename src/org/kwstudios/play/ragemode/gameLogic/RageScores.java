@@ -19,21 +19,46 @@ public class RageScores {
 			int bowPoints = ConstantHolder.POINTS_FOR_BOW_KILL;
 			addPoints(killer, PlayerList.getPlayersGame(killer), bowPoints);
 			killer.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You killed "
-					+ ChatColor.GOLD.toString() + ChatColor.BOLD.toString() + killer.getName() + ChatColor.DARK_AQUA
-					+ " with a direct arrow hit. " + ChatColor.GOLD.toString() + ChatColor.BOLD.toString() + "+"
-					+ bowPoints);
+					+ ChatColor.GOLD.toString() + ChatColor.BOLD.toString() + victim.getName()
+					+ ChatColor.RESET.toString() + ChatColor.DARK_AQUA + " with a direct arrow hit. "
+					+ ChatColor.GOLD.toString() + ChatColor.BOLD.toString() + "+" + bowPoints);
+
+			victim.sendMessage(
+					ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You were killed by " + killer.getName());
 			break;
 		case "combataxe":
 			int axePoints = ConstantHolder.POINTS_FOR_AXE_KILL;
 			addPoints(killer, PlayerList.getPlayersGame(killer), axePoints);
+			killer.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You killed "
+					+ ChatColor.GOLD.toString() + ChatColor.BOLD.toString() + victim.getName()
+					+ ChatColor.RESET.toString() + ChatColor.DARK_AQUA + " with your CombatAxe. "
+					+ ChatColor.GOLD.toString() + ChatColor.BOLD.toString() + "+" + axePoints);
+
+			victim.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You were killed by "
+					+ killer.getName() + ChatColor.BOLD.toString() + ChatColor.DARK_RED.toString() + " -" + axePoints);
 			break;
 		case "rageknife":
 			int knifePoints = ConstantHolder.POINTS_FOR_KNIFE_KILL;
 			addPoints(killer, PlayerList.getPlayersGame(killer), knifePoints);
+			killer.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You killed "
+					+ ChatColor.GOLD.toString() + ChatColor.BOLD.toString() + victim.getName()
+					+ ChatColor.RESET.toString() + ChatColor.DARK_AQUA + " with your RageKnife. "
+					+ ChatColor.GOLD.toString() + ChatColor.BOLD.toString() + "+" + knifePoints);
+			
+			victim.sendMessage(
+					ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You were killed by " + killer.getName());
 			break;
 		case "explosion":
 			int explosionPoints = ConstantHolder.POINTS_FOR_EXPLOSION_KILL;
 			addPoints(killer, PlayerList.getPlayersGame(killer), explosionPoints);
+			killer.sendMessage(
+					ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You killed " + ChatColor.GOLD.toString()
+							+ ChatColor.BOLD.toString() + victim.getName() + ChatColor.RESET.toString()
+							+ ChatColor.DARK_AQUA + " by causing heavy explosions with your RageBow. "
+							+ ChatColor.GOLD.toString() + ChatColor.BOLD.toString() + "+" + explosionPoints);
+			
+			victim.sendMessage(
+					ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You were killed by " + killer.getName());
 			break;
 		default:
 			break;

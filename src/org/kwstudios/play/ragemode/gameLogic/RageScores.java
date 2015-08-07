@@ -9,25 +9,31 @@ import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 public class RageScores {
 
 	private static HashMap<String, Integer> playerpoints = new HashMap<String, Integer>();
-	//private static TableList<String, String> playergame = new TableList<String, String>(); ----> User PlayerList.getPlayersInGame instead
+	// private static TableList<String, String> playergame = new
+	// TableList<String, String>(); ----> User PlayerList.getPlayersInGame
+	// instead
 
-	public static void addPointsToPlayer(Player player, String killCause) {
+	public static void addPointsToPlayer(Player killer, Player victim, String killCause) {
 		switch (killCause.toLowerCase()) {
 		case "ragebow":
 			int bowPoints = ConstantHolder.POINTS_FOR_BOW_KILL;
-			addPoints(player, PlayerList.getPlayersGame(player), bowPoints);
+			addPoints(killer, PlayerList.getPlayersGame(killer), bowPoints);
+			killer.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You killed "
+					+ ChatColor.GOLD.toString() + ChatColor.BOLD.toString() + killer.getName() + ChatColor.DARK_AQUA
+					+ " with a direct arrow hit. " + ChatColor.GOLD.toString() + ChatColor.BOLD.toString() + "+"
+					+ bowPoints);
 			break;
 		case "combataxe":
 			int axePoints = ConstantHolder.POINTS_FOR_AXE_KILL;
-			addPoints(player, PlayerList.getPlayersGame(player), axePoints);
+			addPoints(killer, PlayerList.getPlayersGame(killer), axePoints);
 			break;
 		case "rageknife":
 			int knifePoints = ConstantHolder.POINTS_FOR_KNIFE_KILL;
-			addPoints(player, PlayerList.getPlayersGame(player), knifePoints);
+			addPoints(killer, PlayerList.getPlayersGame(killer), knifePoints);
 			break;
 		case "explosion":
 			int explosionPoints = ConstantHolder.POINTS_FOR_EXPLOSION_KILL;
-			addPoints(player, PlayerList.getPlayersGame(player), explosionPoints);
+			addPoints(killer, PlayerList.getPlayersGame(killer), explosionPoints);
 			break;
 		default:
 			break;
@@ -41,16 +47,8 @@ public class RageScores {
 			playerpoints.remove(playerUUID);
 			int totalPoints = oldPoints + points;
 			playerpoints.put(playerUUID, totalPoints);
-			player.sendMessage(
-					ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_GREEN + "You gained " + ChatColor.GOLD.toString()
-							+ ChatColor.BOLD.toString() + points + ChatColor.DARK_GREEN + " points. You now have "
-							+ ChatColor.GOLD.toString() + ChatColor.BOLD.toString() + totalPoints + " points.");
 		} else {
 			playerpoints.put(playerUUID, points);
-			player.sendMessage(
-					ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_GREEN + "You gained " + ChatColor.GOLD.toString()
-							+ ChatColor.BOLD.toString() + points + ChatColor.DARK_GREEN + " points. You now have "
-							+ ChatColor.GOLD.toString() + ChatColor.BOLD.toString() + points + " points.");
 		}
 	}
 

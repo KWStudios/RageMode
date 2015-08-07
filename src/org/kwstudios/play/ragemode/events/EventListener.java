@@ -11,20 +11,22 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.kwstudios.play.ragemode.gameLogic.GameSpawnGetter;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
 import org.kwstudios.play.ragemode.items.RageArrow;
 import org.kwstudios.play.ragemode.items.RageBow;
 import org.kwstudios.play.ragemode.items.RageKnife;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
-import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 
 public class EventListener implements Listener {
 
@@ -90,6 +92,25 @@ public class EventListener implements Listener {
 		//TODO add Constant for "RageKnife" for unexpected error preventing
 	}
 	
+	@EventHandler(priority = EventPriority.LOWEST)
+	public void onPlayerTeleport(PlayerTeleportEvent event){
+		Player player = event.getPlayer();
+		if(PlayerList.isPlayerPlaying(player.getUniqueId().toString())){
+			player.getInventory().clear();
+			player.getInventory().setItem(0, RageBow.getRageBow());		//
+			player.getInventory().setItem(1, RageKnife.getRageKnife());	//	give him a new set of items
+			player.getInventory().setItem(9, RageArrow.getRageArrow());	//
+		}
+	}
+	
+	@EventHandler(priority = EventPriority.HIGHEST)
+	public void onItemSpawn(PlayerDropItemEvent event){
+		Player player = event.getPlayer();
+		if(PlayerList.isPlayerPlaying(player.getUniqueId().toString())){
+			event.getItemDrop().remove();
+		}
+	}
+	
 	@EventHandler
 	public void onArrowHitPlayer(EntityDamageEvent event){    //Arrow hit player event
 		if(event.getEntity() instanceof Player && event.getCause().equals(DamageCause.PROJECTILE)){
@@ -119,10 +140,10 @@ public class EventListener implements Listener {
 			
 			deceased.teleport(spawns.get(x));    //----> performance optimization
 			
-			deceased.getInventory().clear();
-			deceased.getInventory().setItem(0, RageBow.getRageBow());		//
-			deceased.getInventory().setItem(1, RageKnife.getRageKnife());	//	give him a new set of items
-			deceased.getInventory().setItem(9, RageArrow.getRageArrow());	//
+			//deceased.getInventory().clear();
+			//deceased.getInventory().setItem(0, RageBow.getRageBow());		//
+			//deceased.getInventory().setItem(1, RageKnife.getRageKnife());	//	give him a new set of items
+			//deceased.getInventory().setItem(9, RageArrow.getRageArrow());	//
 //			TODO give him a CombatAxe
 		}
 	}

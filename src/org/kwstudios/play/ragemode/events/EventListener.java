@@ -13,11 +13,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
@@ -66,7 +69,7 @@ public class EventListener implements Listener {
 					double y = location.getY();
 					double z = location.getZ();
 
-					world.createExplosion(x, y, z, 4f, false, false);
+					world.createExplosion(x, y, z, 3f, false, false); //original 4f
 					arrow.remove();
 					//TODO check if 4f is too strong (4f is TNT strength)
 				}
@@ -148,6 +151,30 @@ public class EventListener implements Listener {
 		}
 	}
 	
+	@EventHandler
+	public void onHungerGain(FoodLevelChangeEvent event) {
+		if(event.getEntity() instanceof Player) {
+			Player player = (Player) event.getEntity();
+			if(PlayerList.isPlayerPlaying(player.getUniqueId().toString())) {
+				event.setCancelled(true);
+			}
+		}
+	}
+	
+	@EventHandler
+	public void onBlockBreak(BlockBreakEvent event) {
+		if(PlayerList.isPlayerPlaying(event.getPlayer().getUniqueId().toString())) {
+			event.setCancelled(true);
+		}
+	}
+
+	@EventHandler
+	public void onCommand(PlayerCommandPreprocessEvent event) {
+		if(PlayerList.isPlayerPlaying(event.getPlayer().getUniqueId().toString()) && !event.getPlayer().hasPermission("rm.inGameCommands")) {
+			event.setCancelled(true);
+		}
+
+	}
 	
 	
 

@@ -89,7 +89,11 @@ public class EventListener implements Listener {
 						event.setDamage(25);
 					}					
 				}
-
+			}
+			if(PlayerList.isPlayerPlaying(victim.getUniqueId().toString())) {
+				if(!PlayerList.isGameRunning(PlayerList.getPlayersGame(victim))) {
+					event.setDamage(0);
+				}
 			}
 		}
 		//TODO add Constant for "RageKnife" for unexpected error preventing

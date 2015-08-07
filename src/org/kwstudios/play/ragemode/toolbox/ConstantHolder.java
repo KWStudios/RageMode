@@ -9,5 +9,12 @@ public class ConstantHolder {
 			+ ChatColor.BOLD.toString() + "] " + ChatColor.RESET;
 	
 	public static final String GAME_PATH = "settings.games";
+	
+	public static final int POINTS_FOR_BOW_KILL = 25;
+	public static final int POINTS_FOR_AXE_KILL = 20;
+	public static final int POINTS_FOR_KNIFE_KILL = 15;
+	public static final int POINTS_FOR_EXPLOSION_KILL = 10;
+	
+	//TODO dynamic points getter from config file (with default values)
 
 }

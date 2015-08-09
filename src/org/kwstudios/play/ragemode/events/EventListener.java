@@ -129,19 +129,21 @@ public class EventListener implements Listener {
 	@EventHandler
 	public void onArrowHitPlayer(EntityDamageEvent event){    //Arrow hit player event
 		if(event.getEntity() instanceof Player) {
-			if(event.getCause().equals(DamageCause.PROJECTILE)) {
-				Player victim = (Player) event.getEntity();
-				if(PlayerList.isPlayerPlaying(victim.getUniqueId().toString())){
-					if(event.getDamage() == 0.0d) {
-						event.setDamage(28.34d);
-					}
-					else {
-						event.setDamage(27.114);
+			if(PlayerList.isPlayerPlaying(event.getEntity().getUniqueId().toString())) {
+				if(event.getCause().equals(DamageCause.PROJECTILE)) {
+					Player victim = (Player) event.getEntity();
+					if(PlayerList.isPlayerPlaying(victim.getUniqueId().toString())){
+						if(event.getDamage() == 0.0d) {
+							event.setDamage(28.34d);
+						}
+						else {
+							event.setDamage(27.114);
+						}
 					}
 				}
-			}
-			if(event.getCause().equals(DamageCause.FALL)) {
-				event.setCancelled(true);
+				if(event.getCause().equals(DamageCause.FALL)) {
+					event.setCancelled(true);
+				}
 			}
 		}
 	}

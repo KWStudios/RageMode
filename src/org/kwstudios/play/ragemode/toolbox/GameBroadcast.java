@@ -13,9 +13,11 @@ public class GameBroadcast {
 			int imax = playersInGame.length;
 			
 			while(i < imax) {
-				Bukkit.getPlayer(UUID.fromString(playersInGame[i])).sendMessage(message);
+				if(playersInGame[i] != null) {
+					Bukkit.getPlayer(UUID.fromString(playersInGame[i])).sendMessage(message);	
+				}
 				i++;
-		}
+			}
 	}
 
 }

@@ -61,7 +61,7 @@ public class PlayerList {
 				if (list[i].equals(game)) {
 					n = i;
 					int x = 0;
-					while (n < GetGames.getMaxPlayers(game, fileConfiguration) + i) {
+					while (n < GetGames.getMaxPlayers(game, fileConfiguration) + i - 1) {
 						if(list[n + 1] == null)
 							n++;
 						else {
@@ -448,7 +448,8 @@ public class PlayerList {
 			int i = 0;
 			int imax = playersInGame.length;
 			while(i < imax) {
-				removePlayer(Bukkit.getPlayer(UUID.fromString(playersInGame[i])));
+				if(playersInGame[i] != null)
+					removePlayer(Bukkit.getPlayer(UUID.fromString(playersInGame[i])));
 				i++;
 			}	
 		}

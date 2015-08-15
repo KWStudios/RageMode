@@ -66,7 +66,6 @@ public class GameLoader {
 			player.getInventory().setItem(2, CombatAxe.getCombatAxe());
 			player.getInventory().setItem(9, RageArrow.getRageArrow());
 			//see positions here: http://redditpublic.com/images/b/b2/Items_slot_number.png
-			//TODO add CombatAxe
 		}
 	}
 

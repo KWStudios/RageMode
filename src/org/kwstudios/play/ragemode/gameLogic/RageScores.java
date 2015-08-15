@@ -33,7 +33,9 @@ public class RageScores {
 				break;
 			case "combataxe":
 				int axePoints = ConstantHolder.POINTS_FOR_AXE_KILL;
+				int axeMinusPoints = ConstantHolder.MINUS_POINTS_FOR_AXE_DEATH;
 				totalPoints = addPoints(killer, PlayerList.getPlayersGame(killer), axePoints);
+				totalPoints = addPoints(victim, PlayerList.getPlayersGame(victim), axeMinusPoints);
 				killer.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You killed "
 						+ ChatColor.GOLD.toString() + ChatColor.BOLD.toString() + victim.getName()
 						+ ChatColor.RESET.toString() + ChatColor.DARK_AQUA + " with your CombatAxe. "
@@ -41,7 +43,7 @@ public class RageScores {
 
 				victim.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You were killed by "
 						+ ChatColor.BOLD.toString() + ChatColor.GOLD.toString() + killer.getName()
-						+ ChatColor.BOLD.toString() + ChatColor.DARK_RED.toString() + " -" + axePoints);
+						+ ChatColor.BOLD.toString() + ChatColor.DARK_RED.toString() + " -" + axeMinusPoints);
 
 				killer.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You now have "
 						+ ChatColor.BOLD.toString() + ChatColor.GOLD.toString() + totalPoints

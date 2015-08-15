@@ -93,7 +93,6 @@ public class EventListener implements Listener {
 					if(killer.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GOLD + "RageKnife")){
 						//TODO check if "killer.getItemInHand() instanceof MATERIAL.SHEARS" also works (maybe more stable)
 						event.setDamage(25);
-//						TODO give the killer +15 points
 					}					
 				}
 			}

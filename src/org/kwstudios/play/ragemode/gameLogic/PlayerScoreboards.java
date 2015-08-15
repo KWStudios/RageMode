@@ -2,7 +2,7 @@ package org.kwstudios.play.ragemode.gameLogic;
 
 public class PlayerScoreboards {
 
-	public static void updateScoreboards() {
+	public static void updateScoreboards(String game) {
 		
 	}
 }

@@ -10,6 +10,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowball;
 import org.bukkit.event.EventHandler;
@@ -75,7 +76,17 @@ public class EventListener implements Listener {
 					double y = location.getY();
 					double z = location.getZ();
 					
+					List<Entity> nears = arrow.getNearbyEntities(10, 10, 10);
+					
 					world.createExplosion(x, y, z, 2f, false, false); //original 4f
+					
+					int i = 0;
+					int imax = nears.size();
+					while(i < imax) {
+						Player near = (Player) nears.get(i);
+						near.damage(0.0, shooter);
+						i++;
+					}
 					arrow.remove();
 					//TODO check if 4f is too strong (4f is TNT strength)
 				}

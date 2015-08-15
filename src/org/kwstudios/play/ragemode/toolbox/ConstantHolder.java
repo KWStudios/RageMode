@@ -10,7 +10,7 @@ public class ConstantHolder {
 	
 	public static final String GAME_PATH = "settings.games";
 	
-	public static final int MINUS_POINTS_FOR_AXE_DEATH = 50;
+	public static final int MINUS_POINTS_FOR_AXE_DEATH = -50;
 	public static final int POINTS_FOR_AXE_KILL = 30;
 	public static final int POINTS_FOR_BOW_KILL = 25;
 	public static final int POINTS_FOR_EXPLOSION_KILL = 25;

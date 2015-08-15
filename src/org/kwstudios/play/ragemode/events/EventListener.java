@@ -81,14 +81,15 @@ public class EventListener implements Listener {
 					world.createExplosion(x, y, z, 2f, false, false); //original 4f
 					arrow.remove();	
 					
-					Bukkit.broadcastMessage("FFFFFF " + Integer.toString(nears.size()));
 					
 					int i = 0;
 					int imax = nears.size();
 					while(i < imax) {
-						GameBroadcast.broadcastToGame(PlayerList.getPlayersGame(shooter), "GAYYY" + nears.get(i).getUniqueId().toString());
-						Player near = (Player) nears.get(i);
-						near.damage(30.0, shooter);
+						if(nears.get(i) instanceof Player && !nears.get(i).getUniqueId().toString().equals(shooter.getUniqueId().toString())) {
+							Player near = (Player) nears.get(i);
+							near.damage(0, shooter);							
+						}
+
 						i++;
 					}
 				}

@@ -76,10 +76,12 @@ public class EventListener implements Listener {
 					double y = location.getY();
 					double z = location.getZ();
 					
-					List<Entity> nears = arrow.getNearbyEntities(100, 100, 100);
+					List<Entity> nears = arrow.getNearbyEntities(30, 30, 30);
 					
 					world.createExplosion(x, y, z, 2f, false, false); //original 4f
-					arrow.remove();		
+					arrow.remove();	
+					
+					Bukkit.broadcastMessage("FFFFFF " + Integer.toString(nears.size()));
 					
 					int i = 0;
 					int imax = nears.size();

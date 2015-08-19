@@ -61,8 +61,6 @@ public class GameTimer {
 										+ Integer.toString(totalMessagesBeforeTen) + ChatColor.BLUE + " minutes.");
 					}
 					totalMessagesBeforeTen--;
-				} else if (PlayerList.getPlayersInGame(gameName).length < 2) {
-					this.cancel();
 				}else{
 					this.cancel();
 					StopGame.stopGame(gameName);

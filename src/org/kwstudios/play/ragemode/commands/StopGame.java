@@ -59,7 +59,7 @@ public class StopGame {
 			RageScores.removePointsForPlayers(players);
 			PlayerList.setGameNotRunning(game);
 			GameBroadcast.broadcastToGame(game, ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + game + ChatColor.DARK_GREEN + " has been stopped.");
-
+			RageScores.calculateWinner(game, players);
 		}
 	}
 	

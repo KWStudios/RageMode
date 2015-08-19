@@ -1,6 +1,9 @@
 package org.kwstudios.play.ragemode.gameLogic;
 
 import java.util.HashMap;
+import java.util.UUID;
+
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
@@ -144,6 +147,29 @@ public class RageScores {
 			PlayerPoints pointsHolder = new PlayerPoints(playerUUID, points, totalKills, totalDeaths);
 			playerpoints.put(playerUUID, pointsHolder);
 			return points;
+		}
+	}
+	
+	public static void calculateWinner(String game, String[] players) {
+		String highest = players[0];
+		int highestPoints = 0;
+		int i = 0;
+		int imax = players.length;
+		while(i < imax) {
+			if(playerpoints.get(players[i]).getPoints() > highestPoints) {
+				highest = players[i];
+				highestPoints = playerpoints.get(players[i]).getPoints();
+			}
+			i++;
+		}
+		while(i >= 0) {
+			if(players[i].equals(highest)) {
+				Bukkit.getPlayer(UUID.fromString(highest)).sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.LIGHT_PURPLE + "You won the game " + ChatColor.GOLD + game + ChatColor.LIGHT_PURPLE + ".");
+			}
+			else {
+				Bukkit.getPlayer(UUID.fromString(players[i])).sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_GREEN + Bukkit.getPlayer(UUID.fromString(highest)).getName() + ChatColor.LIGHT_PURPLE + " won the game " + ChatColor.GOLD + game + ChatColor.LIGHT_PURPLE + ".");
+			}
+			i--;
 		}
 	}
 

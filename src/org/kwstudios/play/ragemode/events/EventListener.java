@@ -1,7 +1,9 @@
 package org.kwstudios.play.ragemode.events;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 
 import org.bukkit.Bukkit;
@@ -41,6 +43,7 @@ import org.kwstudios.play.ragemode.toolbox.GameBroadcast;
 public class EventListener implements Listener {
 
 	public FileConfiguration fileConfiguration = null;
+	private Map<UUID, UUID> explosionVictims;  //shot, shooter
 	
 	public EventListener(PluginLoader plugin, FileConfiguration fileconfiguration) {
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
@@ -76,7 +79,7 @@ public class EventListener implements Listener {
 					double y = location.getY();
 					double z = location.getZ();
 					
-					List<Entity> nears = arrow.getNearbyEntities(30, 30, 30);
+					List<Entity> nears = arrow.getNearbyEntities(10, 10, 10);
 					
 					world.createExplosion(x, y, z, 2f, false, false); //original 4f
 					arrow.remove();	
@@ -85,9 +88,13 @@ public class EventListener implements Listener {
 					int i = 0;
 					int imax = nears.size();
 					while(i < imax) {
-						if(nears.get(i) instanceof Player && !nears.get(i).getUniqueId().toString().equals(shooter.getUniqueId().toString())) {
+						if(nears.get(i) instanceof Player /*&& !nears.get(i).getUniqueId().toString().equals(shooter.getUniqueId().toString())*/) {
 							Player near = (Player) nears.get(i);
-							near.damage(0, shooter);							
+							if(explosionVictims.containsKey(near.getUniqueId())) {
+								explosionVictims.remove(near.getUniqueId());
+								explosionVictims.put(near.getUniqueId(), shooter.getUniqueId());
+							}
+//							near.damage(0, shooter);							
 						}
 
 						i++;
@@ -210,15 +217,15 @@ public class EventListener implements Listener {
 
 			}
 			else if(deceased.getLastDamageCause().getCause().equals(DamageCause.BLOCK_EXPLOSION)) {
-				if(deceased.getKiller() == null) {
+				if(explosionVictims.containsKey(deceased.getUniqueId())) {
 					if(doDeathBroadcast)
-						GameBroadcast.broadcastToGame(game, ConstantHolder.RAGEMODE_PREFIX + ChatColor.GREEN  + deceased.getName() + ChatColor.DARK_AQUA + " was " + ChatColor.GOLD + "blown up" + ChatColor.DARK_AQUA + " by " + ChatColor.GREEN + deceased.getName() + ChatColor.DARK_AQUA + ".");	
-					RageScores.addPointsToPlayer(deceased, deceased, "explosion");					
+						GameBroadcast.broadcastToGame(game, ConstantHolder.RAGEMODE_PREFIX + ChatColor.GREEN  + deceased.getName() + ChatColor.DARK_AQUA + " was " + ChatColor.GOLD + "blown up" + ChatColor.DARK_AQUA + " by " + ChatColor.GREEN + Bukkit.getPlayer(explosionVictims.get(deceased.getUniqueId())).getName() + ChatColor.DARK_AQUA + ".");	
+					RageScores.addPointsToPlayer(Bukkit.getPlayer(explosionVictims.get(deceased.getUniqueId())), deceased, "explosion");	
 				}
 				else {
 					if(doDeathBroadcast)
-						GameBroadcast.broadcastToGame(game, ConstantHolder.RAGEMODE_PREFIX + ChatColor.GREEN  + deceased.getName() + ChatColor.DARK_AQUA + " was " + ChatColor.GOLD + "blown up" + ChatColor.DARK_AQUA + " by " + ChatColor.GREEN + deceased.getKiller().getName() + ChatColor.DARK_AQUA + ".");	
-					RageScores.addPointsToPlayer(deceased.getKiller(), deceased, "explosion");					
+						GameBroadcast.broadcastToGame(game, ConstantHolder.RAGEMODE_PREFIX + "Whoops, that shouldn't happen normally...");	
+					deceased.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "Do you know who killed you? Because we don't know it...");
 				}
 
 			}

@@ -7,19 +7,19 @@ import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 
 public class RageScores {
 
-	private static HashMap<String, Integer> playerpoints = new HashMap<String, Integer>();
+	private static HashMap<String, PlayerPoints> playerpoints = new HashMap<String, PlayerPoints>();
 	// private static TableList<String, String> playergame = new
 	// TableList<String, String>(); ----> User PlayerList.getPlayersInGame
 	// instead
 	private static int totalPoints = 0;
-	private static int totalVictimPoints = 0;
 
 	public static void addPointsToPlayer(Player killer, Player victim, String killCause) {
 		if (!killer.getUniqueId().toString().equals(victim.getUniqueId().toString())) {
 			switch (killCause.toLowerCase()) {
 			case "ragebow":
 				int bowPoints = ConstantHolder.POINTS_FOR_BOW_KILL;
-				totalPoints = addPoints(killer, PlayerList.getPlayersGame(killer), bowPoints);
+				totalPoints = addPoints(killer, PlayerList.getPlayersGame(killer), bowPoints, true);
+				addPoints(victim, PlayerList.getPlayersGame(victim), 0, false);
 				killer.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You killed "
 						+ ChatColor.GOLD.toString() + ChatColor.BOLD.toString() + victim.getName()
 						+ ChatColor.RESET.toString() + ChatColor.DARK_AQUA + " with a direct arrow hit. "
@@ -35,8 +35,8 @@ public class RageScores {
 			case "combataxe":
 				int axePoints = ConstantHolder.POINTS_FOR_AXE_KILL;
 				int axeMinusPoints = ConstantHolder.MINUS_POINTS_FOR_AXE_DEATH;
-				totalPoints = addPoints(killer, PlayerList.getPlayersGame(killer), axePoints);
-				totalVictimPoints = addPoints(victim, PlayerList.getPlayersGame(victim), axeMinusPoints);
+				totalPoints = addPoints(killer, PlayerList.getPlayersGame(killer), axePoints, true);
+				addPoints(victim, PlayerList.getPlayersGame(victim), axeMinusPoints, false);
 				killer.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You killed "
 						+ ChatColor.GOLD.toString() + ChatColor.BOLD.toString() + victim.getName()
 						+ ChatColor.RESET.toString() + ChatColor.DARK_AQUA + " with your CombatAxe. "
@@ -52,7 +52,8 @@ public class RageScores {
 				break;
 			case "rageknife":
 				int knifePoints = ConstantHolder.POINTS_FOR_KNIFE_KILL;
-				totalPoints = addPoints(killer, PlayerList.getPlayersGame(killer), knifePoints);
+				totalPoints = addPoints(killer, PlayerList.getPlayersGame(killer), knifePoints, true);
+				addPoints(victim, PlayerList.getPlayersGame(victim), 0, false);
 				killer.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You killed "
 						+ ChatColor.GOLD.toString() + ChatColor.BOLD.toString() + victim.getName()
 						+ ChatColor.RESET.toString() + ChatColor.DARK_AQUA + " with your RageKnife. "
@@ -67,7 +68,8 @@ public class RageScores {
 				break;
 			case "explosion":
 				int explosionPoints = ConstantHolder.POINTS_FOR_EXPLOSION_KILL;
-				totalPoints = addPoints(killer, PlayerList.getPlayersGame(killer), explosionPoints);
+				totalPoints = addPoints(killer, PlayerList.getPlayersGame(killer), explosionPoints, true);
+				addPoints(victim, PlayerList.getPlayersGame(victim), 0, false);
 				killer.sendMessage(
 						ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You killed " + ChatColor.GOLD.toString()
 								+ ChatColor.BOLD.toString() + victim.getName() + ChatColor.RESET.toString()
@@ -88,6 +90,7 @@ public class RageScores {
 			killer.sendMessage(
 					ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You killed yourself you silly idiot.");
 		}
+		
 	}
 
 	public static void removePointsForPlayers(String[] playerUUIDs) {
@@ -98,18 +101,48 @@ public class RageScores {
 		}
 	}
 
-	private static int addPoints(Player player, String gameName, int points) { // returns
-																				// total
-																				// points
+	public static PlayerPoints getPlayerPoints(String playerUUID) {
+		if (playerpoints.containsKey(playerUUID)) {
+			return playerpoints.get(playerUUID);
+		} else {
+			return null;
+		}
+	}
+
+	private static int addPoints(Player player, String gameName, int points, boolean killer) { // returns
+		// total
+		// points
 		String playerUUID = player.getUniqueId().toString();
 		if (playerpoints.containsKey(playerUUID)) {
-			int oldPoints = playerpoints.get(playerUUID);
+			PlayerPoints pointsHolder = playerpoints.get(playerUUID);
+			int oldPoints = pointsHolder.getPoints();
+			int oldKills = pointsHolder.getKills();
+			int oldDeaths = pointsHolder.getDeaths();
 			playerpoints.remove(playerUUID);
 			int totalPoints = oldPoints + points;
-			playerpoints.put(playerUUID, totalPoints);
+			;
+			int totalKills = oldKills;
+			int totalDeaths = oldDeaths;
+			if (killer) {
+				totalKills++;
+			} else {
+				totalDeaths++;
+			}
+			pointsHolder.setPoints(totalPoints);
+			pointsHolder.setKills(totalKills);
+			pointsHolder.setDeaths(totalDeaths);
+			playerpoints.put(playerUUID, pointsHolder);
 			return totalPoints;
 		} else {
-			playerpoints.put(playerUUID, points);
+			int totalKills = 0;
+			int totalDeaths = 0;
+			if (killer) {
+				totalKills = 1;
+			} else {
+				totalDeaths = 1;
+			}
+			PlayerPoints pointsHolder = new PlayerPoints(playerUUID, points, totalKills, totalDeaths);
+			playerpoints.put(playerUUID, pointsHolder);
 			return points;
 		}
 	}

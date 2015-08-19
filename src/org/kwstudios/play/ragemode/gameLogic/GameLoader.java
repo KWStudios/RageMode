@@ -1,6 +1,7 @@
 package org.kwstudios.play.ragemode.gameLogic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,6 +29,8 @@ public class GameLoader {
 		PlayerList.setGameRunning(gameName);
 		checkTeleport();
 		setInventories();
+		List<String> players = Arrays.asList(PlayerList.getPlayersInGame(gameName));
+		TabGuiUpdater.setTabGui(players);
 		new GameTimer(this.gameName, PlayerList.getPlayersInGame(this.gameName), this.fileConfiguration);
 	}
 	

@@ -38,7 +38,7 @@ public class TabGuiUpdater {
 		}
 		for (PlayerPoints playerPoints : playersPoints) {
 			Player player = Bukkit.getPlayer(UUID.fromString(playerPoints.getPlayerUUID()));
-			TabAPI.setTabSlot(player, 2, 0, ChatColor.BLUE + Integer.toString(playersPoints.size()), 0);
+			TabAPI.setTabSlot(player, 0, 1, ChatColor.BLUE + Integer.toString(playersPoints.size()), 0);
 		}
 
 		Collections.sort(playersPoints);
@@ -50,9 +50,9 @@ public class TabGuiUpdater {
 			int deaths = playerPoints.getDeaths();
 			for (PlayerPoints innerPlayerPoints : playersPoints) {
 				Player innerPlayer = Bukkit.getPlayer(UUID.fromString(innerPlayerPoints.getPlayerUUID()));
-				TabAPI.setTabSlot(innerPlayer, i + 6, 0, ChatColor.YELLOW + Integer.toString(points), 0);
-				TabAPI.setTabSlot(innerPlayer, i + 6, 1, ChatColor.YELLOW + player.getName(), 0);
-				TabAPI.setTabSlot(innerPlayer, i + 6, 2,
+				TabAPI.setTabSlot(innerPlayer, 0, i + 5, ChatColor.YELLOW + Integer.toString(points), 0);
+				TabAPI.setTabSlot(innerPlayer, 1, i + 5, ChatColor.YELLOW + player.getName(), 0);
+				TabAPI.setTabSlot(innerPlayer, 2, i + 5,
 						ChatColor.YELLOW + Integer.toString(kills) + " - " + Integer.toString(deaths), 0);
 			}
 		}
@@ -63,16 +63,16 @@ public class TabGuiUpdater {
 	}
 
 	private static void setTitles(Player player) {
-		TabAPI.setTabHnF(player, ChatColor.DARK_RED + "RageMode",
-				ChatColor.YELLOW + "KWStudios.org " + ChatColor.BLUE + "Network");
+		TabAPI.setTabHnF(player, ChatColor.DARK_RED + "RageMode", ChatColor.translateAlternateColorCodes('&', "&eKWStudios.org ")
+				+ ChatColor.translateAlternateColorCodes('&', "&3Network"));
 
-		TabAPI.setTabSlot(player, 1, 0, ChatColor.DARK_AQUA + "Player", 0);
-		TabAPI.setTabSlot(player, 1, 1, ChatColor.DARK_AQUA + "Time", 0);
-		TabAPI.setTabSlot(player, 1, 2, ChatColor.DARK_AQUA + "Map", 0);
+		TabAPI.setTabSlot(player, 0, 0, ChatColor.translateAlternateColorCodes('&', "&9Player"), 100);
+		TabAPI.setTabSlot(player, 1, 0, ChatColor.translateAlternateColorCodes('&', "&9Time"), 100);
+		TabAPI.setTabSlot(player, 2, 0, ChatColor.translateAlternateColorCodes('&', "&9Map"), 100);
 
-		TabAPI.setTabSlot(player, 4, 0, ChatColor.BOLD.toString() + ChatColor.GOLD.toString() + "Points", 0);
-		TabAPI.setTabSlot(player, 4, 1, ChatColor.BOLD.toString() + ChatColor.GOLD.toString() + "Player", 0);
-		TabAPI.setTabSlot(player, 4, 2, ChatColor.BOLD.toString() + ChatColor.GOLD.toString() + "Kills - Deaths", 0);
+		TabAPI.setTabSlot(player, 0, 4, ChatColor.translateAlternateColorCodes('&', "&6&lPoints"), 100);
+		TabAPI.setTabSlot(player, 1, 4, ChatColor.translateAlternateColorCodes('&', "&6&lPlayer"), 100);
+		TabAPI.setTabSlot(player, 2, 4, ChatColor.translateAlternateColorCodes('&', "&6&lKills - Deaths"), 100);
 	}
 
 }

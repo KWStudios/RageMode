@@ -93,7 +93,7 @@ public class RageScores {
 			killer.sendMessage(
 					ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You killed yourself you silly idiot.");
 		}
-		
+		TabGuiUpdater.updateTabGui(PlayerList.getPlayersGame(killer));
 	}
 
 	public static void removePointsForPlayers(String[] playerUUIDs) {

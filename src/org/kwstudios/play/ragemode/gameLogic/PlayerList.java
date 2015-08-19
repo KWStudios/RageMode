@@ -230,6 +230,7 @@ public class PlayerList {
 		while (i < imax) {
 			if(list[i] != null) {
 				if (list[i].equals(player.getUniqueId().toString())) {
+					RageScores.removePointsForPlayers(new String[] {player.getUniqueId().toString()});
 					player.getInventory().clear();
 					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You left your current Game.");
 

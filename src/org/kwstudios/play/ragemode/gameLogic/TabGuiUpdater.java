@@ -8,40 +8,37 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.kwstudios.play.ragemode.loader.PluginLoader;
-import org.kwstudios.play.tabapi.TabAPI;
+
+import com.gmail.zahusek.tinyprotocolapi.api.tabapi.TabAPI;
 
 public class TabGuiUpdater {
 
 	public static void setTabGui(List<String> playerUUIDs) {
 		for (String playerUUID : playerUUIDs) {
 			Player player = Bukkit.getPlayer(UUID.fromString(playerUUID));
-			TabAPI.setPriority(PluginLoader.getInstance(), player, 2);
 			setTitles(player);
-			TabAPI.updatePlayer(player);
+			TabAPI.modifyTab(player);
 		}
 	}
 
 	public static void setTabGui(String playerUUID) {
 		Player player = Bukkit.getPlayer(UUID.fromString(playerUUID));
-		TabAPI.setPriority(PluginLoader.getInstance(), player, 2);
 		setTitles(player);
-		TabAPI.updatePlayer(player);
+		TabAPI.modifyTab(player);
 	}
 
 	public static void updateTabGui(String gameName) {
 		List<PlayerPoints> playersPoints = new ArrayList<PlayerPoints>();
 		String[] playersInGame = PlayerList.getPlayersInGame(gameName);
-		for(String playerInGame : playersInGame){
+		for (String playerInGame : playersInGame) {
 			PlayerPoints playerPoints = RageScores.getPlayerPoints(playerInGame);
-			if(playerPoints != null){
+			if (playerPoints != null) {
 				playersPoints.add(playerPoints);
 			}
 		}
 		for (PlayerPoints playerPoints : playersPoints) {
 			Player player = Bukkit.getPlayer(UUID.fromString(playerPoints.getPlayerUUID()));
-			TabAPI.setTabString(PluginLoader.getInstance(), player, 2, 0,
-					ChatColor.BLUE + Integer.toString(playersPoints.size()));
+			TabAPI.setTabSlot(player, 2, 0, ChatColor.BLUE + Integer.toString(playersPoints.size()), 0);
 		}
 
 		Collections.sort(playersPoints);
@@ -53,33 +50,29 @@ public class TabGuiUpdater {
 			int deaths = playerPoints.getDeaths();
 			for (PlayerPoints innerPlayerPoints : playersPoints) {
 				Player innerPlayer = Bukkit.getPlayer(UUID.fromString(innerPlayerPoints.getPlayerUUID()));
-				TabAPI.setTabString(PluginLoader.getInstance(), innerPlayer, i + 6, 0,
-						ChatColor.YELLOW + Integer.toString(points));
-				TabAPI.setTabString(PluginLoader.getInstance(), innerPlayer, i + 6, 1,
-						ChatColor.YELLOW + player.getName());
-				TabAPI.setTabString(PluginLoader.getInstance(), innerPlayer, i + 6, 2,
-						ChatColor.YELLOW + Integer.toString(kills) + " - " + Integer.toString(deaths));
+				TabAPI.setTabSlot(innerPlayer, i + 6, 0, ChatColor.YELLOW + Integer.toString(points), 0);
+				TabAPI.setTabSlot(innerPlayer, i + 6, 1, ChatColor.YELLOW + player.getName(), 0);
+				TabAPI.setTabSlot(innerPlayer, i + 6, 2,
+						ChatColor.YELLOW + Integer.toString(kills) + " - " + Integer.toString(deaths), 0);
 			}
 		}
 
 		for (PlayerPoints playerPoints : playersPoints) {
-			TabAPI.updatePlayer(Bukkit.getPlayer(UUID.fromString(playerPoints.getPlayerUUID())));
+			TabAPI.modifyTab(Bukkit.getPlayer(UUID.fromString(playerPoints.getPlayerUUID())));
 		}
 	}
 
 	private static void setTitles(Player player) {
-		TabAPI.setTabString(PluginLoader.getInstance(), player, 0, 1, ChatColor.YELLOW + "RageMode");
+		TabAPI.setTabHnF(player, ChatColor.DARK_RED + "RageMode",
+				ChatColor.YELLOW + "KWStudios.org " + ChatColor.BLUE + "Network");
 
-		TabAPI.setTabString(PluginLoader.getInstance(), player, 1, 0, ChatColor.DARK_AQUA + "Player");
-		TabAPI.setTabString(PluginLoader.getInstance(), player, 1, 1, ChatColor.DARK_AQUA + "Time");
-		TabAPI.setTabString(PluginLoader.getInstance(), player, 1, 2, ChatColor.DARK_AQUA + "Map");
+		TabAPI.setTabSlot(player, 1, 0, ChatColor.DARK_AQUA + "Player", 0);
+		TabAPI.setTabSlot(player, 1, 1, ChatColor.DARK_AQUA + "Time", 0);
+		TabAPI.setTabSlot(player, 1, 2, ChatColor.DARK_AQUA + "Map", 0);
 
-		TabAPI.setTabString(PluginLoader.getInstance(), player, 4, 0,
-				ChatColor.BOLD.toString() + ChatColor.GOLD.toString() + "Points");
-		TabAPI.setTabString(PluginLoader.getInstance(), player, 4, 1,
-				ChatColor.BOLD.toString() + ChatColor.GOLD.toString() + "Player");
-		TabAPI.setTabString(PluginLoader.getInstance(), player, 4, 2,
-				ChatColor.BOLD.toString() + ChatColor.GOLD.toString() + "Kills - Deaths");
+		TabAPI.setTabSlot(player, 4, 0, ChatColor.BOLD.toString() + ChatColor.GOLD.toString() + "Points", 0);
+		TabAPI.setTabSlot(player, 4, 1, ChatColor.BOLD.toString() + ChatColor.GOLD.toString() + "Player", 0);
+		TabAPI.setTabSlot(player, 4, 2, ChatColor.BOLD.toString() + ChatColor.GOLD.toString() + "Kills - Deaths", 0);
 	}
 
 }

@@ -7,6 +7,6 @@
 			<attribute name="javadoc_location" value="https://hub.spigotmc.org/javadocs/bukkit/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="jars/TabAPI.jar"/>
+	<classpathentry kind="lib" path="jars/TinyProtocolAPi.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

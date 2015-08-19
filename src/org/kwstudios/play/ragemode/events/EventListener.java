@@ -1,5 +1,6 @@
 package org.kwstudios.play.ragemode.events;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -43,7 +44,7 @@ import org.kwstudios.play.ragemode.toolbox.GameBroadcast;
 public class EventListener implements Listener {
 
 	public FileConfiguration fileConfiguration = null;
-	private Map<UUID, UUID> explosionVictims;  //shot, shooter
+	private Map<UUID, UUID> explosionVictims = new HashMap<UUID, UUID>();  //shot, shooter
 	
 	public EventListener(PluginLoader plugin, FileConfiguration fileconfiguration) {
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
@@ -90,13 +91,16 @@ public class EventListener implements Listener {
 					while(i < imax) {
 						if(nears.get(i) instanceof Player /*&& !nears.get(i).getUniqueId().toString().equals(shooter.getUniqueId().toString())*/) {
 							Player near = (Player) nears.get(i);
-							if(explosionVictims.containsKey(near.getUniqueId())) {
-								explosionVictims.remove(near.getUniqueId());
-								explosionVictims.put(near.getUniqueId(), shooter.getUniqueId());
+							if(explosionVictims != null) {
+								if(explosionVictims.containsKey(near.getUniqueId())) {
+									explosionVictims.remove(near.getUniqueId());
+									explosionVictims.put(near.getUniqueId(), shooter.getUniqueId());
+								}								
 							}
+							explosionVictims.put(near.getUniqueId(), shooter.getUniqueId());
+//							Bukkit.broadcastMessage("Victim:" + near.getName() + " Shooter:" + shooter.getName());	Just a debug Broadcast
 //							near.damage(0, shooter);							
 						}
-
 						i++;
 					}
 				}

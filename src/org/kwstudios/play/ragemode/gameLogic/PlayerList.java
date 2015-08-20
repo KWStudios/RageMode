@@ -115,8 +115,7 @@ public class PlayerList {
 									+ ChatColor.WHITE + ".");
 
 							if (getPlayersInGame(game).length == 2) {
-								new LobbyTimer(game, getPlayersInGame(game),
-										fileConfiguration);
+								new LobbyTimer(game, fileConfiguration);
 							}
 							return true;
 						}
@@ -203,8 +202,7 @@ public class PlayerList {
 							.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You were kicked out of the Game to make room for a VIP.");
 
 					if (getPlayersInGame(game).length == 2) {
-						new LobbyTimer(game, getPlayersInGame(game),
-								fileConfiguration);
+						new LobbyTimer(game, fileConfiguration);
 					}
 					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You joined " + ChatColor.DARK_AQUA + game + ChatColor.WHITE + ".");
 					return true;

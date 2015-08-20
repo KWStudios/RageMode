@@ -15,14 +15,12 @@ public class LobbyTimer {
 	private static final String LOBBY_DELAY_PATH = "settings.lobbydelay";
 
 	private String gameName;
-	private String[] playerUUIDs;
 	private FileConfiguration fileConfiguration;
 	private int secondsRemaining;
 	private Timer t;
 
-	public LobbyTimer(String gameName, String[] playerUUIDs, FileConfiguration fileConfiguration) {
+	public LobbyTimer(String gameName, FileConfiguration fileConfiguration) {
 		this.gameName = gameName;
-		this.playerUUIDs = playerUUIDs;
 		this.fileConfiguration = fileConfiguration;
 		getSecondsToWait();
 		sendTimerMessages();
@@ -52,6 +50,7 @@ public class LobbyTimer {
 
 			public void run() {
 				if (totalMessagesBeforeTen > 0 && PlayerList.getPlayersInGame(gameName).length >= 2) {
+					String[] playerUUIDs = PlayerList.getPlayersInGame(gameName);
 					for (int i = 0; i < playerUUIDs.length; i++) {
 						Bukkit.getPlayer(UUID.fromString(playerUUIDs[i]))
 								.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.BLUE
@@ -77,6 +76,7 @@ public class LobbyTimer {
 			@Override
 			public void run() {
 				if (timesToSendMessage > 0 && PlayerList.getPlayersInGame(gameName).length >= 2) {
+					String[] playerUUIDs = PlayerList.getPlayersInGame(gameName);
 					for (int i = 0; i < playerUUIDs.length; i++) {
 						Bukkit.getPlayer(UUID.fromString(playerUUIDs[i]))
 								.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.BLUE

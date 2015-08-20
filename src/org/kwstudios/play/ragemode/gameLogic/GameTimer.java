@@ -16,14 +16,12 @@ public class GameTimer {
 	private static final String GAME_TIME_PATH = "settings.gametime";
 
 	private String gameName;
-	private String[] playerUUIDs;
 	private FileConfiguration fileConfiguration;
 	private int secondsRemaining;
 	private Timer t;
 	
-	public GameTimer(String gameName, String[] playerUUIDs, FileConfiguration fileConfiguration) {
+	public GameTimer(String gameName, FileConfiguration fileConfiguration) {
 		this.gameName = gameName;
-		this.playerUUIDs = playerUUIDs;
 		this.fileConfiguration = fileConfiguration;
 		PlayerList.setGameRunning(gameName);
 		getMinutesToGo();
@@ -54,6 +52,7 @@ public class GameTimer {
 
 			public void run() {
 				if (totalMessagesBeforeTen > 0 && PlayerList.getPlayersInGame(gameName).length >= 2) {
+					String[] playerUUIDs = PlayerList.getPlayersInGame(gameName);
 					for (int i = 0; i < playerUUIDs.length; i++) {
 						Bukkit.getPlayer(UUID.fromString(playerUUIDs[i]))
 								.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.BLUE

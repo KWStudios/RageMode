@@ -28,41 +28,43 @@ public class TabGuiUpdater {
 	}
 
 	public static void updateTabGui(String gameName) {
-		List<PlayerPoints> playersPoints = new ArrayList<PlayerPoints>();
-		String[] playersInGame = PlayerList.getPlayersInGame(gameName);
-		if (playersInGame != null) {
-			for (String playerInGame : playersInGame) {
-				if (playerInGame != null) {
-					PlayerPoints playerPoints = RageScores.getPlayerPoints(playerInGame);
-					if (playerPoints != null) {
-						playersPoints.add(playerPoints);
+		if (gameName != null) {
+			List<PlayerPoints> playersPoints = new ArrayList<PlayerPoints>();
+			String[] playersInGame = PlayerList.getPlayersInGame(gameName);
+			if (playersInGame != null) {
+				for (String playerInGame : playersInGame) {
+					if (playerInGame != null) {
+						PlayerPoints playerPoints = RageScores.getPlayerPoints(playerInGame);
+						if (playerPoints != null) {
+							playersPoints.add(playerPoints);
+						}
 					}
 				}
 			}
-		}
-		for (PlayerPoints playerPoints : playersPoints) {
-			Player player = Bukkit.getPlayer(UUID.fromString(playerPoints.getPlayerUUID()));
-			TabAPI.setTabSlot(player, 0, 1, ChatColor.BLUE + Integer.toString(playersPoints.size()), 0);
-		}
-
-		Collections.sort(playersPoints);
-		for (int i = 0; i < playersPoints.size(); i++) {
-			PlayerPoints playerPoints = playersPoints.get(i);
-			Player player = Bukkit.getPlayer(UUID.fromString(playerPoints.getPlayerUUID()));
-			int points = playerPoints.getPoints();
-			int kills = playerPoints.getKills();
-			int deaths = playerPoints.getDeaths();
-			for (PlayerPoints innerPlayerPoints : playersPoints) {
-				Player innerPlayer = Bukkit.getPlayer(UUID.fromString(innerPlayerPoints.getPlayerUUID()));
-				TabAPI.setTabSlot(innerPlayer, 0, i + 5, ChatColor.YELLOW + Integer.toString(points), 0);
-				TabAPI.setTabSlot(innerPlayer, 1, i + 5, ChatColor.YELLOW + player.getName(), 0);
-				TabAPI.setTabSlot(innerPlayer, 2, i + 5,
-						ChatColor.YELLOW + Integer.toString(kills) + " - " + Integer.toString(deaths), 0);
+			for (PlayerPoints playerPoints : playersPoints) {
+				Player player = Bukkit.getPlayer(UUID.fromString(playerPoints.getPlayerUUID()));
+				TabAPI.setTabSlot(player, 0, 1, ChatColor.BLUE + Integer.toString(playersPoints.size()), 0);
 			}
-		}
 
-		for (PlayerPoints playerPoints : playersPoints) {
-			TabAPI.modifyTab(Bukkit.getPlayer(UUID.fromString(playerPoints.getPlayerUUID())));
+			Collections.sort(playersPoints);
+			for (int i = 0; i < playersPoints.size(); i++) {
+				PlayerPoints playerPoints = playersPoints.get(i);
+				Player player = Bukkit.getPlayer(UUID.fromString(playerPoints.getPlayerUUID()));
+				int points = playerPoints.getPoints();
+				int kills = playerPoints.getKills();
+				int deaths = playerPoints.getDeaths();
+				for (PlayerPoints innerPlayerPoints : playersPoints) {
+					Player innerPlayer = Bukkit.getPlayer(UUID.fromString(innerPlayerPoints.getPlayerUUID()));
+					TabAPI.setTabSlot(innerPlayer, 0, i + 5, ChatColor.YELLOW + Integer.toString(points), 0);
+					TabAPI.setTabSlot(innerPlayer, 1, i + 5, ChatColor.YELLOW + player.getName(), 0);
+					TabAPI.setTabSlot(innerPlayer, 2, i + 5,
+							ChatColor.YELLOW + Integer.toString(kills) + " - " + Integer.toString(deaths), 0);
+				}
+			}
+
+			for (PlayerPoints playerPoints : playersPoints) {
+				TabAPI.modifyTab(Bukkit.getPlayer(UUID.fromString(playerPoints.getPlayerUUID())));
+			}
 		}
 	}
 

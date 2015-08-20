@@ -31,7 +31,7 @@ public class GameLoader {
 		setInventories();
 		List<String> players = Arrays.asList(PlayerList.getPlayersInGame(gameName));
 		TabGuiUpdater.setTabGui(players);
-		new GameTimer(this.gameName, PlayerList.getPlayersInGame(this.gameName), this.fileConfiguration);
+		new GameTimer(this.gameName, this.fileConfiguration);
 	}
 	
 	private void checkTeleport(){

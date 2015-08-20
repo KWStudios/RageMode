@@ -67,6 +67,10 @@ public class TabGuiUpdater {
 			}
 		}
 	}
+	
+	public static void removeTabForPlayer(Player player){
+		TabAPI.defaultTab(player);
+	}
 
 	private static void setTitles(Player player) {
 		TabAPI.setTabHnF(player, ChatColor.DARK_RED + "RageMode",

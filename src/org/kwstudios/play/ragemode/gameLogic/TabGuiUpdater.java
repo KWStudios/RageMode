@@ -30,10 +30,14 @@ public class TabGuiUpdater {
 	public static void updateTabGui(String gameName) {
 		List<PlayerPoints> playersPoints = new ArrayList<PlayerPoints>();
 		String[] playersInGame = PlayerList.getPlayersInGame(gameName);
-		for (String playerInGame : playersInGame) {
-			PlayerPoints playerPoints = RageScores.getPlayerPoints(playerInGame);
-			if (playerPoints != null) {
-				playersPoints.add(playerPoints);
+		if (playersInGame != null) {
+			for (String playerInGame : playersInGame) {
+				if (playerInGame != null) {
+					PlayerPoints playerPoints = RageScores.getPlayerPoints(playerInGame);
+					if (playerPoints != null) {
+						playersPoints.add(playerPoints);
+					}
+				}
 			}
 		}
 		for (PlayerPoints playerPoints : playersPoints) {
@@ -63,8 +67,9 @@ public class TabGuiUpdater {
 	}
 
 	private static void setTitles(Player player) {
-		TabAPI.setTabHnF(player, ChatColor.DARK_RED + "RageMode", ChatColor.translateAlternateColorCodes('&', "&eKWStudios.org ")
-				+ ChatColor.translateAlternateColorCodes('&', "&3Network"));
+		TabAPI.setTabHnF(player, ChatColor.DARK_RED + "RageMode",
+				ChatColor.translateAlternateColorCodes('&', "&eKWStudios.org ")
+						+ ChatColor.translateAlternateColorCodes('&', "&3Network"));
 
 		TabAPI.setTabSlot(player, 0, 0, ChatColor.translateAlternateColorCodes('&', "&9Player"), 100);
 		TabAPI.setTabSlot(player, 1, 0, ChatColor.translateAlternateColorCodes('&', "&9Time"), 100);

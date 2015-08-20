@@ -30,8 +30,11 @@ public class StopGame {
 						i++;
 					}
 				}
-				PlayerList.setGameNotRunning(args[1]);
 				GameBroadcast.broadcastToGame(args[1], ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + args[1] + ChatColor.DARK_GREEN + " has been stopped.");
+				RageScores.calculateWinner(args[1], players);
+				RageScores.removePointsForPlayers(players);
+				PlayerList.setGameNotRunning(args[1]);
+
 			}
 			else {
 				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "This game isn't running.");
@@ -56,10 +59,11 @@ public class StopGame {
 					i++;
 				}
 			}
-			RageScores.removePointsForPlayers(players);
-			PlayerList.setGameNotRunning(game);
-			GameBroadcast.broadcastToGame(game, ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + game + ChatColor.DARK_GREEN + " has been stopped.");
 			RageScores.calculateWinner(game, players);
+			RageScores.removePointsForPlayers(players);
+			GameBroadcast.broadcastToGame(game, ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + game + ChatColor.DARK_GREEN + " has been stopped.");
+			PlayerList.setGameNotRunning(game);
+
 		}
 	}
 	
@@ -88,6 +92,7 @@ public class StopGame {
 						n++;
 					}
 				}
+				RageScores.removePointsForPlayers(players);
 				PlayerList.setGameNotRunning(games[i]);
 				logger.info(games[i] + " has been stopped.");
 			}

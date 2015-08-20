@@ -156,20 +156,23 @@ public class RageScores {
 		int i = 0;
 		int imax = players.length;
 		while(i < imax) {
-			if(playerpoints.get(players[i]).getPoints() > highestPoints) {
-				highest = players[i];
-				highestPoints = playerpoints.get(players[i]).getPoints();
+			if(playerpoints.containsKey(players[i])) {
+				if(playerpoints.get(players[i]).getPoints() > highestPoints) {
+					highest = players[i];
+					highestPoints = playerpoints.get(players[i]).getPoints();
+				}				
 			}
 			i++;
 		}
-		while(i >= 0) {
+		i = 0;
+		while(i < imax) {
 			if(players[i].equals(highest)) {
 				Bukkit.getPlayer(UUID.fromString(highest)).sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.LIGHT_PURPLE + "You won the game " + ChatColor.GOLD + game + ChatColor.LIGHT_PURPLE + ".");
 			}
 			else {
 				Bukkit.getPlayer(UUID.fromString(players[i])).sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_GREEN + Bukkit.getPlayer(UUID.fromString(highest)).getName() + ChatColor.LIGHT_PURPLE + " won the game " + ChatColor.GOLD + game + ChatColor.LIGHT_PURPLE + ".");
 			}
-			i--;
+			i++;
 		}
 	}
 

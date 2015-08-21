@@ -1,4 +1,4 @@
-package org.kwstudios.play.ragemode.gameLogic;
+package org.kwstudios.play.ragemode.gameLogic;/*
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -88,4 +88,4 @@ public class TabGuiUpdater {
 		TabAPI.setTabSlot(player, 2, 4, ChatColor.translateAlternateColorCodes('&', "&6&lKills - Deaths"), 100);
 	}
 
-}
+}*/

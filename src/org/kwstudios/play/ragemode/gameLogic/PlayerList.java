@@ -11,6 +11,7 @@ import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.kwstudios.play.ragemode.tabsGuiListOverlay.TabAPI;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 import org.kwstudios.play.ragemode.toolbox.GetGames;
 import org.kwstudios.play.ragemode.toolbox.TableList;
@@ -228,7 +229,8 @@ public class PlayerList {
 		while (i < imax) {
 			if(list[i] != null) {
 				if (list[i].equals(player.getUniqueId().toString())) {
-					TabGuiUpdater.removeTabForPlayer(player);
+//					TabGuiUpdater.removeTabForPlayer(player);
+					TabAPI.removeTabGuiListOverlayForPlayer(player);
 					RageScores.removePointsForPlayers(new String[] {player.getUniqueId().toString()});
 					player.getInventory().clear();
 					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You left your current Game.");

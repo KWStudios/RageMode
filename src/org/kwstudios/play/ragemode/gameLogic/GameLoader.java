@@ -14,6 +14,7 @@ import org.kwstudios.play.ragemode.items.CombatAxe;
 import org.kwstudios.play.ragemode.items.RageArrow;
 import org.kwstudios.play.ragemode.items.RageBow;
 import org.kwstudios.play.ragemode.items.RageKnife;
+import org.kwstudios.play.ragemode.tabsGuiListOverlay.TabAPI;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 import org.kwstudios.play.ragemode.toolbox.GameBroadcast;
 
@@ -30,7 +31,8 @@ public class GameLoader {
 		checkTeleport();
 		setInventories();
 		List<String> players = Arrays.asList(PlayerList.getPlayersInGame(gameName));
-		TabGuiUpdater.setTabGui(players);
+//		TabGuiUpdater.setTabGui(players);
+		TabAPI.setTabGuiListOverLayForPlayers(players);
 		new GameTimer(this.gameName, this.fileConfiguration);
 	}
 	

@@ -12,15 +12,37 @@ import org.kwstudios.play.ragemode.commands.StopGame;
 import org.kwstudios.play.ragemode.events.EventListener;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
 
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
+import com.comphenix.protocol.events.ListenerPriority;
+import com.comphenix.protocol.events.PacketAdapter;
+import com.comphenix.protocol.events.PacketEvent;
+
 public class PluginLoader extends JavaPlugin{
 	
 	private static PluginLoader instance = null;
+	private ProtocolManager protocolManager;
 	
 	@Override
 	public void onEnable() {
 		super.onEnable();
 		
 		PluginLoader.instance = this;
+		
+		protocolManager = ProtocolLibrary.getProtocolManager();
+		
+		protocolManager.addPacketListener(
+				  new PacketAdapter(this, ListenerPriority.NORMAL, 
+				          PacketType.Play.Server.PLAYER_INFO) {
+				    @Override
+				    public void onPacketSending(PacketEvent event) {
+				    	if(PlayerList.isPlayerPlaying(event.getPlayer().getUniqueId().toString())) {
+				    		event.setCancelled(true);
+				        }
+				    }
+				  }
+		);
 		
 		PluginDescriptionFile pluginDescriptionFile = getDescription();
 		Logger logger = Logger.getLogger("Minecraft");

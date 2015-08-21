@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.kwstudios.play.ragemode.tabsGuiListOverlay.TabAPI;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 
 public class RageScores {
@@ -93,7 +94,8 @@ public class RageScores {
 			killer.sendMessage(
 					ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You killed yourself you silly idiot.");
 		}
-		TabGuiUpdater.updateTabGui(PlayerList.getPlayersGame(killer));
+//		TabGuiUpdater.updateTabGui(PlayerList.getPlayersGame(killer));
+		TabAPI.updateTabGuiListOverlayForGame(PlayerList.getPlayersGame(killer));
 	}
 
 	public static void removePointsForPlayers(String[] playerUUIDs) {
@@ -151,12 +153,13 @@ public class RageScores {
 	}
 	
 	public static void calculateWinner(String game, String[] players) {
-		String highest = players[0];
-		int highestPoints = 0;
+		String highest = UUID.randomUUID().toString();
+		int highestPoints = -200000000;
 		int i = 0;
 		int imax = players.length;
 		while(i < imax) {
 			if(playerpoints.containsKey(players[i])) {
+				Bukkit.broadcastMessage(Bukkit.getPlayer(UUID.fromString(players[i])).getName() + " " + Integer.toString(i) + " " + playerpoints.get(players[i]).getPoints() + " " + Integer.toString(highestPoints));
 				if(playerpoints.get(players[i]).getPoints() > highestPoints) {
 					highest = players[i];
 					highestPoints = playerpoints.get(players[i]).getPoints();

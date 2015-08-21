@@ -19,6 +19,9 @@ public class StopGame {
 		if(args.length >= 2) {
 			if(PlayerList.isGameRunning(args[1])) {
 				String[] players = PlayerList.getPlayersInGame(args[1]);
+				
+				RageScores.calculateWinner(args[1], players);
+				
 				if(players != null) {
 					int i = 0;
 					int imax = players.length;
@@ -31,7 +34,7 @@ public class StopGame {
 					}
 				}
 				GameBroadcast.broadcastToGame(args[1], ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + args[1] + ChatColor.DARK_GREEN + " has been stopped.");
-				RageScores.calculateWinner(args[1], players);
+
 				RageScores.removePointsForPlayers(players);
 				PlayerList.setGameNotRunning(args[1]);
 
@@ -48,6 +51,7 @@ public class StopGame {
 	public static void stopGame(String game) {
 		if(PlayerList.isGameRunning(game)) {
 			String[] players = PlayerList.getPlayersInGame(game);
+			RageScores.calculateWinner(game, players);
 			if(players != null) {
 				int i = 0;
 				int imax = players.length;
@@ -59,8 +63,8 @@ public class StopGame {
 					i++;
 				}
 			}
-			RageScores.calculateWinner(game, players);
 			RageScores.removePointsForPlayers(players);
+			
 			GameBroadcast.broadcastToGame(game, ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + game + ChatColor.DARK_GREEN + " has been stopped.");
 			PlayerList.setGameNotRunning(game);
 

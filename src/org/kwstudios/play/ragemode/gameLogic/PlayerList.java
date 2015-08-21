@@ -230,8 +230,11 @@ public class PlayerList {
 			if(list[i] != null) {
 				if (list[i].equals(player.getUniqueId().toString())) {
 //					TabGuiUpdater.removeTabForPlayer(player);
+					
 					TabAPI.removeTabGuiListOverlayForPlayer(player);
+					
 					RageScores.removePointsForPlayers(new String[] {player.getUniqueId().toString()});
+					
 					player.getInventory().clear();
 					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You left your current Game.");
 

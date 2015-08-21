@@ -16,6 +16,7 @@ public class TabGuiUpdater {
 	public static void setTabGui(List<String> playerUUIDs) {
 		for (String playerUUID : playerUUIDs) {
 			Player player = Bukkit.getPlayer(UUID.fromString(playerUUID));
+			TabAPI.defaultTab(player);
 			setTitles(player);
 			TabAPI.modifyTab(player);
 		}
@@ -23,6 +24,7 @@ public class TabGuiUpdater {
 
 	public static void setTabGui(String playerUUID) {
 		Player player = Bukkit.getPlayer(UUID.fromString(playerUUID));
+		TabAPI.defaultTab(player);
 		setTitles(player);
 		TabAPI.modifyTab(player);
 	}
@@ -69,7 +71,7 @@ public class TabGuiUpdater {
 	}
 	
 	public static void removeTabForPlayer(Player player){
-		TabAPI.defaultTab(player);
+		TabAPI.removeTab(player);
 	}
 
 	private static void setTitles(Player player) {

@@ -2,6 +2,8 @@ name: RageMode
 main: org.kwstudios.play.ragemode.loader.PluginLoader
 version: 0.1Alpha
 
+depend: [ProtocolLib]
+
 commands:
   rm:
     description: Main command.

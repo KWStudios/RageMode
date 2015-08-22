@@ -2,6 +2,7 @@ package org.kwstudios.play.ragemode.loader;
 
 import java.util.logging.Logger;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -11,6 +12,7 @@ import org.kwstudios.play.ragemode.commands.CommandParser;
 import org.kwstudios.play.ragemode.commands.StopGame;
 import org.kwstudios.play.ragemode.events.EventListener;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
+import org.kwstudios.play.ragemode.tabsGuiListOverlay.TabAPI;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
@@ -30,8 +32,7 @@ public class PluginLoader extends JavaPlugin{
 		
 		PluginLoader.instance = this;
 		
-		protocolManager = ProtocolLibrary.getProtocolManager();
-		
+		protocolManager = ProtocolLibrary.getProtocolManager();		
 		protocolManager.addPacketListener(
 				  new PacketAdapter(this, ListenerPriority.NORMAL, 
 				          PacketType.Play.Server.PLAYER_INFO) {
@@ -40,9 +41,14 @@ public class PluginLoader extends JavaPlugin{
 				    	if(PlayerList.isPlayerPlaying(event.getPlayer().getUniqueId().toString())) {
 				    		event.setCancelled(true);
 				        }
+				    	Bukkit.broadcastMessage(event.getPacket().getModifier().read(0).toString());
+				    	Bukkit.broadcastMessage(event.getPacket().getModifier().read(1).toString());
+//				    	Bukkit.broadcastMessage(event.getPacket().getModifier().read(2).toString());
+//				    	Bukkit.broadcastMessage(event.getPacket().getModifier().read(3).toString());
 				    }
 				  }
 		);
+		new TabAPI(protocolManager);
 		
 		PluginDescriptionFile pluginDescriptionFile = getDescription();
 		Logger logger = Logger.getLogger("Minecraft");

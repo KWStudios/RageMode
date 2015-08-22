@@ -1,0 +1,14 @@
+language: java
+jdk:
+  - oraclejdk8
+  - oraclejdk7
+  - openjdk6
+script: mvn clean test -U
+install: true
+notifications:
+  email:
+    recipients:
+      - "ybrin.development@gmail.com"
+      - "zimonzk@gmail.com"
+    on_success: change
+    on_failure: always

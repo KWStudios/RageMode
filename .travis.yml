@@ -3,7 +3,7 @@ jdk:
   - oraclejdk8
   - oraclejdk7
   - openjdk6
-script: mvn clean test -U
+script: mvn test
 install: true
 notifications:
   email:

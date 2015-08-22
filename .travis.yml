@@ -9,6 +9,6 @@ notifications:
   email:
     recipients:
       - "ybrin.development@gmail.com"
-      - "zimonzk@gmail.com"
+      - "simon.artner@gmail.com"
     on_success: change
     on_failure: always

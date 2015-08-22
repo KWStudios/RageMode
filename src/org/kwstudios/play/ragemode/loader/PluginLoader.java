@@ -1,5 +1,6 @@
 package org.kwstudios.play.ragemode.loader;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
@@ -13,6 +14,7 @@ import org.kwstudios.play.ragemode.commands.StopGame;
 import org.kwstudios.play.ragemode.events.EventListener;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
 import org.kwstudios.play.ragemode.tabsGuiListOverlay.TabAPI;
+import org.mcstats.Metrics;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
@@ -58,6 +60,13 @@ public class PluginLoader extends JavaPlugin{
 		//saveConfig();
 		new PlayerList(getConfig());
 		new EventListener(this, getConfig());
+		
+	    try {
+	        Metrics metrics = new Metrics(this);
+	        metrics.start();
+	    } catch (IOException e) {
+	        // Failed to submit the stats :-(
+	    }
 	}
 
 	@Override

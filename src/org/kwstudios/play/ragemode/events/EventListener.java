@@ -23,12 +23,14 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.kwstudios.play.ragemode.gameLogic.GameSpawnGetter;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
@@ -303,6 +305,20 @@ public class EventListener implements Listener {
 					thrower.getInventory().setItemInHand(null);
 				}
 			}
+		}
+	}
+	
+	@EventHandler
+	public void onInventoryInteractEvent(InventoryClickEvent event){
+		if(PlayerList.isPlayerPlaying(event.getWhoClicked().getUniqueId().toString())){
+			event.setCancelled(true);
+		}
+	}
+	
+	@EventHandler
+	public void onItemPickedUpEvent(PlayerPickupItemEvent event){
+		if(PlayerList.isPlayerPlaying(event.getPlayer().getUniqueId().toString())){
+			event.setCancelled(true);
 		}
 	}
 	

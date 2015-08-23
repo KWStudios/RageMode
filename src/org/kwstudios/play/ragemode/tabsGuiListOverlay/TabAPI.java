@@ -81,12 +81,12 @@ public class TabAPI {
 				new PlayerInfoData()
 				hhu.add(data);
 				*/
-				Bukkit.broadcastMessage("Removed: " + oP[i].getName());
+				/*Bukkit.broadcastMessage("Removed: " + oP[i].getName());
 				packet = new PacketPlayOutPlayerInfo(EnumPlayerInfoAction.REMOVE_PLAYER, ((CraftPlayer)oP[i]).getHandle());
 				
 				Bukkit.broadcastMessage("for Player: " + Bukkit.getPlayer(UUID.fromString(players.get(0))).getName());
 				((CraftPlayer)Bukkit.getPlayer(UUID.fromString(players.get(n)))).getHandle().playerConnection.sendPacket(packet);
-				i++;
+				i++;*/
 			}
 			n++;
 		}

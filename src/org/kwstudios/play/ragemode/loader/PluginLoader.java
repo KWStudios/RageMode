@@ -43,8 +43,8 @@ public class PluginLoader extends JavaPlugin{
 				    	if(PlayerList.isPlayerPlaying(event.getPlayer().getUniqueId().toString())) {
 				    		event.setCancelled(true);
 				        }
-				    	Bukkit.broadcastMessage(event.getPacket().getModifier().read(0).toString());
-				    	Bukkit.broadcastMessage(event.getPacket().getModifier().read(1).toString());
+//				    	Bukkit.broadcastMessage(event.getPacket().getModifier().read(0).toString());
+//				    	Bukkit.broadcastMessage(event.getPacket().getModifier().read(1).toString());
 //				    	Bukkit.broadcastMessage(event.getPacket().getModifier().read(2).toString());
 //				    	Bukkit.broadcastMessage(event.getPacket().getModifier().read(3).toString());
 				    }

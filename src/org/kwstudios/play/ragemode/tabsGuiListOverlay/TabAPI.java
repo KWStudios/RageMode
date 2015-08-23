@@ -74,7 +74,7 @@ public class TabAPI {
 		
 		int n = 0;
 		int nmax = players.size();
-		Bukkit.broadcastMessage("Starting removal: " + nmax + imax);
+//		Bukkit.broadcastMessage("Starting removal: " + nmax + imax);
 		while(n < nmax) {
 			while(i < imax) {/*			
 				data = new PlayerInfoData(new GameProfile(oP[i].getUniqueId(), ""), 2, NativeGamemode.CREATIVE, ChatSerializer.a("Something?"));
@@ -86,7 +86,8 @@ public class TabAPI {
 				
 				Bukkit.broadcastMessage("for Player: " + Bukkit.getPlayer(UUID.fromString(players.get(0))).getName());
 				((CraftPlayer)Bukkit.getPlayer(UUID.fromString(players.get(n)))).getHandle().playerConnection.sendPacket(packet);
-				i++;*/
+				*/
+				i++;
 			}
 			n++;
 		}

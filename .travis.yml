@@ -18,3 +18,4 @@ deploy:
   file: RageMode.jar
   on:
     repo: KWStudios/RageMode
+    tags: true

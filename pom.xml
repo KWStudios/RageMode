@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.kwstudios.play</groupId>
 	<artifactId>ragemode</artifactId>
-	<version>0.1Alpha</version>
+	<version>v0.1-alpha</version>
 	<name>RageMode</name>
 	<description>RageMode plugin for Minecraft</description>
 	<build>

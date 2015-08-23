@@ -1,6 +1,6 @@
 name: RageMode
 main: org.kwstudios.play.ragemode.loader.PluginLoader
-version: 0.1Alpha
+version: v0.1-alpha
 
 depend: [ProtocolLib]
 

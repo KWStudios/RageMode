@@ -14,7 +14,8 @@ deploy:
   provider: releases
   api_key:
     secure: MXvyvKNlEOhNV7um+lY1Np3aGmZlNvMXCsrRZBKkLs7EiSiinRWt5S4jjYwbXu/P+dkRK9/yV+Oth56knwVFZhgkNCOIIrKJR/rYYKAf1+wKq6VFOnQ973+mp/Gy0ZeOf19Ht4elJwrk+nfvBl41KURgRp6IyUratWq5jMYyBB4vOS6WAqdb5UAPU/wZIuiaw9hq8lKsa9NfmHv0Xxuw//vC6ICMwY9BSaTq2eFI7ZK9D4Q+4jeoPtDix/hV4NM9JuaoMp5/jOsWusFRFqtmS/e65G71uQPTplQQ2U8g6IY9ql6s+YiMz8CDMdOrLBa4JO3vvj35txcOHEtC7VNHKnrQVp10Bu9iaa5C4ftSXhrNOUs/RqeuY0qwMCPBVleqYpXPiAnl3Sb1EREU8EP001KtdyMdTZYKZzh5FYn1Y1DLpHRhww7ryDG//3uzRi6gVOuCxNlr4u97AL2lebKb0stKS6wErfo5tlUZfQn/I/azYximXgY02GMLImgV9YtrZeq7N9SUQX9Mu3n1h4Ux4Bu/+x4dV8oYyhAivNF7Ata23zm5VVuJKgzdPktJOkQEyNlgcZgJN5nhD8KVGrX1iuhNwwxeOfKyiLEfDmnvoeMaaf1UEAdZipnmD7pvX7J4Ybz4WmbiDU7kjjsaBA0Es1YIiaJynBreiBJUXtJmOtI=
-  file: "./"
+  file_glob: true
+  file: "${RELEASE_PKG_FILE}"
   skip_cleanup: true
   on:
     repo: KWStudios/RageMode

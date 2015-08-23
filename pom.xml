@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.kwstudios.play.ragemode</groupId>
-	<artifactId>RageMode</artifactId>
+	<groupId>org.kwstudios.play</groupId>
+	<artifactId>ragemode</artifactId>
 	<version>0.1Alpha</version>
 	<name>RageMode</name>
 	<description>RageMode plugin for Minecraft</description>
@@ -44,6 +44,17 @@
 				</executions>
 			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<directory>./</directory>
+				<includes>
+					<include>config.yml</include>
+					<include>LICENSE</include>
+					<include>plugin.yml</include>
+					<include>README.md</include>
+				</includes>
+			</resource>
+		</resources>
 	</build>
 	<url>http://mc.kwstudios.org/</url>
 	<repositories>

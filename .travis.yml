@@ -1,7 +1,7 @@
 language: java
 jdk:
 - oraclejdk7
-script: mvn test
+script: mvn deploy
 install: true
 notifications:
   email:
@@ -12,7 +12,6 @@ notifications:
     on_failure: always
 before_deploy:
   - ls
-  - tree
 deploy:
   provider: releases
   api_key:

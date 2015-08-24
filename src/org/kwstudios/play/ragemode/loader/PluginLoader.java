@@ -36,6 +36,7 @@ public class PluginLoader extends JavaPlugin{
 		
 		PluginLoader.instance = this;
 		
+//		TODO Make ProtocolLib a SoftDependence
 		protocolManager = ProtocolLibrary.getProtocolManager();		
 		protocolManager.addPacketListener(
 				  new PacketAdapter(this, ListenerPriority.NORMAL, 

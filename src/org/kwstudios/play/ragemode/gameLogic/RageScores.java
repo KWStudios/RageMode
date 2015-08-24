@@ -159,7 +159,7 @@ public class RageScores {
 		int imax = players.length;
 		while(i < imax) {
 			if(playerpoints.containsKey(players[i])) {
-				Bukkit.broadcastMessage(Bukkit.getPlayer(UUID.fromString(players[i])).getName() + " " + Integer.toString(i) + " " + playerpoints.get(players[i]).getPoints() + " " + Integer.toString(highestPoints));
+//				Bukkit.broadcastMessage(Bukkit.getPlayer(UUID.fromString(players[i])).getName() + " " + Integer.toString(i) + " " + playerpoints.get(players[i]).getPoints() + " " + Integer.toString(highestPoints));
 				if(playerpoints.get(players[i]).getPoints() > highestPoints) {
 					highest = players[i];
 					highestPoints = playerpoints.get(players[i]).getPoints();

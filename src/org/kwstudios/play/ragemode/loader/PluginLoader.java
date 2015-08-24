@@ -3,6 +3,8 @@ package org.kwstudios.play.ragemode.loader;
 import java.io.IOException;
 import java.util.logging.Logger;
 
+import net.minecraft.server.v1_8_R3.PacketPlayOutPlayerInfo;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -41,12 +43,13 @@ public class PluginLoader extends JavaPlugin{
 				    @Override
 				    public void onPacketSending(PacketEvent event) {
 				    	if(PlayerList.isPlayerPlaying(event.getPlayer().getUniqueId().toString())) {
-				    		event.setCancelled(true);
+				    		if(!TabAPI.allowedPackets.contains(event.getPacket().toString())) {
+				    			event.setCancelled(true);
+				    		}
+				    		else {
+				    			TabAPI.allowedPackets.remove(event.getPacket().toString());
+				    		}
 				        }
-//				    	Bukkit.broadcastMessage(event.getPacket().getModifier().read(0).toString());
-//				    	Bukkit.broadcastMessage(event.getPacket().getModifier().read(1).toString());
-//				    	Bukkit.broadcastMessage(event.getPacket().getModifier().read(2).toString());
-//				    	Bukkit.broadcastMessage(event.getPacket().getModifier().read(3).toString());
 				    }
 				  }
 		);

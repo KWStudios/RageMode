@@ -8,26 +8,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import net.minecraft.server.v1_8_R3.IChatBaseComponent;
 import net.minecraft.server.v1_8_R3.IChatBaseComponent.ChatSerializer;
 import net.minecraft.server.v1_8_R3.PacketPlayOutPlayerInfo.EnumPlayerInfoAction;
 import net.minecraft.server.v1_8_R3.WorldSettings.EnumGamemode;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.conversations.Conversation.ConversationState;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
-import org.kwstudios.play.ragemode.toolbox.TableList;
-
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolManager;
 import com.comphenix.protocol.events.PacketContainer;
-import com.comphenix.protocol.wrappers.EnumWrappers.NativeGameMode;
-import com.comphenix.protocol.wrappers.PlayerInfoData;
-import com.comphenix.protocol.wrappers.WrappedChatComponent;
-import com.comphenix.protocol.wrappers.WrappedGameProfile;
 import com.mojang.authlib.GameProfile;
 
 public class TabAPI {
@@ -178,6 +170,8 @@ public class TabAPI {
 			PacketContainer reset = protocolManager.createPacket(PacketType.Play.Server.PLAYER_INFO);
 			reset.getModifier().write(0, EnumPlayerInfoAction.REMOVE_PLAYER);
 			reset.getModifier().write(1, gameSetTab.get(PlayerList.getPlayersGame(player)));
+			
+			allowedPackets.add(reset.toString());
 			
 			try {
 				protocolManager.sendServerPacket(player, reset);

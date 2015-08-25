@@ -115,7 +115,6 @@ public class PlayerList {
 							player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You joined "
 									+ ChatColor.DARK_AQUA + game
 									+ ChatColor.WHITE + ".");
-							TabAPI.setTabGuiListOverLayForPlayers(Arrays.asList(new String[]{player.getUniqueId().toString()}));
 
 							if (getPlayersInGame(game).length == 2) {
 								new LobbyTimer(game, fileConfiguration);

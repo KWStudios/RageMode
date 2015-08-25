@@ -36,8 +36,9 @@ public class PluginLoader extends JavaPlugin {
 		super.onEnable();
 
 		PluginLoader.instance = this;
-
-		protocolManager = ProtocolLibrary.getProtocolManager();
+		
+//		TODO Make ProtocolLib a SoftDependence
+		protocolManager = ProtocolLibrary.getProtocolManager();		
 		protocolManager.addPacketListener(
 				new PacketAdapter(this, ListenerPriority.NORMAL, PacketType.Play.Server.PLAYER_INFO) {
 					@Override

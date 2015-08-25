@@ -14,6 +14,7 @@ import net.minecraft.server.v1_8_R3.WorldSettings.EnumGamemode;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.conversations.Conversation.ConversationState;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 import com.comphenix.protocol.PacketType;
@@ -67,7 +68,7 @@ public class TabAPI {
 		int d = 0;
 		int dmax = oP2.length;
 		while(d < dmax) {
-			datatoRemove = ff.new PlayerInfoData(new GameProfile(oP2[d].getUniqueId(), oP2[d].getName()), 1, EnumGamemode.NOT_SET, ChatSerializer.a(oP2[d].getName()));/*(new WrappedGameProfile(oP2[d].getUniqueId(), oP2[d].getName()), 420, NativeGameMode.NOT_SET, WrappedChatComponent.fromText(oP2[d].getName())));*/
+			datatoRemove = ff.new PlayerInfoData(((CraftPlayer) oP2[d]).getHandle().getProfile(), 1, EnumGamemode.NOT_SET, ChatSerializer.a(oP2[d].getName()));/*(new WrappedGameProfile(oP2[d].getUniqueId(), oP2[d].getName()), 420, NativeGameMode.NOT_SET, WrappedChatComponent.fromText(oP2[d].getName())));*/
 			toRemove.add(datatoRemove);
 			
 			d++;
@@ -135,7 +136,7 @@ public class TabAPI {
 		int d = 0;
 		int dmax = oP2.length;
 		while(d < dmax) {
-			datatoRestore = ff.new PlayerInfoData(new GameProfile(oP2[d].getUniqueId(), oP2[d].getName()), 1, convertGameMode(oP2[d].getGameMode()), ChatSerializer.a(oP2[d].getName()));/*(new WrappedGameProfile(oP2[d].getUniqueId(), oP2[d].getName()), 420, NativeGameMode.NOT_SET, WrappedChatComponent.fromText(oP2[d].getName())));*/
+			datatoRestore = ff.new PlayerInfoData(((CraftPlayer) oP2[d]).getHandle().getProfile(), 1, convertGameMode(oP2[d].getGameMode()), ChatSerializer.a(oP2[d].getName()));/*(new WrappedGameProfile(oP2[d].getUniqueId(), oP2[d].getName()), 420, NativeGameMode.NOT_SET, WrappedChatComponent.fromText(oP2[d].getName())));*/
 			toRestore.add(datatoRestore);
 			
 			d++;

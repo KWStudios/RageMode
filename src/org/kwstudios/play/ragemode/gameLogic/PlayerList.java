@@ -115,6 +115,7 @@ public class PlayerList {
 							player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You joined "
 									+ ChatColor.DARK_AQUA + game
 									+ ChatColor.WHITE + ".");
+							TabAPI.setTabGuiListOverLayForPlayers(Arrays.asList(new String[]{player.getUniqueId().toString()}));
 
 							if (getPlayersInGame(game).length == 2) {
 								new LobbyTimer(game, fileConfiguration);
@@ -134,7 +135,8 @@ public class PlayerList {
 								fileConfiguration) - 1);
 						kickposition = kickposition + 1 + i;
 						n = 0;
-						playerToKick = Bukkit.getPlayer(UUID.fromString(list[kickposition]));	
+						playerToKick = Bukkit.getPlayer(UUID
+								.fromString(list[kickposition]));	
 						isVIP = playerToKick.hasPermission("rm.vip");
 					} while (isVIP);
 						

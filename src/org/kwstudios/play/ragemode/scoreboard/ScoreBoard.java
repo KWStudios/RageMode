@@ -83,7 +83,7 @@ public class ScoreBoard {
 	 * 
 	 */
 	public void setScoreBoard() {
-		for (Player player : player) {
+		for (Player player : this.player) {
 			player.setScoreboard(scoreboard);
 		}
 	}
@@ -103,7 +103,7 @@ public class ScoreBoard {
 	 * 
 	 */
 	public void removeScoreBoard() {
-		for (Player player : player) {
+		for (Player player : this.player) {
 			player.setScoreboard(scoreboardManager.getNewScoreboard());
 		}
 	}

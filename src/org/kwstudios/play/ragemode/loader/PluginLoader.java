@@ -3,9 +3,6 @@ package org.kwstudios.play.ragemode.loader;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-import net.minecraft.server.v1_8_R3.PacketPlayOutPlayerInfo;
-
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -38,12 +35,12 @@ public class PluginLoader extends JavaPlugin {
 		PluginLoader.instance = this;
 		
 //		TODO Make ProtocolLib a SoftDependence
-		protocolManager = ProtocolLibrary.getProtocolManager();		
+/*		protocolManager = ProtocolLibrary.getProtocolManager();		
 		protocolManager.addPacketListener(
 				new PacketAdapter(this, ListenerPriority.NORMAL, PacketType.Play.Server.PLAYER_INFO) {
 					@Override
 					public void onPacketSending(PacketEvent event) {
-						if (PlayerList.isPlayerPlaying(event.getPlayer().getUniqueId().toString())) {
+						if (PlayerList.isPlayerPlaying(event.getPlayer().getUniqueId().toString()) && PlayerList.isGameRunning(PlayerList.getPlayersGame(event.getPlayer()))) {
 							if (!TabAPI.allowedPackets.contains(event.getPacket().toString())) {
 								event.setCancelled(true);
 							} else {
@@ -52,7 +49,7 @@ public class PluginLoader extends JavaPlugin {
 						}
 					}
 				});
-		new TabAPI(protocolManager);
+		new TabAPI(protocolManager);*/
 
 		PluginDescriptionFile pluginDescriptionFile = getDescription();
 		Logger logger = Logger.getLogger("Minecraft");

@@ -99,9 +99,7 @@ public class EventListener implements Listener {
 									explosionVictims.put(near.getUniqueId(), shooter.getUniqueId());
 								}								
 							}
-							explosionVictims.put(near.getUniqueId(), shooter.getUniqueId());
-//							Bukkit.broadcastMessage("Victim:" + near.getName() + " Shooter:" + shooter.getName());	Just a debug Broadcast
-//							near.damage(0, shooter);							
+							explosionVictims.put(near.getUniqueId(), shooter.getUniqueId());						
 						}
 						i++;
 					}
@@ -131,18 +129,6 @@ public class EventListener implements Listener {
 		}
 		//TODO add Constant for "RageKnife" for unexpected error preventing
 	}
-	
-	/* NOT WORKING
-	@EventHandler(priority = EventPriority.LOWEST)
-	public void onPlayerTeleport(PlayerTeleportEvent event){
-		Player player = event.getPlayer();
-		if(PlayerList.isPlayerPlaying(player.getUniqueId().toString())){
-			player.getInventory().clear();
-			player.getInventory().setItem(0, RageBow.getRageBow());		//
-			player.getInventory().setItem(1, RageKnife.getRageKnife());	//	give him a new set of items
-			player.getInventory().setItem(9, RageArrow.getRageArrow());	//
-		}
-	}*/
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onItemSpawn(PlayerDropItemEvent event){
@@ -321,12 +307,4 @@ public class EventListener implements Listener {
 			event.setCancelled(true);
 		}
 	}
-	
-	
-
-	// @EventHandler
-	// public void onPlayerDeath(PlayerDeathEvent event) {
-	// event.getEntity().getLastDamageCause().
-	//
-	// }
 }

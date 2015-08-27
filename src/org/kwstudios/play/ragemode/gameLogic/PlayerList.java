@@ -1,7 +1,6 @@
 package org.kwstudios.play.ragemode.gameLogic;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -80,8 +79,7 @@ public class PlayerList {
 		return players;
 	}
 
-	public static boolean addPlayer(Player player, String game,
-			FileConfiguration fileConfiguration) {
+	public static boolean addPlayer(Player player, String game, FileConfiguration fileConfiguration) {
 		if (isGameRunning(game)) {
 			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "This Game is already running.");
 			return false;
@@ -232,7 +230,7 @@ public class PlayerList {
 				if (list[i].equals(player.getUniqueId().toString())) {
 //					TabGuiUpdater.removeTabForPlayer(player);
 					
-					TabAPI.removeTabGuiListOverlayForPlayer(player);
+//					TabAPI.removeTabGuiListOverlayForPlayer(player);
 					
 					RageScores.removePointsForPlayers(new String[] {player.getUniqueId().toString()});
 					

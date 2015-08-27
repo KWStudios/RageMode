@@ -34,7 +34,7 @@ public class GameLoader {
 		setInventories();
 		List<String> players = Arrays.asList(PlayerList.getPlayersInGame(gameName));
 		// TabGuiUpdater.setTabGui(players);
-		TabAPI.setTabGuiListOverLayForPlayers(players);
+//		TabAPI.setTabGuiListOverLayForPlayers(players);
 		ScoreBoard gameBoard = new ScoreBoard(players, true);
 		gameBoard.setTitle(ConstantHolder.SCOREBOARD_DEFAULT_TITLE);
 		String kdLine = ChatColor.YELLOW + "0 / 0 " + ConstantHolder.SCOREBOARD_DEFAULT_KD;

@@ -22,7 +22,7 @@ import com.comphenix.protocol.ProtocolManager;
 import com.comphenix.protocol.events.PacketContainer;
 import com.mojang.authlib.GameProfile;
 
-public class TabAPI {
+public class TabAPI {/*
 	private static ProtocolManager protocolManager;
 	
 	public static List<String> allowedPackets = new ArrayList<String>();
@@ -68,7 +68,7 @@ public class TabAPI {
 		int dmax = oP2.length;
 		while(d < dmax) {
 			datatoRemove = ff.new PlayerInfoData(((CraftPlayer) oP2[d]).getHandle().getProfile(), 1, EnumGamemode.NOT_SET, ChatSerializer.a(oP2[d].getName()));/*(new WrappedGameProfile(oP2[d].getUniqueId(), oP2[d].getName()), 420, NativeGameMode.NOT_SET, WrappedChatComponent.fromText(oP2[d].getName())));*/
-			toRemove.add(datatoRemove);
+		/*	toRemove.add(datatoRemove);
 			
 			d++;
 		}
@@ -112,7 +112,7 @@ public class TabAPI {
 			}
 			n++;
 		}*/
-		
+		/*
 		PacketContainer add = protocolManager.createPacket(PacketType.Play.Server.PLAYER_INFO);
 		add.getModifier().write(0, EnumPlayerInfoAction.ADD_PLAYER);
 		
@@ -158,6 +158,8 @@ public class TabAPI {
 			
 			h++;
 		}
+		PacketContainer join = protocolManager.createPacket(PacketType.Play.Server.LOGIN);
+		
 	}
 	
 	public static void updateTabGuiListOverlayForGame(String game) {
@@ -197,7 +199,7 @@ public class TabAPI {
 		int dmax = oP2.length;
 		while(d < dmax) {
 			datatoRestore = ff.new PlayerInfoData(((CraftPlayer) oP2[d]).getHandle().getProfile(), 1, convertGameMode(oP2[d].getGameMode()), ChatSerializer.a(oP2[d].getName()));/*(new WrappedGameProfile(oP2[d].getUniqueId(), oP2[d].getName()), 420, NativeGameMode.NOT_SET, WrappedChatComponent.fromText(oP2[d].getName())));*/
-			toRestore.add(datatoRestore);
+	/*		toRestore.add(datatoRestore);
 			
 			d++;
 		}
@@ -209,5 +211,5 @@ public class TabAPI {
 			} catch (InvocationTargetException e) {
 				e.printStackTrace();
 			}
-	}
+	}*/
 }

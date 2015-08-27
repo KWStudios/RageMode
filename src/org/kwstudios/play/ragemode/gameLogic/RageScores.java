@@ -100,7 +100,7 @@ public class RageScores {
 					ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You killed yourself you silly idiot.");
 		}
 		// TabGuiUpdater.updateTabGui(PlayerList.getPlayersGame(killer));
-		TabAPI.updateTabGuiListOverlayForGame(PlayerList.getPlayersGame(killer));
+//		TabAPI.updateTabGuiListOverlayForGame(PlayerList.getPlayersGame(killer));
 	}
 
 	private static void updateScoreBoard(Player player, ScoreBoard scoreBoard) {

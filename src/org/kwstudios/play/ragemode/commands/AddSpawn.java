@@ -1,8 +1,5 @@
 package org.kwstudios.play.ragemode.commands;
 
-import java.util.Set;
-import java.util.logging.Logger;
-
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;

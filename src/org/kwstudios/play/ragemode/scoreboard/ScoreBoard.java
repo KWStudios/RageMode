@@ -1,6 +1,7 @@
 package org.kwstudios.play.ragemode.scoreboard;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,10 +15,10 @@ import org.bukkit.scoreboard.ScoreboardManager;
 
 public class ScoreBoard {
 
+	public static HashMap<String, ScoreBoard> allScoreBoards = new HashMap<String, ScoreBoard>();
 	private List<Player> player = new ArrayList<Player>();
 	private ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
-	private Scoreboard scoreboard;
-	private Objective objective;
+	private HashMap<Player, ScoreBoardHolder> scoreboards = new HashMap<Player, ScoreBoardHolder>();
 
 	/**
 	 * Creates a new instance of ScoreBoard, which manages the ScoreBoards for
@@ -28,10 +29,13 @@ public class ScoreBoard {
 	 */
 	public ScoreBoard(List<Player> player) {
 		this.player = player;
-		scoreboard = scoreboardManager.getNewScoreboard();
-		scoreboard.clearSlot(DisplaySlot.SIDEBAR);
-		objective = scoreboard.registerNewObjective("ragescores", "dummy");
-		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+		for (Player loopPlayer : player) {
+			Scoreboard scoreboard = scoreboardManager.getNewScoreboard();
+			scoreboard.clearSlot(DisplaySlot.SIDEBAR);
+			Objective objective = scoreboard.registerNewObjective("ragescores", "dummy");
+			objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+			scoreboards.put(loopPlayer, new ScoreBoardHolder(loopPlayer, scoreboard, objective));
+		}
 	}
 
 	/**
@@ -48,10 +52,13 @@ public class ScoreBoard {
 		for (String player : playerString) {
 			this.player.add(Bukkit.getPlayer(UUID.fromString(player)));
 		}
-		scoreboard = scoreboardManager.getNewScoreboard();
-		scoreboard.clearSlot(DisplaySlot.SIDEBAR);
-		objective = scoreboard.registerNewObjective("ragescores", "dummy");
-		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+		for (Player loopPlayer : player) {
+			Scoreboard scoreboard = scoreboardManager.getNewScoreboard();
+			scoreboard.clearSlot(DisplaySlot.SIDEBAR);
+			Objective objective = scoreboard.registerNewObjective("ragescores", "dummy");
+			objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+			scoreboards.put(loopPlayer, new ScoreBoardHolder(loopPlayer, scoreboard, objective));
+		}
 	}
 
 	/**
@@ -61,7 +68,9 @@ public class ScoreBoard {
 	 *            The String, the title should be set to.
 	 */
 	public void setTitle(String title) {
-		objective.setDisplayName(title);
+		for (Player player : this.player) {
+			scoreboards.get(player).getObjective().setDisplayName(title);
+		}
 	}
 
 	/**
@@ -74,7 +83,28 @@ public class ScoreBoard {
 	 *            The integer, the score should be set to.
 	 */
 	public void setLine(String line, int dummyScore) {
-		Score score = objective.getScore(line);
+		for (Player player : this.player) {
+			Score score = scoreboards.get(player).getObjective().getScore(line);
+			score.setScore(dummyScore);
+		}
+	}
+
+	/**
+	 * Updates one score-line with the given String as the name and the Integer
+	 * as a score which should be displayed next to the name.
+	 * 
+	 * @param player
+	 *            The Player for which the Line should be set.
+	 * @param oldLine
+	 *            The old score-name which should be updated.
+	 * @param line
+	 *            The name of the new score.
+	 * @param dummyScore
+	 *            The integer, the score should be set to.
+	 */
+	public void updateLine(Player player, String oldLine, String line, int dummyScore) {
+		scoreboards.get(player).getScoreboard().resetScores(oldLine);
+		Score score = scoreboards.get(player).getObjective().getScore(line);
 		score.setScore(dummyScore);
 	}
 
@@ -84,7 +114,7 @@ public class ScoreBoard {
 	 */
 	public void setScoreBoard() {
 		for (Player player : this.player) {
-			player.setScoreboard(scoreboard);
+			player.setScoreboard(scoreboards.get(player).getScoreboard());
 		}
 	}
 
@@ -95,7 +125,7 @@ public class ScoreBoard {
 	 *            The Player instance for which the ScoreBoard should be set.
 	 */
 	public void setScoreBoard(Player player) {
-		player.setScoreboard(scoreboard);
+		player.setScoreboard(scoreboards.get(player).getScoreboard());
 	}
 
 	/**
@@ -117,6 +147,45 @@ public class ScoreBoard {
 	 */
 	public void removeScoreBoard(Player player) {
 		player.setScoreboard(scoreboardManager.getNewScoreboard());
+	}
+
+	/**
+	 * Adds this instance to the global ScoreBoards list allScoreBoards. This
+	 * can be accessed with the getScoreBoard(String gameName) method.
+	 * 
+	 * @param gameName
+	 *            the unique game-name for which the ScoreBoards element should
+	 *            be saved for.
+	 * 
+	 * @return Whether the ScoreBoard was stored successfully or not.
+	 */
+	public boolean addToScoreBoards(String gameName, boolean forceReplace) {
+		if (!allScoreBoards.containsKey(gameName)) {
+			allScoreBoards.put(gameName, this);
+			return true;
+		} else if (forceReplace) {
+			allScoreBoards.remove(gameName);
+			allScoreBoards.put(gameName, this);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns the ScoreBoard element which was saved for the unique gameName
+	 * String with the addToScoreBoards method.
+	 * 
+	 * @param gameName
+	 *            The unique String key for which the ScoreBoard was saved.
+	 * @return The ScoreBoard element which was saved for the given String.
+	 */
+	public ScoreBoard getScoreBoard(String gameName) {
+		if (allScoreBoards.containsKey(gameName)) {
+			return allScoreBoards.get(gameName);
+		} else {
+			return null;
+		}
 	}
 
 }

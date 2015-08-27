@@ -17,5 +17,9 @@ public class ConstantHolder {
 	public static final int POINTS_FOR_KNIFE_KILL = 15;
 	
 	//TODO dynamic points getter from config file (with default values)
+	
+	public static final String SCOREBOARD_DEFAULT_TITLE = ChatColor.GOLD + "RageMode" + ChatColor.RESET;
+	public static final String SCOREBOARD_DEFAULT_POINTS = ChatColor.GREEN + "Points" + ChatColor.RESET;
+	public static final String SCOREBOARD_DEFAULT_KD = ChatColor.GREEN + "K/D" + ChatColor.RESET;
 
 }

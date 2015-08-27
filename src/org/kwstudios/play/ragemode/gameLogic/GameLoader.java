@@ -35,9 +35,13 @@ public class GameLoader {
 //		TabGuiUpdater.setTabGui(players);
 		TabAPI.setTabGuiListOverLayForPlayers(players);
 		ScoreBoard gameBoard = new ScoreBoard(players, true);
+		gameBoard.setTitle(ConstantHolder.SCOREBOARD_DEFAULT_TITLE);
+		gameBoard.setLine("0 / 0 " + ConstantHolder.SCOREBOARD_DEFAULT_KD, 0);
+		gameBoard.setLine("0 " + ConstantHolder.SCOREBOARD_DEFAULT_POINTS, 1);
+		gameBoard.setScoreBoard();
 		new GameTimer(this.gameName, this.fileConfiguration);
 	}
-	
+
 	private void checkTeleport(){
 		GameSpawnGetter gameSpawnGetter = new GameSpawnGetter(gameName, fileConfiguration);
 		if (gameSpawnGetter.isGameReady()) {
@@ -63,7 +67,7 @@ public class GameLoader {
 			player.teleport(location);
 		}
 	}
-	
+
 	private void setInventories(){
 		String[] players = PlayerList.getPlayersInGame(gameName);
 		for (String playerUUID : players) {

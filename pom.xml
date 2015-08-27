@@ -90,5 +90,12 @@
 			<version>R8-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.tabapi</groupId>
+			<artifactId>tabapi</artifactId>
+			<version>0.9.2</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/TabAPI_1_8_R3-8.jar</systemPath>
+		</dependency>
 	</dependencies>
 </project>

@@ -26,7 +26,7 @@ import com.comphenix.protocol.events.PacketEvent;
 public class PluginLoader extends JavaPlugin {
 
 	private static PluginLoader instance = null;
-	private ProtocolManager protocolManager;
+//	private ProtocolManager protocolManager;
 
 	@Override
 	public void onEnable() {

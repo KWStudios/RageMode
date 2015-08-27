@@ -16,6 +16,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.PluginLoader;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolManager;
@@ -212,4 +213,20 @@ public class TabAPI {/*
 				e.printStackTrace();
 			}
 	}*/
+	public static void setTab(List<String> playerList, String text, int x, int y) {
+		int i = 0;
+		int imax = playerList.size();
+		
+		while(i < imax) {
+			org.mcsg.double0negative.tabapi.TabAPI.setPriority(org.kwstudios.play.ragemode.loader.PluginLoader.getInstance(), Bukkit.getPlayer(UUID.fromString(playerList.get(i))), 0);
+			
+			org.mcsg.double0negative.tabapi.TabAPI.setTabString(org.kwstudios.play.ragemode.loader.PluginLoader.getInstance(), Bukkit.getPlayer(UUID.fromString(playerList.get(i))), x, y, text);
+			
+			org.mcsg.double0negative.tabapi.TabAPI.clearTab(Bukkit.getPlayer(UUID.fromString(playerList.get(i))));
+			
+			org.mcsg.double0negative.tabapi.TabAPI.updatePlayer(Bukkit.getPlayer(UUID.fromString(playerList.get(i))));
+			
+			i++;
+		}
+	}
 }

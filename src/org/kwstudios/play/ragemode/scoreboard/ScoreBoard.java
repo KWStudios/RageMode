@@ -173,12 +173,23 @@ public class ScoreBoard {
 	}
 
 	/**
+	 * Returns the HashMap with all the ScoreBoardHolder elements for each Player within this ScoreBoard.
+	 * @return The ScoreBoardHolder HashMap.
+	 * 
+	 */
+	public HashMap<Player, ScoreBoardHolder> getScoreboards() {
+		return scoreboards;
+	}
+
+	/**
+	 * @deprecated
 	 * Returns the ScoreBoard element which was saved for the unique gameName
 	 * String with the addToScoreBoards method.
 	 * 
 	 * @param gameName
 	 *            The unique String key for which the ScoreBoard was saved.
 	 * @return The ScoreBoard element which was saved for the given String.
+	 * 
 	 */
 	public ScoreBoard getScoreBoard(String gameName) {
 		if (allScoreBoards.containsKey(gameName)) {

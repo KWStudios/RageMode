@@ -6,6 +6,8 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.kwstudios.play.ragemode.scoreboard.ScoreBoard;
+import org.kwstudios.play.ragemode.scoreboard.ScoreBoardHolder;
 import org.kwstudios.play.ragemode.tabsGuiListOverlay.TabAPI;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 
@@ -90,12 +92,32 @@ public class RageScores {
 			default:
 				break;
 			}
+			ScoreBoard board = ScoreBoard.allScoreBoards.get(PlayerList.getPlayersGame(killer));
+			updateScoreBoard(killer, board);
+			updateScoreBoard(victim, board);
 		} else {
 			killer.sendMessage(
 					ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You killed yourself you silly idiot.");
 		}
-//		TabGuiUpdater.updateTabGui(PlayerList.getPlayersGame(killer));
+		// TabGuiUpdater.updateTabGui(PlayerList.getPlayersGame(killer));
 		TabAPI.updateTabGuiListOverlayForGame(PlayerList.getPlayersGame(killer));
+	}
+
+	private static void updateScoreBoard(Player player, ScoreBoard scoreBoard) {
+		PlayerPoints points = playerpoints.get(player.getUniqueId().toString());
+		ScoreBoardHolder holder = scoreBoard.getScoreboards().get(player);
+
+		String oldKD = holder.getOldKdLine();
+		String newKD = ChatColor.YELLOW + Integer.toString(points.getKills()) + " / "
+				+ Integer.toString(points.getDeaths()) + " " + ConstantHolder.SCOREBOARD_DEFAULT_KD;
+		holder.setOldKdLine(newKD);
+		scoreBoard.updateLine(player, oldKD, newKD, 0);
+
+		String oldPoints = holder.getOldPointsLine();
+		String newPoints = ChatColor.YELLOW + Integer.toString(points.getPoints()) + " "
+				+ ConstantHolder.SCOREBOARD_DEFAULT_POINTS;
+		holder.setOldPointsLine(newPoints);
+		scoreBoard.updateLine(player, oldPoints, newPoints, 1);
 	}
 
 	public static void removePointsForPlayers(String[] playerUUIDs) {
@@ -151,29 +173,36 @@ public class RageScores {
 			return points;
 		}
 	}
-	
+
 	public static void calculateWinner(String game, String[] players) {
 		String highest = UUID.randomUUID().toString();
 		int highestPoints = -200000000;
 		int i = 0;
 		int imax = players.length;
-		while(i < imax) {
-			if(playerpoints.containsKey(players[i])) {
-//				Bukkit.broadcastMessage(Bukkit.getPlayer(UUID.fromString(players[i])).getName() + " " + Integer.toString(i) + " " + playerpoints.get(players[i]).getPoints() + " " + Integer.toString(highestPoints));
-				if(playerpoints.get(players[i]).getPoints() > highestPoints) {
+		while (i < imax) {
+			if (playerpoints.containsKey(players[i])) {
+				// Bukkit.broadcastMessage(Bukkit.getPlayer(UUID.fromString(players[i])).getName()
+				// + " " + Integer.toString(i) + " " +
+				// playerpoints.get(players[i]).getPoints() + " " +
+				// Integer.toString(highestPoints));
+				if (playerpoints.get(players[i]).getPoints() > highestPoints) {
 					highest = players[i];
 					highestPoints = playerpoints.get(players[i]).getPoints();
-				}				
+				}
 			}
 			i++;
 		}
 		i = 0;
-		while(i < imax) {
-			if(players[i].equals(highest)) {
-				Bukkit.getPlayer(UUID.fromString(highest)).sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.LIGHT_PURPLE + "You won the game " + ChatColor.GOLD + game + ChatColor.LIGHT_PURPLE + ".");
-			}
-			else {
-				Bukkit.getPlayer(UUID.fromString(players[i])).sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_GREEN + Bukkit.getPlayer(UUID.fromString(highest)).getName() + ChatColor.LIGHT_PURPLE + " won the game " + ChatColor.GOLD + game + ChatColor.LIGHT_PURPLE + ".");
+		while (i < imax) {
+			if (players[i].equals(highest)) {
+				Bukkit.getPlayer(UUID.fromString(highest))
+						.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.LIGHT_PURPLE + "You won the game "
+								+ ChatColor.GOLD + game + ChatColor.LIGHT_PURPLE + ".");
+			} else {
+				Bukkit.getPlayer(UUID.fromString(players[i]))
+						.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_GREEN
+								+ Bukkit.getPlayer(UUID.fromString(highest)).getName() + ChatColor.LIGHT_PURPLE
+								+ " won the game " + ChatColor.GOLD + game + ChatColor.LIGHT_PURPLE + ".");
 			}
 			i++;
 		}

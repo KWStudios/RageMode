@@ -8,6 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
 import org.kwstudios.play.ragemode.gameLogic.RageScores;
+import org.kwstudios.play.ragemode.scoreboard.ScoreBoard;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 import org.kwstudios.play.ragemode.toolbox.GameBroadcast;
 import org.kwstudios.play.ragemode.toolbox.GetGames;
@@ -21,6 +22,8 @@ public class StopGame {
 				String[] players = PlayerList.getPlayersInGame(args[1]);
 				
 				RageScores.calculateWinner(args[1], players);
+				
+				ScoreBoard.allScoreBoards.get(args[1]).removeScoreBoard();
 				
 				if(players != null) {
 					int i = 0;
@@ -52,6 +55,7 @@ public class StopGame {
 		if(PlayerList.isGameRunning(game)) {
 			String[] players = PlayerList.getPlayersInGame(game);
 			RageScores.calculateWinner(game, players);
+			ScoreBoard.allScoreBoards.get(game).removeScoreBoard();
 			if(players != null) {
 				int i = 0;
 				int imax = players.length;
@@ -72,7 +76,7 @@ public class StopGame {
 	}
 	
 	public static void stopAllGames(FileConfiguration fileConfiguration, Logger logger) {
-		logger.info("RageMode is searching for games to stop ...");
+		logger.info("RageMode is searching for games to stop...");
 		
 		String[] games = GetGames.getGameNames(fileConfiguration);
 		
@@ -82,9 +86,12 @@ public class StopGame {
 		while(i < imax) {
 			if(PlayerList.isGameRunning(games[i])) {
 				
-				logger.info("stopping " + games[i] + " ...");
+				logger.info("Stopping " + games[i] + " ...");
+				
+				ScoreBoard.allScoreBoards.get(games[i]).removeScoreBoard();
 				
 				String[] players = PlayerList.getPlayersInGame(games[i]);
+				RageScores.calculateWinner(games[i], players);
 				if(players != null) {
 					int n = 0;
 					int nmax = players.length;
@@ -102,6 +109,6 @@ public class StopGame {
 			}
 		i++;
 		}
-		logger.info("Ragemode: all games stopped!");
+		logger.info("Ragemode: All games stopped!");
 	}
 }

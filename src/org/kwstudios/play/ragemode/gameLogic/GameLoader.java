@@ -15,6 +15,7 @@ import org.kwstudios.play.ragemode.items.RageArrow;
 import org.kwstudios.play.ragemode.items.RageBow;
 import org.kwstudios.play.ragemode.items.RageKnife;
 import org.kwstudios.play.ragemode.scoreboard.ScoreBoard;
+import org.kwstudios.play.ragemode.scoreboard.ScoreBoardHolder;
 import org.kwstudios.play.ragemode.tabsGuiListOverlay.TabAPI;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 import org.kwstudios.play.ragemode.toolbox.GameBroadcast;
@@ -32,17 +33,25 @@ public class GameLoader {
 		checkTeleport();
 		setInventories();
 		List<String> players = Arrays.asList(PlayerList.getPlayersInGame(gameName));
-//		TabGuiUpdater.setTabGui(players);
+		// TabGuiUpdater.setTabGui(players);
 		TabAPI.setTabGuiListOverLayForPlayers(players);
 		ScoreBoard gameBoard = new ScoreBoard(players, true);
 		gameBoard.setTitle(ConstantHolder.SCOREBOARD_DEFAULT_TITLE);
-		gameBoard.setLine("0 / 0 " + ConstantHolder.SCOREBOARD_DEFAULT_KD, 0);
-		gameBoard.setLine("0 " + ConstantHolder.SCOREBOARD_DEFAULT_POINTS, 1);
+		String kdLine = ChatColor.YELLOW + "0 / 0 " + ConstantHolder.SCOREBOARD_DEFAULT_KD;
+		gameBoard.setLine(kdLine, 0);
+		String pointsLine = ChatColor.YELLOW + "0 " + ConstantHolder.SCOREBOARD_DEFAULT_POINTS;
+		gameBoard.setLine(pointsLine, 1);
 		gameBoard.setScoreBoard();
+		gameBoard.addToScoreBoards(gameName, true);
+		for (String player : players) {
+			ScoreBoardHolder holder = gameBoard.getScoreboards().get(Bukkit.getPlayer(UUID.fromString(player)));
+			holder.setOldKdLine(kdLine);
+			holder.setOldPointsLine(pointsLine);
+		}
 		new GameTimer(this.gameName, this.fileConfiguration);
 	}
 
-	private void checkTeleport(){
+	private void checkTeleport() {
 		GameSpawnGetter gameSpawnGetter = new GameSpawnGetter(gameName, fileConfiguration);
 		if (gameSpawnGetter.isGameReady()) {
 			gameSpawns = gameSpawnGetter.getSpawnLocations();
@@ -52,7 +61,7 @@ public class GameLoader {
 					+ "The game is not set up correctly. Please contact an Admin.";
 			GameBroadcast.broadcastToGame(gameName, message);
 			String[] players = PlayerList.getPlayersInGame(gameName);
-			for(String player : players){
+			for (String player : players) {
 				Player thisPlayer = Bukkit.getPlayer(UUID.fromString(player));
 				PlayerList.removePlayer(thisPlayer);
 			}
@@ -68,7 +77,7 @@ public class GameLoader {
 		}
 	}
 
-	private void setInventories(){
+	private void setInventories() {
 		String[] players = PlayerList.getPlayersInGame(gameName);
 		for (String playerUUID : players) {
 			Player player = Bukkit.getPlayer(UUID.fromString(playerUUID));
@@ -76,7 +85,8 @@ public class GameLoader {
 			player.getInventory().setItem(1, RageKnife.getRageKnife());
 			player.getInventory().setItem(2, CombatAxe.getCombatAxe());
 			player.getInventory().setItem(9, RageArrow.getRageArrow());
-			//see positions here: http://redditpublic.com/images/b/b2/Items_slot_number.png
+			// see positions here:
+			// http://redditpublic.com/images/b/b2/Items_slot_number.png
 		}
 	}
 

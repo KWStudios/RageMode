@@ -71,7 +71,7 @@
 		<dependency>
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot</artifactId>
-			<version>1.8.8-R0.1-20150830.210027-1</version>
+			<version>1.8.8-R0.1-20150830.210929-1</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>

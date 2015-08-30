@@ -60,7 +60,7 @@
 	<repositories>
 		<repository>
 			<id>kwstudios-repo</id>
-			<url>http://45.55.135.116:8081/artifactory/libs-snapshot</url>
+			<url>http://45.55.135.116:8081/artifactory/libs-snapshot-local/</url>
 		</repository>
 		<repository>
 			<id>mcstats-repo</id>
@@ -71,7 +71,7 @@
 		<dependency>
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot</artifactId>
-			<version>1.8.8-R0.1-20150830.203257-1</version>
+			<version>1.8.8-R0.1-20150830.210027-1</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>

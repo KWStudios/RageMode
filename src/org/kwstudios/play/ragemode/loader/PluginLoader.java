@@ -16,12 +16,12 @@ import org.kwstudios.play.ragemode.tabsGuiListOverlay.TabAPI;
 import org.kwstudios.play.ragemode.updater.Updater;
 import org.mcstats.Metrics;
 
-import com.comphenix.protocol.PacketType;
+/*import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import com.comphenix.protocol.events.ListenerPriority;
 import com.comphenix.protocol.events.PacketAdapter;
-import com.comphenix.protocol.events.PacketEvent;
+import com.comphenix.protocol.events.PacketEvent;*/
 
 public class PluginLoader extends JavaPlugin {
 

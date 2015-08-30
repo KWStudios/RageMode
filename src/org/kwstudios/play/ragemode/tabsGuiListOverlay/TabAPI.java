@@ -1,6 +1,6 @@
 package org.kwstudios.play.ragemode.tabsGuiListOverlay;
 
-import java.lang.reflect.InvocationTargetException;
+/*import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -21,7 +21,7 @@ import org.kwstudios.play.ragemode.gameLogic.PlayerList;
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolManager;
 import com.comphenix.protocol.events.PacketContainer;
-import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.GameProfile;*/
 
 public class TabAPI {/*
 	private static ProtocolManager protocolManager;

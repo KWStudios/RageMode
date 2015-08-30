@@ -213,20 +213,22 @@ public class TabAPI {/*
 				e.printStackTrace();
 			}
 	}*/
-	public static void setTab(List<String> playerList, String text, int x, int y) {
-		int i = 0;
-		int imax = playerList.size();
-		
-		while(i < imax) {
-			org.mcsg.double0negative.tabapi.TabAPI.setPriority(org.kwstudios.play.ragemode.loader.PluginLoader.getInstance(), Bukkit.getPlayer(UUID.fromString(playerList.get(i))), 0);
-			
-			org.mcsg.double0negative.tabapi.TabAPI.setTabString(org.kwstudios.play.ragemode.loader.PluginLoader.getInstance(), Bukkit.getPlayer(UUID.fromString(playerList.get(i))), x, y, text);
-			
-			org.mcsg.double0negative.tabapi.TabAPI.clearTab(Bukkit.getPlayer(UUID.fromString(playerList.get(i))));
-			
-			org.mcsg.double0negative.tabapi.TabAPI.updatePlayer(Bukkit.getPlayer(UUID.fromString(playerList.get(i))));
-			
-			i++;
-		}
-	}
+	
+	
+//	public static void setTab(List<String> playerList, String text, int x, int y) {
+//		int i = 0;
+//		int imax = playerList.size();
+//		
+//		while(i < imax) {
+//			org.mcsg.double0negative.tabapi.TabAPI.setPriority(org.kwstudios.play.ragemode.loader.PluginLoader.getInstance(), Bukkit.getPlayer(UUID.fromString(playerList.get(i))), 0);
+//			
+//			org.mcsg.double0negative.tabapi.TabAPI.setTabString(org.kwstudios.play.ragemode.loader.PluginLoader.getInstance(), Bukkit.getPlayer(UUID.fromString(playerList.get(i))), x, y, text);
+//			
+//			org.mcsg.double0negative.tabapi.TabAPI.clearTab(Bukkit.getPlayer(UUID.fromString(playerList.get(i))));
+//			
+//			org.mcsg.double0negative.tabapi.TabAPI.updatePlayer(Bukkit.getPlayer(UUID.fromString(playerList.get(i))));
+//			
+//			i++;
+//		}
+//	}
 }

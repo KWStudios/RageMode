@@ -230,8 +230,8 @@ public class PlayerList {
 				if (list[i].equals(player.getUniqueId().toString())) {
 //					TabGuiUpdater.removeTabForPlayer(player);
 					
-					org.mcsg.double0negative.tabapi.TabAPI.disableTabForPlayer(player);
-					org.mcsg.double0negative.tabapi.TabAPI.updatePlayer(player);
+//					org.mcsg.double0negative.tabapi.TabAPI.disableTabForPlayer(player);
+//					org.mcsg.double0negative.tabapi.TabAPI.updatePlayer(player);
 					
 					RageScores.removePointsForPlayers(new String[] {player.getUniqueId().toString()});
 					

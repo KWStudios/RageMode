@@ -70,10 +70,6 @@
 			<id>Plugin Metrics</id>
 			<url>http://repo.mcstats.org/content/repositories/public</url>
 		</repository>
-		<repository>
-			<id>TabAPI</id>
-			<url>http://45.55.135.116:8081/artifactory/libs-snapshot-local/</url>
-		</repository>
 	</repositories>
 	<dependencies>
 		<dependency>
@@ -98,12 +94,6 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.36</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mcsg.double0negative</groupId>
-			<artifactId>tabapi</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>

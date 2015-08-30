@@ -62,6 +62,10 @@
 			<id>kwstudios-repo</id>
 			<url>http://45.55.135.116:8081/artifactory/libs-snapshot</url>
 		</repository>
+		<repository>
+			<id>mcstats-repo</id>
+			<url>http://repo.mcstats.org/content/repositories/public</url>
+		</repository>
 	</repositories>
 	<dependencies>
 		<dependency>

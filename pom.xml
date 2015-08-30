@@ -60,7 +60,7 @@
 	<repositories>
 		<repository>
 			<id>kwstudios-repo</id>
-			<url>http://45.55.135.116:8081/artifactory/</url>
+			<url>http://45.55.135.116:8081/artifactory/libs-snapshot</url>
 		</repository>
 	</repositories>
 	<dependencies>

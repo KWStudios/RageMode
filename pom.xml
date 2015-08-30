@@ -59,8 +59,8 @@
 	<url>http://mc.kwstudios.org/</url>
 	<repositories>
 		<repository>
-			<id>kwstudios-repo</id>
-			<url>http://45.55.135.116:8081/artifactory/libs-snapshot-local/</url>
+			<id>spigot-repo</id>
+			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
 		</repository>
 		<repository>
 			<id>mcstats-repo</id>
@@ -69,8 +69,8 @@
 	</repositories>
 	<dependencies>
 		<dependency>
-			<groupId>org.bukkit</groupId>
-			<artifactId>craftbukkit</artifactId>
+			<groupId>org.spigotmc</groupId>
+			<artifactId>spigot-api</artifactId>
 			<version>1.8.8-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>

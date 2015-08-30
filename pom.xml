@@ -64,7 +64,7 @@
 		</repository>
 		<repository>
 			<id>spigot-repo</id>
-			<url>http://maven.elmakers.com/repository/</url>
+			<url>http://45.55.135.116:8081/artifactory/libs-snapshot/</url>
 		</repository>
 		<repository>
 			<id>Plugin Metrics</id>
@@ -73,8 +73,8 @@
 	</repositories>
 	<dependencies>
 		<dependency>
-			<groupId>org.bukkit</groupId>
-			<artifactId>craftbukkit</artifactId>
+			<groupId>org.spigotmc</groupId>
+			<artifactId>spigot</artifactId>
 			<version>1.8.8-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>

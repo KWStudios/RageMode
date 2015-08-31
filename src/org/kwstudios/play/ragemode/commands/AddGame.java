@@ -26,6 +26,7 @@ public class AddGame {
 			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED + "Missing arguments! Usage: /rm add <GameName> <MaxPlayers>");
 			return;
 		}
+		@SuppressWarnings("unused")
 		int x;
 		try {
 			x = Integer.parseInt(args[2]);

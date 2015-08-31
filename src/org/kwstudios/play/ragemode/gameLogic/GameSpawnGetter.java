@@ -17,7 +17,6 @@ public class GameSpawnGetter {
 	private FileConfiguration fileConfiguration;
 	private boolean isGameReady = false;
 	private List<Location> spawnLocations = new ArrayList<Location>();
-	private List<Location> removedLocations = new ArrayList<Location>();
 
 	public GameSpawnGetter(String gameName, FileConfiguration fileConfiguration) {
 		this.gameName = gameName;

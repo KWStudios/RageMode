@@ -9,13 +9,11 @@ import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 public class AddSpawn {
 	
 	private Player player;
-	private String label;
 	private String[] args;
 	private FileConfiguration fileConfiguration;
 	
 	public AddSpawn(Player player, String label, String[] args, FileConfiguration fileConfiguration) {
 		this.player = player;
-		this.label = label;
 		this.args = args;
 		this.fileConfiguration = fileConfiguration;
 		

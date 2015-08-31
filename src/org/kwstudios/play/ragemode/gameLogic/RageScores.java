@@ -241,6 +241,9 @@ public class RageScores {
 				}
 			}
 			i++;
+			
+			playerpoints.get(highest).setWinner(true);
+			
 		}
 		i = 0;
 		while (i < imax) {

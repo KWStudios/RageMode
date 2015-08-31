@@ -20,6 +20,8 @@ public class YAMLStats {
 	private static File yamlStatsFile;
 	private static FileConfiguration statsConfiguration;
 	
+	protected static boolean working = false;
+	
 	
 	
 	public static void initS() {
@@ -28,7 +30,7 @@ public class YAMLStats {
 		else
 			inited = true;
 		
-		File file = new File(PluginLoader.getInstance().getDataFolder() + "stats.yml");
+		File file = new File(PluginLoader.getInstance().getDataFolder(), "stats.yml");
 		YamlConfiguration config = null;
 		yamlStatsFile = file;
 		
@@ -54,9 +56,17 @@ public class YAMLStats {
         }
         
         statsConfiguration = config; 
+        try {
+			config.save(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static void addPlayerStatistics(List<PlayerPoints> pP) {
+		if(!inited)
+			return;
+		
 		int i = 0;
 		int imax = pP.size();
 		while(i < imax) {
@@ -100,7 +110,11 @@ public class YAMLStats {
 				
 				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "score", (score + pP.get(i).getPoints()), statsConfiguration);
 				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "games", (games + 1), statsConfiguration);
-				ConfigFactory.setDouble("data." + pP.get(i).getPlayerUUID(), "KD", ((kills + pP.get(i).getKills())/(deaths + pP.get(i).getDeaths())), statsConfiguration);
+				if((deaths + pP.get(i).getDeaths()) != 0)
+					ConfigFactory.setDouble("data." + pP.get(i).getPlayerUUID(), "KD", ((kills + pP.get(i).getKills())/(deaths + pP.get(i).getDeaths())), statsConfiguration);	
+				else
+					ConfigFactory.setDouble("data." + pP.get(i).getPlayerUUID(), "KD", 1.0d, statsConfiguration);
+
 			}
 			else {
 				ConfigFactory.setString("data", pP.get(i).getPlayerUUID(), "", statsConfiguration);
@@ -126,12 +140,14 @@ public class YAMLStats {
 				
 				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "score", pP.get(i).getPoints(), statsConfiguration);
 				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "games", 1, statsConfiguration);
-				ConfigFactory.setDouble("data." + pP.get(i).getPlayerUUID(), "KD", pP.get(i).getKills()/pP.get(i).getDeaths(), statsConfiguration);
+				if(pP.get(i).getDeaths() != 0) 
+					ConfigFactory.setDouble("data." + pP.get(i).getPlayerUUID(), "KD", pP.get(i).getKills()/pP.get(i).getDeaths(), statsConfiguration);
+				else
+					ConfigFactory.setDouble("data." + pP.get(i).getPlayerUUID(), "KD", 1.0d, statsConfiguration);
 			}			
 			
 			i++;
 		}
-
 		
 		try {
 			statsConfiguration.save(yamlStatsFile);
@@ -140,7 +156,10 @@ public class YAMLStats {
 		}
 	}
 	
-	public static PlayerPoints getPlayerStats(String sUUID) { //returns a RetPlayerPoints object containing the GLOBAL statistics of a player
+	public static RetPlayerPoints getPlayerStatistics(String sUUID) { //returns a RetPlayerPoints object containing the GLOBAL statistics of a player
+		if(!inited)
+			return null;
+		
 		RetPlayerPoints plPo = new RetPlayerPoints(sUUID);
 		
 		if(ConfigFactory.getKeysUnderPath("data", false, statsConfiguration).contains(sUUID)) {
@@ -159,7 +178,36 @@ public class YAMLStats {
 			plPo.setWins(ConfigFactory.getInt("data." + sUUID, "wins", statsConfiguration));
 			plPo.setPoints(ConfigFactory.getInt("data." + sUUID, "score", statsConfiguration));
 			plPo.setGames(ConfigFactory.getInt("data." + sUUID, "games", statsConfiguration));
+			
+			ConfigFactory.getDouble("data." + sUUID, "KD", statsConfiguration);
 		}
 		return plPo;
-	}	
+	}
+	
+	private static class AddToPlayersStats implements Runnable{
+		private List<PlayerPoints> lsUUIDs = null;
+		
+		public AddToPlayersStats(List<PlayerPoints> ls) {
+			super();
+			this.lsUUIDs = ls;
+		}
+
+		@Override
+		public void run() {
+			while(working) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			working = true;
+			addPlayerStatistics(lsUUIDs);			
+			working = false;
+		}
+	}
+	
+	public static AddToPlayersStats createPlayersStats(List<PlayerPoints> ls) {
+		return new AddToPlayersStats(ls);
+	}
 }

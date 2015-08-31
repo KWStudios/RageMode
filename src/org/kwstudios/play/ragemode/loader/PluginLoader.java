@@ -10,10 +10,14 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.kwstudios.play.ragemode.commands.CommandParser;
 import org.kwstudios.play.ragemode.commands.StopGame;
+import org.kwstudios.play.ragemode.database.MySQLConnector;
 import org.kwstudios.play.ragemode.events.EventListener;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
 import org.kwstudios.play.ragemode.metrics.Metrics;
+import org.kwstudios.play.ragemode.statistics.YAMLStats;
 import org.kwstudios.play.ragemode.updater.Updater;
+
+import com.mysql.jdbc.authentication.MysqlClearPasswordPlugin;
 
 /*import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
@@ -25,6 +29,7 @@ import com.comphenix.protocol.events.PacketEvent;*/
 public class PluginLoader extends JavaPlugin {
 
 	private static PluginLoader instance = null;
+	private static MySQLConnector mySqlConnector = null;
 //	private ProtocolManager protocolManager;
 
 	@Override
@@ -67,6 +72,9 @@ public class PluginLoader extends JavaPlugin {
 		}
 
 		new Updater(this, "http://mc.kwstudios.org/plugin-updater/ragemode.html");
+		
+		YAMLStats.initS();
+		mySqlConnector = new MySQLConnector("empty", 1337, "empty", "empty", "empty");
 	}
 
 	@Override
@@ -105,4 +113,7 @@ public class PluginLoader extends JavaPlugin {
 		return PluginLoader.instance;
 	}
 
+	public static MySQLConnector getMySqlConnector() {
+		return mySqlConnector;
+	}
 }

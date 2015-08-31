@@ -1,4 +1,7 @@
 package org.kwstudios.play.ragemode.commands;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -7,12 +10,16 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
+import org.kwstudios.play.ragemode.gameLogic.PlayerPoints;
 import org.kwstudios.play.ragemode.gameLogic.RageScores;
+import org.kwstudios.play.ragemode.loader.PluginLoader;
 import org.kwstudios.play.ragemode.scoreboard.ScoreBoard;
+import org.kwstudios.play.ragemode.statistics.MySQLStats;
+import org.kwstudios.play.ragemode.statistics.MySQLThread;
+import org.kwstudios.play.ragemode.statistics.YAMLStats;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 import org.kwstudios.play.ragemode.toolbox.GameBroadcast;
 import org.kwstudios.play.ragemode.toolbox.GetGames;
-
 
 public class StopGame {
 	
@@ -55,6 +62,23 @@ public class StopGame {
 		if(PlayerList.isGameRunning(game)) {
 			String[] players = PlayerList.getPlayersInGame(game);
 			RageScores.calculateWinner(game, players);
+			
+			int f = 0;
+			int fmax = players.length;
+			List<PlayerPoints> lPP = new ArrayList<PlayerPoints>();
+			while(f < fmax) {				
+				if(RageScores.getPlayerPoints(players[f]) != null) {
+					PlayerPoints pP = RageScores.getPlayerPoints(players[f]);
+					lPP.add(pP);
+					
+					Thread sthread = new Thread(new MySQLThread(pP));
+					sthread.start();
+				}				
+				f++;
+			}
+			Thread thread = new Thread(YAMLStats.createPlayersStats(lPP));
+			thread.start();
+
 			ScoreBoard.allScoreBoards.get(game).removeScoreBoard();
 			if(players != null) {
 				int i = 0;
@@ -67,7 +91,7 @@ public class StopGame {
 					i++;
 				}
 			}
-			RageScores.removePointsForPlayers(players);
+			RageScores.removePointsForPlayers(players);			
 			
 			GameBroadcast.broadcastToGame(game, ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + game + ChatColor.DARK_GREEN + " has been stopped.");
 			PlayerList.setGameNotRunning(game);
@@ -87,11 +111,27 @@ public class StopGame {
 			if(PlayerList.isGameRunning(games[i])) {
 				
 				logger.info("Stopping " + games[i] + " ...");
-				
 				ScoreBoard.allScoreBoards.get(games[i]).removeScoreBoard();
 				
 				String[] players = PlayerList.getPlayersInGame(games[i]);
 				RageScores.calculateWinner(games[i], players);
+				
+				int f = 0;
+				int fmax = players.length;
+				List<PlayerPoints> lPP = new ArrayList<PlayerPoints>();
+				while(f < fmax) {				
+					if(RageScores.getPlayerPoints(players[f]) != null) {
+						PlayerPoints pP = RageScores.getPlayerPoints(players[f]);
+						lPP.add(pP);
+						
+						Thread sthread = new Thread(new MySQLThread(pP));
+						sthread.start();
+					}				
+					f++;
+				}
+				Thread thread = new Thread(YAMLStats.createPlayersStats(lPP));
+				thread.start();
+				
 				if(players != null) {
 					int n = 0;
 					int nmax = players.length;

@@ -2,6 +2,7 @@ package org.kwstudios.play.ragemode.statistics;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -55,75 +56,82 @@ public class YAMLStats {
         statsConfiguration = config; 
 	}
 	
-	public static void addPlayerStatistics(PlayerPoints pP) {
-		Set<String> contents = ConfigFactory.getKeysUnderPath("data", false, statsConfiguration);
-		if(contents.contains(pP.getPlayerUUID())) {
-			ConfigFactory.setString("data." + pP.getPlayerUUID(), "name", Bukkit.getPlayer(UUID.fromString(pP.getPlayerUUID())).getName(), statsConfiguration);
+	public static void addPlayerStatistics(List<PlayerPoints> pP) {
+		int i = 0;
+		int imax = pP.size();
+		while(i < imax) {
+			Set<String> contents = ConfigFactory.getKeysUnderPath("data", false, statsConfiguration);
+			if(contents.contains(pP.get(i).getPlayerUUID())) {
+				ConfigFactory.setString("data." + pP.get(i).getPlayerUUID(), "name", Bukkit.getPlayer(UUID.fromString(pP.get(i).getPlayerUUID())).getName(), statsConfiguration);
+				
+				int kills = ConfigFactory.getInt("data." + pP.get(i).getPlayerUUID(), "kills", statsConfiguration);
+				int axeKills = ConfigFactory.getInt("data." + pP.get(i).getPlayerUUID(), "axe_kills", statsConfiguration);
+				int directArrowKills = ConfigFactory.getInt("data." + pP.get(i).getPlayerUUID(), "direct_arrow_kills", statsConfiguration);
+				int explosionKills = ConfigFactory.getInt("data." + pP.get(i).getPlayerUUID(), "explosion_kills", statsConfiguration);
+				int knifeKills = ConfigFactory.getInt("data." + pP.get(i).getPlayerUUID(), "knife_kills", statsConfiguration);
+				
+				int deaths = ConfigFactory.getInt("data." + pP.get(i).getPlayerUUID(), "kills", statsConfiguration);
+				int axeDeaths = ConfigFactory.getInt("data." + pP.get(i).getPlayerUUID(), "axe_deaths", statsConfiguration);
+				int directArrowDeaths = ConfigFactory.getInt("data." + pP.get(i).getPlayerUUID(), "direct_arrow_deaths", statsConfiguration);
+				int explosionDeaths = ConfigFactory.getInt("data." + pP.get(i).getPlayerUUID(), "explosion_deaths", statsConfiguration);
+				int knifeDeaths = ConfigFactory.getInt("data." + pP.get(i).getPlayerUUID(), "knife_deaths", statsConfiguration);
+				
+				int wins = ConfigFactory.getInt("data." + pP.get(i).getPlayerUUID(), "wins", statsConfiguration);
+				int score = ConfigFactory.getInt("data." + pP.get(i).getPlayerUUID(), "score", statsConfiguration);
+				int games = ConfigFactory.getInt("data." + pP.get(i).getPlayerUUID(), "games", statsConfiguration);
+				
+				
+				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "kills", (kills + pP.get(i).getKills()), statsConfiguration);
+				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "axe_kills", (axeKills + pP.get(i).getAxeKills()), statsConfiguration);
+				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "direct_arrow_kills", (directArrowKills + pP.get(i).getDirectArrowKills()), statsConfiguration);
+				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "explosion_kills", (explosionKills + pP.get(i).getExplosionKills()), statsConfiguration);
+				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "knife_kills", (knifeKills + pP.get(i).getKnifeKills()), statsConfiguration);
+				
+				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "deaths", (deaths + pP.get(i).getDeaths()), statsConfiguration);
+				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "axe_deaths", (axeDeaths + pP.get(i).getAxeDeaths()), statsConfiguration);
+				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "direct_arrow_deaths",(directArrowDeaths + pP.get(i).getDirectArrowDeaths()), statsConfiguration);
+				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "explosion_deaths", (explosionDeaths + pP.get(i).getExplosionDeaths()), statsConfiguration);
+				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "knife_deaths", (knifeDeaths + pP.get(i).getKnifeDeaths()), statsConfiguration);
+				
+				if(pP.get(i).isWinner())
+					ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "wins", (wins + 1), statsConfiguration);
+				else
+					ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "wins", wins, statsConfiguration);
+				
+				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "score", (score + pP.get(i).getPoints()), statsConfiguration);
+				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "games", (games + 1), statsConfiguration);
+				ConfigFactory.setDouble("data." + pP.get(i).getPlayerUUID(), "KD", ((kills + pP.get(i).getKills())/(deaths + pP.get(i).getDeaths())), statsConfiguration);
+			}
+			else {
+				ConfigFactory.setString("data", pP.get(i).getPlayerUUID(), "", statsConfiguration);
+				
+				ConfigFactory.setString("data." + pP.get(i).getPlayerUUID(), "name", Bukkit.getPlayer(UUID.fromString(pP.get(i).getPlayerUUID())).getName(), statsConfiguration);
+	
+				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "kills", pP.get(i).getKills(), statsConfiguration);
+				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "axe_kills", pP.get(i).getAxeKills(), statsConfiguration);
+				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "direct_arrow_kills", pP.get(i).getDirectArrowKills(), statsConfiguration);
+				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "explosion_kills", pP.get(i).getExplosionKills(), statsConfiguration);
+				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "knife_kills", pP.get(i).getKnifeKills(), statsConfiguration);
+				
+				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "deaths", pP.get(i).getDeaths(), statsConfiguration);
+				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "axe_deaths", pP.get(i).getAxeDeaths(), statsConfiguration);
+				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "direct_arrow_deaths", pP.get(i).getDirectArrowDeaths(), statsConfiguration);
+				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "explosion_deaths", pP.get(i).getExplosionDeaths(), statsConfiguration);
+				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "knife_deaths", pP.get(i).getKnifeDeaths(), statsConfiguration);
+				
+				if(pP.get(i).isWinner())
+					ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "wins", 1, statsConfiguration);
+				else
+					ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "wins", 0, statsConfiguration);
+				
+				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "score", pP.get(i).getPoints(), statsConfiguration);
+				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "games", 1, statsConfiguration);
+				ConfigFactory.setDouble("data." + pP.get(i).getPlayerUUID(), "KD", pP.get(i).getKills()/pP.get(i).getDeaths(), statsConfiguration);
+			}			
 			
-			int kills = ConfigFactory.getInt("data." + pP.getPlayerUUID(), "kills", statsConfiguration);
-			int axeKills = ConfigFactory.getInt("data." + pP.getPlayerUUID(), "axe_kills", statsConfiguration);
-			int directArrowKills = ConfigFactory.getInt("data." + pP.getPlayerUUID(), "direct_arrow_kills", statsConfiguration);
-			int explosionKills = ConfigFactory.getInt("data." + pP.getPlayerUUID(), "explosion_kills", statsConfiguration);
-			int knifeKills = ConfigFactory.getInt("data." + pP.getPlayerUUID(), "knife_kills", statsConfiguration);
-			
-			int deaths = ConfigFactory.getInt("data." + pP.getPlayerUUID(), "kills", statsConfiguration);
-			int axeDeaths = ConfigFactory.getInt("data." + pP.getPlayerUUID(), "axe_deaths", statsConfiguration);
-			int directArrowDeaths = ConfigFactory.getInt("data." + pP.getPlayerUUID(), "direct_arrow_deaths", statsConfiguration);
-			int explosionDeaths = ConfigFactory.getInt("data." + pP.getPlayerUUID(), "explosion_deaths", statsConfiguration);
-			int knifeDeaths = ConfigFactory.getInt("data." + pP.getPlayerUUID(), "knife_deaths", statsConfiguration);
-			
-			int wins = ConfigFactory.getInt("data." + pP.getPlayerUUID(), "wins", statsConfiguration);
-			int score = ConfigFactory.getInt("data." + pP.getPlayerUUID(), "score", statsConfiguration);
-			int games = ConfigFactory.getInt("data." + pP.getPlayerUUID(), "games", statsConfiguration);
-			
-			
-			ConfigFactory.setInt("data." + pP.getPlayerUUID(), "kills", (kills + pP.getKills()), statsConfiguration);
-			ConfigFactory.setInt("data." + pP.getPlayerUUID(), "axe_kills", (axeKills + pP.getAxeKills()), statsConfiguration);
-			ConfigFactory.setInt("data." + pP.getPlayerUUID(), "direct_arrow_kills", (directArrowKills + pP.getDirectArrowKills()), statsConfiguration);
-			ConfigFactory.setInt("data." + pP.getPlayerUUID(), "explosion_kills", (explosionKills + pP.getExplosionKills()), statsConfiguration);
-			ConfigFactory.setInt("data." + pP.getPlayerUUID(), "knife_kills", (knifeKills + pP.getKnifeKills()), statsConfiguration);
-			
-			ConfigFactory.setInt("data." + pP.getPlayerUUID(), "deaths", (deaths + pP.getDeaths()), statsConfiguration);
-			ConfigFactory.setInt("data." + pP.getPlayerUUID(), "axe_deaths", (axeDeaths + pP.getAxeDeaths()), statsConfiguration);
-			ConfigFactory.setInt("data." + pP.getPlayerUUID(), "direct_arrow_deaths",(directArrowDeaths + pP.getDirectArrowDeaths()), statsConfiguration);
-			ConfigFactory.setInt("data." + pP.getPlayerUUID(), "explosion_deaths", (explosionDeaths + pP.getExplosionDeaths()), statsConfiguration);
-			ConfigFactory.setInt("data." + pP.getPlayerUUID(), "knife_deaths", (knifeDeaths + pP.getKnifeDeaths()), statsConfiguration);
-			
-			if(pP.isWinner())
-				ConfigFactory.setInt("data." + pP.getPlayerUUID(), "wins", (wins + 1), statsConfiguration);
-			else
-				ConfigFactory.setInt("data." + pP.getPlayerUUID(), "wins", wins, statsConfiguration);
-			
-			ConfigFactory.setInt("data." + pP.getPlayerUUID(), "score", (score + pP.getPoints()), statsConfiguration);
-			ConfigFactory.setInt("data." + pP.getPlayerUUID(), "games", (games + 1), statsConfiguration);
-			ConfigFactory.setDouble("data." + pP.getPlayerUUID(), "KD", ((kills + pP.getKills())/(deaths + pP.getDeaths())), statsConfiguration);
+			i++;
 		}
-		else {
-			ConfigFactory.setString("data", pP.getPlayerUUID(), "", statsConfiguration);
-			
-			ConfigFactory.setString("data." + pP.getPlayerUUID(), "name", Bukkit.getPlayer(UUID.fromString(pP.getPlayerUUID())).getName(), statsConfiguration);
 
-			ConfigFactory.setInt("data." + pP.getPlayerUUID(), "kills", pP.getKills(), statsConfiguration);
-			ConfigFactory.setInt("data." + pP.getPlayerUUID(), "axe_kills", pP.getAxeKills(), statsConfiguration);
-			ConfigFactory.setInt("data." + pP.getPlayerUUID(), "direct_arrow_kills", pP.getDirectArrowKills(), statsConfiguration);
-			ConfigFactory.setInt("data." + pP.getPlayerUUID(), "explosion_kills", pP.getExplosionKills(), statsConfiguration);
-			ConfigFactory.setInt("data." + pP.getPlayerUUID(), "knife_kills", pP.getKnifeKills(), statsConfiguration);
-			
-			ConfigFactory.setInt("data." + pP.getPlayerUUID(), "deaths", pP.getDeaths(), statsConfiguration);
-			ConfigFactory.setInt("data." + pP.getPlayerUUID(), "axe_deaths", pP.getAxeDeaths(), statsConfiguration);
-			ConfigFactory.setInt("data." + pP.getPlayerUUID(), "direct_arrow_deaths", pP.getDirectArrowDeaths(), statsConfiguration);
-			ConfigFactory.setInt("data." + pP.getPlayerUUID(), "explosion_deaths", pP.getExplosionDeaths(), statsConfiguration);
-			ConfigFactory.setInt("data." + pP.getPlayerUUID(), "knife_deaths", pP.getKnifeDeaths(), statsConfiguration);
-			
-			if(pP.isWinner())
-				ConfigFactory.setInt("data." + pP.getPlayerUUID(), "wins", 1, statsConfiguration);
-			else
-				ConfigFactory.setInt("data." + pP.getPlayerUUID(), "wins", 0, statsConfiguration);
-			
-			ConfigFactory.setInt("data." + pP.getPlayerUUID(), "score", pP.getPoints(), statsConfiguration);
-			ConfigFactory.setInt("data." + pP.getPlayerUUID(), "games", 1, statsConfiguration);
-			ConfigFactory.setDouble("data." + pP.getPlayerUUID(), "KD", pP.getKills()/pP.getDeaths(), statsConfiguration);
-		}
 		
 		try {
 			statsConfiguration.save(yamlStatsFile);
@@ -152,7 +160,6 @@ public class YAMLStats {
 			plPo.setPoints(ConfigFactory.getInt("data." + sUUID, "score", statsConfiguration));
 			plPo.setGames(ConfigFactory.getInt("data." + sUUID, "games", statsConfiguration));
 		}
-		
 		return plPo;
 	}	
 }

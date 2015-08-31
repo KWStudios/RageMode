@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.kwstudios.play.ragemode.gameLogic.PlayerPoints;
+import org.kwstudios.play.ragemode.gameLogic.RetPlayerPoints;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
 import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
 
@@ -130,5 +131,28 @@ public class YAMLStats {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public static PlayerPoints getPlayerStats(String sUUID) { //returns a RetPlayerPoints object containing the GLOBAL statistics of a player
+		RetPlayerPoints plPo = new RetPlayerPoints(sUUID);
+		
+		if(ConfigFactory.getKeysUnderPath("data", false, statsConfiguration).contains(sUUID)) {
+			plPo.setKills(ConfigFactory.getInt("data." + sUUID, "kills", statsConfiguration));
+			plPo.setAxeKills(ConfigFactory.getInt("data." + sUUID, "axe_kills", statsConfiguration));
+			plPo.setDirectArrowKills(ConfigFactory.getInt("data." + sUUID, "direct_arrow_kills", statsConfiguration));
+			plPo.setExplosionKills(ConfigFactory.getInt("data." + sUUID, "explosion_kills", statsConfiguration));
+			plPo.setKnifeKills(ConfigFactory.getInt("data." + sUUID, "knife_kills", statsConfiguration));
+			
+			plPo.setDeaths(ConfigFactory.getInt("data." + sUUID, "kills", statsConfiguration));
+			plPo.setAxeDeaths(ConfigFactory.getInt("data." + sUUID, "axe_deaths", statsConfiguration));
+			plPo.setDirectArrowDeaths(ConfigFactory.getInt("data." + sUUID, "direct_arrow_deaths", statsConfiguration));
+			plPo.setExplosionDeaths(ConfigFactory.getInt("data." + sUUID, "explosion_deaths", statsConfiguration));
+			plPo.setKnifeDeaths(ConfigFactory.getInt("data." + sUUID, "knife_deaths", statsConfiguration));
+			
+			plPo.setWins(ConfigFactory.getInt("data." + sUUID, "wins", statsConfiguration));
+			plPo.setPoints(ConfigFactory.getInt("data." + sUUID, "score", statsConfiguration));
+			plPo.setGames(ConfigFactory.getInt("data." + sUUID, "games", statsConfiguration));
+		}
+		
+		return plPo;
+	}	
 }

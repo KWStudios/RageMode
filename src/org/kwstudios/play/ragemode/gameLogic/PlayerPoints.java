@@ -16,9 +16,6 @@ public class PlayerPoints implements Comparable<PlayerPoints> {
 	private Integer points = 0;
 	private boolean isWinner = false;
 
-	private int wins = 0;
-	private int games = 0;
-
 	public PlayerPoints(String playerUUID) {
 		this.playerUUID = playerUUID;
 	}
@@ -121,22 +118,6 @@ public class PlayerPoints implements Comparable<PlayerPoints> {
 
 	public void setWinner(boolean isWinner) {
 		this.isWinner = isWinner;
-	}
-
-	public int getWins() {
-		return wins;
-	}
-
-	public void setWins(int wins) {
-		this.wins = wins;
-	}
-
-	public int getGames() {
-		return games;
-	}
-
-	public void setGames(int games) {
-		this.games = games;
 	}
 
 	@Override

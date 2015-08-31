@@ -4,11 +4,14 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.kwstudios.play.ragemode.database.MySQLConnector;
 import org.kwstudios.play.ragemode.gameLogic.PlayerPoints;
 import org.kwstudios.play.ragemode.gameLogic.RetPlayerPoints;
+import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 
 public class MySQLStats {
 
@@ -66,8 +69,9 @@ public class MySQLStats {
 				oldGames = rs.getInt("games");
 			}
 		} catch (SQLException e) {
-			System.out.println("Something went wrong!");
-			return;
+			System.out.println(
+					ConstantHolder.RAGEMODE_PREFIX + Bukkit.getPlayer(UUID.fromString(playerPoints.getPlayerUUID()))
+							+ " has no statistics yet! Creating one special row for him...");
 		}
 		if (statement != null) {
 			try {

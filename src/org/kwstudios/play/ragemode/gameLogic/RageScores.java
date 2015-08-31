@@ -20,11 +20,24 @@ public class RageScores {
 
 	public static void addPointsToPlayer(Player killer, Player victim, String killCause) {
 		if (!killer.getUniqueId().toString().equals(victim.getUniqueId().toString())) {
+			
+			PlayerPoints killerPoints = playerpoints.get(killer.getUniqueId().toString());
+			PlayerPoints victimPoints = playerpoints.get(victim.getUniqueId().toString());
+			
 			switch (killCause.toLowerCase()) {
 			case "ragebow":
 				int bowPoints = ConstantHolder.POINTS_FOR_BOW_KILL;
 				totalPoints = addPoints(killer, PlayerList.getPlayersGame(killer), bowPoints, true);
 				addPoints(victim, PlayerList.getPlayersGame(victim), 0, false);
+				
+				int oldDirectArrowKills = killerPoints.getDirectArrowKills();
+				int newDirectArrowKills = oldDirectArrowKills++;
+				killerPoints.setDirectArrowKills(newDirectArrowKills);
+				
+				int oldDirectArrowDeaths = victimPoints.getDirectArrowDeaths();
+				int newDirectArrowDeaths = oldDirectArrowDeaths++;
+				victimPoints.setDirectArrowDeaths(newDirectArrowDeaths);
+				
 				killer.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You killed "
 						+ ChatColor.GOLD.toString() + ChatColor.BOLD.toString() + victim.getName()
 						+ ChatColor.RESET.toString() + ChatColor.DARK_AQUA + " with a direct arrow hit. "
@@ -42,6 +55,15 @@ public class RageScores {
 				int axeMinusPoints = ConstantHolder.MINUS_POINTS_FOR_AXE_DEATH;
 				totalPoints = addPoints(killer, PlayerList.getPlayersGame(killer), axePoints, true);
 				addPoints(victim, PlayerList.getPlayersGame(victim), axeMinusPoints, false);
+				
+				int oldAxeKills = killerPoints.getAxeKills();
+				int newAxeKills = oldAxeKills++;
+				killerPoints.setAxeKills(newAxeKills);
+				
+				int oldAxeDeaths = victimPoints.getAxeDeaths();
+				int newAxeDeaths = oldAxeDeaths++;
+				victimPoints.setAxeDeaths(newAxeDeaths);
+				
 				killer.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You killed "
 						+ ChatColor.GOLD.toString() + ChatColor.BOLD.toString() + victim.getName()
 						+ ChatColor.RESET.toString() + ChatColor.DARK_AQUA + " with your CombatAxe. "
@@ -59,6 +81,15 @@ public class RageScores {
 				int knifePoints = ConstantHolder.POINTS_FOR_KNIFE_KILL;
 				totalPoints = addPoints(killer, PlayerList.getPlayersGame(killer), knifePoints, true);
 				addPoints(victim, PlayerList.getPlayersGame(victim), 0, false);
+				
+				int oldKnifeKills = killerPoints.getKnifeKills();
+				int newKnifeKills = oldKnifeKills++;
+				killerPoints.setAxeKills(newKnifeKills);
+				
+				int oldKnifeDeaths = victimPoints.getKnifeDeaths();
+				int newKnifeDeaths = oldKnifeDeaths++;
+				victimPoints.setAxeDeaths(newKnifeDeaths);
+				
 				killer.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You killed "
 						+ ChatColor.GOLD.toString() + ChatColor.BOLD.toString() + victim.getName()
 						+ ChatColor.RESET.toString() + ChatColor.DARK_AQUA + " with your RageKnife. "
@@ -75,6 +106,15 @@ public class RageScores {
 				int explosionPoints = ConstantHolder.POINTS_FOR_EXPLOSION_KILL;
 				totalPoints = addPoints(killer, PlayerList.getPlayersGame(killer), explosionPoints, true);
 				addPoints(victim, PlayerList.getPlayersGame(victim), 0, false);
+				
+				int oldExplosionKills = killerPoints.getExplosionKills();
+				int newExplosionKills = oldExplosionKills++;
+				killerPoints.setAxeKills(newExplosionKills);
+				
+				int oldExplosionDeaths = victimPoints.getExplosionDeaths();
+				int newExplosionDeaths = oldExplosionDeaths++;
+				victimPoints.setAxeDeaths(newExplosionDeaths);
+				
 				killer.sendMessage(
 						ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You killed " + ChatColor.GOLD.toString()
 								+ ChatColor.BOLD.toString() + victim.getName() + ChatColor.RESET.toString()
@@ -167,7 +207,10 @@ public class RageScores {
 			} else {
 				totalDeaths = 1;
 			}
-			PlayerPoints pointsHolder = new PlayerPoints(playerUUID, points, totalKills, totalDeaths);
+			PlayerPoints pointsHolder = new PlayerPoints(playerUUID);
+			pointsHolder.setPoints(points);
+			pointsHolder.setKills(totalKills);
+			pointsHolder.setDeaths(totalDeaths);
 			playerpoints.put(playerUUID, pointsHolder);
 			return points;
 		}

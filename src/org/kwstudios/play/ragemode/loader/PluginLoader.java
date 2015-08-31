@@ -12,9 +12,9 @@ import org.kwstudios.play.ragemode.commands.CommandParser;
 import org.kwstudios.play.ragemode.commands.StopGame;
 import org.kwstudios.play.ragemode.events.EventListener;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
+import org.kwstudios.play.ragemode.metrics.Metrics;
 import org.kwstudios.play.ragemode.tabsGuiListOverlay.TabAPI;
 import org.kwstudios.play.ragemode.updater.Updater;
-import org.mcstats.Metrics;
 
 /*import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;

@@ -10,7 +10,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
-import org.kwstudios.play.ragemode.gameLogic.PlayerScoreboards;
 import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 import org.kwstudios.play.ragemode.toolbox.GameBroadcast;
@@ -75,7 +74,6 @@ public class PlayerJoin {
 				player.getInventory().setChestplate(null);
 				player.getInventory().setLeggings(null);
 				player.getInventory().setBoots(null);
-				PlayerScoreboards.updateScoreboards(args[1]);
 				String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_GREEN + player.getName()
 						+ ChatColor.BLUE + " joined the game.";
 				GameBroadcast.broadcastToGame(args[1], message);

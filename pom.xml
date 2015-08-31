@@ -34,13 +34,13 @@
 	<repositories>
 		<repository>
 			<id>spigot-repo</id>
-			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+			<url>http://45.55.135.116:8081/artifactory/libs-snapshot/</url>
 		</repository>
 	</repositories>
 	<dependencies>
 		<dependency>
-			<groupId>org.spigotmc</groupId>
-			<artifactId>spigot-api</artifactId>
+			<groupId>org.bukkit</groupId>
+			<artifactId>craftbukkit</artifactId>
 			<version>1.8.8-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>

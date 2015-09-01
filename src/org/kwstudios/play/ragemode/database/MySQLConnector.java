@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
+import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
+
 public class MySQLConnector {
 
 	private Connection connection = null;
@@ -43,8 +45,8 @@ public class MySQLConnector {
 			}
 			System.out.println("The table was created successfully!");
 		} else {
-			System.out.println(
-					"We could not reach the given database url or the authentication failed. Please recheck the config.yml.");
+			System.out.println(ConstantHolder.RAGEMODE_PREFIX
+					+ "We could not reach the given database url or the authentication failed. Please recheck the config.yml.");
 		}
 	}
 

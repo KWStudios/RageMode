@@ -65,14 +65,18 @@ public class StopGame {
 			
 			int f = 0;
 			int fmax = players.length;
-			List<PlayerPoints> lPP = new ArrayList<PlayerPoints>();
+			List<PlayerPoints> lPP = new ArrayList<PlayerPoints>();			
+			boolean doSQL = PluginLoader.getInstance().getConfig().getBoolean("settings.global.statistics.mySQL.enable");
 			while(f < fmax) {				
 				if(RageScores.getPlayerPoints(players[f]) != null) {
 					PlayerPoints pP = RageScores.getPlayerPoints(players[f]);
 					lPP.add(pP);
 					
-					Thread sthread = new Thread(new MySQLThread(pP));
-					sthread.start();
+					if(doSQL) {
+						Thread sthread = new Thread(new MySQLThread(pP));
+						sthread.start();						
+					}
+
 				}				
 				f++;
 			}
@@ -86,6 +90,7 @@ public class StopGame {
 				
 				while(i < imax) {
 					if(players[i] != null) {
+
 						PlayerList.removePlayer(Bukkit.getPlayer(UUID.fromString(players[i])));
 					}
 					i++;
@@ -115,22 +120,6 @@ public class StopGame {
 				
 				String[] players = PlayerList.getPlayersInGame(games[i]);
 				RageScores.calculateWinner(games[i], players);
-				
-				int f = 0;
-				int fmax = players.length;
-				List<PlayerPoints> lPP = new ArrayList<PlayerPoints>();
-				while(f < fmax) {				
-					if(RageScores.getPlayerPoints(players[f]) != null) {
-						PlayerPoints pP = RageScores.getPlayerPoints(players[f]);
-						lPP.add(pP);
-						
-						Thread sthread = new Thread(new MySQLThread(pP));
-						sthread.start();
-					}				
-					f++;
-				}
-				Thread thread = new Thread(YAMLStats.createPlayersStats(lPP));
-				thread.start();
 				
 				if(players != null) {
 					int n = 0;

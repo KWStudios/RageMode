@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -73,8 +74,36 @@ public class PluginLoader extends JavaPlugin {
 
 		new Updater(this, "http://mc.kwstudios.org/plugin-updater/ragemode.html");
 		
-		YAMLStats.initS();
-		mySqlConnector = new MySQLConnector("empty", 1337, "empty", "empty", "empty");
+		if(getConfig().isSet("settings.global.statistics")) {
+			if(getConfig().isSet("settings.global.statistics.yaml")) {
+				if(getConfig().getBoolean("settings.global.statistics.yaml"))
+					YAMLStats.initS();
+			}
+			else
+				getConfig().set("settings.global.statistics.yaml", "false");
+			
+			if(getConfig().isSet("settings.global.statistics.mySQL")) {
+				if(getConfig().isSet("settings.global.statistics.mySQL")) {
+					if(getConfig().getBoolean("settings.global.statistics.mySQL.enable"))
+						mySqlConnector = new MySQLConnector("empty", 1337, "empty", "empty", "empty");						
+				}
+				else
+					getConfig().set("settings.global.statistics.mySQL.enable", "false");
+			}
+			else
+				getConfig().set("settings.global.statistics.mySQL.enable", "false");
+		}
+		else {
+			getConfig().set("settings.global.statistics.yaml", "true");
+			getConfig().set("settings.global.statistics.mySQL.enable", "false");
+			getConfig().set("settings.global.statistics.mySQL.url", "put.your.databaseURL.here");
+			getConfig().set("settings.global.statistics.mySQL.port", "put.your.databasePort.here");
+			getConfig().set("settings.global.statistics.mySQL.database", "put.your.databaseName.here");
+			getConfig().set("settings.global.statistics.mySQL.username", "put.your.databaseUsername.here");
+			getConfig().set("settings.global.statistics.mySQL.password", "put.your.databasePassword.here");		
+		}
+		saveConfig();
+		
 	}
 
 	@Override
@@ -116,4 +145,5 @@ public class PluginLoader extends JavaPlugin {
 	public static MySQLConnector getMySqlConnector() {
 		return mySqlConnector;
 	}
+	
 }

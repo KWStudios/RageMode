@@ -162,8 +162,14 @@ public class EventListener implements Listener {
 	
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent event) {		//Player autorespawn
+		Player deceased;
+		if(event.getEntity() instanceof Player && event.getEntity() != null){
+			 deceased = (Player) event.getEntity();
+		}
+		else{
+			return;
+		}
 		if(PlayerList.isPlayerPlaying(event.getEntity().getUniqueId().toString())) {
-			Player deceased = (Player) event.getEntity();
 			if(PlayerList.isPlayerPlaying(deceased.getKiller().getUniqueId().toString()) || deceased.getKiller() == null) {
 				String game = PlayerList.getPlayersGame(deceased);
 				

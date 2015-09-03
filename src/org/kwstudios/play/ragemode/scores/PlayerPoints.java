@@ -1,4 +1,4 @@
-package org.kwstudios.play.ragemode.gameLogic;
+package org.kwstudios.play.ragemode.scores;
 
 public class PlayerPoints implements Comparable<PlayerPoints> {
 

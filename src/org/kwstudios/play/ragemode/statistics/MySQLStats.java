@@ -9,8 +9,8 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.kwstudios.play.ragemode.database.MySQLConnector;
-import org.kwstudios.play.ragemode.gameLogic.PlayerPoints;
-import org.kwstudios.play.ragemode.gameLogic.RetPlayerPoints;
+import org.kwstudios.play.ragemode.scores.PlayerPoints;
+import org.kwstudios.play.ragemode.scores.RetPlayerPoints;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 
 public class MySQLStats {

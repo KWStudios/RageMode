@@ -11,6 +11,7 @@ import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.kwstudios.play.ragemode.scores.RageScores;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 import org.kwstudios.play.ragemode.toolbox.GetGames;
 import org.kwstudios.play.ragemode.toolbox.TableList;

@@ -1,4 +1,4 @@
-package org.kwstudios.play.ragemode.gameLogic;
+package org.kwstudios.play.ragemode.scores;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.kwstudios.play.ragemode.gameLogic.PlayerList;
 import org.kwstudios.play.ragemode.scoreboard.ScoreBoard;
 import org.kwstudios.play.ragemode.scoreboard.ScoreBoardHolder;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;

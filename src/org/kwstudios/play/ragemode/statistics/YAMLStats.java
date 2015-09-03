@@ -9,9 +9,9 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.kwstudios.play.ragemode.gameLogic.PlayerPoints;
-import org.kwstudios.play.ragemode.gameLogic.RetPlayerPoints;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
+import org.kwstudios.play.ragemode.scores.PlayerPoints;
+import org.kwstudios.play.ragemode.scores.RetPlayerPoints;
 import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
 
 public class YAMLStats {

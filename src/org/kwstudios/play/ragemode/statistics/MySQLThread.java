@@ -1,7 +1,7 @@
 package org.kwstudios.play.ragemode.statistics;
 
-import org.kwstudios.play.ragemode.gameLogic.PlayerPoints;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
+import org.kwstudios.play.ragemode.scores.PlayerPoints;
 
 public class MySQLThread implements Runnable {
 

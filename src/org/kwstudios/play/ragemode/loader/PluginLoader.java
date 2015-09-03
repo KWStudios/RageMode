@@ -31,29 +31,29 @@ public class PluginLoader extends JavaPlugin {
 
 	private static PluginLoader instance = null;
 	private static MySQLConnector mySqlConnector = null;
-//	private ProtocolManager protocolManager;
+	// private ProtocolManager protocolManager;
 
 	@Override
 	public void onEnable() {
 		super.onEnable();
 
 		PluginLoader.instance = this;
-		
-/*		protocolManager = ProtocolLibrary.getProtocolManager();		
-		protocolManager.addPacketListener(
-				new PacketAdapter(this, ListenerPriority.NORMAL, PacketType.Play.Server.PLAYER_INFO) {
-					@Override
-					public void onPacketSending(PacketEvent event) {
-						if (PlayerList.isPlayerPlaying(event.getPlayer().getUniqueId().toString()) && PlayerList.isGameRunning(PlayerList.getPlayersGame(event.getPlayer()))) {
-							if (!TabAPI.allowedPackets.contains(event.getPacket().toString())) {
-								event.setCancelled(true);
-							} else {
-								TabAPI.allowedPackets.remove(event.getPacket().toString());
-							}
-						}
-					}
-				});
-		new TabAPI(protocolManager);*/
+
+		/*
+		 * protocolManager = ProtocolLibrary.getProtocolManager();
+		 * protocolManager.addPacketListener( new PacketAdapter(this,
+		 * ListenerPriority.NORMAL, PacketType.Play.Server.PLAYER_INFO) {
+		 * 
+		 * @Override public void onPacketSending(PacketEvent event) { if
+		 * (PlayerList.isPlayerPlaying(event.getPlayer().getUniqueId().toString(
+		 * )) &&
+		 * PlayerList.isGameRunning(PlayerList.getPlayersGame(event.getPlayer())
+		 * )) { if
+		 * (!TabAPI.allowedPackets.contains(event.getPacket().toString())) {
+		 * event.setCancelled(true); } else {
+		 * TabAPI.allowedPackets.remove(event.getPacket().toString()); } } } });
+		 * new TabAPI(protocolManager);
+		 */
 
 		PluginDescriptionFile pluginDescriptionFile = getDescription();
 		Logger logger = Logger.getLogger("Minecraft");
@@ -73,37 +73,11 @@ public class PluginLoader extends JavaPlugin {
 		}
 
 		new Updater(this, "http://mc.kwstudios.org/plugin-updater/ragemode.html");
-		
-		if(getConfig().isSet("settings.global.statistics")) {
-			if(getConfig().isSet("settings.global.statistics.yaml")) {
-				if(getConfig().getBoolean("settings.global.statistics.yaml"))
-					YAMLStats.initS();
-			}
-			else
-				getConfig().set("settings.global.statistics.yaml", "false");
-			
-			if(getConfig().isSet("settings.global.statistics.mySQL")) {
-				if(getConfig().isSet("settings.global.statistics.mySQL")) {
-					if(getConfig().getBoolean("settings.global.statistics.mySQL.enable"))
-						mySqlConnector = new MySQLConnector("empty", 1337, "empty", "empty", "empty");						
-				}
-				else
-					getConfig().set("settings.global.statistics.mySQL.enable", "false");
-			}
-			else
-				getConfig().set("settings.global.statistics.mySQL.enable", "false");
-		}
-		else {
-			getConfig().set("settings.global.statistics.yaml", "true");
-			getConfig().set("settings.global.statistics.mySQL.enable", "false");
-			getConfig().set("settings.global.statistics.mySQL.url", "put.your.databaseURL.here");
-			getConfig().set("settings.global.statistics.mySQL.port", "put.your.databasePort.here");
-			getConfig().set("settings.global.statistics.mySQL.database", "put.your.databaseName.here");
-			getConfig().set("settings.global.statistics.mySQL.username", "put.your.databaseUsername.here");
-			getConfig().set("settings.global.statistics.mySQL.password", "put.your.databasePassword.here");		
-		}
+
+		initStatistics();
+
 		saveConfig();
-		
+
 	}
 
 	@Override
@@ -134,8 +108,40 @@ public class PluginLoader extends JavaPlugin {
 		}
 
 		saveConfig();
-
 		return true;
+	}
+
+	public void initStatistics() {
+		if (getConfig().isSet("settings.global.statistics")) {
+			if (getConfig().isSet("settings.global.statistics.yaml")) {
+				if (getConfig().getBoolean("settings.global.statistics.yaml"))
+					YAMLStats.initS();
+			} else
+				getConfig().set("settings.global.statistics.yaml", false);
+
+			if (getConfig().isSet("settings.global.statistics.mySQL")) {
+				if (getConfig().isSet("settings.global.statistics.mySQL")) {
+					if (getConfig().getBoolean("settings.global.statistics.mySQL.enable")) {
+						String databaseURL = getConfig().getString("settings.global.statistics.mySQL.url");
+						int port = getConfig().getInt("settings.global.statistics.mySQL.port");
+						String database = getConfig().getString("settings.global.statistics.mySQL.database");
+						String username = getConfig().getString("settings.global.statistics.mySQL.username");
+						String password = getConfig().getString("settings.global.statistics.mySQL.password");
+						mySqlConnector = new MySQLConnector(databaseURL, port, database, username, password);
+					}
+				} else
+					getConfig().set("settings.global.statistics.mySQL.enable", false);
+			} else
+				getConfig().set("settings.global.statistics.mySQL.enable", false);
+		} else {
+			getConfig().set("settings.global.statistics.yaml", true);
+			getConfig().set("settings.global.statistics.mySQL.enable", false);
+			getConfig().set("settings.global.statistics.mySQL.url", "put.your.databaseURL.here");
+			getConfig().set("settings.global.statistics.mySQL.port", "put.your.databasePort.here");
+			getConfig().set("settings.global.statistics.mySQL.database", "put.your.databaseName.here");
+			getConfig().set("settings.global.statistics.mySQL.username", "put.your.databaseUsername.here");
+			getConfig().set("settings.global.statistics.mySQL.password", "put.your.databasePassword.here");
+		}
 	}
 
 	public static PluginLoader getInstance() {
@@ -145,5 +151,5 @@ public class PluginLoader extends JavaPlugin {
 	public static MySQLConnector getMySqlConnector() {
 		return mySqlConnector;
 	}
-	
+
 }

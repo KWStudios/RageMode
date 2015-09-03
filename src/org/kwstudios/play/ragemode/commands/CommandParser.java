@@ -4,19 +4,21 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 
 public class CommandParser {
-	
+
 	private Player player;
 	@SuppressWarnings("unused")
 	private Command command;
 	private String label;
 	private String[] args;
 	private FileConfiguration fileConfiguration;
-	
+
 	private boolean isCommand = false;
-	
-	public CommandParser(Player player, Command command, String label, String[] args, FileConfiguration fileConfiguration){
+
+	public CommandParser(Player player, Command command, String label, String[] args,
+			FileConfiguration fileConfiguration) {
 		this.player = player;
 		this.command = command;
 		this.label = label;
@@ -24,8 +26,13 @@ public class CommandParser {
 		this.fileConfiguration = fileConfiguration;
 		checkCommand();
 	}
-	
-	private void checkCommand(){
+
+	private void checkCommand() {
+		if (args == null || args.length < 1) {
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED
+					+ "This is not the command you are looking for!");
+			return;
+		}
 		switch (label.toLowerCase()) {
 		case "rm":
 			parseFirstArg();
@@ -41,9 +48,9 @@ public class CommandParser {
 			break;
 		}
 	}
-	
-	private void parseFirstArg(){
-		switch (args[0].toLowerCase()){
+
+	private void parseFirstArg() {
+		switch (args[0].toLowerCase()) {
 		case "add":
 			new AddGame(player, label, args, fileConfiguration);
 			break;
@@ -68,8 +75,12 @@ public class CommandParser {
 		case "stop":
 			new StopGame(player, label, args, fileConfiguration);
 			break;
+		case "reload":
+			new ReloadConfig(player, label, args, fileConfiguration);
+			break;
 		default:
-			player.sendMessage(ChatColor.DARK_RED + "This is not a valid RageMode command! Type /help ragemode for more help.");
+			player.sendMessage(
+					ChatColor.DARK_RED + "This is not a valid RageMode command! Type /help ragemode for more help.");
 			break;
 		}
 	}

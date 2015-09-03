@@ -43,4 +43,29 @@ commands:
     aliases: ['ragemode list']
     permission: ragemode.rm.list
     permission-message: You may not use that command!
+  rm reload:
+    description: Reloads the config.yml from disk.
+    aliases: ['ragemode reload']
+    permission: ragemode.rm.reload
+    permission-message: You may not use that command!
+    
+permissions:
+    ragemode.rm:
+        description: Gives access to the main command.
+        default: true
+    ragemode.rm.*:
+        description: Gives access to all basic commands.
+        default: true
+        children:
+            ragemode.rm.join: true
+            ragemode.rm.leave: true
+            ragemode.rm.list: true
+    ragemode.admin.*:
+        description: Gives access to all game-setup commands.
+        default: op
+        children:
+            ragemode.admin.add: true
+            ragemode.admin.lobby: true
+            ragemode.admin.addspawn: true
+            ragemode.admin.remove: true
     

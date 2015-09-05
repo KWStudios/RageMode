@@ -8,6 +8,8 @@ public class ConstantHolder {
 			+ ChatColor.YELLOW.toString() + ChatColor.BOLD.toString() + "RageMode" + ChatColor.AQUA.toString()
 			+ ChatColor.BOLD.toString() + "] " + ChatColor.RESET;
 	
+	public static final String PERMISSION_MESSAGE = ChatColor.DARK_RED + "You may not use that command!";
+	
 	public static final String GAME_PATH = "settings.games";
 	
 	public static final int MINUS_POINTS_FOR_AXE_DEATH = -50;

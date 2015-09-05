@@ -170,7 +170,7 @@ public class EventListener implements Listener {
 			return;
 		}
 		if(PlayerList.isPlayerPlaying(event.getEntity().getUniqueId().toString())) {
-			if(PlayerList.isPlayerPlaying(deceased.getKiller().getUniqueId().toString()) || deceased.getKiller() == null) {
+			if((deceased.getKiller() != null && PlayerList.isPlayerPlaying(deceased.getKiller().getUniqueId().toString())) || deceased.getKiller() == null) {
 				String game = PlayerList.getPlayersGame(deceased);
 				
 				if(!fileConfiguration.isSet("global.deathmessages")) {

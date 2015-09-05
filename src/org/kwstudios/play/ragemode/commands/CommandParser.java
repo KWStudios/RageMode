@@ -52,31 +52,67 @@ public class CommandParser {
 	private void parseFirstArg() {
 		switch (args[0].toLowerCase()) {
 		case "add":
-			new AddGame(player, label, args, fileConfiguration);
+			if (player.hasPermission("ragemode.admin.add")) {
+				new AddGame(player, label, args, fileConfiguration);
+			} else {
+				player.sendMessage(ConstantHolder.PERMISSION_MESSAGE);
+			}
 			break;
 		case "lobby":
-			new AddLobby(player, label, args, fileConfiguration);
+			if (player.hasPermission("ragemode.admin.lobby")) {
+				new AddLobby(player, label, args, fileConfiguration);
+			} else {
+				player.sendMessage(ConstantHolder.PERMISSION_MESSAGE);
+			}
 			break;
 		case "addspawn":
-			new AddSpawn(player, label, args, fileConfiguration);
+			if (player.hasPermission("ragemode.admin.addspawn")) {
+				new AddSpawn(player, label, args, fileConfiguration);
+			} else {
+				player.sendMessage(ConstantHolder.PERMISSION_MESSAGE);
+			}
 			break;
 		case "join":
-			new PlayerJoin(player, label, args, fileConfiguration);
+			if (player.hasPermission("ragemode.rm.join")) {
+				new PlayerJoin(player, label, args, fileConfiguration);
+			} else {
+				player.sendMessage(ConstantHolder.PERMISSION_MESSAGE);
+			}
 			break;
 		case "leave":
-			new PlayerLeave(player, label, args, fileConfiguration);
+			if (player.hasPermission("ragemode.rm.leave")) {
+				new PlayerLeave(player, label, args, fileConfiguration);
+			} else {
+				player.sendMessage(ConstantHolder.PERMISSION_MESSAGE);
+			}
 			break;
 		case "remove":
-			new RemoveGame(player, label, args, fileConfiguration);
+			if (player.hasPermission("ragemode.admin.remove")) {
+				new RemoveGame(player, label, args, fileConfiguration);
+			} else {
+				player.sendMessage(ConstantHolder.PERMISSION_MESSAGE);
+			}
 			break;
 		case "list":
-			new ListGames(player, label, args, fileConfiguration);
+			if (player.hasPermission("ragemode.rm.list")) {
+				new ListGames(player, label, args, fileConfiguration);
+			} else {
+				player.sendMessage(ConstantHolder.PERMISSION_MESSAGE);
+			}
 			break;
 		case "stop":
-			new StopGame(player, label, args, fileConfiguration);
+			if (player.hasPermission("ragemode.admin.stop")) {
+				new StopGame(player, label, args, fileConfiguration);
+			} else {
+				player.sendMessage(ConstantHolder.PERMISSION_MESSAGE);
+			}
 			break;
 		case "reload":
-			new ReloadConfig(player, label, args, fileConfiguration);
+			if (player.hasPermission("ragemode.admin.reload")) {
+				new ReloadConfig(player, label, args, fileConfiguration);
+			} else {
+				player.sendMessage(ConstantHolder.PERMISSION_MESSAGE);
+			}
 			break;
 		default:
 			player.sendMessage(

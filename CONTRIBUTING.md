@@ -87,3 +87,10 @@ If you followed these rules during your work, your pull request will likely be a
 Just create a pull request for your fork on the original [repository site](https://github.com/KWStudios/RageMode).  
 If you are unhappy with our rules, create a new [issue](https://github.com/KWStudios/RageMode/issues) and ask what you want to change.  
 If you want to be named in the credits, just leave a comment inside our code near to your changes and we will name you on the Spigot Wiki.
+
+## Exporting the plugin for testing purposes
+
+We use Maven for our project, so if you want to export the plugin as a jar file, right click the pom.xml file inside eclipse and hit *Run As > Maven build*. Now type *clean install* inside the goals. Then go ahead and change the Tab from *Main* to *JRE*. You must select a version 7 JDK (for example under *Alternate JRE:* the *jdk1.7.0_79*).  
+***Note:*** You must have a JDK installed and referenced inside your PATH variable to be able to build the jar with Maven.
+
+Once it has finished exporting, you should have a *ragemode-vX.X.jar* inside your *target* folder. This is the plugin file which you should now copy to your *plugins* folder in your Bukkit/Spigot server.

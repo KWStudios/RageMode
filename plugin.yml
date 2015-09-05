@@ -11,22 +11,27 @@ commands:
   rm add:
     description: Adds a RageMode map with the given name and the maximum player count.
     aliases: ['ragemode add']
-    permission: ragemode.rm.admin.add
+    permission: ragemode.admin.add
     permission-message: You may not use that command!
   rm lobby:
     description: Sets the lobby for the given RageMode map to the current position.
     aliases: ['ragemode lobby']
-    permission: ragemode.rm.admin.lobby
+    permission: ragemode.admin.lobby
     permission-message: You may not use that command!
   rm addspawn:
     description: Sets a spawn location for the given RageMode map to the current position.
     aliases: ['ragemode addspawn']
-    permission: ragemode.rm.admin.addspawn
+    permission: ragemode.admin.addspawn
     permission-message: You may not use that command!
   rm remove:
     description: Removes the given RageMode map.
     aliases: ['ragemode remove']
-    permission: ragemode.rm.admin.remove
+    permission: ragemode.admin.remove
+    permission-message: You may not use that command!
+  rm stop:
+    description: Stops the given RageMode map.
+    aliases: ['ragemode stop']
+    permission: ragemode.admin.stop
     permission-message: You may not use that command!
   rm join:
     description: Joins the given RageMode game.
@@ -46,7 +51,7 @@ commands:
   rm reload:
     description: Reloads the config.yml from disk.
     aliases: ['ragemode reload']
-    permission: ragemode.rm.reload
+    permission: ragemode.admin.reload
     permission-message: You may not use that command!
     
 permissions:
@@ -68,4 +73,6 @@ permissions:
             ragemode.admin.lobby: true
             ragemode.admin.addspawn: true
             ragemode.admin.remove: true
+            ragemode.admin.reload: true
+            ragemode.admin.stop: true
     

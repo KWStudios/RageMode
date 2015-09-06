@@ -173,10 +173,10 @@ public class EventListener implements Listener {
 			if((deceased.getKiller() != null && PlayerList.isPlayerPlaying(deceased.getKiller().getUniqueId().toString())) || deceased.getKiller() == null) {
 				String game = PlayerList.getPlayersGame(deceased);
 				
-				if(!fileConfiguration.isSet("global.deathmessages")) {
-					ConfigFactory.setBoolean("global", "deathmessages", false, fileConfiguration);			
+				if(!fileConfiguration.isSet("setting.global.deathmessages")) {
+					ConfigFactory.setBoolean("settings.global", "deathmessages", false, fileConfiguration);			
 				}
-				boolean doDeathBroadcast = ConfigFactory.getBoolean("global", "deathmessages", fileConfiguration);
+				boolean doDeathBroadcast = ConfigFactory.getBoolean("settings.global", "deathmessages", fileConfiguration);
 				if(deceased.getLastDamage() == 0.0f) {
 					if(deceased.getKiller() == null) {
 						if(doDeathBroadcast)

@@ -111,7 +111,7 @@ public class YAMLStats {
 				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "score", (score + pP.get(i).getPoints()), statsConfiguration);
 				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "games", (games + 1), statsConfiguration);
 				if((deaths + pP.get(i).getDeaths()) != 0)
-					ConfigFactory.setDouble("data." + pP.get(i).getPlayerUUID(), "KD", ((kills + pP.get(i).getKills())/(deaths + pP.get(i).getDeaths())), statsConfiguration);	
+					ConfigFactory.setDouble("data." + pP.get(i).getPlayerUUID(), "KD", ((double)((kills + pP.get(i).getKills()))/((double)(deaths + pP.get(i).getDeaths()))), statsConfiguration);	
 				else
 					ConfigFactory.setDouble("data." + pP.get(i).getPlayerUUID(), "KD", 1.0d, statsConfiguration);
 
@@ -141,7 +141,7 @@ public class YAMLStats {
 				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "score", pP.get(i).getPoints(), statsConfiguration);
 				ConfigFactory.setInt("data." + pP.get(i).getPlayerUUID(), "games", 1, statsConfiguration);
 				if(pP.get(i).getDeaths() != 0) 
-					ConfigFactory.setDouble("data." + pP.get(i).getPlayerUUID(), "KD", pP.get(i).getKills()/pP.get(i).getDeaths(), statsConfiguration);
+					ConfigFactory.setDouble("data." + pP.get(i).getPlayerUUID(), "KD", ((double)pP.get(i).getKills())/((double)pP.get(i).getDeaths()), statsConfiguration);
 				else
 					ConfigFactory.setDouble("data." + pP.get(i).getPlayerUUID(), "KD", 1.0d, statsConfiguration);
 			}			
@@ -179,7 +179,7 @@ public class YAMLStats {
 			plPo.setPoints(ConfigFactory.getInt("data." + sUUID, "score", statsConfiguration));
 			plPo.setGames(ConfigFactory.getInt("data." + sUUID, "games", statsConfiguration));
 			
-			ConfigFactory.getDouble("data." + sUUID, "KD", statsConfiguration);
+			plPo.setKD(ConfigFactory.getDouble("data." + sUUID, "KD", statsConfiguration));
 		}
 		return plPo;
 	}

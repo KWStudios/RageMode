@@ -120,19 +120,17 @@ public class PluginLoader extends JavaPlugin {
 				getConfig().set("settings.global.statistics.yaml", false);
 
 			if (getConfig().isSet("settings.global.statistics.mySQL")) {
-				if (getConfig().isSet("settings.global.statistics.mySQL")) {
-					if (getConfig().getBoolean("settings.global.statistics.mySQL.enable")) {
-						String databaseURL = getConfig().getString("settings.global.statistics.mySQL.url");
-						int port = getConfig().getInt("settings.global.statistics.mySQL.port");
-						String database = getConfig().getString("settings.global.statistics.mySQL.database");
-						String username = getConfig().getString("settings.global.statistics.mySQL.username");
-						String password = getConfig().getString("settings.global.statistics.mySQL.password");
-						mySqlConnector = new MySQLConnector(databaseURL, port, database, username, password);
-					}
-				} else
-					getConfig().set("settings.global.statistics.mySQL.enable", false);
+				if (getConfig().getBoolean("settings.global.statistics.mySQL.enable")) {
+					String databaseURL = getConfig().getString("settings.global.statistics.mySQL.url");
+					int port = getConfig().getInt("settings.global.statistics.mySQL.port");
+					String database = getConfig().getString("settings.global.statistics.mySQL.database");
+					String username = getConfig().getString("settings.global.statistics.mySQL.username");
+					String password = getConfig().getString("settings.global.statistics.mySQL.password");
+					mySqlConnector = new MySQLConnector(databaseURL, port, database, username, password);
+				}
 			} else
-				getConfig().set("settings.global.statistics.mySQL.enable", false);
+					getConfig().set("settings.global.statistics.mySQL.enable", false);
+			
 		} else {
 			getConfig().set("settings.global.statistics.yaml", true);
 			getConfig().set("settings.global.statistics.mySQL.enable", false);

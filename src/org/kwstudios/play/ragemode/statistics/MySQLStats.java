@@ -96,7 +96,7 @@ public class MySQLStats {
 		int newWins = (playerPoints.isWinner()) ? oldWins + 1 : oldWins;
 		int newScore = oldScore + playerPoints.getPoints();
 		int newGames = oldGames + 1;
-		double newKD = (newDeaths != 0) ? (newKills / newDeaths) : 1;
+		double newKD = (newDeaths != 0) ? (((double)newKills) / ((double)newDeaths)) : 1;
 
 		statement = null;
 		query = "REPLACE INTO rm_stats_players (name, uuid, kills, axe_kills, direct_arrow_kills, explosion_kills, knife_kills, deaths, axe_deaths, direct_arrow_deaths, explosion_deaths, knife_deaths, wins, score, games, kd) VALUES ("

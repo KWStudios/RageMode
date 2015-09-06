@@ -62,7 +62,7 @@ public class PlayerList {
 				if (list[i].equals(game)) {
 					n = i;
 					int x = 0;
-					while (n < GetGames.getMaxPlayers(game, fileConfiguration) + i - 1) {
+					while (n <= GetGames.getMaxPlayers(game, fileConfiguration) + i - 1) {
 						if(list[n + 1] == null)
 							n++;
 						else {
@@ -74,7 +74,7 @@ public class PlayerList {
 					players = Arrays.copyOf(players, x);
 				}
 			}
-		    i = i + playersPerGame;		
+		    i = i + (playersPerGame + 1);		
 		}
 		return players;
 	}
@@ -107,7 +107,7 @@ public class PlayerList {
 			if (list[i] != null) {
 				if (list[i].equals(game)) {
 					n = i;
-					while (n <= GetGames.getMaxPlayers(game, fileConfiguration)) {
+					while (n <= GetGames.getMaxPlayers(game, fileConfiguration) + i) {
 						if (list[n] == null) {
 							list[n] = player.getUniqueId().toString();
 							player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You joined "
@@ -349,9 +349,9 @@ public class PlayerList {
 			return false;
 		
 		int i = 0;
-		int imax = GetGames.getConfigGamesCount(fileConfiguration);
+		int imax = runningGames.length;
 		
-		while (i < imax) {    //TODO Fix ArrayIndexOutOfBoundsException if there are many games and just one is running
+		while (i < imax) {
 			if (runningGames[i] != null) {
 				if (runningGames[i].equals(game)) {
 					runningGames[i] = null;

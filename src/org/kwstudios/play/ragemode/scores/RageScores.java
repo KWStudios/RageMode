@@ -77,7 +77,7 @@ public class RageScores {
 						+ ChatColor.GOLD.toString() + ChatColor.BOLD.toString() + "+" + axePoints);
 
 				victim.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You were killed by "
-						+ ChatColor.BOLD.toString() + ChatColor.GOLD.toString() + killer.getName()
+						+ ChatColor.BOLD.toString() + ChatColor.GOLD.toString() + killer.getName() + " "
 						+ ChatColor.BOLD.toString() + ChatColor.DARK_RED.toString() + axeMinusPoints);
 
 				killer.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You now have "

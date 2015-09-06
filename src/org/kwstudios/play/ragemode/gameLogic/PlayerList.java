@@ -122,7 +122,7 @@ public class PlayerList {
 						n++;
 					}
 				}
-				if (player.hasPermission("rm.vip") && hasRoomForVIP(game)) {
+				if (player.hasPermission("ragemode.vip") && hasRoomForVIP(game)) {
 					Random random = new Random();
 					boolean isVIP = false;
 					Player playerToKick;

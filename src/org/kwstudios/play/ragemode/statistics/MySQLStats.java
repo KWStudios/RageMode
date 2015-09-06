@@ -30,7 +30,7 @@ public class MySQLStats {
 		Connection connection = mySQLConnector.getConnection();
 
 		Statement statement = null;
-		String query = "SELECT * FROM rm_stats_players WHERE uuid LIKE " + playerPoints.getPlayerUUID() + ";";
+		String query = "SELECT * FROM rm_stats_players WHERE uuid LIKE '" + playerPoints.getPlayerUUID() + "';";
 
 		int oldKills = 0;
 		int oldAxeKills = 0;
@@ -93,20 +93,21 @@ public class MySQLStats {
 		int newExplosionDeaths = oldExplosionDeaths + playerPoints.getExplosionDeaths();
 		int newKnifeDeaths = oldKnifeDeaths + playerPoints.getKnifeDeaths();
 
-		int newWins = (playerPoints.isWinner()) ? oldWins++ : oldWins;
+		int newWins = (playerPoints.isWinner()) ? oldWins + 1 : oldWins;
 		int newScore = oldScore + playerPoints.getPoints();
-		int newGames = oldGames++;
+		int newGames = oldGames + 1;
 		double newKD = (newDeaths != 0) ? (newKills / newDeaths) : 1;
 
 		statement = null;
-		query = "REPLACE INTO rm_stats_players (kills, axe_kills, direct_arrow_kills, explosion_kills, knife_kills, deaths, axe_deaths, direct_arrow_deaths, explosion_deaths, knife_deaths, wins, score, games, kd) VALUES ("
-				+ Integer.toString(newKills) + ", " + Integer.toString(newAxeKills) + ", "
-				+ Integer.toString(newDirectArrowKills) + ", " + Integer.toString(newExplosionKills) + ", "
-				+ Integer.toString(newKnifeKills) + ", " + Integer.toString(newDeaths) + ", "
-				+ Integer.toString(newAxeDeaths) + ", " + Integer.toString(newDirectArrowDeaths) + ", "
-				+ Integer.toString(newExplosionDeaths) + ", " + Integer.toString(newKnifeDeaths) + ", "
-				+ Integer.toString(newWins) + ", " + Integer.toString(newScore) + ", " + Integer.toString(newGames)
-				+ ", " + Double.toString(newKD) + ");";
+		query = "REPLACE INTO rm_stats_players (name, uuid, kills, axe_kills, direct_arrow_kills, explosion_kills, knife_kills, deaths, axe_deaths, direct_arrow_deaths, explosion_deaths, knife_deaths, wins, score, games, kd) VALUES ("
+				+ "'" + Bukkit.getPlayer(UUID.fromString(playerPoints.getPlayerUUID())).getName() + "', " + "'"
+				+ playerPoints.getPlayerUUID() + "', " + Integer.toString(newKills) + ", "
+				+ Integer.toString(newAxeKills) + ", " + Integer.toString(newDirectArrowKills) + ", "
+				+ Integer.toString(newExplosionKills) + ", " + Integer.toString(newKnifeKills) + ", "
+				+ Integer.toString(newDeaths) + ", " + Integer.toString(newAxeDeaths) + ", "
+				+ Integer.toString(newDirectArrowDeaths) + ", " + Integer.toString(newExplosionDeaths) + ", "
+				+ Integer.toString(newKnifeDeaths) + ", " + Integer.toString(newWins) + ", "
+				+ Integer.toString(newScore) + ", " + Integer.toString(newGames) + ", " + Double.toString(newKD) + ");";
 		try {
 			statement = connection.createStatement();
 			statement.executeUpdate(query);
@@ -131,7 +132,7 @@ public class MySQLStats {
 		Connection connection = mySQLConnector.getConnection();
 
 		Statement statement = null;
-		String query = "SELECT * FROM rm_stats_players WHERE uuid LIKE " + player.getUniqueId().toString() + ";";
+		String query = "SELECT * FROM rm_stats_players WHERE uuid LIKE '" + player.getUniqueId().toString() + "';";
 
 		int currentKills = 0;
 		int currentAxeKills = 0;

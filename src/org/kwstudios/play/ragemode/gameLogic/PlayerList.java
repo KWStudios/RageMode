@@ -351,7 +351,7 @@ public class PlayerList {
 		int i = 0;
 		int imax = GetGames.getConfigGamesCount(fileConfiguration);
 		
-		while (i < imax) {
+		while (i < imax) {    //TODO Fix ArrayIndexOutOfBoundsException if there are many games and just one is running
 			if (runningGames[i] != null) {
 				if (runningGames[i].equals(game)) {
 					runningGames[i] = null;

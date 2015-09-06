@@ -22,7 +22,9 @@ public class RageScores {
 	public static void addPointsToPlayer(Player killer, Player victim, String killCause) {
 		if (!killer.getUniqueId().toString().equals(victim.getUniqueId().toString())) {
 
+			String killerUUID = killer.getUniqueId().toString();
 			PlayerPoints killerPoints;
+			String victimUUID = victim.getUniqueId().toString();
 			PlayerPoints victimPoints;
 
 			switch (killCause.toLowerCase()) {
@@ -31,14 +33,14 @@ public class RageScores {
 				totalPoints = addPoints(killer, PlayerList.getPlayersGame(killer), bowPoints, true);
 				addPoints(victim, PlayerList.getPlayersGame(victim), 0, false);
 
-				killerPoints = playerpoints.get(killer.getUniqueId().toString());
+				killerPoints = playerpoints.get(killerUUID);
 				int oldDirectArrowKills = killerPoints.getDirectArrowKills();
-				int newDirectArrowKills = oldDirectArrowKills++;
+				int newDirectArrowKills = oldDirectArrowKills + 1;
 				killerPoints.setDirectArrowKills(newDirectArrowKills);
 
-				victimPoints = playerpoints.get(victim.getUniqueId().toString());
+				victimPoints = playerpoints.get(victimUUID);
 				int oldDirectArrowDeaths = victimPoints.getDirectArrowDeaths();
-				int newDirectArrowDeaths = oldDirectArrowDeaths++;
+				int newDirectArrowDeaths = oldDirectArrowDeaths + 1;
 				victimPoints.setDirectArrowDeaths(newDirectArrowDeaths);
 
 				killer.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You killed "
@@ -59,14 +61,14 @@ public class RageScores {
 				totalPoints = addPoints(killer, PlayerList.getPlayersGame(killer), axePoints, true);
 				addPoints(victim, PlayerList.getPlayersGame(victim), axeMinusPoints, false);
 
-				killerPoints = playerpoints.get(killer.getUniqueId().toString());
+				killerPoints = playerpoints.get(killerUUID);
 				int oldAxeKills = killerPoints.getAxeKills();
-				int newAxeKills = oldAxeKills++;
+				int newAxeKills = oldAxeKills + 1;
 				killerPoints.setAxeKills(newAxeKills);
 
-				victimPoints = playerpoints.get(victim.getUniqueId().toString());
+				victimPoints = playerpoints.get(victimUUID);
 				int oldAxeDeaths = victimPoints.getAxeDeaths();
-				int newAxeDeaths = oldAxeDeaths++;
+				int newAxeDeaths = oldAxeDeaths + 1;
 				victimPoints.setAxeDeaths(newAxeDeaths);
 
 				killer.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You killed "
@@ -87,15 +89,15 @@ public class RageScores {
 				totalPoints = addPoints(killer, PlayerList.getPlayersGame(killer), knifePoints, true);
 				addPoints(victim, PlayerList.getPlayersGame(victim), 0, false);
 
-				killerPoints = playerpoints.get(killer.getUniqueId().toString());
+				killerPoints = playerpoints.get(killerUUID);
 				int oldKnifeKills = killerPoints.getKnifeKills();
-				int newKnifeKills = oldKnifeKills++;
-				killerPoints.setAxeKills(newKnifeKills);
+				int newKnifeKills = oldKnifeKills + 1;
+				killerPoints.setKnifeKills(newKnifeKills);
 
-				victimPoints = playerpoints.get(victim.getUniqueId().toString());
+				victimPoints = playerpoints.get(victimUUID);
 				int oldKnifeDeaths = victimPoints.getKnifeDeaths();
-				int newKnifeDeaths = oldKnifeDeaths++;
-				victimPoints.setAxeDeaths(newKnifeDeaths);
+				int newKnifeDeaths = oldKnifeDeaths + 1;
+				victimPoints.setKnifeDeaths(newKnifeDeaths);
 
 				killer.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You killed "
 						+ ChatColor.GOLD.toString() + ChatColor.BOLD.toString() + victim.getName()
@@ -114,15 +116,15 @@ public class RageScores {
 				totalPoints = addPoints(killer, PlayerList.getPlayersGame(killer), explosionPoints, true);
 				addPoints(victim, PlayerList.getPlayersGame(victim), 0, false);
 
-				killerPoints = playerpoints.get(killer.getUniqueId().toString());
+				killerPoints = playerpoints.get(killerUUID);
 				int oldExplosionKills = killerPoints.getExplosionKills();
-				int newExplosionKills = oldExplosionKills++;
-				killerPoints.setAxeKills(newExplosionKills);
+				int newExplosionKills = oldExplosionKills + 1;
+				killerPoints.setExplosionKills(newExplosionKills);
 
-				victimPoints = playerpoints.get(victim.getUniqueId().toString());
+				victimPoints = playerpoints.get(victimUUID);
 				int oldExplosionDeaths = victimPoints.getExplosionDeaths();
-				int newExplosionDeaths = oldExplosionDeaths++;
-				victimPoints.setAxeDeaths(newExplosionDeaths);
+				int newExplosionDeaths = oldExplosionDeaths + 1;
+				victimPoints.setExplosionDeaths(newExplosionDeaths);
 
 				killer.sendMessage(
 						ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + "You killed " + ChatColor.GOLD.toString()
@@ -193,9 +195,8 @@ public class RageScores {
 			int oldPoints = pointsHolder.getPoints();
 			int oldKills = pointsHolder.getKills();
 			int oldDeaths = pointsHolder.getDeaths();
-			playerpoints.remove(playerUUID);
+			//playerpoints.remove(playerUUID);
 			int totalPoints = oldPoints + points;
-			;
 			int totalKills = oldKills;
 			int totalDeaths = oldDeaths;
 			if (killer) {
@@ -206,7 +207,7 @@ public class RageScores {
 			pointsHolder.setPoints(totalPoints);
 			pointsHolder.setKills(totalKills);
 			pointsHolder.setDeaths(totalDeaths);
-			playerpoints.put(playerUUID, pointsHolder);
+			//playerpoints.put(playerUUID, pointsHolder);
 			return totalPoints;
 		} else {
 			int totalKills = 0;

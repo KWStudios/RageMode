@@ -1,6 +1,10 @@
 package org.kwstudios.play.ragemode.loader;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.logging.Logger;
 
 import org.bukkit.command.Command;
@@ -14,10 +18,12 @@ import org.kwstudios.play.ragemode.commands.StopGame;
 import org.kwstudios.play.ragemode.database.MySQLConnector;
 import org.kwstudios.play.ragemode.events.EventListener;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
+import org.kwstudios.play.ragemode.locale.Messages;
 import org.kwstudios.play.ragemode.metrics.Metrics;
 import org.kwstudios.play.ragemode.statistics.YAMLStats;
 import org.kwstudios.play.ragemode.updater.Updater;
 
+import com.google.gson.Gson;
 import com.mysql.jdbc.authentication.MysqlClearPasswordPlugin;
 
 /*import com.comphenix.protocol.PacketType;
@@ -31,6 +37,7 @@ public class PluginLoader extends JavaPlugin {
 
 	private static PluginLoader instance = null;
 	private static MySQLConnector mySqlConnector = null;
+	private static Messages messages = null;
 	// private ProtocolManager protocolManager;
 
 	@Override
@@ -76,6 +83,8 @@ public class PluginLoader extends JavaPlugin {
 
 		initStatistics();
 
+		loadMessages();
+
 		saveConfig();
 
 	}
@@ -95,7 +104,7 @@ public class PluginLoader extends JavaPlugin {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if (!(sender instanceof Player)) {
-			sender.sendMessage("You must be a Player!");
+			sender.sendMessage(messages.NOT_A_PLAYER);
 			return false;
 		}
 
@@ -129,8 +138,8 @@ public class PluginLoader extends JavaPlugin {
 					mySqlConnector = new MySQLConnector(databaseURL, port, database, username, password);
 				}
 			} else
-					getConfig().set("settings.global.statistics.mySQL.enable", false);
-			
+				getConfig().set("settings.global.statistics.mySQL.enable", false);
+
 		} else {
 			getConfig().set("settings.global.statistics.yaml", true);
 			getConfig().set("settings.global.statistics.mySQL.enable", false);
@@ -142,12 +151,28 @@ public class PluginLoader extends JavaPlugin {
 		}
 	}
 
+	public void loadMessages() {
+		InputStream input = getClass().getResourceAsStream("/en.json");
+		BufferedReader reader;
+		try {
+			reader = new BufferedReader(new InputStreamReader(input, "UTF8"));
+			Gson gson = new Gson();
+			messages = gson.fromJson(reader, Messages.class);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static PluginLoader getInstance() {
 		return PluginLoader.instance;
 	}
 
 	public static MySQLConnector getMySqlConnector() {
 		return mySqlConnector;
+	}
+
+	public static Messages getMessages() {
+		return messages;
 	}
 
 }

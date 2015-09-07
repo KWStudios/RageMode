@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
+import org.kwstudios.play.ragemode.loader.PluginLoader;
 import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 
@@ -22,8 +23,10 @@ public class AddGame {
 	}
 
 	private void addGametoConfig() {
-		if(args.length < 3) {
-			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED + "Missing arguments! Usage: /rm add <GameName> <MaxPlayers>");
+		if (args.length < 3) {
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX
+					+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().MISSING_ARGUMENTS
+							.replace("$USAGE$", "/rm add <GameName> <MaxPlayers>")));
 			return;
 		}
 		@SuppressWarnings("unused")
@@ -31,23 +34,25 @@ public class AddGame {
 		try {
 			x = Integer.parseInt(args[2]);
 		} catch (Exception e) {
-			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED + args[2] + " is not a number.");
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+					PluginLoader.getMessages().NOT_A_NUMBER.replace("$WRONG_NUMBER$", args[2])));
 			return;
 		}
 
 		if (fileConfiguration.isSet("settings.games." + args[1])) {
-			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED + args[1] + " already exists.");
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+					PluginLoader.getMessages().ALREADY_EXISTS.replace("$GAME$", args[1])));
 			return;
 		}
-		
+
 		PlayerList.addGameToList(args[1], Integer.parseInt(args[2]));
-		
+
 		ConfigFactory.setString("settings.games", args[1], "", fileConfiguration);
 		ConfigFactory.setInt("settings.games." + args[1], "maxplayers", Integer.parseInt(args[2]), fileConfiguration);
 		ConfigFactory.setString("settings.games." + args[1], "world", player.getWorld().getName(), fileConfiguration);
-		
-		player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_GREEN + "The game " + ChatColor.DARK_AQUA + args[1]
-				+ ChatColor.DARK_GREEN + " was added successfully!");
+
+		player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+				PluginLoader.getMessages().ADDED_SUCCESSFULLY.replace("$GAME$", args[1])));
 		return;
 	}
 

@@ -57,7 +57,7 @@ public class PlayerList {
 		int imax = GetGames.getConfigGamesCount(fileConfiguration)
 				* (GetGames.getOverallMaxPlayers(fileConfiguration) + 1);
 		int playersPerGame = GetGames.getOverallMaxPlayers(fileConfiguration);
-		while (i <= imax) {
+		while (i < imax) {
 			if(list[i] != null) {
 				if (list[i].equals(game)) {
 					n = i;

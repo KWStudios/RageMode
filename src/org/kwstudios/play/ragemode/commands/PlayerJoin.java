@@ -10,6 +10,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
+import org.kwstudios.play.ragemode.loader.PluginLoader;
 import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 import org.kwstudios.play.ragemode.toolbox.GameBroadcast;
@@ -33,7 +34,8 @@ public class PlayerJoin {
 
 	private void doPlayerJoin() {
 		if (args.length < 2) {
-			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED + "Missing arguments! Usage: /rm join <GameName>");
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+					PluginLoader.getMessages().MISSING_ARGUMENTS.replace("$USAGE$", "/rm join <GameName>")));
 			return;
 		}
 		MapChecker mapChecker = new MapChecker(args[1], fileConfiguration);
@@ -42,9 +44,9 @@ public class PlayerJoin {
 			double lobbyX = ConfigFactory.getDouble(ConstantHolder.GAME_PATH + "." + args[1] + ".lobby", "x", fileConfiguration);
 			double lobbyY = ConfigFactory.getDouble(ConstantHolder.GAME_PATH + "." + args[1] + ".lobby", "y", fileConfiguration);
 			double lobbyZ = ConfigFactory.getDouble(ConstantHolder.GAME_PATH + "." + args[1] + ".lobby", "z", fileConfiguration);
-			double lobbyYaw =  ConfigFactory.getDouble(ConstantHolder.GAME_PATH + "." + args[1] + ".lobby", "yaw", fileConfiguration);
-			double lobbyPitch =  ConfigFactory.getDouble(ConstantHolder.GAME_PATH + "." + args[1] + ".lobby", "pitch", fileConfiguration);
-			
+			double lobbyYaw = ConfigFactory.getDouble(ConstantHolder.GAME_PATH + "." + args[1] + ".lobby", "yaw", fileConfiguration);
+			double lobbyPitch = ConfigFactory.getDouble(ConstantHolder.GAME_PATH + "." + args[1] + ".lobby", "pitch", fileConfiguration);
+
 			Location lobbyLocation = new Location(Bukkit.getWorld(world), lobbyX, lobbyY, lobbyZ);
 			lobbyLocation.setYaw((float) lobbyYaw);
 			lobbyLocation.setPitch((float) lobbyPitch);
@@ -74,13 +76,14 @@ public class PlayerJoin {
 				player.getInventory().setChestplate(null);
 				player.getInventory().setLeggings(null);
 				player.getInventory().setBoots(null);
-				String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_GREEN + player.getName()
-						+ ChatColor.BLUE + " joined the game.";
+				String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+						PluginLoader.getMessages().PLAYER_JOINED.replace("$PLAYER$", player.getName()));
 				GameBroadcast.broadcastToGame(args[1], message);
 				logger.info(message);
 			} else {
-				logger.info(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED + player.getName()
-						+ " could not join the RageMode game " + args[1] + ".");
+				logger.info(ConstantHolder.RAGEMODE_PREFIX
+						+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PLAYER_COULD_NOT_JOIN
+								.replace("$PLAYER$", player.getName()).replace("$GAME$", args[1])));
 			}
 
 		} else {

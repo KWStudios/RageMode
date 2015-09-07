@@ -3,35 +3,38 @@ package org.kwstudios.play.ragemode.commands;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.kwstudios.play.ragemode.loader.PluginLoader;
 import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 
 public class AddSpawn {
-	
+
 	private Player player;
 	private String[] args;
 	private FileConfiguration fileConfiguration;
-	
+
 	public AddSpawn(Player player, String label, String[] args, FileConfiguration fileConfiguration) {
 		this.player = player;
 		this.args = args;
 		this.fileConfiguration = fileConfiguration;
-		
+
 		addSpawnToConfig();
 	}
-	
+
 	private void addSpawnToConfig() {
-		if(args.length < 2) {
-			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED + "Missing arguments! Usage: /rm addspawn <GameName>");
+		if (args.length < 2) {
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+					PluginLoader.getMessages().MISSING_ARGUMENTS.replace("$USAGE$", "/rm addspawn <GameName>")));
 			return;
 		}
 		int i = 1;
-		if(!fileConfiguration.isSet("settings.games." + args[1])) {
-			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED + args[1] + " doesn't exist.");
+		if (!fileConfiguration.isSet("settings.games." + args[1])) {
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+					PluginLoader.getMessages().NOT_SET_YET.replace("$USAGE$", "/rm add <GameName> <MaxPlayers>")));
 			return;
 		}
-				
-		while(fileConfiguration.isSet("settings.games." + args[1] + ".spawns." + Integer.toString(i))) {
+
+		while (fileConfiguration.isSet("settings.games." + args[1] + ".spawns." + Integer.toString(i))) {
 			i++;
 		}
 		ConfigFactory.setString("settings.games." + args[1] + ".spawns", Integer.toString(i), "", fileConfiguration);
@@ -40,8 +43,9 @@ public class AddSpawn {
 		ConfigFactory.setDouble("settings.games." + args[1] + ".spawns." + Integer.toString(i), "z", player.getLocation().getZ(), fileConfiguration);
 		ConfigFactory.setDouble("settings.games." + args[1] + ".spawns." + Integer.toString(i), "yaw", player.getLocation().getYaw(), fileConfiguration);
 		ConfigFactory.setDouble("settings.games." + args[1] + ".spawns." + Integer.toString(i), "pitch", player.getLocation().getPitch(), fileConfiguration);
-		player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_GREEN + "Spawn " + Integer.toString(i) + " for the game " + ChatColor.DARK_AQUA + args[1]
-				+ ChatColor.DARK_GREEN + " was set successfully!");
+		player.sendMessage(ConstantHolder.RAGEMODE_PREFIX
+				+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().SPAWN_SUCCESSFULLY
+						.replace("$NUMBER$", Integer.toString(i)).replace("$GAME$", args[1])));
 	}
 
 }

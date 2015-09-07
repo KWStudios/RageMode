@@ -3,6 +3,7 @@ package org.kwstudios.play.ragemode.commands;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.kwstudios.play.ragemode.loader.PluginLoader;
 import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 
@@ -28,8 +29,8 @@ public class AddLobby {
 		if (args.length >= 2) {
 			String gameName = args[1];
 			if (!fileConfiguration.isSet(GAMES_PATH + "." + gameName)) {
-				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "This game was not set yet! Set it with "
-						+ ChatColor.DARK_RED + "/rm add [name]");
+				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+						PluginLoader.getMessages().NOT_SET_YET.replace("$USAGE$", "/rm add <GameName> <MaxPlayers>")));
 				return;
 			} else {
 				String path = GAMES_PATH + "." + gameName + "." + "lobby";
@@ -39,13 +40,13 @@ public class AddLobby {
 				ConfigFactory.setDouble(path, "z", player.getLocation().getZ(), fileConfiguration);
 				ConfigFactory.setDouble(path, "yaw", player.getLocation().getYaw(), fileConfiguration);
 				ConfigFactory.setDouble(path, "pitch", player.getLocation().getPitch(), fileConfiguration);
-				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_GREEN + "The lobby for the game "
-						+ ChatColor.DARK_AQUA + gameName + ChatColor.DARK_GREEN + " was set successfully!");
-				
+				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+						PluginLoader.getMessages().LOBBY_SUCCESSFULLY.replace("$GAME$", gameName)));
+
 			}
 		} else {
-			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED
-					+ "Missing arguments! Usage: /rm lobby <GameName>");
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+					PluginLoader.getMessages().MISSING_ARGUMENTS.replace("$USAGE$", "/rm lobby <GameName>")));
 		}
 	}
 

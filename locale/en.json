@@ -26,7 +26,7 @@
 
   "GAME_NOT_RUNNING": "This game isn't running.",
   "SEARCHING_GAMES_TO_STOP": "RageMode is searching for games to stop...",
-  "GAME_STOPPED": "$GAME$ has been stopped.",
+  "GAME_STOPPED": "§3$GAME$ §2has been stopped.",
   "ALL_GAMES_STOPPED": "All games stopped!",
 
   "RELOADED_SUCCESSFULLY": "§2The config file was reloaded successfully!"

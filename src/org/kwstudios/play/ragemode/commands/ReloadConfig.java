@@ -12,8 +12,8 @@ public class ReloadConfig {
 		PluginLoader pluginLoader = PluginLoader.getInstance();
 		pluginLoader.reloadConfig();
 		pluginLoader.initStatistics();
-		player.sendMessage(
-				ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_GREEN + "The config file was reloaded successfully!");
+		player.sendMessage(ConstantHolder.RAGEMODE_PREFIX
+				+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().RELOADED_SUCCESSFULLY));
 		// TODO To be continued...
 	}
 

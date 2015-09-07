@@ -20,13 +20,16 @@
 		</plugins>
 		<resources>
 			<resource>
-				<directory>./</directory>
+				<directory>${basedir}</directory>
 				<includes>
 					<include>config.yml</include>
 					<include>LICENSE</include>
 					<include>plugin.yml</include>
 					<include>README.md</include>
 				</includes>
+			</resource>
+			<resource>
+				<directory>${basedir}/locale</directory>
 			</resource>
 		</resources>
 	</build>

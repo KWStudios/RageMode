@@ -1,0 +1,33 @@
+{
+  "NOT_A_PLAYER": "You must be a player!",
+  "WRONG_COMMAND": "§4This is not the command you are looking for!",
+  "PERMISSION_MESSAGE": "§4You may not use that command!",
+
+  "MISSING_ARGUMENTS": "§4Missing arguments! Usage: $USAGE$",
+
+  "NOT_A_NUMBER": "§4$WRONG_NUMBER$ is not a number.",
+  "ALREADY_EXISTS": "§4$GAME$ already exists.",
+  "ADDED_SUCCESSFULLY": "§2The game §3$GAME$ §2was added successfully!",
+
+  "NOT_SET_YET": "§4This game was not set yet! Set it with $USAGE$",
+  "LOBBY_SUCCESSFULLY": "§2The lobby for the game §3$GAME$ §2was set successfully!",
+
+  "SPAWN_SUCCESSFULLY": "§2Spawn $NUMBER$ for the game §3$GAME$ §2was set successfully!",
+
+  "PLAYER_JOINED": "§2$PLAYER$ §9joined the game.",
+  "PLAYER_COULD_NOT_JOIN": "§4$PLAYER$ could not join the RageMode game $GAME$.",
+
+  "REMOVED_NON_EXISTANT_GAME": "§4Don't remove nonexistent games!",
+  "GAME_RUNNING": "§4This game is running at the moment. Please wait until it is over.",
+  "REMOVED_SUCCESSFULLY": "The game $GAME$ was removed successfully.",
+
+  "LISTING_GAMES": "Listing all available ragemode games...",
+  "NO_GAMES_AVAILABLE": "There are currently no RageMode maps on this server.",
+
+  "GAME_NOT_RUNNING": "This game isn't running.",
+  "SEARCHING_GAMES_TO_STOP": "RageMode is searching for games to stop...",
+  "GAME_STOPPED": "$GAME$ has been stopped.",
+  "ALL_GAMES_STOPPED": "All games stopped!",
+
+  "RELOADED_SUCCESSFULLY": "§2The config file was reloaded successfully!",
+}

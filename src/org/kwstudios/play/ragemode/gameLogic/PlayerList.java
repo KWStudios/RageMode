@@ -122,96 +122,96 @@ public class PlayerList {
 						}
 						n++;
 					}
-				}
-				if (player.hasPermission("ragemode.vip") && hasRoomForVIP(game)) {
-					Random random = new Random();
-					boolean isVIP = false;
-					Player playerToKick;
-					
-					do {
-						kickposition = random.nextInt(GetGames.getMaxPlayers(game,
-								fileConfiguration) - 1);
-						kickposition = kickposition + 1 + i;
-						n = 0;
-						playerToKick = Bukkit.getPlayer(UUID
-								.fromString(list[kickposition]));	
-						isVIP = playerToKick.hasPermission("ragemode.vip");
-					} while (isVIP);
+					if (player.hasPermission("ragemode.vip") && hasRoomForVIP(game)) {
+						Random random = new Random();
+						boolean isVIP = false;
+						Player playerToKick;
 						
-					while (n < oldLocations.getFirstLength()) {						//Get him back to his old location.
-						if (oldLocations.getFromFirstObject(n) == playerToKick) {
-							playerToKick.teleport(oldLocations
-									.getFromSecondObject(n));
-							oldLocations.removeFromBoth(n);
+						do {
+							kickposition = random.nextInt(GetGames.getMaxPlayers(game,
+									fileConfiguration) - 1);
+							kickposition = kickposition + 1 + i;
+							n = 0;
+							playerToKick = Bukkit.getPlayer(UUID
+									.fromString(list[kickposition]));	
+							isVIP = playerToKick.hasPermission("ragemode.vip");
+						} while (isVIP);
+							
+						while (n < oldLocations.getFirstLength()) {						//Get him back to his old location.
+							if (oldLocations.getFromFirstObject(n) == playerToKick) {
+								playerToKick.teleport(oldLocations
+										.getFromSecondObject(n));
+								oldLocations.removeFromBoth(n);
+							}
+							n++;
 						}
-						n++;
-					}
-					
-					n = 0;
-					
-					while (n < oldInventories.getFirstLength()) {						//Give him his inventory back.
-						if (oldInventories.getFromFirstObject(n) == playerToKick) {
-							playerToKick.getInventory().clear();
-							playerToKick.getInventory().setContents(oldInventories.getFromSecondObject(n));
-							oldInventories.removeFromBoth(n);
+						
+						n = 0;
+						
+						while (n < oldInventories.getFirstLength()) {						//Give him his inventory back.
+							if (oldInventories.getFromFirstObject(n) == playerToKick) {
+								playerToKick.getInventory().clear();
+								playerToKick.getInventory().setContents(oldInventories.getFromSecondObject(n));
+								oldInventories.removeFromBoth(n);
+							}
+							n++;
 						}
-						n++;
-					}
-					
-					n = 0;
-					
-					while (n < oldArmor.getFirstLength()) {							//Give him his armor back.
-						if (oldArmor.getFromFirstObject(n) == playerToKick) {
-							playerToKick.getInventory().setArmorContents(oldArmor.getFromSecondObject(n));
-							oldArmor.removeFromBoth(n);
+						
+						n = 0;
+						
+						while (n < oldArmor.getFirstLength()) {							//Give him his armor back.
+							if (oldArmor.getFromFirstObject(n) == playerToKick) {
+								playerToKick.getInventory().setArmorContents(oldArmor.getFromSecondObject(n));
+								oldArmor.removeFromBoth(n);
+							}
+							n++;
 						}
-						n++;
-					}
-					
-					n = 0;
-					
-					while (n < oldHealth.getFirstLength()) {							//Give him his health back.
-						if (oldHealth.getFromFirstObject(n) == playerToKick) {
-							playerToKick.setHealth(oldHealth.getFromSecondObject(n));
-							oldHealth.removeFromBoth(n);
+						
+						n = 0;
+						
+						while (n < oldHealth.getFirstLength()) {							//Give him his health back.
+							if (oldHealth.getFromFirstObject(n) == playerToKick) {
+								playerToKick.setHealth(oldHealth.getFromSecondObject(n));
+								oldHealth.removeFromBoth(n);
+							}
+							n++;
 						}
-						n++;
-					}
-					
-					n = 0;
-					
-					while (n < oldHunger.getFirstLength()) {							//Give him his hunger back.
-						if (oldHunger.getFromFirstObject(n) == playerToKick) {
-							playerToKick.setFoodLevel(oldHunger.getFromSecondObject(n));
-							oldHunger.removeFromBoth(n);
+						
+						n = 0;
+						
+						while (n < oldHunger.getFirstLength()) {							//Give him his hunger back.
+							if (oldHunger.getFromFirstObject(n) == playerToKick) {
+								playerToKick.setFoodLevel(oldHunger.getFromSecondObject(n));
+								oldHunger.removeFromBoth(n);
+							}
+							n++;
 						}
-						n++;
-					}
-					
-					n = 0;
-					
-					while (n < oldGameMode.getFirstLength()) {							//Give him his gamemode back.
-						if (oldGameMode.getFromFirstObject(n) == playerToKick) {
-							playerToKick.setGameMode(oldGameMode.getFromSecondObject(n));
-							oldGameMode.removeFromBoth(n);
+						
+						n = 0;
+						
+						while (n < oldGameMode.getFirstLength()) {							//Give him his gamemode back.
+							if (oldGameMode.getFromFirstObject(n) == playerToKick) {
+								playerToKick.setGameMode(oldGameMode.getFromSecondObject(n));
+								oldGameMode.removeFromBoth(n);
+							}
+							n++;
 						}
-						n++;
+						
+						list[kickposition] = player.getUniqueId().toString();
+						playerToKick
+								.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You were kicked out of the Game to make room for a VIP.");
+	
+						if (getPlayersInGame(game).length == 2) {
+							new LobbyTimer(game, fileConfiguration);
+						}
+						player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You joined " + ChatColor.DARK_AQUA + game + ChatColor.WHITE + ".");
+						return true;
+				
+					} else {
+						player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "This Game is already full!");
+						return false;
 					}
-					
-					list[kickposition] = player.getUniqueId().toString();
-					playerToKick
-							.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You were kicked out of the Game to make room for a VIP.");
-
-					if (getPlayersInGame(game).length == 2) {
-						new LobbyTimer(game, fileConfiguration);
-					}
-					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You joined " + ChatColor.DARK_AQUA + game + ChatColor.WHITE + ".");
-					return true;
-				} else {
-					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "This Game is already full!");
-					return false;
 				}
-
 			}
 			i = i + playersPerGame;
 		}

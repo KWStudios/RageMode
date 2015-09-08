@@ -38,7 +38,7 @@ public class ShowStats {
 	}
 
 	private void constructMessage(Player player, String playerName) {		
-		Thread thread = new Thread(new uuiderThread(playerName));
+		Thread thread = new Thread(new uuiderThread(player, playerName));
 		thread.start();
 	}
 
@@ -50,10 +50,13 @@ public class ShowStats {
 	
 	private class uuiderThread implements Runnable {
 		private String name;
+		private Player player;
 		private String sUUID;
-		public uuiderThread(String name) {
+		public uuiderThread(Player player, String name) {
+			this.player = player;
 			this.name = name;
 		}
+		
 		@Override
 		public void run() {
 		//	http("https://api.mojang.com/users/profiles/minecraft/" + name, "");
@@ -69,7 +72,7 @@ public class ShowStats {
 			CharSequence sUUID_SEQ_5 = sUUID.subSequence(20, 32);
 			sUUID = new String(sUUID_SEQ_1 + "-" + sUUID_SEQ_2 + "-" + sUUID_SEQ_3 + "-" + sUUID_SEQ_4 + "-" + sUUID_SEQ_5);
 			
-			Player player = Bukkit.getPlayer(UUID.fromString(sUUID));
+			Player statsPlayer = Bukkit.getPlayer(UUID.fromString(sUUID));
 			RetPlayerPoints rpp = null;
 			
 			if(PluginLoader.getInstance().getConfig().getString("settings.global.statistics.type").equalsIgnoreCase("yaml")) {
@@ -82,7 +85,7 @@ public class ShowStats {
 			}
 			
 			if(rpp != null) {
-				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "Showing the stats of " + name + ":");
+				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "Showing the stats of " + statsPlayer + ":");
 				player.sendMessage("Deaths:  " + rpp.getDeaths());
 				player.sendMessage("Kills:   " + rpp.getKills());
 				player.sendMessage("KD:      " + rpp.getKD());

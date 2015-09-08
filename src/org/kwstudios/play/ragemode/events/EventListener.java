@@ -42,6 +42,7 @@ import org.kwstudios.play.ragemode.scores.RageScores;
 import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 import org.kwstudios.play.ragemode.toolbox.GameBroadcast;
+import org.kwstudios.play.ragemode.toolbox.GetGames;
 
 
 
@@ -320,8 +321,13 @@ public class EventListener implements Listener {
 	@EventHandler
 	public void onSignChange(SignChangeEvent event){
 		Sign sign = (Sign) event.getBlock();
-		if(event.getLine(0).equalsIgnoreCase("[rm]") || event.getLine(0).equalsIgnoreCase("[ragemode]")){
-			//TODO Get all available games and set the lines for the sign.
+		if(event.getLine(0).trim().equalsIgnoreCase("[rm]") || event.getLine(0).trim().equalsIgnoreCase("[ragemode]")){
+			String[] allGames = GetGames.getGameNames(PluginLoader.getInstance().getConfig());
+			for(String game : allGames){
+				if(event.getLine(1).trim().equalsIgnoreCase(game.trim())){
+					
+				}
+			}
 		}
 	}
 }

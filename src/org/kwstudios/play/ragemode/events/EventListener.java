@@ -39,6 +39,7 @@ import org.kwstudios.play.ragemode.gameLogic.PlayerList;
 import org.kwstudios.play.ragemode.items.CombatAxe;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
 import org.kwstudios.play.ragemode.scores.RageScores;
+import org.kwstudios.play.ragemode.signs.SignCreator;
 import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 import org.kwstudios.play.ragemode.toolbox.GameBroadcast;
@@ -275,6 +276,10 @@ public class EventListener implements Listener {
 		if(PlayerList.isPlayerPlaying(event.getPlayer().getUniqueId().toString())) {
 			event.setCancelled(true);
 		}
+		
+		if(event.getBlock() instanceof Sign){
+			SignCreator.removeSign((Sign)event.getBlock());
+		}
 	}
 
 	@EventHandler
@@ -325,7 +330,7 @@ public class EventListener implements Listener {
 			String[] allGames = GetGames.getGameNames(PluginLoader.getInstance().getConfig());
 			for(String game : allGames){
 				if(event.getLine(1).trim().equalsIgnoreCase(game.trim())){
-					
+					SignCreator.createNewSign(sign, game);
 				}
 			}
 		}

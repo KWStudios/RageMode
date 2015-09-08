@@ -85,7 +85,7 @@ public class ShowStats {
 			}
 			
 			if(rpp != null) {
-				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "Showing the stats of " + statsPlayer + ":");
+				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "Showing the stats of " + name + ":");
 				player.sendMessage("Deaths:  " + rpp.getDeaths());
 				player.sendMessage("Kills:   " + rpp.getKills());
 				player.sendMessage("KD:      " + rpp.getKD());

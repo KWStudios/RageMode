@@ -20,15 +20,13 @@ public class SignCreator {
 		File file = SignConfiguration.getYamlSignsFile();
 		FileConfiguration fileConfiguration = SignConfiguration.getSignConfiguration();
 
-		Bukkit.broadcastMessage(Integer.toString(sign.getLocation().getBlockX()));
-		
-		Bukkit.broadcastMessage(Integer.toString(sign.getX()));
-		
 		Set<String> signs = ConfigFactory.getKeysUnderPath("signs", false, fileConfiguration);
-		if (signs.contains(
-				Integer.toString(sign.getLocation().getBlockX()) + Integer.toString(sign.getLocation().getBlockY())
-						+ Integer.toString(sign.getLocation().getBlockZ()) + sign.getWorld().getName())) {
-			return false;
+		if (signs != null) {
+			if (signs.contains(
+					Integer.toString(sign.getLocation().getBlockX()) + Integer.toString(sign.getLocation().getBlockY())
+							+ Integer.toString(sign.getLocation().getBlockZ()) + sign.getWorld().getName())) {
+				return false;
+			}
 		}
 
 		int x = sign.getX();

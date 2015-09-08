@@ -325,8 +325,13 @@ public class EventListener implements Listener {
 	
 	@EventHandler
 	public void onSignChange(SignChangeEvent event){
-		Sign sign = (Sign) event.getBlock();
-		if(event.getLine(0).trim().equalsIgnoreCase("[rm]") || event.getLine(0).trim().equalsIgnoreCase("[ragemode]")){
+		Sign sign;
+		if(event.getBlock() instanceof Sign){
+		sign = (Sign) event.getBlock();
+		}else{
+			return;
+		}
+		if(event.getLine(1).trim().equalsIgnoreCase("[rm]") || event.getLine(2).trim().equalsIgnoreCase("[ragemode]")){
 			String[] allGames = GetGames.getGameNames(PluginLoader.getInstance().getConfig());
 			for(String game : allGames){
 				if(event.getLine(1).trim().equalsIgnoreCase(game.trim())){

@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -25,7 +24,6 @@ import org.kwstudios.play.ragemode.statistics.YAMLStats;
 import org.kwstudios.play.ragemode.updater.Updater;
 
 import com.google.gson.Gson;
-import com.mysql.jdbc.authentication.MysqlClearPasswordPlugin;
 
 /*import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;

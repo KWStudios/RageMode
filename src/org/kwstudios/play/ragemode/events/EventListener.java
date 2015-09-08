@@ -11,7 +11,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Arrow;
@@ -278,8 +277,8 @@ public class EventListener implements Listener {
 			event.setCancelled(true);
 		}
 		
-		if(event.getBlock() instanceof Sign){
-			SignCreator.removeSign((Sign)event.getBlock());
+		if(event.getBlock().getState() instanceof Sign){
+			SignCreator.removeSign((Sign)event.getBlock().getState());
 		}
 	}
 
@@ -333,7 +332,7 @@ public class EventListener implements Listener {
 			for(String game : allGames){
 				if(event.getLine(2).trim().equalsIgnoreCase(game.trim())){
 					SignCreator.createNewSign(sign, game);
-					SignCreator.updateSign(sign);
+					SignCreator.updateSign(event);
 				}
 			}
 		}

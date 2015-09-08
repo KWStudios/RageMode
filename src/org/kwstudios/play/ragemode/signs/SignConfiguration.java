@@ -19,7 +19,7 @@ public class SignConfiguration {
 		else
 			inited = true;
 
-		File file = new File(PluginLoader.getInstance().getDataFolder(), "stats.yml");
+		File file = new File(PluginLoader.getInstance().getDataFolder(), "signs.yml");
 		YamlConfiguration config = null;
 		yamlSignsFile = file;
 

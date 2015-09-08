@@ -107,7 +107,8 @@ public class PlayerList {
 			if (list[i] != null) {
 				if (list[i].equals(game)) {
 					n = i;
-					while (n <= GetGames.getMaxPlayers(game, fileConfiguration) + i) {
+					n++;	//should increase performance because the gamename in the list isn't checked for null 
+					while (n <= (GetGames.getMaxPlayers(game, fileConfiguration) + i)) {
 						if (list[n] == null) {
 							list[n] = player.getUniqueId().toString();
 							player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You joined "
@@ -134,7 +135,7 @@ public class PlayerList {
 						n = 0;
 						playerToKick = Bukkit.getPlayer(UUID
 								.fromString(list[kickposition]));	
-						isVIP = playerToKick.hasPermission("rm.vip");
+						isVIP = playerToKick.hasPermission("ragemode.vip");
 					} while (isVIP);
 						
 					while (n < oldLocations.getFirstLength()) {						//Get him back to his old location.
@@ -389,7 +390,7 @@ public class PlayerList {
 		
 		while(i < imax) {
 			if(players[i] != null) {
-				if(Bukkit.getPlayer(UUID.fromString(players[i])).hasPermission("rm.vip")) {
+				if(Bukkit.getPlayer(UUID.fromString(players[i])).hasPermission("ragemode.vip")) {
 					vipsInGame++;
 				}
 			}

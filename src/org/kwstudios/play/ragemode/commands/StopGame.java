@@ -65,7 +65,7 @@ public class StopGame {
 			int f = 0;
 			int fmax = players.length;
 			List<PlayerPoints> lPP = new ArrayList<PlayerPoints>();			
-			boolean doSQL = PluginLoader.getInstance().getConfig().getBoolean("settings.global.statistics.mySQL.enable");
+			boolean doSQL = PluginLoader.getInstance().getConfig().getString("settings.global.statistics.type").equalsIgnoreCase("mySQL");
 			while(f < fmax) {				
 				if(RageScores.getPlayerPoints(players[f]) != null) {
 					PlayerPoints pP = RageScores.getPlayerPoints(players[f]);

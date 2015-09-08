@@ -169,7 +169,7 @@ public class YAMLStats {
 			plPo.setExplosionKills(ConfigFactory.getInt("data." + sUUID, "explosion_kills", statsConfiguration));
 			plPo.setKnifeKills(ConfigFactory.getInt("data." + sUUID, "knife_kills", statsConfiguration));
 			
-			plPo.setDeaths(ConfigFactory.getInt("data." + sUUID, "kills", statsConfiguration));
+			plPo.setDeaths(ConfigFactory.getInt("data." + sUUID, "deaths", statsConfiguration));
 			plPo.setAxeDeaths(ConfigFactory.getInt("data." + sUUID, "axe_deaths", statsConfiguration));
 			plPo.setDirectArrowDeaths(ConfigFactory.getInt("data." + sUUID, "direct_arrow_deaths", statsConfiguration));
 			plPo.setExplosionDeaths(ConfigFactory.getInt("data." + sUUID, "explosion_deaths", statsConfiguration));

@@ -62,21 +62,22 @@ public class ShowStats {
 			if(sUUID == null)
 				return;
 			
-			CharSequence sUUID_SEQ_1 = sUUID.subSequence(0, 7);
-			CharSequence sUUID_SEQ_2 = sUUID.subSequence(8, 11);
-			CharSequence sUUID_SEQ_3 = sUUID.subSequence(12, 15);
-			CharSequence sUUID_SEQ_4 = sUUID.subSequence(16, 19);
-			CharSequence sUUID_SEQ_5 = sUUID.subSequence(20, 31);
+			CharSequence sUUID_SEQ_1 = sUUID.subSequence(0, 8);
+			CharSequence sUUID_SEQ_2 = sUUID.subSequence(8, 12);
+			CharSequence sUUID_SEQ_3 = sUUID.subSequence(12, 16);
+			CharSequence sUUID_SEQ_4 = sUUID.subSequence(16, 20);
+			CharSequence sUUID_SEQ_5 = sUUID.subSequence(20, 32);
 			sUUID = new String(sUUID_SEQ_1 + "-" + sUUID_SEQ_2 + "-" + sUUID_SEQ_3 + "-" + sUUID_SEQ_4 + "-" + sUUID_SEQ_5);
 			
 			Player player = Bukkit.getPlayer(UUID.fromString(sUUID));
 			RetPlayerPoints rpp = null;
 			
-			if(PluginLoader.getInstance().getConfig().getString("settings.global.statistics.type").equals("yaml")) {
+			if(PluginLoader.getInstance().getConfig().getString("settings.global.statistics.type").equalsIgnoreCase("yaml")) {
 				rpp = YAMLStats.getPlayerStatistics(sUUID);
 			}
 			
-			if(PluginLoader.getInstance().getConfig().getString("settings.global.statistics.type").equals("mySQL")) {
+			if(PluginLoader.getInstance().getConfig().getString("settings.global.statistics.type").equalsIgnoreCase("mySQL")) {
+				Bukkit.broadcastMessage(sUUID);
 				rpp = MySQLStats.getPlayerStatistics(Bukkit.getPlayer(UUID.fromString(sUUID)), PluginLoader.getMySqlConnector());
 			}
 			
@@ -92,7 +93,8 @@ public class ShowStats {
 				player.sendMessage("Score:    " + rpp.getPoints());				
 				player.sendMessage("Rank:     " + "Ranker™ hasn't been added jet :(");					
 			}
-			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "That player hasn't player on that server yet.");
+			else
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "That player hasn't played on that server yet.");
 		}
 		
 /*		   public HttpResponse http(String url, String body) {

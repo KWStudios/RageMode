@@ -14,7 +14,6 @@ import org.kwstudios.play.ragemode.loader.PluginLoader;
 import org.kwstudios.play.ragemode.scoreboard.ScoreBoard;
 import org.kwstudios.play.ragemode.scores.PlayerPoints;
 import org.kwstudios.play.ragemode.scores.RageScores;
-import org.kwstudios.play.ragemode.statistics.MySQLStats;
 import org.kwstudios.play.ragemode.statistics.MySQLThread;
 import org.kwstudios.play.ragemode.statistics.YAMLStats;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
@@ -43,18 +42,18 @@ public class StopGame {
 						i++;
 					}
 				}
-				GameBroadcast.broadcastToGame(args[1], ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + args[1] + ChatColor.DARK_GREEN + " has been stopped.");
+				GameBroadcast.broadcastToGame(args[1], ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().GAME_STOPPED.replace("$GAME$", args[1])));
 
 				RageScores.removePointsForPlayers(players);
 				PlayerList.setGameNotRunning(args[1]);
 
 			}
 			else {
-				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "This game isn't running.");
+				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().GAME_NOT_RUNNING));
 			}
 		}
 		else {
-			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED + "Missing arguments! Usage: /rm stop <GameName>");
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().MISSING_ARGUMENTS.replace("$USAGE$", "/rm stop <GameName>")));
 		}
 	}
 	
@@ -98,7 +97,7 @@ public class StopGame {
 			}
 			RageScores.removePointsForPlayers(players);			
 			
-			GameBroadcast.broadcastToGame(game, ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_AQUA + game + ChatColor.DARK_GREEN + " has been stopped.");
+			GameBroadcast.broadcastToGame(game, ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().GAME_STOPPED.replace("$GAME$", game)));
 			PlayerList.setGameNotRunning(game);
 
 		}

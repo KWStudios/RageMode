@@ -10,8 +10,8 @@ public class MapChecker {
 	private String gameName;
 	private FileConfiguration fileConfiguration;
 	private boolean isValid = false;
-	String message = "";
-	int maxPlayers;
+	private String message = "";
+	private int maxPlayers;
 
 	public MapChecker(String gameName, FileConfiguration fileConfiguration) {
 		this.gameName = gameName;

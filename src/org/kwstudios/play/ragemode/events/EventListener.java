@@ -11,6 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Arrow;
@@ -325,12 +326,7 @@ public class EventListener implements Listener {
 	
 	@EventHandler
 	public void onSignChange(SignChangeEvent event){
-		Sign sign;
-		if(event.getBlock() instanceof Sign){
-		sign = (Sign) event.getBlock();
-		}else{
-			return;
-		}
+		Sign sign = (Sign)event.getBlock().getState();
 		if(event.getLine(1).trim().equalsIgnoreCase("[rm]") || event.getLine(1).trim().equalsIgnoreCase("[ragemode]")){
 			String[] allGames = GetGames.getGameNames(PluginLoader.getInstance().getConfig());
 			for(String game : allGames){

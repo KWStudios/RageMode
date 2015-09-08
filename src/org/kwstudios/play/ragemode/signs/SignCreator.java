@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.Set;
 
 import org.bukkit.ChatColor;
-import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
@@ -16,13 +15,14 @@ import org.kwstudios.play.ragemode.toolbox.GetGames;
 
 public class SignCreator {
 
-	public synchronized static boolean createNewSign(Block sign, String game) {
+	public synchronized static boolean createNewSign(Sign sign, String game) {
 		File file = SignConfiguration.getYamlSignsFile();
 		FileConfiguration fileConfiguration = SignConfiguration.getSignConfiguration();
 
 		Set<String> signs = ConfigFactory.getKeysUnderPath("signs", false, fileConfiguration);
-		if (signs.contains(Integer.toString(sign.getX()) + Integer.toString(sign.getY()) + Integer.toString(sign.getZ())
-				+ sign.getWorld().getName())) {
+		if (signs.contains(
+				Integer.toString(sign.getLocation().getBlockX()) + Integer.toString(sign.getLocation().getBlockY())
+						+ Integer.toString(sign.getLocation().getBlockZ()) + sign.getWorld().getName())) {
 			return false;
 		}
 

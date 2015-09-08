@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Set;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Sign;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -19,6 +20,10 @@ public class SignCreator {
 		File file = SignConfiguration.getYamlSignsFile();
 		FileConfiguration fileConfiguration = SignConfiguration.getSignConfiguration();
 
+		Bukkit.broadcastMessage(Integer.toString(sign.getLocation().getBlockX()));
+		
+		Bukkit.broadcastMessage(Integer.toString(sign.getX()));
+		
 		Set<String> signs = ConfigFactory.getKeysUnderPath("signs", false, fileConfiguration);
 		if (signs.contains(
 				Integer.toString(sign.getLocation().getBlockX()) + Integer.toString(sign.getLocation().getBlockY())

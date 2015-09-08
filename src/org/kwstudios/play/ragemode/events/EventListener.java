@@ -11,6 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.block.Sign;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
@@ -20,6 +21,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -312,6 +314,14 @@ public class EventListener implements Listener {
 	public void onItemPickedUpEvent(PlayerPickupItemEvent event){
 		if(PlayerList.isPlayerPlaying(event.getPlayer().getUniqueId().toString())){
 			event.setCancelled(true);
+		}
+	}
+	
+	@EventHandler
+	public void onSignChange(SignChangeEvent event){
+		Sign sign = (Sign) event.getBlock();
+		if(event.getLine(0).equalsIgnoreCase("[rm]") || event.getLine(0).equalsIgnoreCase("[ragemode]")){
+			//TODO Get all available games and set the lines for the sign.
 		}
 	}
 }

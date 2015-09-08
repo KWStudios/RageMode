@@ -77,24 +77,24 @@ public class ShowStats {
 			}
 			
 			if(PluginLoader.getInstance().getConfig().getString("settings.global.statistics.type").equalsIgnoreCase("mySQL")) {
-				Bukkit.broadcastMessage(sUUID);
+//				Bukkit.broadcastMessage(sUUID);
 				rpp = MySQLStats.getPlayerStatistics(Bukkit.getPlayer(UUID.fromString(sUUID)), PluginLoader.getMySqlConnector());
 			}
 			
 			if(rpp != null) {
 				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "Showing the stats of " + name + ":");
-				player.sendMessage("Deaths: " + rpp.getDeaths());
-				player.sendMessage("Kills:  " + rpp.getKills());
-				player.sendMessage("KD:     " + rpp.getKD());
+				player.sendMessage("Deaths:  " + rpp.getDeaths());
+				player.sendMessage("Kills:   " + rpp.getKills());
+				player.sendMessage("KD:      " + rpp.getKD());
 				player.sendMessage("---------------");
 				player.sendMessage("Games:   " + rpp.getGames());
 				player.sendMessage("Wins:    " + rpp.getWins());
 				player.sendMessage("---------------");
-				player.sendMessage("Score:    " + rpp.getPoints());				
-				player.sendMessage("Rank:     " + "Ranker™ hasn't been added jet :(");					
+				player.sendMessage("Score:   " + rpp.getPoints());				
+				player.sendMessage("Rank:    " + "Ranker™ hasn't been added jet :(");					
 			}
 			else
-			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "That player hasn't played on that server yet.");
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "That player hasn't played on this server yet.");
 		}
 		
 /*		   public HttpResponse http(String url, String body) {
@@ -127,7 +127,7 @@ public class ShowStats {
             com.google.gson.Gson gson = new com.google.gson.Gson();
             UUIDStrings data = gson.fromJson(reader, UUIDStrings.class);
             if((data.id != null) && (data.name != null)) {
-            	Bukkit.broadcastMessage(data.id + data.name);            	
+//            	Bukkit.broadcastMessage(data.id + data.name);            	
             	this.sUUID = data.id;
             }
             else
@@ -135,12 +135,7 @@ public class ShowStats {
             
 			} catch (Exception i) {
 				i.printStackTrace();
-			}
-			
-			
-			
+			}			
 		}
 	}
-	
-
 }

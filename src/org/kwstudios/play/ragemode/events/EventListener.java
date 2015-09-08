@@ -331,6 +331,7 @@ public class EventListener implements Listener {
 			for(String game : allGames){
 				if(event.getLine(1).trim().equalsIgnoreCase(game.trim())){
 					SignCreator.createNewSign(sign, game);
+					SignCreator.updateSign(sign);
 				}
 			}
 		}

@@ -181,6 +181,8 @@ public class YAMLStats {
 			
 			plPo.setKD(ConfigFactory.getDouble("data." + sUUID, "KD", statsConfiguration));
 		}
+		else 
+			return null;
 		return plPo;
 	}
 	

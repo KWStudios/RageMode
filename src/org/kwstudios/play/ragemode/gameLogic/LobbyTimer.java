@@ -12,7 +12,7 @@ import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 
 public class LobbyTimer {
 
-	private static final String LOBBY_DELAY_PATH = "settings.lobbydelay";
+	private static final String LOBBY_DELAY_PATH = "settings.global.lobbydelay";
 
 	private String gameName;
 	private FileConfiguration fileConfiguration;
@@ -28,11 +28,11 @@ public class LobbyTimer {
 
 	private void getSecondsToWait() {
 		if (fileConfiguration.isSet(LOBBY_DELAY_PATH)
-				&& isInt(ConfigFactory.getString("settings", "lobbydelay", fileConfiguration))) {
-			secondsRemaining = ConfigFactory.getInt("settings", "lobbydelay", fileConfiguration);
+				&& isInt(ConfigFactory.getString("settings.global", "lobbydelay", fileConfiguration))) {
+			secondsRemaining = ConfigFactory.getInt("settings.global", "lobbydelay", fileConfiguration);
 		} else {
 			secondsRemaining = 30;
-			ConfigFactory.setInt("settings", "lobbydelay", secondsRemaining, fileConfiguration);
+			ConfigFactory.setInt("settings.global", "lobbydelay", secondsRemaining, fileConfiguration);
 		}
 	}
 

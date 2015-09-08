@@ -20,6 +20,7 @@ import org.kwstudios.play.ragemode.events.EventListener;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
 import org.kwstudios.play.ragemode.locale.Messages;
 import org.kwstudios.play.ragemode.metrics.Metrics;
+import org.kwstudios.play.ragemode.signs.SignConfiguration;
 import org.kwstudios.play.ragemode.statistics.YAMLStats;
 import org.kwstudios.play.ragemode.updater.Updater;
 
@@ -84,6 +85,8 @@ public class PluginLoader extends JavaPlugin {
 		initStatistics();
 
 		loadMessages();
+		
+		SignConfiguration.initSignConfiguration();
 
 		saveConfig();
 
@@ -122,14 +125,11 @@ public class PluginLoader extends JavaPlugin {
 
 	public void initStatistics() {
 		if (getConfig().isSet("settings.global.statistics")) {
-			if (getConfig().isSet("settings.global.statistics.yaml")) {
-				if (getConfig().getBoolean("settings.global.statistics.yaml"))
+			if (getConfig().isSet("settings.global.statistics.type")) {
+				if (getConfig().getString("settings.global.statistics.type").equals("yaml"))
 					YAMLStats.initS();
-			} else
-				getConfig().set("settings.global.statistics.yaml", false);
-
-			if (getConfig().isSet("settings.global.statistics.mySQL")) {
-				if (getConfig().getBoolean("settings.global.statistics.mySQL.enable")) {
+				
+				if (getConfig().getString("settings.global.statistics.type").equals("mySQL")) {
 					String databaseURL = getConfig().getString("settings.global.statistics.mySQL.url");
 					int port = getConfig().getInt("settings.global.statistics.mySQL.port");
 					String database = getConfig().getString("settings.global.statistics.mySQL.database");
@@ -138,11 +138,11 @@ public class PluginLoader extends JavaPlugin {
 					mySqlConnector = new MySQLConnector(databaseURL, port, database, username, password);
 				}
 			} else
-				getConfig().set("settings.global.statistics.mySQL.enable", false);
+				getConfig().set("settings.global.statistics.type", "yaml");
 
 		} else {
-			getConfig().set("settings.global.statistics.yaml", true);
-			getConfig().set("settings.global.statistics.mySQL.enable", false);
+			getConfig().set("settings.global.statistics.type", "yaml");
+			getConfig().set("settings.global.statistics.mySQL", "to enable mySQL change the value of \"type\" to mySQL");
 			getConfig().set("settings.global.statistics.mySQL.url", "put.your.databaseURL.here");
 			getConfig().set("settings.global.statistics.mySQL.port", "put.your.databasePort.here");
 			getConfig().set("settings.global.statistics.mySQL.database", "put.your.databaseName.here");

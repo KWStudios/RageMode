@@ -12,7 +12,7 @@ import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 
 public class GameTimer {
 
-	private static final String GAME_TIME_PATH = "settings.gametime";
+	private static final String GAME_TIME_PATH = "settings.global.gametime";
 
 	private String gameName;
 	private FileConfiguration fileConfiguration;
@@ -29,11 +29,11 @@ public class GameTimer {
 
 	private void getMinutesToGo() {
 		if (fileConfiguration.isSet(GAME_TIME_PATH)
-				&& isInt(ConfigFactory.getString("settings", "gametime", fileConfiguration))) {
-			secondsRemaining = ConfigFactory.getInt("settings", "gametime", fileConfiguration) * 60;
+				&& isInt(ConfigFactory.getString("settings.global", "gametime", fileConfiguration))) {
+			secondsRemaining = ConfigFactory.getInt("settings.global", "gametime", fileConfiguration) * 60;
 		} else {
 			secondsRemaining = 300;
-			ConfigFactory.setInt("settings", "gametime", secondsRemaining / 60, fileConfiguration);
+			ConfigFactory.setInt("settings.global", "gametime", secondsRemaining / 60, fileConfiguration);
 		}
 	}
 

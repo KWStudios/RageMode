@@ -331,10 +331,10 @@ public class EventListener implements Listener {
 		}else{
 			return;
 		}
-		if(event.getLine(1).trim().equalsIgnoreCase("[rm]") || event.getLine(2).trim().equalsIgnoreCase("[ragemode]")){
+		if(event.getLine(1).trim().equalsIgnoreCase("[rm]") || event.getLine(1).trim().equalsIgnoreCase("[ragemode]")){
 			String[] allGames = GetGames.getGameNames(PluginLoader.getInstance().getConfig());
 			for(String game : allGames){
-				if(event.getLine(1).trim().equalsIgnoreCase(game.trim())){
+				if(event.getLine(2).trim().equalsIgnoreCase(game.trim())){
 					SignCreator.createNewSign(sign, game);
 					SignCreator.updateSign(sign);
 				}

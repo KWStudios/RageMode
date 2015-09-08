@@ -16,7 +16,7 @@ import org.kwstudios.play.ragemode.toolbox.GetGames;
 
 public class SignCreator {
 
-	public synchronized static boolean createNewSign(Sign sign, String game) {
+	public synchronized static boolean createNewSign(Block sign, String game) {
 		File file = SignConfiguration.getYamlSignsFile();
 		FileConfiguration fileConfiguration = SignConfiguration.getSignConfiguration();
 

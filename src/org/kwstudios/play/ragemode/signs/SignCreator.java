@@ -191,16 +191,16 @@ public class SignCreator {
 	public static String getGameFromSign(Sign sign) {
 		FileConfiguration fileConfiguration = SignConfiguration.getSignConfiguration();
 
-		Set<String> signs = ConfigFactory.getKeysUnderPath("signs", false, fileConfiguration);
-		if (signs != null) {
-			for (String signString : signs) {
-				String path = "signs." + signString;
-				String game = ConfigFactory.getString(path, "game", fileConfiguration);
-				for (String gameName : GetGames.getGameNames(PluginLoader.getInstance().getConfig())) {
-					if (game.trim().equalsIgnoreCase(gameName.trim())) {
-						return game;
-					}
-				}
+		int x = sign.getX();
+		int y = sign.getY();
+		int z = sign.getZ();
+		String world = sign.getWorld().getName();
+		String signString = Integer.toString(x) + Integer.toString(y) + Integer.toString(z) + world;
+		String path = "signs." + signString;
+		String game = ConfigFactory.getString(path, "game", fileConfiguration);
+		for (String gameName : GetGames.getGameNames(PluginLoader.getInstance().getConfig())) {
+			if (game.trim().equalsIgnoreCase(gameName.trim())) {
+				return game;
 			}
 		}
 

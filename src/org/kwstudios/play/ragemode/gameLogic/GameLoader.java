@@ -16,6 +16,7 @@ import org.kwstudios.play.ragemode.items.RageBow;
 import org.kwstudios.play.ragemode.items.RageKnife;
 import org.kwstudios.play.ragemode.scoreboard.ScoreBoard;
 import org.kwstudios.play.ragemode.scoreboard.ScoreBoardHolder;
+import org.kwstudios.play.ragemode.signs.SignCreator;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 import org.kwstudios.play.ragemode.toolbox.GameBroadcast;
 
@@ -51,6 +52,7 @@ public class GameLoader {
 			holder.setOldPointsLine(pointsLine);
 		}
 		new GameTimer(this.gameName, this.fileConfiguration);
+		SignCreator.updateAllSigns(gameName);
 	}
 
 	private void checkTeleport() {

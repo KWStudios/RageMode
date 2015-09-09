@@ -3,6 +3,7 @@ package org.kwstudios.play.ragemode.commands;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
+import org.kwstudios.play.ragemode.signs.SignCreator;
 
 public class PlayerLeave {
 	
@@ -23,7 +24,9 @@ public class PlayerLeave {
 	}
 	
 	private void doPlayerLeave(){
+		String gameName = PlayerList.getPlayersGame(player);
 		PlayerList.removePlayer(player);
+		SignCreator.updateAllSigns(gameName);
 	}
 
 }

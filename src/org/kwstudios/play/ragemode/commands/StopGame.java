@@ -14,6 +14,7 @@ import org.kwstudios.play.ragemode.loader.PluginLoader;
 import org.kwstudios.play.ragemode.scoreboard.ScoreBoard;
 import org.kwstudios.play.ragemode.scores.PlayerPoints;
 import org.kwstudios.play.ragemode.scores.RageScores;
+import org.kwstudios.play.ragemode.signs.SignCreator;
 import org.kwstudios.play.ragemode.statistics.MySQLThread;
 import org.kwstudios.play.ragemode.statistics.YAMLStats;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
@@ -46,6 +47,7 @@ public class StopGame {
 
 				RageScores.removePointsForPlayers(players);
 				PlayerList.setGameNotRunning(args[1]);
+				SignCreator.updateAllSigns(args[1]);
 
 			}
 			else {
@@ -99,6 +101,7 @@ public class StopGame {
 			
 			GameBroadcast.broadcastToGame(game, ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().GAME_STOPPED.replace("$GAME$", game)));
 			PlayerList.setGameNotRunning(game);
+			SignCreator.updateAllSigns(game);
 
 		}
 	}
@@ -133,6 +136,7 @@ public class StopGame {
 				}
 				RageScores.removePointsForPlayers(players);
 				PlayerList.setGameNotRunning(games[i]);
+				SignCreator.updateAllSigns(games[i]);
 				logger.info(games[i] + " has been stopped.");
 			}
 		i++;

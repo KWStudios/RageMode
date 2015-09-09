@@ -20,6 +20,7 @@ import org.bukkit.entity.Snowball;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -34,6 +35,7 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.kwstudios.play.ragemode.commands.PlayerJoin;
 import org.kwstudios.play.ragemode.gameLogic.GameSpawnGetter;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
 import org.kwstudios.play.ragemode.items.CombatAxe;
@@ -304,6 +306,23 @@ public class EventListener implements Listener {
 				if(thrower.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GOLD + "CombatAxe")) {
 					thrower.launchProjectile(Snowball.class);
 					thrower.getInventory().setItemInHand(null);
+				}
+			}
+		}
+		
+		if(event.getClickedBlock().getState() instanceof Sign){
+			if(event.getAction() == Action.RIGHT_CLICK_BLOCK){
+				Sign sign = (Sign) event.getClickedBlock().getState();
+				if(SignCreator.isJoinSign(sign)){
+					Player player = event.getPlayer();
+					if (player.hasPermission("ragemode.rm.join")) {
+						String[] args = new String[2];
+						args[0] = "join";
+						args[1] = SignCreator.getGameFromSign(sign);
+						new PlayerJoin(player, args[0], args, PluginLoader.getInstance().getConfig());
+					} else{
+						player.sendMessage(ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PERMISSION_MESSAGE));
+					}
 				}
 			}
 		}

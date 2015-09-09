@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
+import org.kwstudios.play.ragemode.signs.SignCreator;
 import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 import org.kwstudios.play.ragemode.toolbox.GameBroadcast;
@@ -80,6 +81,7 @@ public class PlayerJoin {
 						PluginLoader.getMessages().PLAYER_JOINED.replace("$PLAYER$", player.getName()));
 				GameBroadcast.broadcastToGame(args[1], message);
 				logger.info(message);
+				SignCreator.updateAllSigns(args[1]);
 			} else {
 				logger.info(ConstantHolder.RAGEMODE_PREFIX
 						+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PLAYER_COULD_NOT_JOIN

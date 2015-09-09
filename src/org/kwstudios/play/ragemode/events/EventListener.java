@@ -310,18 +310,20 @@ public class EventListener implements Listener {
 			}
 		}
 		
-		if(event.getClickedBlock().getState() instanceof Sign){
-			if(event.getAction() == Action.RIGHT_CLICK_BLOCK){
-				Sign sign = (Sign) event.getClickedBlock().getState();
-				if(SignCreator.isJoinSign(sign)){
-					Player player = event.getPlayer();
-					if (player.hasPermission("ragemode.rm.join")) {
-						String[] args = new String[2];
-						args[0] = "join";
-						args[1] = SignCreator.getGameFromSign(sign);
-						new PlayerJoin(player, args[0], args, PluginLoader.getInstance().getConfig());
-					} else{
-						player.sendMessage(ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PERMISSION_MESSAGE));
+		if(event.getClickedBlock() != null && event.getClickedBlock().getState() != null){
+			if(event.getClickedBlock().getState() instanceof Sign){
+				if(event.getAction() == Action.RIGHT_CLICK_BLOCK){
+					Sign sign = (Sign) event.getClickedBlock().getState();
+					if(SignCreator.isJoinSign(sign)){
+						Player player = event.getPlayer();
+						if (player.hasPermission("ragemode.rm.join")) {
+							String[] args = new String[2];
+							args[0] = "join";
+							args[1] = SignCreator.getGameFromSign(sign);
+							new PlayerJoin(player, args[0], args, PluginLoader.getInstance().getConfig());
+						} else{
+							player.sendMessage(ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PERMISSION_MESSAGE));
+						}
 					}
 				}
 			}

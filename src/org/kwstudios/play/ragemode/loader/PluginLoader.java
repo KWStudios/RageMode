@@ -20,7 +20,9 @@ import org.kwstudios.play.ragemode.gameLogic.PlayerList;
 import org.kwstudios.play.ragemode.locale.Messages;
 import org.kwstudios.play.ragemode.metrics.Metrics;
 import org.kwstudios.play.ragemode.signs.SignConfiguration;
+import org.kwstudios.play.ragemode.signs.SignCreator;
 import org.kwstudios.play.ragemode.statistics.YAMLStats;
+import org.kwstudios.play.ragemode.toolbox.GetGames;
 import org.kwstudios.play.ragemode.updater.Updater;
 
 import com.google.gson.Gson;
@@ -83,8 +85,13 @@ public class PluginLoader extends JavaPlugin {
 		initStatistics();
 
 		loadMessages();
-		
+
 		SignConfiguration.initSignConfiguration();
+
+		String[] games = GetGames.getGameNames(getConfig());
+		for (String game : games) {
+			SignCreator.updateAllSigns(game);
+		}
 
 		saveConfig();
 
@@ -126,7 +133,7 @@ public class PluginLoader extends JavaPlugin {
 			if (getConfig().isSet("settings.global.statistics.type")) {
 				if (getConfig().getString("settings.global.statistics.type").equals("yaml"))
 					YAMLStats.initS();
-				
+
 				if (getConfig().getString("settings.global.statistics.type").equals("mySQL")) {
 					String databaseURL = getConfig().getString("settings.global.statistics.mySQL.url");
 					int port = getConfig().getInt("settings.global.statistics.mySQL.port");
@@ -140,7 +147,8 @@ public class PluginLoader extends JavaPlugin {
 
 		} else {
 			getConfig().set("settings.global.statistics.type", "yaml");
-			getConfig().set("settings.global.statistics.mySQL", "to enable mySQL change the value of \"type\" to mySQL");
+			getConfig().set("settings.global.statistics.mySQL",
+					"to enable mySQL change the value of \"type\" to mySQL");
 			getConfig().set("settings.global.statistics.mySQL.url", "put.your.databaseURL.here");
 			getConfig().set("settings.global.statistics.mySQL.port", "put.your.databasePort.here");
 			getConfig().set("settings.global.statistics.mySQL.database", "put.your.databaseName.here");

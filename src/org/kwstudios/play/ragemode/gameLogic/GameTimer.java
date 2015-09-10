@@ -1,13 +1,21 @@
 package org.kwstudios.play.ragemode.gameLogic;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.kwstudios.play.ragemode.bossbar.BossbarLib;
 import org.kwstudios.play.ragemode.commands.StopGame;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
 import org.kwstudios.play.ragemode.scoreboard.ScoreBoard;
+import org.kwstudios.play.ragemode.scores.PlayerPoints;
+import org.kwstudios.play.ragemode.scores.RageScores;
 import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 
@@ -50,6 +58,7 @@ public class GameTimer {
 		t.scheduleAtFixedRate(new TimerTask() {
 			private int totalMessages = timeMillisForLoop / 60000;
 			private int secondsRemaining = timeMillisForLoop / 1000;
+			private int bossBarPointer = 0;
 			// private int totalTimesLooped = 0;
 			// private final long startTimeMillis = System.currentTimeMillis();
 
@@ -97,6 +106,41 @@ public class GameTimer {
 							}
 						});
 					}
+
+					// -------BossBar update-------
+
+					if (secondsRemaining % 2 == 0) {
+						String[] playerUUIDs = PlayerList.getPlayersInGame(gameName);
+						List<PlayerPoints> playerPoints = new ArrayList<PlayerPoints>();
+						for (String playerUUID : playerUUIDs) {
+							PlayerPoints points = RageScores.getPlayerPoints(playerUUID);
+							if (points != null) {
+								playerPoints.add(points);
+							}
+						}
+						Collections.sort(playerPoints);
+						if (playerPoints.size() > bossBarPointer) {
+							PlayerPoints points = playerPoints.get(bossBarPointer);
+							String message = ChatColor.DARK_GREEN + Integer.toString(bossBarPointer + 1) + ": "
+									+ ChatColor.DARK_AQUA
+									+ Bukkit.getPlayer(UUID.fromString(points.getPlayerUUID())).getName() + " - "
+									+ ChatColor.GOLD + Integer.toString(points.getPoints()) + ChatColor.DARK_AQUA
+									+ " points. " + ChatColor.GOLD + Integer.toString(points.getKills()) + " / "
+									+ Integer.toString(points.getDeaths()) + ChatColor.DARK_AQUA + " K/D.";
+							for (String playerUUID : playerUUIDs) {
+								BossbarLib.getHandler().getBossbar(Bukkit.getPlayer(UUID.fromString(playerUUID)))
+										.setMessage(message).setPercentage(1f);
+								BossbarLib.getHandler().updateBossbar(Bukkit.getPlayer(UUID.fromString(playerUUID)));
+							}
+							bossBarPointer++;
+						} else {
+							if (bossBarPointer >= PlayerList.getPlayersInGame(gameName).length) {
+								bossBarPointer = 0;
+							}
+						}
+					}
+
+					// -------End of BossBar update-------
 				} else {
 					this.cancel();
 					PluginLoader.getInstance().getServer().getScheduler()

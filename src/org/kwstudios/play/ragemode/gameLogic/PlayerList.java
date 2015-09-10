@@ -238,7 +238,8 @@ public class PlayerList {
 					
 					RageScores.removePointsForPlayers(new String[] {player.getUniqueId().toString()});
 					
-					ScoreBoard.allScoreBoards.get(PlayerList.getPlayersGame(player)).removeScoreBoard(player);
+					if(ScoreBoard.allScoreBoards.containsKey(PlayerList.getPlayersGame(player)))
+						ScoreBoard.allScoreBoards.get(PlayerList.getPlayersGame(player)).removeScoreBoard(player);
 					
 					BossbarLib.getHandler().clearBossbar(player);
 					
@@ -345,6 +346,7 @@ public class PlayerList {
 		while (i < imax) {
 			if (runningGames[i] == null) {
 				runningGames[i] = game;
+				return true;
 			}
 			i++;
 		}

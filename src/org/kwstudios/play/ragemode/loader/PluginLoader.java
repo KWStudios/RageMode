@@ -106,7 +106,7 @@ public class PluginLoader extends JavaPlugin {
 		PluginDescriptionFile pluginDescriptionFile = getDescription();
 		Logger logger = Logger.getLogger("Minecraft");
 
-		StopGame.stopAllGames(getConfig(), logger);
+//		StopGame.stopAllGames(getConfig(), logger);
 
 		logger.info(pluginDescriptionFile.getName() + " was unloaded successfully! (Version: "
 				+ pluginDescriptionFile.getVersion() + ")");

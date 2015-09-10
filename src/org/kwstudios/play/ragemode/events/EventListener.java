@@ -33,6 +33,7 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.kwstudios.play.ragemode.commands.PlayerJoin;
@@ -357,5 +358,10 @@ public class EventListener implements Listener {
 				}
 			}
 		}
+	}
+	
+	@EventHandler
+	public void onPlayerKick(PlayerKickEvent event) {
+		PlayerList.removePlayer(event.getPlayer());
 	}
 }

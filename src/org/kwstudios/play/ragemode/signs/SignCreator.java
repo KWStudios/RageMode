@@ -119,7 +119,7 @@ public class SignCreator {
 			for (String signString : signs) {
 				String path = "signs." + signString;
 				String game = ConfigFactory.getString(path, "game", fileConfiguration);
-				if (game != null) {
+				if (game != null && gameName != null) {
 					if (game.trim().equalsIgnoreCase(gameName.trim())) {
 						int x = ConfigFactory.getInt(path, "x", fileConfiguration);
 						int y = ConfigFactory.getInt(path, "y", fileConfiguration);

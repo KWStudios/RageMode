@@ -12,6 +12,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.kwstudios.play.ragemode.bossbar.BossbarLib;
+import org.kwstudios.play.ragemode.loader.PluginLoader;
 import org.kwstudios.play.ragemode.scoreboard.ScoreBoard;
 import org.kwstudios.play.ragemode.scores.RageScores;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
@@ -222,7 +223,7 @@ public class PlayerList {
 		return false;
 	}
 
-	public static boolean removePlayer(Player player) {
+	public static boolean removePlayer(final Player player) {
 		int i = 0;
 		int n = 0;
 		int imax = GetGames.getConfigGamesCount(fileConfiguration)
@@ -236,10 +237,15 @@ public class PlayerList {
 //					org.mcsg.double0negative.tabapi.TabAPI.disableTabForPlayer(player);
 //					org.mcsg.double0negative.tabapi.TabAPI.updatePlayer(player);
 					
-					RageScores.removePointsForPlayers(new String[] {player.getUniqueId().toString()});
+					PluginLoader.getInstance().getServer().getScheduler().scheduleSyncDelayedTask(PluginLoader.getInstance(), new Runnable() {
+					    @Override
+					    public void run() {
+					    	if(ScoreBoard.allScoreBoards.containsKey(PlayerList.getPlayersGame(player)))
+					    		ScoreBoard.allScoreBoards.get(PlayerList.getPlayersGame(player)).removeScoreBoard(player);   
+					    }
+					});
 					
-					if(ScoreBoard.allScoreBoards.containsKey(PlayerList.getPlayersGame(player)))
-						ScoreBoard.allScoreBoards.get(PlayerList.getPlayersGame(player)).removeScoreBoard(player);
+					RageScores.removePointsForPlayers(new String[] {player.getUniqueId().toString()});					
 					
 					BossbarLib.getHandler().clearBossbar(player);
 					

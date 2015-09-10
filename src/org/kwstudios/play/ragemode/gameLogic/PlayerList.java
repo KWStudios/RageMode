@@ -223,7 +223,7 @@ public class PlayerList {
 		return false;
 	}
 
-	public static boolean removePlayer(final Player player) {
+	public static boolean removePlayer(Player player) {
 		int i = 0;
 		int n = 0;
 		int imax = GetGames.getConfigGamesCount(fileConfiguration)
@@ -237,13 +237,8 @@ public class PlayerList {
 //					org.mcsg.double0negative.tabapi.TabAPI.disableTabForPlayer(player);
 //					org.mcsg.double0negative.tabapi.TabAPI.updatePlayer(player);
 					
-					PluginLoader.getInstance().getServer().getScheduler().scheduleSyncDelayedTask(PluginLoader.getInstance(), new Runnable() {
-					    @Override
-					    public void run() {
-					    	if(ScoreBoard.allScoreBoards.containsKey(PlayerList.getPlayersGame(player)))
-					    		ScoreBoard.allScoreBoards.get(PlayerList.getPlayersGame(player)).removeScoreBoard(player);   
-					    }
-					});
+					if(ScoreBoard.allScoreBoards.containsKey(PlayerList.getPlayersGame(player)))
+						ScoreBoard.allScoreBoards.get(PlayerList.getPlayersGame(player)).removeScoreBoard(player);   
 					
 					RageScores.removePointsForPlayers(new String[] {player.getUniqueId().toString()});					
 					

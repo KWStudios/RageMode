@@ -119,32 +119,35 @@ public class SignCreator {
 			for (String signString : signs) {
 				String path = "signs." + signString;
 				String game = ConfigFactory.getString(path, "game", fileConfiguration);
-				if (game.trim().equalsIgnoreCase(gameName.trim())) {
-					int x = ConfigFactory.getInt(path, "x", fileConfiguration);
-					int y = ConfigFactory.getInt(path, "y", fileConfiguration);
-					int z = ConfigFactory.getInt(path, "z", fileConfiguration);
-					String world = ConfigFactory.getString(path, "world", fileConfiguration);
-					Location signLocation = new Location(Bukkit.getWorld(world), x, y, z);
-					if (signLocation.getBlock().getState() instanceof Sign) {
-						Sign sign = (Sign) signLocation.getBlock().getState();
-						sign.setLine(0, ChatColor.DARK_AQUA + "[" + ChatColor.DARK_PURPLE + "RageMode"
-								+ ChatColor.DARK_AQUA + "]");
-						sign.setLine(1, game);
-						sign.setLine(2,
-								"Players " + ChatColor.DARK_AQUA + "["
-										+ Integer.toString(PlayerList.getPlayersInGame(game).length) + " / "
-										+ GetGames.getMaxPlayers(game, PluginLoader.getInstance().getConfig()) + "]");
-						String running = (PlayerList.isGameRunning(game))
-								? ChatColor.GOLD.toString() + ChatColor.ITALIC.toString() + "Running..."
-								: ChatColor.DARK_GREEN.toString() + "Waiting...";
-						sign.setLine(3, running);
-						sign.update();
-					} else {
-						Bukkit.getConsoleSender().sendMessage(ConstantHolder.RAGEMODE_PREFIX
-								+ "A funny jester tried to modify the signs.yml without commands.");
-						Bukkit.getConsoleSender().sendMessage(ConstantHolder.RAGEMODE_PREFIX + "Skipping update of "
-								+ ChatColor.DARK_PURPLE + "(1)" + ChatColor.RESET + " sign...");
+				if (game != null) {
+					if (game.trim().equalsIgnoreCase(gameName.trim())) {
+						int x = ConfigFactory.getInt(path, "x", fileConfiguration);
+						int y = ConfigFactory.getInt(path, "y", fileConfiguration);
+						int z = ConfigFactory.getInt(path, "z", fileConfiguration);
+						String world = ConfigFactory.getString(path, "world", fileConfiguration);
+						Location signLocation = new Location(Bukkit.getWorld(world), x, y, z);
+						if (signLocation.getBlock().getState() instanceof Sign) {
+							Sign sign = (Sign) signLocation.getBlock().getState();
+							sign.setLine(0, ChatColor.DARK_AQUA + "[" + ChatColor.DARK_PURPLE + "RageMode"
+									+ ChatColor.DARK_AQUA + "]");
+							sign.setLine(1, game);
+							sign.setLine(2, "Players " + ChatColor.DARK_AQUA + "["
+									+ Integer.toString(PlayerList.getPlayersInGame(game).length) + " / "
+									+ GetGames.getMaxPlayers(game, PluginLoader.getInstance().getConfig()) + "]");
+							String running = (PlayerList.isGameRunning(game))
+									? ChatColor.GOLD.toString() + ChatColor.ITALIC.toString() + "Running..."
+									: ChatColor.DARK_GREEN.toString() + "Waiting...";
+							sign.setLine(3, running);
+							sign.update();
+						} else {
+							Bukkit.getConsoleSender().sendMessage(ConstantHolder.RAGEMODE_PREFIX
+									+ "A funny jester tried to modify the signs.yml without commands.");
+							Bukkit.getConsoleSender().sendMessage(ConstantHolder.RAGEMODE_PREFIX + "Skipping update of "
+									+ ChatColor.DARK_PURPLE + "(1)" + ChatColor.RESET + " sign...");
+						}
 					}
+				} else {
+					return false;
 				}
 			}
 			return true;

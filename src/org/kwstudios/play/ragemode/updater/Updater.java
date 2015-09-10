@@ -14,6 +14,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
+import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -26,6 +27,10 @@ public class Updater {
 	private URL url;
 	private JavaPlugin plugin;
 	private String pluginurl;
+	private String version = "";
+	private String downloadURL = "";
+	private String changeLOG = "";
+	private boolean out = true;
 
 	/**
 	 * Create a new SpigotPluginUpdate to check and update your plugin
@@ -39,23 +44,15 @@ public class Updater {
 		try {
 			url = new URL(pluginurl);
 		} catch (MalformedURLException e) {
-			System.out.println(
-					"[SpigotPluginUpdater] Error in checking update for: '" + pluginurl + "' invalid Pluginname!");
-			System.out.println(" -- StackTrace --");
+			Bukkit.getConsoleSender().sendMessage(ConstantHolder.RAGEMODE_PREFIX + "Error in checking update for: '"
+					+ pluginurl + "' (invalid URL?)");
 			e.printStackTrace();
-			System.out.println(" -- End of StackTrace --");
 		}
 		this.plugin = plugin;
 		this.pluginurl = pluginurl;
 		Thread thread = new Thread(new UpdateRunnable());
-        thread.start();
+		thread.start();
 	}
-
-	private String version = "";
-	private String downloadURL = "";
-	private String changeLOG = "";
-
-	private boolean out = true;
 
 	/**
 	 * Enable a console output if new Version is availible
@@ -76,7 +73,7 @@ public class Updater {
 	 * 
 	 * @return if new update is availible
 	 */
-	public boolean needsUpdate() {
+	private boolean needsUpdate() {
 
 		try {
 			URLConnection con = url.openConnection();
@@ -91,20 +88,20 @@ public class Updater {
 			changeLOG = children.item(5).getTextContent();
 			if (newVersion(plugin.getDescription().getVersion(), version.replaceAll("[a-zA-z ]", ""))) {
 				if (out) {
-					System.out.println(" New Version found: " + version.replaceAll("[a-zA-z ]", ""));
-					System.out.println(" Download it here: " + downloadURL.toString());
-					System.out.println(" Changelog: " + changeLOG);
+					Bukkit.getConsoleSender().sendMessage(ConstantHolder.RAGEMODE_PREFIX + "New Version found: "
+							+ version.replaceAll("[a-zA-z ]", ""));
+					Bukkit.getConsoleSender().sendMessage(
+							ConstantHolder.RAGEMODE_PREFIX + "Download it here: " + downloadURL.toString());
+					Bukkit.getConsoleSender().sendMessage(ConstantHolder.RAGEMODE_PREFIX + "Changelog: " + changeLOG);
 				}
 
 				return true;
 			}
 
 		} catch (IOException | SAXException | ParserConfigurationException e) {
-			System.out.println(
-					"[SpigotPluginUpdater] Error in checking update for: '" + pluginurl + "' (invalid URL?) !");
-			System.out.println(" -- StackTrace --");
+			Bukkit.getConsoleSender().sendMessage(ConstantHolder.RAGEMODE_PREFIX + "Error in checking update for: '"
+					+ pluginurl + "' (invalid URL?) !");
 			e.printStackTrace();
-			System.out.println(" -- End of StackTrace --");
 		}
 
 		return false;
@@ -117,7 +114,7 @@ public class Updater {
 	 * @param newv
 	 * @return if it is newer
 	 */
-	public boolean newVersion(String oldv, String newv) {
+	private boolean newVersion(String oldv, String newv) {
 		// System.out.println("Check " + oldv + " - " + newv);
 		if (oldv != null && newv != null) {
 			oldv = oldv.replaceAll("[a-zA-z ]", "");
@@ -154,49 +151,10 @@ public class Updater {
 	}
 
 	/**
-	 * Executes the Update and trys to install it
+	 * Executes the Update and tries to install it.
+	 * 
 	 */
-	public void update() {
-		try {
-			URL download = new URL(getFolder(pluginurl) + downloadURL);
-
-			BufferedInputStream in = null;
-			FileOutputStream fout = null;
-			try {
-				if (out) {
-					plugin.getLogger().info("Trying to download from: " + getFolder(pluginurl) + downloadURL);
-				}
-				in = new BufferedInputStream(download.openStream());
-				fout = new FileOutputStream("plugins/" + downloadURL);
-
-				final byte data[] = new byte[1024];
-				int count;
-				while ((count = in.read(data, 0, 1024)) != -1) {
-					fout.write(data, 0, count);
-				}
-			} finally {
-				if (in != null) {
-					in.close();
-				}
-				if (fout != null) {
-					fout.close();
-				}
-			}
-
-			if (out) {
-				plugin.getLogger().info("Succesfully downloaded file: " + downloadURL);
-				plugin.getLogger().info("To have the Features, you have to reload your Server now!");
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Executes the Update and trys to install it But uses an external link for
-	 * downloading the File
-	 */
-	public void externalUpdate() {
+	private void externalUpdate() {
 		try {
 			URL download = new URL(downloadURL);
 
@@ -233,16 +191,17 @@ public class Updater {
 				String[] splittedPath = oldFileURL.getPath().split("/");
 				String oldFileName = splittedPath[splittedPath.length - 1];
 				File oldFile = new File(PluginLoader.getInstance().getDataFolder().getParentFile(), oldFileName);
-				
+
 				if (oldFile.exists()) {
 					oldFile.delete();
 				}
 
-//				File newPluginFile = new File(PluginLoader.getInstance().getDataFolder().getParentFile(),
-//						newFile.getName());
+				// File newPluginFile = new
+				// File(PluginLoader.getInstance().getDataFolder().getParentFile(),
+				// newFile.getName());
 				File newPluginFile = new File(PluginLoader.getInstance().getServer().getUpdateFolderFile(),
 						oldFile.getName());
-				if(!newPluginFile.getParentFile().exists()){
+				if (!newPluginFile.getParentFile().exists()) {
 					newPluginFile.getParentFile().mkdirs();
 				}
 				Files.copy(newFile, newPluginFile);
@@ -258,28 +217,15 @@ public class Updater {
 		}
 	}
 
-	private String getFolder(String s) {
-		String path = s;
-		int lastslash = path.lastIndexOf("/");
-		// for(int i = 0; i < path.length(); i++){
-		//
-		// if(c == '/'){
-		// lastslash++;
-		// }
-		// }
-		String folder = path.substring(0, lastslash + 1);
-		return folder;
-	}
-	
-	private class UpdateRunnable implements Runnable{
+	private class UpdateRunnable implements Runnable {
 
 		@Override
 		public void run() {
 			Updater.this.enableOut();
-			if(Updater.this.needsUpdate()){
+			if (Updater.this.needsUpdate()) {
 				Updater.this.externalUpdate();
 			}
-			
+
 		}
 	}
 }

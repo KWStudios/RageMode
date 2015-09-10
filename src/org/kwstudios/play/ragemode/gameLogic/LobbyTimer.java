@@ -86,7 +86,9 @@ public class LobbyTimer {
 					timesToSendMessage--;
 				} else if (timesToSendMessage == 0 && PlayerList.getPlayersInGame(gameName).length >= 2) {
 					this.cancel();
-					new GameLoader(gameName, fileConfiguration);
+					synchronized (this) {
+						new GameLoader(gameName, fileConfiguration);
+					}
 				} else {
 					this.cancel();
 				}

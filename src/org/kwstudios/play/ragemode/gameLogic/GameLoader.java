@@ -10,6 +10,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.kwstudios.play.ragemode.bossbar.BossbarLib;
 import org.kwstudios.play.ragemode.items.CombatAxe;
 import org.kwstudios.play.ragemode.items.RageArrow;
 import org.kwstudios.play.ragemode.items.RageBow;
@@ -34,10 +35,10 @@ public class GameLoader {
 		setInventories();
 		List<String> players = Arrays.asList(PlayerList.getPlayersInGame(gameName));
 		// TabGuiUpdater.setTabGui(players);
-//		TabAPI.setTabGuiListOverLayForPlayers(players);
-		
-//		TabAPI.setTab(players, "Test", 0, 0);
-		
+		// TabAPI.setTabGuiListOverLayForPlayers(players);
+
+		// TabAPI.setTab(players, "Test", 0, 0);
+
 		ScoreBoard gameBoard = new ScoreBoard(players, true);
 		gameBoard.setTitle(ConstantHolder.SCOREBOARD_DEFAULT_TITLE);
 		String kdLine = ChatColor.YELLOW + "0 / 0 " + ConstantHolder.SCOREBOARD_DEFAULT_KD;
@@ -53,6 +54,14 @@ public class GameLoader {
 		}
 		new GameTimer(this.gameName, this.fileConfiguration);
 		SignCreator.updateAllSigns(gameName);
+
+		String initialMessage = ChatColor.DARK_AQUA + "Welcome to " + ChatColor.DARK_PURPLE + gameName
+				+ ChatColor.DARK_AQUA + "!";
+		for (String player : players) {
+			BossbarLib.getHandler().getBossbar(Bukkit.getPlayer(UUID.fromString(player)))
+					.setMessage(initialMessage).setPercentage(1f);
+			BossbarLib.getHandler().updateBossbar(Bukkit.getPlayer(UUID.fromString(player)));
+		}
 	}
 
 	private void checkTeleport() {

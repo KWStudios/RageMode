@@ -12,6 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.kwstudios.play.ragemode.bossbar.BossbarLib;
 import org.kwstudios.play.ragemode.commands.CommandParser;
 import org.kwstudios.play.ragemode.commands.StopGame;
 import org.kwstudios.play.ragemode.database.MySQLConnector;
@@ -46,6 +47,8 @@ public class PluginLoader extends JavaPlugin {
 		super.onEnable();
 
 		PluginLoader.instance = this;
+		
+		BossbarLib.setPluginInstance(this);
 
 		/*
 		 * protocolManager = ProtocolLibrary.getProtocolManager();

@@ -215,7 +215,7 @@ public class PlayerList {
 					}
 				}
 			}
-			i = i + playersPerGame;
+			i = i + playersPerGame + 1;
 		}
 
 		player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "The game you wish to join wasn't found.");

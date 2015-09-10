@@ -241,12 +241,17 @@ public class RageScores {
 					highest = players[i];
 					highestPoints = playerpoints.get(players[i]).getPoints();
 				}
+//				else
+//					Bukkit.broadcastMessage("nothighest"+players[i]);
 			}
+//			else
+//				Bukkit.broadcastMessage(players[i]);
 			i++;
 			
-			playerpoints.get(highest).setWinner(true);
-			
 		}
+		
+		playerpoints.get(highest).setWinner(true);
+		
 		i = 0;
 		while (i < imax) {
 			if (players[i].equals(highest)) {

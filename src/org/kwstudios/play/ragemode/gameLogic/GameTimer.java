@@ -6,6 +6,7 @@ import java.util.TimerTask;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.kwstudios.play.ragemode.commands.StopGame;
+import org.kwstudios.play.ragemode.loader.PluginLoader;
 import org.kwstudios.play.ragemode.scoreboard.ScoreBoard;
 import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
@@ -84,15 +85,22 @@ public class GameTimer {
 					secondsString = (seconds < 10) ? "0" + Integer.toString((int) seconds)
 							: Integer.toString((int) seconds);
 					ScoreBoard gameBoard = ScoreBoard.allScoreBoards.get(gameName);
-					gameBoard.setTitle(ConstantHolder.SCOREBOARD_DEFAULT_TITLE + " " + ChatColor.DARK_AQUA + minutesString
-							+ ":" + secondsString);
-					if(secondsRemaining == 0){
+					gameBoard.setTitle(ConstantHolder.SCOREBOARD_DEFAULT_TITLE + " " + ChatColor.DARK_AQUA
+							+ minutesString + ":" + secondsString);
+					if (secondsRemaining == 0) {
 						this.cancel();
 						StopGame.stopGame(gameName);
 					}
 				} else {
 					this.cancel();
-					StopGame.stopGame(gameName);
+					PluginLoader.getInstance().getServer().getScheduler()
+							.scheduleSyncDelayedTask(PluginLoader.getInstance(), new Runnable() {
+						@Override
+						public void run() {
+							StopGame.stopGame(gameName);
+						}
+					});
+
 				}
 			}
 		}, 0, 1000);

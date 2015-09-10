@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.kwstudios.play.ragemode.loader.PluginLoader;
 import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 
@@ -86,9 +87,13 @@ public class LobbyTimer {
 					timesToSendMessage--;
 				} else if (timesToSendMessage == 0 && PlayerList.getPlayersInGame(gameName).length >= 2) {
 					this.cancel();
-					synchronized (this) {
-						new GameLoader(gameName, fileConfiguration);
-					}
+					PluginLoader.getInstance().getServer().getScheduler()
+							.scheduleSyncDelayedTask(PluginLoader.getInstance(), new Runnable() {
+						@Override
+						public void run() {
+							new GameLoader(gameName, fileConfiguration);
+						}
+					});
 				} else {
 					this.cancel();
 				}

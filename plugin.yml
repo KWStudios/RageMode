@@ -48,6 +48,11 @@ commands:
     aliases: ['ragemode list']
     permission: ragemode.rm.list
     permission-message: You may not use that command!
+  rm stats:
+    description: Lists the statistics for the given player.
+    aliases: ['ragemode stats']
+    permission: ragemode.rm.stats
+    permission-message: You may not use that command!
   rm reload:
     description: Reloads the config.yml from disk.
     aliases: ['ragemode reload']
@@ -65,6 +70,7 @@ permissions:
             ragemode.rm.join: true
             ragemode.rm.leave: true
             ragemode.rm.list: true
+            ragemode.rm.stats: true
     ragemode.admin.*:
         description: Gives access to all game-setup commands.
         default: op
@@ -75,4 +81,7 @@ permissions:
             ragemode.admin.remove: true
             ragemode.admin.reload: true
             ragemode.admin.stop: true
+    ragemode.vip:
+        description: Gives access to the VIP functions.
+        default: op
     

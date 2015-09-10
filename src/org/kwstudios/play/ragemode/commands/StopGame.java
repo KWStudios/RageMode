@@ -11,7 +11,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
-import org.kwstudios.play.ragemode.scoreboard.ScoreBoard;
 import org.kwstudios.play.ragemode.scores.PlayerPoints;
 import org.kwstudios.play.ragemode.scores.RageScores;
 import org.kwstudios.play.ragemode.signs.SignCreator;
@@ -30,7 +29,6 @@ public class StopGame {
 				
 				RageScores.calculateWinner(args[1], players);
 				
-				ScoreBoard.allScoreBoards.get(args[1]).removeScoreBoard();
 				
 				if(players != null) {
 					int i = 0;
@@ -84,7 +82,6 @@ public class StopGame {
 			Thread thread = new Thread(YAMLStats.createPlayersStats(lPP));
 			thread.start();
 
-			ScoreBoard.allScoreBoards.get(game).removeScoreBoard();
 			if(players != null) {
 				int i = 0;
 				int imax = players.length;
@@ -118,7 +115,6 @@ public class StopGame {
 			if(PlayerList.isGameRunning(games[i])) {
 				
 				logger.info("Stopping " + games[i] + " ...");
-				ScoreBoard.allScoreBoards.get(games[i]).removeScoreBoard();
 				
 				String[] players = PlayerList.getPlayersInGame(games[i]);
 				RageScores.calculateWinner(games[i], players);

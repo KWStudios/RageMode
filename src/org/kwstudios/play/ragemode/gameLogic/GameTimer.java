@@ -89,7 +89,13 @@ public class GameTimer {
 							+ minutesString + ":" + secondsString);
 					if (secondsRemaining == 0) {
 						this.cancel();
-						StopGame.stopGame(gameName);
+						PluginLoader.getInstance().getServer().getScheduler()
+								.scheduleSyncDelayedTask(PluginLoader.getInstance(), new Runnable() {
+							@Override
+							public void run() {
+								StopGame.stopGame(gameName);
+							}
+						});
 					}
 				} else {
 					this.cancel();

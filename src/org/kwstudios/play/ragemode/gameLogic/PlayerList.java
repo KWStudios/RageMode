@@ -11,6 +11,8 @@ import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.kwstudios.play.ragemode.bossbar.BossbarLib;
+import org.kwstudios.play.ragemode.scoreboard.ScoreBoard;
 import org.kwstudios.play.ragemode.scores.RageScores;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 import org.kwstudios.play.ragemode.toolbox.GetGames;
@@ -39,7 +41,7 @@ public class PlayerList {
 								* (GetGames
 										.getOverallMaxPlayers(fileConfiguration) + 1));
 		while(i < imax) {
-			list[i*GetGames.getOverallMaxPlayers(fileConfiguration)] = games[i];
+			list[i*(GetGames.getOverallMaxPlayers(fileConfiguration) + 1)] = games[i];
 			i++;
 		}
 		runningGames = Arrays.copyOf(runningGames,
@@ -235,6 +237,10 @@ public class PlayerList {
 //					org.mcsg.double0negative.tabapi.TabAPI.updatePlayer(player);
 					
 					RageScores.removePointsForPlayers(new String[] {player.getUniqueId().toString()});
+					
+					ScoreBoard.allScoreBoards.get(PlayerList.getPlayersGame(player)).removeScoreBoard(player);
+					
+					BossbarLib.getHandler().clearBossbar(player);
 					
 					player.getInventory().clear();
 					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You left your current Game.");

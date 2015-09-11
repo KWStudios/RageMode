@@ -280,7 +280,7 @@ public class EventListener implements Listener {
 			event.setCancelled(true);
 		}
 		
-		if(event.getBlock().getState() instanceof Sign){
+		if(event.getBlock().getState() instanceof Sign && !event.isCancelled()){
 			SignCreator.removeSign((Sign)event.getBlock().getState());
 		}
 	}

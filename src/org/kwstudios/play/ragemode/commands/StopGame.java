@@ -80,7 +80,7 @@ public class StopGame {
 							+ ".";
 					PlayerList.removePlayerSynced(player);
 					TitleAPI.sendTitle(player, 20, 160, 20, title, subtitle);
-					player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 220, 50, false, false), true);
+					player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 200, 25, false, false), true);
 				}
 			}
 			if (!EventListener.waitingGames.containsKey(game)) {

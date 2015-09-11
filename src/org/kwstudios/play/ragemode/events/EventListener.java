@@ -369,7 +369,15 @@ public class EventListener implements Listener {
 			if(EventListener.waitingGames != null) {
 				if(EventListener.waitingGames.containsKey(PlayerList.getPlayersGame(event.getPlayer()))) {
 					if(EventListener.waitingGames.get(PlayerList.getPlayersGame(event.getPlayer()))) {
-						event.getPlayer().setVelocity(new Vector(0d, event.getPlayer().getVelocity().getY(), 0d));
+						Location from = event.getFrom();
+						Location to = event.getTo();
+						double x = Math.floor(from.getX());
+						double z = Math.floor(from.getZ());
+						if(Math.floor(to.getX())!=x||Math.floor(to.getZ())!=z){
+						    x+=.5;
+						    z+=.5;
+						    event.getPlayer().teleport(new Location(from.getWorld(),x,from.getY(),z,from.getYaw(),from.getPitch()));
+						}
 					}
 				}
 			}

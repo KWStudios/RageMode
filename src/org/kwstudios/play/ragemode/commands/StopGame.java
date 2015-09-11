@@ -75,7 +75,7 @@ public class StopGame {
 							+ Integer.toString(RageScores.getPlayerPoints(winnerUUID).getKills()) + " / "
 							+ Integer.toString(RageScores.getPlayerPoints(winnerUUID).getDeaths()) + ChatColor.GOLD
 							+ ".";
-					TitleAPI.sendTitle(player, 10, 80, 10, title, subtitle);
+					TitleAPI.sendTitle(player, 20, 160, 20, title, subtitle);
 				}
 			}
 			if (!EventListener.waitingGames.containsKey(game)) {
@@ -94,7 +94,7 @@ public class StopGame {
 								EventListener.waitingGames.remove(gameName);
 							}
 						}
-					}, 100);
+					}, 200);
 		}
 	}
 

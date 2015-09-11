@@ -86,15 +86,26 @@ public class ShowStats {
 			
 			if(rpp != null) {
 				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "Showing the stats of " + name + ":");
-				player.sendMessage("Deaths:  " + rpp.getDeaths());
-				player.sendMessage("Kills:   " + rpp.getKills());
-				player.sendMessage("KD:      " + rpp.getKD());
+				PluginLoader.getInstance();
+				player.sendMessage(PluginLoader.getMessages().KNIFE_DEATHS + rpp.getKnifeDeaths());
+				player.sendMessage(PluginLoader.getMessages().EXPLOSION_DEATHS + rpp.getExplosionDeaths());
+				player.sendMessage(PluginLoader.getMessages().ARROW_DEATHS + rpp.getDirectArrowDeaths());
+				player.sendMessage(PluginLoader.getMessages().AXE_DEATHS + rpp.getAxeDeaths());
 				player.sendMessage("---------------");
-				player.sendMessage("Games:   " + rpp.getGames());
-				player.sendMessage("Wins:    " + rpp.getWins());
+				player.sendMessage(PluginLoader.getMessages().KNIFE_KILLS + rpp.getKnifeKills());
+				player.sendMessage(PluginLoader.getMessages().EXPLOSION_KILLS + rpp.getExplosionKills());
+				player.sendMessage(PluginLoader.getMessages().ARROW_KILLS + rpp.getDirectArrowKills());
+				player.sendMessage(PluginLoader.getMessages().AXE_KILLS + rpp.getAxeKills());
 				player.sendMessage("---------------");
-				player.sendMessage("Score:   " + rpp.getPoints());				
-				player.sendMessage("Rank:    " + "Ranker™ hasn't been added jet :(");					
+				player.sendMessage(PluginLoader.getMessages().DEATHS + rpp.getDeaths());
+				player.sendMessage(PluginLoader.getMessages().KILLS + rpp.getKills());
+				player.sendMessage(PluginLoader.getMessages().KD + rpp.getKD());
+				player.sendMessage("---------------");
+				player.sendMessage(PluginLoader.getMessages().GAMES + rpp.getGames());
+				player.sendMessage(PluginLoader.getMessages().WINS + rpp.getWins());
+				player.sendMessage("---------------");
+				player.sendMessage(PluginLoader.getMessages().SCORE + rpp.getPoints());				
+				player.sendMessage(PluginLoader.getMessages().RANK + "Ranker™ hasn't been added jet :(");					
 			}
 			else
 			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "That player hasn't played on this server yet.");

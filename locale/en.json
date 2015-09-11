@@ -30,4 +30,23 @@
   "ALL_GAMES_STOPPED": "All games stopped!",
 
   "RELOADED_SUCCESSFULLY": "§2RageMode was reloaded successfully!"
+  
+  "KNIFE_DEATHS": "Knife Deaths:  "
+  "EXPLOSION_DEATHS": "Explosion Deaths:  "
+  "ARROW_DEATHS": "Knife Deaths:  "
+  "AXE_DEATHS": "Arrow Deaths:  "
+  "DEATHS": "Deaths:  "
+  
+  "KNIFE_KILLS": "Knife Kills:   "
+  "EXPLOSION_KILLS": "Explosion Kills:   "
+  "ARROW_KILLS": "Knife Kills:   "
+  "AXE_KILLS": "Arrow Kills:   "
+  "KILLS": "Kills:   "
+  
+  "KD": "KD:      "
+  
+  "GAMES": "Games:   "
+  "WINS": "Wins:    "
+  "SCORE": "Score:   "
+  "RANK": "Rank:    "
 }

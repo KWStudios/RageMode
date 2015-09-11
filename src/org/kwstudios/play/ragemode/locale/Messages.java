@@ -24,5 +24,20 @@ public class Messages {
 	public String GAME_STOPPED;
 	public String ALL_GAMES_STOPPED;
 	public String RELOADED_SUCCESSFULLY;
+	public String KNIFE_DEATHS;
+	public String EXPLOSION_DEATHS;
+	public String ARROW_DEATHS;
+	public String AXE_DEATHS;
+	public String DEATHS;
+	public String KNIFE_KILLS;
+	public String EXPLOSION_KILLS;
+	public String ARROW_KILLS;
+	public String AXE_KILLS;
+	public String KILLS;
+	public String KD;
+	public String GAMES;
+	public String WINS;
+	public String SCORE;
+	public String RANK;	
 
 }

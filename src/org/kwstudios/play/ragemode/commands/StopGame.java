@@ -9,6 +9,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.kwstudios.play.ragemode.events.EventListener;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
@@ -76,6 +78,7 @@ public class StopGame {
 							+ Integer.toString(RageScores.getPlayerPoints(winnerUUID).getDeaths()) + ChatColor.GOLD
 							+ ".";
 					TitleAPI.sendTitle(player, 20, 160, 20, title, subtitle);
+					player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 200, 1, false, false), true);
 				}
 			}
 			if (!EventListener.waitingGames.containsKey(game)) {

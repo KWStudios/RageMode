@@ -102,11 +102,30 @@ public class PluginLoader extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
+		
+		Thread thread = new Thread(new Runnable() {	
+			@Override
+			public void run() {
+				StopGame.stopAllGames(getConfig(), Logger.getLogger("Minecraft"));	
+			}});
+		
+			thread.start();
+			while(thread.isAlive()) {
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+
 		super.onDisable();
 		PluginDescriptionFile pluginDescriptionFile = getDescription();
 		Logger logger = Logger.getLogger("Minecraft");
 
 //		StopGame.stopAllGames(getConfig(), logger);
+
+
+
 
 		logger.info(pluginDescriptionFile.getName() + " was unloaded successfully! (Version: "
 				+ pluginDescriptionFile.getVersion() + ")");

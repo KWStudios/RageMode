@@ -298,13 +298,13 @@ public class PlayerList {
 					
 					n = 0;
 					
-					while (n < oldGameMode.getFirstLength()) {							//Give him his gamemode back.
+/*					while (n < oldGameMode.getFirstLength()) {							//Give him his gamemode back.
 						if (oldGameMode.getFromFirstObject(n) == player) {
 							player.setGameMode(oldGameMode.getFromSecondObject(n));
 							oldGameMode.removeFromBoth(n);
 						}
 						n++;
-					}
+					}*/
 					
 					
 					list[i] = null;
@@ -317,10 +317,19 @@ public class PlayerList {
 		return false;
 	}
 	
-	public static void removeUIFromPlayer(Player player) {
+	public static void removePlayerSynced(Player player) {
 		BossbarLib.getHandler().clearBossbar(player);
 		if(ScoreBoard.allScoreBoards.containsKey(PlayerList.getPlayersGame(player)))
-			ScoreBoard.allScoreBoards.get(PlayerList.getPlayersGame(player)).removeScoreBoard(player);   
+			ScoreBoard.allScoreBoards.get(PlayerList.getPlayersGame(player)).removeScoreBoard(player);
+		
+		int n = 0;
+		while (n < oldGameMode.getFirstLength()) {							//Give him his gamemode back.
+			if (oldGameMode.getFromFirstObject(n) == player) {
+				player.setGameMode(oldGameMode.getFromSecondObject(n));
+				oldGameMode.removeFromBoth(n);
+			}
+			n++;
+		}
 
 	}
 

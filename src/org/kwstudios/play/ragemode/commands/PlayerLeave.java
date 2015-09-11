@@ -30,7 +30,7 @@ public class PlayerLeave {
 		String gameName = PlayerList.getPlayersGame(player);
 		PlayerList.removePlayer(player);
 		SignCreator.updateAllSigns(gameName);
-		PlayerList.removeUIFromPlayer(player);
+		PlayerList.removePlayerSynced(player);
 	}
 
 }

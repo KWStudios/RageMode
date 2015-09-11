@@ -34,6 +34,7 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerKickEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.kwstudios.play.ragemode.commands.PlayerJoin;
@@ -52,6 +53,7 @@ import org.kwstudios.play.ragemode.toolbox.GetGames;
 
 public class EventListener implements Listener {
 
+	public static HashMap<String, Boolean> waitingGames = new HashMap<String, Boolean>();
 	public FileConfiguration fileConfiguration = null;
 	private Map<UUID, UUID> explosionVictims = new HashMap<UUID, UUID>();  //shot, shooter
 	
@@ -363,5 +365,18 @@ public class EventListener implements Listener {
 	@EventHandler
 	public void onPlayerKick(PlayerKickEvent event) {
 		PlayerList.removePlayer(event.getPlayer());
+	}
+	
+	@EventHandler
+	public void onPlayerMove(PlayerMoveEvent event){
+		if(PlayerList.isPlayerPlaying(event.getPlayer().getUniqueId().toString())) {
+			if(EventListener.waitingGames != null) {
+				if(EventListener.waitingGames.containsKey(PlayerList.getPlayersGame(event.getPlayer()))) {
+					if(EventListener.waitingGames.get(PlayerList.getPlayersGame(event.getPlayer()))) {
+						event.setCancelled(true);
+					}
+				}
+			}
+		}
 	}
 }

@@ -226,7 +226,7 @@ public class RageScores {
 		}
 	}
 
-	public static void calculateWinner(String game, String[] players) {
+	public static String calculateWinner(String game, String[] players) {
 		String highest = UUID.randomUUID().toString();
 		int highestPoints = -200000000;
 		int i = 0;
@@ -266,6 +266,8 @@ public class RageScores {
 			}
 			i++;
 		}
+		
+		return highest;
 	}
 
 	// TODO Statistics for games and for the server globally. (Maybe also for

@@ -37,6 +37,7 @@ import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.util.Vector;
 import org.kwstudios.play.ragemode.commands.PlayerJoin;
 import org.kwstudios.play.ragemode.gameLogic.GameSpawnGetter;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
@@ -363,17 +364,12 @@ public class EventListener implements Listener {
 	}
 	
 	@EventHandler
-	public void onPlayerKick(PlayerKickEvent event) {
-		PlayerList.removePlayer(event.getPlayer());
-	}
-	
-	@EventHandler
 	public void onPlayerMove(PlayerMoveEvent event){
 		if(PlayerList.isPlayerPlaying(event.getPlayer().getUniqueId().toString())) {
 			if(EventListener.waitingGames != null) {
 				if(EventListener.waitingGames.containsKey(PlayerList.getPlayersGame(event.getPlayer()))) {
 					if(EventListener.waitingGames.get(PlayerList.getPlayersGame(event.getPlayer()))) {
-						event.setCancelled(true);
+						event.getPlayer().setVelocity(new Vector(0d, event.getPlayer().getVelocity().getY(), 0d));
 					}
 				}
 			}

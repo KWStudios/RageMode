@@ -237,12 +237,12 @@ public class PlayerList {
 //					org.mcsg.double0negative.tabapi.TabAPI.disableTabForPlayer(player);
 //					org.mcsg.double0negative.tabapi.TabAPI.updatePlayer(player);
 					
-					if(ScoreBoard.allScoreBoards.containsKey(PlayerList.getPlayersGame(player)))
-						ScoreBoard.allScoreBoards.get(PlayerList.getPlayersGame(player)).removeScoreBoard(player);   
+//					if(ScoreBoard.allScoreBoards.containsKey(PlayerList.getPlayersGame(player)))
+//						ScoreBoard.allScoreBoards.get(PlayerList.getPlayersGame(player)).removeScoreBoard(player);   
 					
 					RageScores.removePointsForPlayers(new String[] {player.getUniqueId().toString()});					
 					
-					BossbarLib.getHandler().clearBossbar(player);
+//					BossbarLib.getHandler().clearBossbar(player);
 					
 					player.getInventory().clear();
 					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You left your current Game.");
@@ -315,6 +315,13 @@ public class PlayerList {
 		}
 		player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "The fact that you are not in a game caused a Problem while trying to remove you from that game.");
 		return false;
+	}
+	
+	public static void removeUIFromPlayer(Player player) {
+		BossbarLib.getHandler().clearBossbar(player);
+		if(ScoreBoard.allScoreBoards.containsKey(PlayerList.getPlayersGame(player)))
+			ScoreBoard.allScoreBoards.get(PlayerList.getPlayersGame(player)).removeScoreBoard(player);   
+
 	}
 
 	public static boolean isGameRunning(String game) {

@@ -1,5 +1,8 @@
 package org.kwstudios.play.ragemode.commands;
 
+import java.util.UUID;
+
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
@@ -27,6 +30,7 @@ public class PlayerLeave {
 		String gameName = PlayerList.getPlayersGame(player);
 		PlayerList.removePlayer(player);
 		SignCreator.updateAllSigns(gameName);
+		PlayerList.removeUIFromPlayer(player);
 	}
 
 }

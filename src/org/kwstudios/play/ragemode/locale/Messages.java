@@ -1,7 +1,7 @@
 package org.kwstudios.play.ragemode.locale;
 
 public class Messages {
-	
+
 	public String NOT_A_PLAYER;
 	public String WRONG_COMMAND;
 	public String PERMISSION_MESSAGE;
@@ -38,6 +38,14 @@ public class Messages {
 	public String GAMES;
 	public String WINS;
 	public String SCORE;
-	public String RANK;	
+	public String RANK;
+	public String NOT_PLAYED_YET;
+	public String BROADCAST_AXE_KILL;
+	public String BROADCAST_ARROW_KILL;
+	public String BROADCAST_KNIFE_KILL;
+	public String BROADCAST_EXPLOSION_KILL;
+	public String BROADCAST_ERROR_KILL;
+	public String UNKNOWN_KILLER;
+	public String UNKNOWN_WEAPON;
 
 }

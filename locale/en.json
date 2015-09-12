@@ -30,23 +30,34 @@
   "ALL_GAMES_STOPPED": "All games stopped!",
 
   "RELOADED_SUCCESSFULLY": "§2RageMode was reloaded successfully!",
-  
+
   "KNIFE_DEATHS": "Knife Deaths: ",
   "EXPLOSION_DEATHS": "Explosion Deaths: ",
   "ARROW_DEATHS": "Arrow Deaths: ",
   "AXE_DEATHS": "Axe Deaths: ",
   "DEATHS": "Deaths: ",
-  
+
   "KNIFE_KILLS": "Knife Kills: ",
   "EXPLOSION_KILLS": "Explosion Kills: ",
   "ARROW_KILLS": "Arrow Kills: ",
   "AXE_KILLS": "Axe Kills: ",
   "KILLS": "Kills: ",
-  
+
   "KD": "KD: ",
-  
+
   "GAMES": "Games: ",
   "WINS": "Wins: ",
   "SCORE": "Score: ",
-  "RANK": "Rank: "
+  "RANK": "Rank: ",
+
+  "NOT_PLAYED_YET": "That player hasn't played on this server yet.",
+
+  "BROADCAST_AXE_KILL": "§a$VICTIM$ §3was killed by §a$KILLER$ §3with a §6$WEAPON$ §3.",
+  "BROADCAST_ARROW_KILL": "§a$VICTIM$ §3was killed by a §6$WEAPON$ §3from §a$KILLER$ §3.",
+  "BROADCAST_KNIFE_KILL": "§a$VICTIM$ §3was killed by §a$KILLER$ §3with a §6$WEAPON$ §3.",
+  "BROADCAST_EXPLOSION_KILL": "§a$VICTIM$ §3was §6$WEAPON$ §3by §a$KILLER$ §3.",
+  "BROADCAST_ERROR_KILL": "Whoops, that shouldn't happen normally...",
+
+  "UNKNOWN_KILLER": "Do you know who killed you? Because we don't know it...",
+  "UNKNOWN_WEAPON": "§a$VICTIM$ §3was killed by something unexpected."
 }

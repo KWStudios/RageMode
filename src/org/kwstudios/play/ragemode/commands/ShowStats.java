@@ -16,6 +16,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;*/
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
@@ -29,15 +30,14 @@ import com.google.gson.Gson;
 
 public class ShowStats {
 	public ShowStats(Player player, String label, String[] args, FileConfiguration fileConfiguration) {
-		if(args.length < 2) {
+		if (args.length < 2) {
 			constructMessage(player, player.getName());
-		}
-		else {
+		} else {
 			constructMessage(player, args[1]);
 		}
 	}
 
-	private void constructMessage(Player player, String playerName) {		
+	private void constructMessage(Player player, String playerName) {
 		Thread thread = new Thread(new uuiderThread(player, playerName));
 		thread.start();
 	}
@@ -47,44 +47,50 @@ public class ShowStats {
 		public String name;
 		public boolean legacy;
 	}
-	
+
 	private class uuiderThread implements Runnable {
 		private String name;
 		private Player player;
 		private String sUUID;
+
 		public uuiderThread(Player player, String name) {
 			this.player = player;
 			this.name = name;
 		}
-		
+
 		@Override
 		public void run() {
-		//	http("https://api.mojang.com/users/profiles/minecraft/" + name, "");
+			// http("https://api.mojang.com/users/profiles/minecraft/" + name,
+			// "");
 			https();
-			
-			if(sUUID == null)
+
+			if (sUUID == null)
 				return;
-			
+
 			CharSequence sUUID_SEQ_1 = sUUID.subSequence(0, 8);
 			CharSequence sUUID_SEQ_2 = sUUID.subSequence(8, 12);
 			CharSequence sUUID_SEQ_3 = sUUID.subSequence(12, 16);
 			CharSequence sUUID_SEQ_4 = sUUID.subSequence(16, 20);
 			CharSequence sUUID_SEQ_5 = sUUID.subSequence(20, 32);
-			sUUID = new String(sUUID_SEQ_1 + "-" + sUUID_SEQ_2 + "-" + sUUID_SEQ_3 + "-" + sUUID_SEQ_4 + "-" + sUUID_SEQ_5);
-			
+			sUUID = new String(
+					sUUID_SEQ_1 + "-" + sUUID_SEQ_2 + "-" + sUUID_SEQ_3 + "-" + sUUID_SEQ_4 + "-" + sUUID_SEQ_5);
+
 			Player statsPlayer = Bukkit.getPlayer(UUID.fromString(sUUID));
 			RetPlayerPoints rpp = null;
-			
-			if(PluginLoader.getInstance().getConfig().getString("settings.global.statistics.type").equalsIgnoreCase("yaml")) {
+
+			if (PluginLoader.getInstance().getConfig().getString("settings.global.statistics.type")
+					.equalsIgnoreCase("yaml")) {
 				rpp = YAMLStats.getPlayerStatistics(sUUID);
 			}
-			
-			if(PluginLoader.getInstance().getConfig().getString("settings.global.statistics.type").equalsIgnoreCase("mySQL")) {
-//				Bukkit.broadcastMessage(sUUID);
-				rpp = MySQLStats.getPlayerStatistics(Bukkit.getPlayer(UUID.fromString(sUUID)), PluginLoader.getMySqlConnector());
+
+			if (PluginLoader.getInstance().getConfig().getString("settings.global.statistics.type")
+					.equalsIgnoreCase("mySQL")) {
+				// Bukkit.broadcastMessage(sUUID);
+				rpp = MySQLStats.getPlayerStatistics(Bukkit.getPlayer(UUID.fromString(sUUID)),
+						PluginLoader.getMySqlConnector());
 			}
-			
-			if(rpp != null) {
+
+			if (rpp != null) {
 				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "Showing the stats of " + name + ":");
 				PluginLoader.getInstance();
 				player.sendMessage(PluginLoader.getMessages().KNIFE_DEATHS + rpp.getKnifeDeaths());
@@ -104,52 +110,51 @@ public class ShowStats {
 				player.sendMessage(PluginLoader.getMessages().GAMES + rpp.getGames());
 				player.sendMessage(PluginLoader.getMessages().WINS + rpp.getWins());
 				player.sendMessage("---------------");
-				player.sendMessage(PluginLoader.getMessages().SCORE + rpp.getPoints());				
-				player.sendMessage(PluginLoader.getMessages().RANK + "Ranker™ hasn't been added jet :(");					
+				player.sendMessage(PluginLoader.getMessages().SCORE + rpp.getPoints());
+				player.sendMessage(PluginLoader.getMessages().RANK + "Ranker™ hasn't been added jet :(");
+			} else {
+				String message = ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().NOT_PLAYED_YET);
+				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + message);
 			}
-			else
-			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "That player hasn't played on this server yet.");
 		}
-		
-/*		   public HttpResponse http(String url, String body) {
-		
-		        try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
-		            HttpPost request = new HttpPost(url);
-		            StringEntity params = new StringEntity(body);
-		            request.addHeader("content-type", "application/json");
-		            request.setEntity(params);
-		            HttpResponse result = httpClient.execute(request);
-		            String json = EntityUtils.toString(result.getEntity(), "UTF-8");
-		
-		            com.google.gson.Gson gson = new com.google.gson.Gson();
-		            UUIDStrings data = gson.fromJson(json, UUIDStrings.class);
-		            Bukkit.broadcastMessage(data.id + data.name + data.legacy);
-		            this.sUUID = data.id;
-		
-		        } catch (IOException ex) {
-		        }
-		        return null;
-    		}*/	
+
+		/*
+		 * public HttpResponse http(String url, String body) {
+		 * 
+		 * try (CloseableHttpClient httpClient =
+		 * HttpClientBuilder.create().build()) { HttpPost request = new
+		 * HttpPost(url); StringEntity params = new StringEntity(body);
+		 * request.addHeader("content-type", "application/json");
+		 * request.setEntity(params); HttpResponse result =
+		 * httpClient.execute(request); String json =
+		 * EntityUtils.toString(result.getEntity(), "UTF-8");
+		 * 
+		 * com.google.gson.Gson gson = new com.google.gson.Gson(); UUIDStrings
+		 * data = gson.fromJson(json, UUIDStrings.class);
+		 * Bukkit.broadcastMessage(data.id + data.name + data.legacy);
+		 * this.sUUID = data.id;
+		 * 
+		 * } catch (IOException ex) { } return null; }
+		 */
 		public void https() {
-						
+
 			try {
-			URL	url = new URL("https://api.mojang.com/users/profiles/minecraft/" + name);
-			URLConnection con = url.openConnection();
-			InputStream in = con.getInputStream();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF8"));
-			
-            com.google.gson.Gson gson = new com.google.gson.Gson();
-            UUIDStrings data = gson.fromJson(reader, UUIDStrings.class);
-            if((data.id != null) && (data.name != null)) {
-//            	Bukkit.broadcastMessage(data.id + data.name);            	
-            	this.sUUID = data.id;
-            }
-            else
-            	return;
-            
+				URL url = new URL("https://api.mojang.com/users/profiles/minecraft/" + name);
+				URLConnection con = url.openConnection();
+				InputStream in = con.getInputStream();
+				BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF8"));
+
+				com.google.gson.Gson gson = new com.google.gson.Gson();
+				UUIDStrings data = gson.fromJson(reader, UUIDStrings.class);
+				if ((data.id != null) && (data.name != null)) {
+					// Bukkit.broadcastMessage(data.id + data.name);
+					this.sUUID = data.id;
+				} else
+					return;
+
 			} catch (Exception i) {
 				i.printStackTrace();
-			}			
+			}
 		}
 	}
 }

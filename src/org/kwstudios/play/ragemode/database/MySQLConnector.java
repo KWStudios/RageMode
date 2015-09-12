@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
+import org.bukkit.Bukkit;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 
 public class MySQLConnector {
@@ -43,10 +44,12 @@ public class MySQLConnector {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			System.out.println("The table was created successfully!");
+			String successMessage = ConstantHolder.RAGEMODE_PREFIX + "The table was created successfully!";
+			Bukkit.getConsoleSender().sendMessage(successMessage);
 		} else {
-			System.out.println(ConstantHolder.RAGEMODE_PREFIX
-					+ "We could not reach the given database url or the authentication failed. Please recheck the config.yml.");
+			String message = ConstantHolder.RAGEMODE_PREFIX
+					+ "We could not reach the given database url or the authentication failed. Please recheck the config.yml.";
+			Bukkit.getConsoleSender().sendMessage(message);
 		}
 	}
 

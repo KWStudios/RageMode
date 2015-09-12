@@ -21,14 +21,15 @@ import org.kwstudios.play.ragemode.toolbox.TableList;
 
 public class PlayerList {
 	private static FileConfiguration fileConfiguration;
-	private static String[] list = new String[1]; // [Gamemane,Playername x overallMaxPlayers,Gamename,...]
+	private static String[] list = new String[1]; // [Gamemane,Playername x
+													// overallMaxPlayers,Gamename,...]
 	public static TableList<Player, Location> oldLocations = new TableList<Player, Location>();
 	public static TableList<Player, ItemStack[]> oldInventories = new TableList<Player, ItemStack[]>();
 	public static TableList<Player, ItemStack[]> oldArmor = new TableList<Player, ItemStack[]>();
 	public static TableList<Player, Double> oldHealth = new TableList<Player, Double>();
 	public static TableList<Player, Integer> oldHunger = new TableList<Player, Integer>();
 	public static TableList<Player, GameMode> oldGameMode = new TableList<Player, GameMode>();
-	
+
 	private static String[] runningGames = new String[1];
 
 	public PlayerList(FileConfiguration fileConfiguration) {
@@ -36,22 +37,18 @@ public class PlayerList {
 		int imax = GetGames.getConfigGamesCount(fileConfiguration);
 		String[] games = GetGames.getGameNames(fileConfiguration);
 		PlayerList.fileConfiguration = fileConfiguration;
-		list = Arrays
-				.copyOf(list,
-						GetGames.getConfigGamesCount(fileConfiguration)
-								* (GetGames
-										.getOverallMaxPlayers(fileConfiguration) + 1));
-		while(i < imax) {
-			list[i*(GetGames.getOverallMaxPlayers(fileConfiguration) + 1)] = games[i];
+		list = Arrays.copyOf(list, GetGames.getConfigGamesCount(fileConfiguration)
+				* (GetGames.getOverallMaxPlayers(fileConfiguration) + 1));
+		while (i < imax) {
+			list[i * (GetGames.getOverallMaxPlayers(fileConfiguration) + 1)] = games[i];
 			i++;
 		}
-		runningGames = Arrays.copyOf(runningGames,
-				GetGames.getConfigGamesCount(fileConfiguration));
+		runningGames = Arrays.copyOf(runningGames, GetGames.getConfigGamesCount(fileConfiguration));
 	}
 
 	public static String[] getPlayersInGame(String game) {
 		int maxPlayers = GetGames.getMaxPlayers(game, fileConfiguration);
-		if(maxPlayers == -1)
+		if (maxPlayers == -1)
 			return null;
 		String[] players = new String[maxPlayers];
 
@@ -61,12 +58,12 @@ public class PlayerList {
 				* (GetGames.getOverallMaxPlayers(fileConfiguration) + 1);
 		int playersPerGame = GetGames.getOverallMaxPlayers(fileConfiguration);
 		while (i < imax) {
-			if(list[i] != null) {
+			if (list[i] != null) {
 				if (list[i].equals(game)) {
 					n = i;
 					int x = 0;
 					while (n <= GetGames.getMaxPlayers(game, fileConfiguration) + i - 1) {
-						if(list[n + 1] == null)
+						if (list[n + 1] == null)
 							n++;
 						else {
 							players[x] = list[n + 1];
@@ -77,14 +74,16 @@ public class PlayerList {
 					players = Arrays.copyOf(players, x);
 				}
 			}
-		    i = i + (playersPerGame + 1);		
+			i = i + (playersPerGame + 1);
 		}
 		return players;
 	}
 
 	public static boolean addPlayer(Player player, String game, FileConfiguration fileConfiguration) {
 		if (isGameRunning(game)) {
-			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "This Game is already running.");
+			String message = ConstantHolder.RAGEMODE_PREFIX
+					+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().GAME_RUNNING);
+			player.sendMessage(message);
 			return false;
 		}
 
@@ -96,9 +95,11 @@ public class PlayerList {
 				* (GetGames.getOverallMaxPlayers(fileConfiguration) + 1);
 		int playersPerGame = GetGames.getOverallMaxPlayers(fileConfiguration);
 		while (i < imax) {
-			if(list[i] != null) {
+			if (list[i] != null) {
 				if (player.getUniqueId().toString().equals(list[i])) {
-					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You are already in a game. You can leave it by typing /rm leave");
+					String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+							PluginLoader.getMessages().PLAYER_ALREADY_IN_GAME.replace("$USAGE$", "/rm leave"));
+					player.sendMessage(message);
 					return false;
 				}
 			}
@@ -110,13 +111,14 @@ public class PlayerList {
 			if (list[i] != null) {
 				if (list[i].equals(game)) {
 					n = i;
-					n++;	//should increase performance because the gamename in the list isn't checked for null 
+					n++; // should increase performance because the gamename in
+							// the list isn't checked for null
 					while (n <= (GetGames.getMaxPlayers(game, fileConfiguration) + i)) {
 						if (list[n] == null) {
 							list[n] = player.getUniqueId().toString();
-							player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You joined "
-									+ ChatColor.DARK_AQUA + game
-									+ ChatColor.WHITE + ".");
+							String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes(
+									'§', PluginLoader.getMessages().YOU_JOINED_THE_GAME.replace("$GAME$", game));
+							player.sendMessage(message);
 
 							if (getPlayersInGame(game).length == 2) {
 								new LobbyTimer(game, fileConfiguration);
@@ -129,29 +131,33 @@ public class PlayerList {
 						Random random = new Random();
 						boolean isVIP = false;
 						Player playerToKick;
-						
+
 						do {
-							kickposition = random.nextInt(GetGames.getMaxPlayers(game,
-									fileConfiguration) - 1);
+							kickposition = random.nextInt(GetGames.getMaxPlayers(game, fileConfiguration) - 1);
 							kickposition = kickposition + 1 + i;
 							n = 0;
-							playerToKick = Bukkit.getPlayer(UUID
-									.fromString(list[kickposition]));	
+							playerToKick = Bukkit.getPlayer(UUID.fromString(list[kickposition]));
 							isVIP = playerToKick.hasPermission("ragemode.vip");
 						} while (isVIP);
-							
-						while (n < oldLocations.getFirstLength()) {						//Get him back to his old location.
+
+						while (n < oldLocations.getFirstLength()) { // Get him
+																	// back to
+																	// his old
+																	// location.
 							if (oldLocations.getFromFirstObject(n) == playerToKick) {
-								playerToKick.teleport(oldLocations
-										.getFromSecondObject(n));
+								playerToKick.teleport(oldLocations.getFromSecondObject(n));
 								oldLocations.removeFromBoth(n);
 							}
 							n++;
 						}
-						
+
 						n = 0;
-						
-						while (n < oldInventories.getFirstLength()) {						//Give him his inventory back.
+
+						while (n < oldInventories.getFirstLength()) { // Give
+																		// him
+																		// his
+																		// inventory
+																		// back.
 							if (oldInventories.getFromFirstObject(n) == playerToKick) {
 								playerToKick.getInventory().clear();
 								playerToKick.getInventory().setContents(oldInventories.getFromSecondObject(n));
@@ -159,59 +165,72 @@ public class PlayerList {
 							}
 							n++;
 						}
-						
+
 						n = 0;
-						
-						while (n < oldArmor.getFirstLength()) {							//Give him his armor back.
+
+						while (n < oldArmor.getFirstLength()) { // Give him his
+																// armor back.
 							if (oldArmor.getFromFirstObject(n) == playerToKick) {
 								playerToKick.getInventory().setArmorContents(oldArmor.getFromSecondObject(n));
 								oldArmor.removeFromBoth(n);
 							}
 							n++;
 						}
-						
+
 						n = 0;
-						
-						while (n < oldHealth.getFirstLength()) {							//Give him his health back.
+
+						while (n < oldHealth.getFirstLength()) { // Give him his
+																	// health
+																	// back.
 							if (oldHealth.getFromFirstObject(n) == playerToKick) {
 								playerToKick.setHealth(oldHealth.getFromSecondObject(n));
 								oldHealth.removeFromBoth(n);
 							}
 							n++;
 						}
-						
+
 						n = 0;
-						
-						while (n < oldHunger.getFirstLength()) {							//Give him his hunger back.
+
+						while (n < oldHunger.getFirstLength()) { // Give him his
+																	// hunger
+																	// back.
 							if (oldHunger.getFromFirstObject(n) == playerToKick) {
 								playerToKick.setFoodLevel(oldHunger.getFromSecondObject(n));
 								oldHunger.removeFromBoth(n);
 							}
 							n++;
 						}
-						
+
 						n = 0;
-						
-						while (n < oldGameMode.getFirstLength()) {							//Give him his gamemode back.
+
+						while (n < oldGameMode.getFirstLength()) { // Give him
+																	// his
+																	// gamemode
+																	// back.
 							if (oldGameMode.getFromFirstObject(n) == playerToKick) {
 								playerToKick.setGameMode(oldGameMode.getFromSecondObject(n));
 								oldGameMode.removeFromBoth(n);
 							}
 							n++;
 						}
-						
+
 						list[kickposition] = player.getUniqueId().toString();
-						playerToKick
-								.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You were kicked out of the Game to make room for a VIP.");
-	
+						String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+								PluginLoader.getMessages().PLAYER_KICKED_FOR_VIP);
+						playerToKick.sendMessage(message);
+
 						if (getPlayersInGame(game).length == 2) {
 							new LobbyTimer(game, fileConfiguration);
 						}
-						player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You joined " + ChatColor.DARK_AQUA + game + ChatColor.WHITE + ".");
+						message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+								PluginLoader.getMessages().YOU_JOINED_THE_GAME.replace("$GAME$", game));
+						player.sendMessage(message);
 						return true;
-				
+
 					} else {
-						player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "This Game is already full!");
+						String message = ConstantHolder.RAGEMODE_PREFIX
+								+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().GAME_FULL);
+						player.sendMessage(message);
 						return false;
 					}
 				}
@@ -219,7 +238,9 @@ public class PlayerList {
 			i = i + playersPerGame + 1;
 		}
 
-		player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "The game you wish to join wasn't found.");
+		String message = ConstantHolder.RAGEMODE_PREFIX
+				+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().GAME_DOES_NOT_EXIST);
+		player.sendMessage(message);
 		return false;
 	}
 
@@ -230,100 +251,115 @@ public class PlayerList {
 				* (GetGames.getOverallMaxPlayers(fileConfiguration) + 1);
 
 		while (i < imax) {
-			if(list[i] != null) {
+			if (list[i] != null) {
 				if (list[i].equals(player.getUniqueId().toString())) {
-//					TabGuiUpdater.removeTabForPlayer(player);
-					
-//					org.mcsg.double0negative.tabapi.TabAPI.disableTabForPlayer(player);
-//					org.mcsg.double0negative.tabapi.TabAPI.updatePlayer(player);
-					
-//					if(ScoreBoard.allScoreBoards.containsKey(PlayerList.getPlayersGame(player)))
-//						ScoreBoard.allScoreBoards.get(PlayerList.getPlayersGame(player)).removeScoreBoard(player);   
-					
-					RageScores.removePointsForPlayers(new String[] {player.getUniqueId().toString()});					
-					
-//					BossbarLib.getHandler().clearBossbar(player);
-					
-					player.getInventory().clear();
-					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "You left your current Game.");
+					// TabGuiUpdater.removeTabForPlayer(player);
 
-					while (n < oldLocations.getFirstLength()) {					//Bring him back to his old location
+					// org.mcsg.double0negative.tabapi.TabAPI.disableTabForPlayer(player);
+					// org.mcsg.double0negative.tabapi.TabAPI.updatePlayer(player);
+
+					// if(ScoreBoard.allScoreBoards.containsKey(PlayerList.getPlayersGame(player)))
+					// ScoreBoard.allScoreBoards.get(PlayerList.getPlayersGame(player)).removeScoreBoard(player);
+
+					RageScores.removePointsForPlayers(new String[] { player.getUniqueId().toString() });
+
+					// BossbarLib.getHandler().clearBossbar(player);
+
+					player.getInventory().clear();
+					String message = ConstantHolder.RAGEMODE_PREFIX
+							+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PLAYER_LEFT_GAME);
+					player.sendMessage(message);
+
+					while (n < oldLocations.getFirstLength()) { // Bring him
+																// back to his
+																// old location
 						if (oldLocations.getFromFirstObject(n) == player) {
 							player.teleport(oldLocations.getFromSecondObject(n));
 							oldLocations.removeFromBoth(n);
 						}
 						n++;
 					}
-					
+
 					n = 0;
 
-					while (n < oldInventories.getFirstLength()) {					//Give him his inventory back
+					while (n < oldInventories.getFirstLength()) { // Give him
+																	// his
+																	// inventory
+																	// back
 						if (oldInventories.getFromFirstObject(n) == player) {
-							player.getInventory().clear();							
+							player.getInventory().clear();
 							player.getInventory().setContents(oldInventories.getFromSecondObject(n));
 							oldInventories.removeFromBoth(n);
 						}
 						n++;
-					}	
-					
+					}
+
 					n = 0;
-					
+
 					while (n < oldArmor.getFirstLength()) {
-						if (oldArmor.getFromFirstObject(n) == player) {					//Give him his armor back
+						if (oldArmor.getFromFirstObject(n) == player) { // Give
+																		// him
+																		// his
+																		// armor
+																		// back
 							player.getInventory().setArmorContents(oldArmor.getFromSecondObject(n));
 							oldArmor.removeFromBoth(n);
 						}
 						n++;
 					}
-					
+
 					n = 0;
-					
-					while (n < oldHealth.getFirstLength()) {							//Give him his health back.
+
+					while (n < oldHealth.getFirstLength()) { // Give him his
+																// health back.
 						if (oldHealth.getFromFirstObject(n) == player) {
 							player.setHealth(oldHealth.getFromSecondObject(n));
 							oldHealth.removeFromBoth(n);
 						}
 						n++;
 					}
-					
+
 					n = 0;
-					
-					while (n < oldHunger.getFirstLength()) {							//Give him his hunger back.
+
+					while (n < oldHunger.getFirstLength()) { // Give him his
+																// hunger back.
 						if (oldHunger.getFromFirstObject(n) == player) {
 							player.setFoodLevel(oldHunger.getFromSecondObject(n));
 							oldHunger.removeFromBoth(n);
 						}
 						n++;
 					}
-					
+
 					n = 0;
-					
-/*					while (n < oldGameMode.getFirstLength()) {							//Give him his gamemode back.
-						if (oldGameMode.getFromFirstObject(n) == player) {
-							player.setGameMode(oldGameMode.getFromSecondObject(n));
-							oldGameMode.removeFromBoth(n);
-						}
-						n++;
-					}*/
-					
-					
+
+					/*
+					 * while (n < oldGameMode.getFirstLength()) { //Give him his
+					 * gamemode back. if (oldGameMode.getFromFirstObject(n) ==
+					 * player) {
+					 * player.setGameMode(oldGameMode.getFromSecondObject(n));
+					 * oldGameMode.removeFromBoth(n); } n++; }
+					 */
+
 					list[i] = null;
 					return true;
 				}
 			}
 			i++;
 		}
-		player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "The fact that you are not in a game caused a Problem while trying to remove you from that game.");
+		String message = ConstantHolder.RAGEMODE_PREFIX
+				+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PLAYER_NOT_IN_GAME);
+		player.sendMessage(message);
 		return false;
 	}
-	
+
 	public static void removePlayerSynced(Player player) {
 		BossbarLib.getHandler().clearBossbar(player);
-		if(ScoreBoard.allScoreBoards.containsKey(PlayerList.getPlayersGame(player)))
+		if (ScoreBoard.allScoreBoards.containsKey(PlayerList.getPlayersGame(player)))
 			ScoreBoard.allScoreBoards.get(PlayerList.getPlayersGame(player)).removeScoreBoard(player);
-		
+
 		int n = 0;
-		while (n < oldGameMode.getFirstLength()) {							//Give him his gamemode back.
+		while (n < oldGameMode.getFirstLength()) { // Give him his gamemode
+													// back.
 			if (oldGameMode.getFromFirstObject(n) == player) {
 				player.setGameMode(oldGameMode.getFromSecondObject(n));
 				oldGameMode.removeFromBoth(n);
@@ -353,9 +389,9 @@ public class PlayerList {
 		int i = 0;
 		int imax = runningGames.length;
 		while (i < imax) {
-			if(runningGames[i] != null) {
+			if (runningGames[i] != null) {
 				if (runningGames[i].equals(game))
-					return false;	
+					return false;
 			}
 			i++;
 		}
@@ -369,134 +405,134 @@ public class PlayerList {
 		}
 		return false;
 	}
-	
+
 	public static boolean setGameNotRunning(String game) {
 		if (!GetGames.isGameExistent(game, fileConfiguration))
 			return false;
-		
+
 		int i = 0;
 		int imax = runningGames.length;
-		
+
 		while (i < imax) {
 			if (runningGames[i] != null) {
 				if (runningGames[i].equals(game)) {
 					runningGames[i] = null;
-					return true;			
-				}				
+					return true;
+				}
 			}
 			i++;
 		}
-		return false;				
+		return false;
 	}
 
 	public static boolean isPlayerPlaying(String player) {
-		if(player != null) {
+		if (player != null) {
 			int i = 0;
 			int imax = list.length;
-			
-			while(i < imax) {
-				if(list[i] != null) {
-					if(list[i].equals(player)) {
+
+			while (i < imax) {
+				if (list[i] != null) {
+					if (list[i].equals(player)) {
 						return true;
-					}				
+					}
 				}
-				i++;			
-			}		
+				i++;
+			}
 		}
 
 		return false;
 	}
-	
+
 	public static boolean hasRoomForVIP(String game) {
 		String[] players = getPlayersInGame(game);
 		int i = 0;
 		int imax = players.length;
 		int vipsInGame = 0;
-		
-		while(i < imax) {
-			if(players[i] != null) {
-				if(Bukkit.getPlayer(UUID.fromString(players[i])).hasPermission("ragemode.vip")) {
+
+		while (i < imax) {
+			if (players[i] != null) {
+				if (Bukkit.getPlayer(UUID.fromString(players[i])).hasPermission("ragemode.vip")) {
 					vipsInGame++;
 				}
 			}
 			i++;
 		}
-		
-		if(vipsInGame == players.length) {
+
+		if (vipsInGame == players.length) {
 			return false;
 		}
-	return true;
+		return true;
 	}
-	
+
 	public static void addGameToList(String game, int maxPlayers) {
-		if(GetGames.getOverallMaxPlayers(fileConfiguration) < maxPlayers) {
-				String[] oldList = list;
-				list = Arrays.copyOf(list, (GetGames.getConfigGamesCount(fileConfiguration) + 1) * (maxPlayers + 1));
-				int i = 0;
-				int imax = oldList.length;
-				int n = 0;
-				int nmax = (GetGames.getOverallMaxPlayers(fileConfiguration) + 1);
-				
-				while(i < imax) {
-					while(n < nmax + i) {
-						list[n + i] = oldList[n + i];
-						n++;
-					}
-					i = i + maxPlayers + 1;
-					n = i;
-				}
-				
-				list[i] = game;
-		}
-		else {
+		if (GetGames.getOverallMaxPlayers(fileConfiguration) < maxPlayers) {
 			String[] oldList = list;
-			list = Arrays.copyOf(list, (GetGames.getConfigGamesCount(fileConfiguration) + 1) * (GetGames.getOverallMaxPlayers(fileConfiguration) + 1));
+			list = Arrays.copyOf(list, (GetGames.getConfigGamesCount(fileConfiguration) + 1) * (maxPlayers + 1));
 			int i = 0;
 			int imax = oldList.length;
-			
-			while(i < imax) {
+			int n = 0;
+			int nmax = (GetGames.getOverallMaxPlayers(fileConfiguration) + 1);
+
+			while (i < imax) {
+				while (n < nmax + i) {
+					list[n + i] = oldList[n + i];
+					n++;
+				}
+				i = i + maxPlayers + 1;
+				n = i;
+			}
+
+			list[i] = game;
+		} else {
+			String[] oldList = list;
+			list = Arrays.copyOf(list, (GetGames.getConfigGamesCount(fileConfiguration) + 1)
+					* (GetGames.getOverallMaxPlayers(fileConfiguration) + 1));
+			int i = 0;
+			int imax = oldList.length;
+
+			while (i < imax) {
 				list[i] = oldList[i];
 				i++;
 			}
-			
+
 			list[i] = game;
 		}
-		
+
 		String[] oldRunningGames = runningGames;
 		runningGames = Arrays.copyOf(runningGames, (runningGames.length + 1));
 		int i = 0;
 		int imax = runningGames.length - 1;
-		
-		while(i < imax) {
+
+		while (i < imax) {
 			runningGames[i] = oldRunningGames[i];
 			i++;
-		}	
+		}
 	}
-	
+
 	public static void deleteGameFromList(String game) {
 		String[] playersInGame = getPlayersInGame(game);
-		if(playersInGame != null) {
+		if (playersInGame != null) {
 			int i = 0;
 			int imax = playersInGame.length;
-			while(i < imax) {
-				if(playersInGame[i] != null)
+			while (i < imax) {
+				if (playersInGame[i] != null)
 					removePlayer(Bukkit.getPlayer(UUID.fromString(playersInGame[i])));
 				i++;
-			}	
+			}
 		}
 		int i = 0;
 		int imax = list.length;
 		int gamePos = imax;
 		int nextGamePos = imax;
-		
-		while(i < imax) {
-			if(list[i] != null) {
-				if(list[i].equals(game)) {
+
+		while (i < imax) {
+			if (list[i] != null) {
+				if (list[i].equals(game)) {
 					gamePos = i;
 					int n = 0;
 					int nmax = GetGames.getOverallMaxPlayers(fileConfiguration) + 1;
-					
-					while(n < nmax) {
+
+					while (n < nmax) {
 						list[n + i] = null;
 						n++;
 					}
@@ -506,50 +542,51 @@ public class PlayerList {
 			i++;
 		}
 		i = nextGamePos;
-		
-		while(i < imax) {
+
+		while (i < imax) {
 			list[gamePos] = list[i];
 			list[i] = null;
 			i++;
 			gamePos++;
 		}
-		String[] oldList = new String[(GetGames.getConfigGamesCount(fileConfiguration) - 1) * (GetGames.getOverallMaxPlayers(fileConfiguration) + 1)];
+		String[] oldList = new String[(GetGames.getConfigGamesCount(fileConfiguration) - 1)
+				* (GetGames.getOverallMaxPlayers(fileConfiguration) + 1)];
 		int g = 0;
 		int gmax = oldList.length;
-		
-		while(g < gmax) {
+
+		while (g < gmax) {
 			oldList[g] = list[g];
 			g++;
 		}
-		
+
 		list = Arrays.copyOf(list, oldList.length);
-		
+
 		g = 0;
-		
-		while(g < gmax) {
+
+		while (g < gmax) {
 			list[g] = oldList[g];
 			g++;
 		}
 	}
-	
+
 	public static String getPlayersGame(Player player) {
 		String sPlayer = player.getUniqueId().toString();
 		String game = null;
-		
+
 		int i = 0;
 		int imax = list.length;
 		int playersPerGame = GetGames.getOverallMaxPlayers(fileConfiguration);
-		
-		while(i < imax) {
-			if(list[i] != null) {
-				if((i % (playersPerGame + 1)) == 0) {
+
+		while (i < imax) {
+			if (list[i] != null) {
+				if ((i % (playersPerGame + 1)) == 0) {
 					game = list[i];
 				}
-				if(list[i].equals(sPlayer)) {
+				if (list[i].equals(sPlayer)) {
 					return game;
 				}
 			}
-		i++;
+			i++;
 		}
 		return null;
 	}

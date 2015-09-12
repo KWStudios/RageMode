@@ -195,7 +195,7 @@ public class RageScores {
 			int oldPoints = pointsHolder.getPoints();
 			int oldKills = pointsHolder.getKills();
 			int oldDeaths = pointsHolder.getDeaths();
-			//playerpoints.remove(playerUUID);
+			// playerpoints.remove(playerUUID);
 			int totalPoints = oldPoints + points;
 			int totalKills = oldKills;
 			int totalDeaths = oldDeaths;
@@ -207,7 +207,7 @@ public class RageScores {
 			pointsHolder.setPoints(totalPoints);
 			pointsHolder.setKills(totalKills);
 			pointsHolder.setDeaths(totalDeaths);
-			//playerpoints.put(playerUUID, pointsHolder);
+			// playerpoints.put(playerUUID, pointsHolder);
 			return totalPoints;
 		} else {
 			int totalKills = 0;
@@ -241,17 +241,17 @@ public class RageScores {
 					highest = players[i];
 					highestPoints = playerpoints.get(players[i]).getPoints();
 				}
-//				else
-//					Bukkit.broadcastMessage("nothighest"+players[i]);
+				// else
+				// Bukkit.broadcastMessage("nothighest"+players[i]);
 			}
-//			else
-//				Bukkit.broadcastMessage(players[i]);
+			// else
+			// Bukkit.broadcastMessage(players[i]);
 			i++;
-			
+
 		}
-		
+
 		playerpoints.get(highest).setWinner(true);
-		
+
 		i = 0;
 		while (i < imax) {
 			if (players[i].equals(highest)) {
@@ -266,7 +266,7 @@ public class RageScores {
 			}
 			i++;
 		}
-		
+
 		return highest;
 	}
 

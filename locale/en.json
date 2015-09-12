@@ -59,5 +59,37 @@
   "BROADCAST_ERROR_KILL": "Whoops, that shouldn't happen normally...",
 
   "UNKNOWN_KILLER": "Do you know who killed you? Because we don't know it...",
-  "UNKNOWN_WEAPON": "§a$VICTIM$ §3was killed by something unexpected."
+  "UNKNOWN_WEAPON": "§a$VICTIM$ §3was killed by something unexpected.",
+
+  "MESSAGE_ARROW_KILL": "§3You killed §6§l$VICTIM$ §r§3with a direct arrow hit. §6§l$POINTS$",
+  "MESSAGE_AXE_KILL": "§3You killed §6§l$VICTIM$ §r§3with your CombatAxe. §6§l$POINTS$",
+  "MESSAGE_KNIFE_KILL": "§3You killed §6§l$VICTIM$ §r§3with your RageKnife. §6§l$POINTS$",
+  "MESSAGE_EXPLOSION_KILL": "§3You killed §6§l$VICTIM$ §r§3by causing heavy explosions with your RageBow. §6§l$POINTS$",
+
+  "MESSAGE_ARROW_DEATH": "§3You were killed by §6§l$KILLER$ §r§3with a direct arrow hit. §6§l$POINTS$",
+  "MESSAGE_AXE_DEATH": "§3You were killed by §6§l$KILLER$ §r§3with a CombatAxe. §6§l$POINTS$",
+  "MESSAGE_KNIFE_DEATH": "§3You were killed by §6§l$KILLER$ §r§3with a RageKnife. §6§l$POINTS$",
+  "MESSAGE_EXPLOSION_DEATH": "§3You were killed by §6§l$KILLER$ §r§3by an explosion. §6§l$POINTS$",
+
+  "MESSAGE_CURRENT_POINTS": "§3You now have §6§l$POINTS$ §r§3points.",
+
+  "MESSAGE_SUICIDE": "§3You killed yourself you silly idiot.",
+
+  "MESSAGE_YOU_WON": "§dYou won the game §6$GAME$ §d.",
+  "MESSAGE_PLAYER_WON": "§2$PLAYER$ §dwon the game §6$GAME$ §d.",
+
+  "GAME_NOT_SET_UP": "§4The game is not set up correctly. Please contact an Admin.",
+
+  "LOBBY_MESSAGE": "§9This round will start in §e$TIME$ §9seconds.",
+
+  "PLAYER_ALREADY_IN_GAME": "You are already in a game. You can leave it by typing $USAGE$",
+  "YOU_JOINED_THE_GAME": "You joined §3$GAME$ §r.",
+
+  "PLAYER_KICKED_FOR_VIP": "You were kicked out of the Game to make room for a VIP.",
+
+  "GAME_FULL": "This Game is already full!",
+  "GAME_DOES_NOT_EXIST": "The game you wish to join wasn't found.",
+
+  "PLAYER_LEFT_GAME": "You left your current Game.",
+  "PLAYER_NOT_IN_GAME": "The fact that you are not in a game caused a Problem while trying to remove you from that game."
 }

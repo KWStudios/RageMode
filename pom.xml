@@ -30,6 +30,7 @@
 			</resource>
 			<resource>
 				<directory>${basedir}/locale</directory>
+				<targetPath>locale</targetPath>
 			</resource>
 		</resources>
 	</build>

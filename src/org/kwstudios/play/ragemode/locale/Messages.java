@@ -47,5 +47,26 @@ public class Messages {
 	public String BROADCAST_ERROR_KILL;
 	public String UNKNOWN_KILLER;
 	public String UNKNOWN_WEAPON;
+	public String MESSAGE_ARROW_KILL;
+	public String MESSAGE_AXE_KILL;
+	public String MESSAGE_KNIFE_KILL;
+	public String MESSAGE_EXPLOSION_KILL;
+	public String MESSAGE_ARROW_DEATH;
+	public String MESSAGE_AXE_DEATH;
+	public String MESSAGE_KNIFE_DEATH;
+	public String MESSAGE_EXPLOSION_DEATH;
+	public String MESSAGE_CURRENT_POINTS;
+	public String MESSAGE_SUICIDE;
+	public String MESSAGE_YOU_WON;
+	public String MESSAGE_PLAYER_WON;
+	public String GAME_NOT_SET_UP;
+	public String LOBBY_MESSAGE;
+	public String PLAYER_ALREADY_IN_GAME;
+	public String YOU_JOINED_THE_GAME;
+	public String PLAYER_KICKED_FOR_VIP;
+	public String GAME_FULL;
+	public String GAME_DOES_NOT_EXIST;
+	public String PLAYER_LEFT_GAME;
+	public String PLAYER_NOT_IN_GAME;
 
 }

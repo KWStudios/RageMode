@@ -15,6 +15,7 @@ import org.kwstudios.play.ragemode.items.CombatAxe;
 import org.kwstudios.play.ragemode.items.RageArrow;
 import org.kwstudios.play.ragemode.items.RageBow;
 import org.kwstudios.play.ragemode.items.RageKnife;
+import org.kwstudios.play.ragemode.loader.PluginLoader;
 import org.kwstudios.play.ragemode.scoreboard.ScoreBoard;
 import org.kwstudios.play.ragemode.scoreboard.ScoreBoardHolder;
 import org.kwstudios.play.ragemode.signs.SignCreator;
@@ -58,8 +59,8 @@ public class GameLoader {
 		String initialMessage = ChatColor.DARK_AQUA + "Welcome to " + ChatColor.DARK_PURPLE + gameName
 				+ ChatColor.DARK_AQUA + "!";
 		for (String player : players) {
-			BossbarLib.getHandler().getBossbar(Bukkit.getPlayer(UUID.fromString(player)))
-					.setMessage(initialMessage).setPercentage(1f);
+			BossbarLib.getHandler().getBossbar(Bukkit.getPlayer(UUID.fromString(player))).setMessage(initialMessage)
+					.setPercentage(1f);
 			BossbarLib.getHandler().updateBossbar(Bukkit.getPlayer(UUID.fromString(player)));
 		}
 	}
@@ -70,8 +71,8 @@ public class GameLoader {
 			gameSpawns = gameSpawnGetter.getSpawnLocations();
 			teleportPlayersToGameSpawns();
 		} else {
-			String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED
-					+ "The game is not set up correctly. Please contact an Admin.";
+			String message = ConstantHolder.RAGEMODE_PREFIX
+					+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().GAME_NOT_SET_UP);
 			GameBroadcast.broadcastToGame(gameName, message);
 			String[] players = PlayerList.getPlayersInGame(gameName);
 			for (String player : players) {

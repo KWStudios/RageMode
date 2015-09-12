@@ -53,10 +53,10 @@ public class LobbyTimer {
 				if (totalMessagesBeforeTen > 0 && PlayerList.getPlayersInGame(gameName).length >= 2) {
 					String[] playerUUIDs = PlayerList.getPlayersInGame(gameName);
 					for (int i = 0; i < playerUUIDs.length; i++) {
-						Bukkit.getPlayer(UUID.fromString(playerUUIDs[i]))
-								.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.BLUE
-										+ "This round will start in " + ChatColor.YELLOW
-										+ Integer.toString(totalMessagesBeforeTen * 10) + ChatColor.BLUE + " seconds.");
+						String message = ConstantHolder.RAGEMODE_PREFIX
+								+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().LOBBY_MESSAGE
+										.replace("$TIME$", Integer.toString(totalMessagesBeforeTen * 10)));
+						Bukkit.getPlayer(UUID.fromString(playerUUIDs[i])).sendMessage(message);
 					}
 					totalMessagesBeforeTen--;
 					if (totalMessagesBeforeTen == 0) {
@@ -79,10 +79,10 @@ public class LobbyTimer {
 				if (timesToSendMessage > 0 && PlayerList.getPlayersInGame(gameName).length >= 2) {
 					String[] playerUUIDs = PlayerList.getPlayersInGame(gameName);
 					for (int i = 0; i < playerUUIDs.length; i++) {
-						Bukkit.getPlayer(UUID.fromString(playerUUIDs[i]))
-								.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.BLUE
-										+ "This round will start in " + ChatColor.YELLOW
-										+ Integer.toString(timesToSendMessage) + ChatColor.BLUE + " seconds.");
+						String message = ConstantHolder.RAGEMODE_PREFIX
+								+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().LOBBY_MESSAGE
+										.replace("$TIME$", Integer.toString(timesToSendMessage)));
+						Bukkit.getPlayer(UUID.fromString(playerUUIDs[i])).sendMessage(message);
 					}
 					timesToSendMessage--;
 				} else if (timesToSendMessage == 0 && PlayerList.getPlayersInGame(gameName).length >= 2) {

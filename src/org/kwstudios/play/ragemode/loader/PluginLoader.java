@@ -179,7 +179,7 @@ public class PluginLoader extends JavaPlugin {
 	}
 
 	public void loadMessages() {
-		InputStream input = getClass().getResourceAsStream("/en.json");
+		InputStream input = getClass().getResourceAsStream("/locale/en.json");
 		BufferedReader reader;
 		try {
 			reader = new BufferedReader(new InputStreamReader(input, "UTF8"));

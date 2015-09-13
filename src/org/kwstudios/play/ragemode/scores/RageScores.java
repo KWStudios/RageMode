@@ -213,14 +213,23 @@ public class RageScores {
 			int totalPoints = oldPoints + points;
 			int totalKills = oldKills;
 			int totalDeaths = oldDeaths;
+			int currentStreak = 0;
+			int longestStreak = 0;
 			if (killer) {
 				totalKills++;
+				currentStreak = pointsHolder.getCurrentStreak() + 1;
 			} else {
 				totalDeaths++;
+				currentStreak = 0;
 			}
+			longestStreak = (pointsHolder.getCurrentStreak() > pointsHolder.getLongestStreak())
+					? pointsHolder.getCurrentStreak() : pointsHolder.getLongestStreak();
+
 			pointsHolder.setPoints(totalPoints);
 			pointsHolder.setKills(totalKills);
 			pointsHolder.setDeaths(totalDeaths);
+			pointsHolder.setCurrentStreak(currentStreak);
+			pointsHolder.setLongestStreak(longestStreak);
 			// playerpoints.put(playerUUID, pointsHolder);
 			return totalPoints;
 		} else {

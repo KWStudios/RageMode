@@ -13,6 +13,8 @@ public class PlayerPoints implements Comparable<PlayerPoints> {
 	private int directArrowDeaths = 0;
 	private int explosionDeaths = 0;
 	private int knifeDeaths = 0;
+	private int currentStreak = 0;
+	private int longestStreak = 0;
 	private Integer points = 0;
 	private boolean isWinner = false;
 
@@ -102,6 +104,22 @@ public class PlayerPoints implements Comparable<PlayerPoints> {
 
 	public void setKnifeDeaths(int knifeDeaths) {
 		this.knifeDeaths = knifeDeaths;
+	}
+
+	public int getCurrentStreak() {
+		return currentStreak;
+	}
+
+	public void setCurrentStreak(int currentStreak) {
+		this.currentStreak = currentStreak;
+	}
+
+	public int getLongestStreak() {
+		return longestStreak;
+	}
+
+	public void setLongestStreak(int longestStreak) {
+		this.longestStreak = longestStreak;
 	}
 
 	public Integer getPoints() {

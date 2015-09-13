@@ -7,7 +7,8 @@
 	<name>RageMode</name>
 	<description>RageMode plugin for Minecraft</description>
 	<build>
-		<sourceDirectory>src</sourceDirectory>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<testSourceDirectory>src/test/java</testSourceDirectory>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -20,17 +21,18 @@
 		</plugins>
 		<resources>
 			<resource>
-				<directory>${basedir}</directory>
-				<includes>
-					<include>config.yml</include>
-					<include>LICENSE</include>
-					<include>plugin.yml</include>
-					<include>README.md</include>
-				</includes>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
 			</resource>
 			<resource>
-				<directory>${basedir}/locale</directory>
-				<targetPath>locale</targetPath>
+				<directory>${basedir}</directory>
+				<includes>
+					<include>LICENSE</include>
+					<include>README.md</include>
+				</includes>
 			</resource>
 		</resources>
 	</build>

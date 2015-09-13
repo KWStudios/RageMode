@@ -19,10 +19,10 @@ import org.kwstudios.play.ragemode.scores.RageScores;
 import org.kwstudios.play.ragemode.signs.SignCreator;
 import org.kwstudios.play.ragemode.statistics.MySQLThread;
 import org.kwstudios.play.ragemode.statistics.YAMLStats;
-import org.kwstudios.play.ragemode.title.TitleAPI;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 import org.kwstudios.play.ragemode.toolbox.GameBroadcast;
 import org.kwstudios.play.ragemode.toolbox.GetGames;
+import org.kwstudios.play.ragemode.toolbox.TitleAPI;
 
 public class StopGame {
 

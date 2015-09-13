@@ -16,6 +16,7 @@ import org.kwstudios.play.ragemode.loader.PluginLoader;
 import org.kwstudios.play.ragemode.scoreboard.ScoreBoard;
 import org.kwstudios.play.ragemode.scores.PlayerPoints;
 import org.kwstudios.play.ragemode.scores.RageScores;
+import org.kwstudios.play.ragemode.toolbox.ActionBarAPI;
 import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 
@@ -107,7 +108,7 @@ public class GameTimer {
 						});
 					}
 
-					// -------BossBar update-------
+					// -------BossBar and ActionBar update-------
 
 					if (secondsRemaining % 2 == 0) {
 						String[] playerUUIDs = PlayerList.getPlayersInGame(gameName);
@@ -131,6 +132,7 @@ public class GameTimer {
 								BossbarLib.getHandler().getBossbar(Bukkit.getPlayer(UUID.fromString(playerUUID)))
 										.setMessage(message).setPercentage(1f);
 								BossbarLib.getHandler().updateBossbar(Bukkit.getPlayer(UUID.fromString(playerUUID)));
+								ActionBarAPI.sendActionBar(Bukkit.getPlayer(UUID.fromString(playerUUID)), message);
 							}
 							bossBarPointer++;
 						} else {
@@ -140,7 +142,7 @@ public class GameTimer {
 						}
 					}
 
-					// -------End of BossBar update-------
+					// -------End of BossBar and ActionBar update-------
 				} else {
 					this.cancel();
 					PluginLoader.getInstance().getServer().getScheduler()

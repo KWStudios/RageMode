@@ -200,11 +200,11 @@ public class EventListener implements Listener {
 				if (deceased.getLastDamage() == 0.0f) {
 					if (deceased.getKiller() == null) {
 						if (doDeathBroadcast) {
-							String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes(
-									'§',
-									PluginLoader.getMessages().BROADCAST_AXE_KILL
-											.replace("$VICTIM$", deceased.getName())
-											.replace("$KILLER$", deceased.getName()).replace("$WEAPON$", "CombatAxe"));
+							String message = ConstantHolder.RAGEMODE_PREFIX
+									+ ChatColor.translateAlternateColorCodes('§',
+											PluginLoader.getMessages().BROADCAST_AXE_KILL
+													.replace("$VICTIM$", deceased.getName())
+													.replace("$KILLER$", deceased.getName()));
 							GameBroadcast.broadcastToGame(game, message);
 						}
 						RageScores.addPointsToPlayer(deceased, deceased, "combataxe");
@@ -214,8 +214,7 @@ public class EventListener implements Listener {
 									+ ChatColor.translateAlternateColorCodes('§',
 											PluginLoader.getMessages().BROADCAST_AXE_KILL
 													.replace("$VICTIM$", deceased.getName())
-													.replace("$KILLER$", deceased.getKiller().getName())
-													.replace("$WEAPON$", "CombatAxe"));
+													.replace("$KILLER$", deceased.getKiller().getName()));
 							GameBroadcast.broadcastToGame(game, message);
 						}
 						RageScores.addPointsToPlayer(deceased.getKiller(), deceased, "combataxe");
@@ -227,8 +226,7 @@ public class EventListener implements Listener {
 									+ ChatColor.translateAlternateColorCodes('§',
 											PluginLoader.getMessages().BROADCAST_ARROW_KILL
 													.replace("$VICTIM$", deceased.getName())
-													.replace("$KILLER$", deceased.getName())
-													.replace("$WEAPON$", "direct arrow hit"));
+													.replace("$KILLER$", deceased.getName()));
 							GameBroadcast.broadcastToGame(game, message);
 						}
 						RageScores.addPointsToPlayer(deceased, deceased, "ragebow");
@@ -238,8 +236,7 @@ public class EventListener implements Listener {
 									+ ChatColor.translateAlternateColorCodes('§',
 											PluginLoader.getMessages().BROADCAST_ARROW_KILL
 													.replace("$VICTIM$", deceased.getName())
-													.replace("$KILLER$", deceased.getKiller().getName())
-													.replace("$WEAPON$", "direct arrow hit"));
+													.replace("$KILLER$", deceased.getKiller().getName()));
 							GameBroadcast.broadcastToGame(game, message);
 						}
 						RageScores.addPointsToPlayer(deceased.getKiller(), deceased, "ragebow");
@@ -248,11 +245,11 @@ public class EventListener implements Listener {
 				} else if (deceased.getLastDamageCause().getCause().equals(DamageCause.ENTITY_ATTACK)) {
 					if (deceased.getKiller() == null) {
 						if (doDeathBroadcast) {
-							String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes(
-									'§',
-									PluginLoader.getMessages().BROADCAST_KNIFE_KILL
-											.replace("$VICTIM$", deceased.getName())
-											.replace("$KILLER$", deceased.getName()).replace("$WEAPON$", "RageKnife"));
+							String message = ConstantHolder.RAGEMODE_PREFIX
+									+ ChatColor.translateAlternateColorCodes('§',
+											PluginLoader.getMessages().BROADCAST_KNIFE_KILL
+													.replace("$VICTIM$", deceased.getName())
+													.replace("$KILLER$", deceased.getName()));
 							GameBroadcast.broadcastToGame(game, message);
 						}
 						RageScores.addPointsToPlayer(deceased, deceased, "rageknife");
@@ -262,8 +259,7 @@ public class EventListener implements Listener {
 									+ ChatColor.translateAlternateColorCodes('§',
 											PluginLoader.getMessages().BROADCAST_KNIFE_KILL
 													.replace("$VICTIM$", deceased.getName())
-													.replace("$KILLER$", deceased.getKiller().getName())
-													.replace("$WEAPON$", "RageKnife"));
+													.replace("$KILLER$", deceased.getKiller().getName()));
 							GameBroadcast.broadcastToGame(game, message);
 						}
 						RageScores.addPointsToPlayer(deceased.getKiller(), deceased, "rageknife");
@@ -273,14 +269,12 @@ public class EventListener implements Listener {
 					if (explosionVictims.containsKey(deceased.getUniqueId())) {
 						if (doDeathBroadcast) {
 							String message = ConstantHolder.RAGEMODE_PREFIX
-									+ ChatColor
-											.translateAlternateColorCodes('§',
-													PluginLoader.getMessages().BROADCAST_EXPLOSION_KILL
-															.replace("$VICTIM$", deceased.getName())
-															.replace("$KILLER$",
-																	Bukkit.getPlayer(explosionVictims
-																			.get(deceased.getUniqueId())).getName())
-											.replace("$WEAPON$", "blown up"));
+									+ ChatColor.translateAlternateColorCodes('§',
+											PluginLoader.getMessages().BROADCAST_EXPLOSION_KILL
+													.replace("$VICTIM$", deceased.getName()).replace("$KILLER$",
+															Bukkit.getPlayer(
+																	explosionVictims.get(deceased.getUniqueId()))
+															.getName()));
 							GameBroadcast.broadcastToGame(game, message);
 						}
 						RageScores.addPointsToPlayer(Bukkit.getPlayer(explosionVictims.get(deceased.getUniqueId())),

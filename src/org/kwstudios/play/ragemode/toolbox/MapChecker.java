@@ -4,6 +4,7 @@ import java.util.Set;
 
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.kwstudios.play.ragemode.loader.PluginLoader;
 
 public class MapChecker {
 
@@ -30,8 +31,8 @@ public class MapChecker {
 
 	private void checkMapName() {
 		if (!fileConfiguration.isSet(ConstantHolder.GAME_PATH + "." + gameName)) {
-			message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.YELLOW + gameName + ChatColor.DARK_RED
-					+ " is not a valid RageMode Map.";
+			message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+					PluginLoader.getMessages().INVALID_GAME.replace("$GAME$", gameName));
 			isValid = false;
 		} else {
 			isValid = true;
@@ -41,8 +42,8 @@ public class MapChecker {
 	private void checkBasics() {
 		String path = ConstantHolder.GAME_PATH + "." + gameName;
 		if (!fileConfiguration.isSet(path + ".maxplayers") || !fileConfiguration.isSet(path + ".world")) {
-			message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED
-					+ "The worldname or the maxplayers are not set. Please contact an Admin for further information.";
+			message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+					PluginLoader.getMessages().NAME_OR_MAXPLAYERS_NOT_SET);
 			isValid = false;
 		} else {
 			if (ConfigFactory.getString(path, "world", fileConfiguration) != "") {
@@ -50,12 +51,13 @@ public class MapChecker {
 				if (maxPlayers != -32500000) {
 					isValid = true;
 				} else {
-					message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED + "The maxplayers value for "
-							+ gameName + " is not set properly.";
+					message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+							PluginLoader.getMessages().MAXPLAYERS_NOT_SET.replace("$GAME$", gameName));
 					isValid = false;
 				}
 			} else {
-				message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED + "The world name can't be empty!";
+				message = ConstantHolder.RAGEMODE_PREFIX
+						+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().WORLDNAME_NOT_SET);
 				isValid = false;
 			}
 		}
@@ -63,32 +65,35 @@ public class MapChecker {
 
 	private void checkLobby() {
 		if (!fileConfiguration.isSet(ConstantHolder.GAME_PATH + "." + gameName + "." + "lobby")) {
-			message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED + "The lobby was not set yet for "
-					+ ChatColor.DARK_AQUA + gameName + ChatColor.DARK_RED + ". Set it with /rm lobby [game name]";
+			message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+					PluginLoader.getMessages().LOBBY_NOT_SET.replace("$GAME$", gameName));
 			isValid = false;
 		} else {
 			String thisPath = ConstantHolder.GAME_PATH + "." + gameName + "." + "lobby";
 			if (fileConfiguration.isSet(thisPath + ".x") && fileConfiguration.isSet(thisPath + ".y")
-					&& fileConfiguration.isSet(thisPath + ".z") && fileConfiguration.isSet(thisPath + ".world") && fileConfiguration.isSet(thisPath + ".yaw") && fileConfiguration.isSet(thisPath + ".pitch")) {
+					&& fileConfiguration.isSet(thisPath + ".z") && fileConfiguration.isSet(thisPath + ".world")
+					&& fileConfiguration.isSet(thisPath + ".yaw") && fileConfiguration.isSet(thisPath + ".pitch")) {
 				if (!ConfigFactory.getString(thisPath, "world", fileConfiguration).isEmpty()) {
 					if (isDouble(ConfigFactory.getString(thisPath, "x", fileConfiguration))
 							&& isDouble(ConfigFactory.getString(thisPath, "y", fileConfiguration))
-							&& isDouble(ConfigFactory.getString(thisPath, "z", fileConfiguration)) && isDouble(ConfigFactory.getString(thisPath, "yaw", fileConfiguration)) && isDouble(ConfigFactory.getString(thisPath, "pitch", fileConfiguration))) {
+							&& isDouble(ConfigFactory.getString(thisPath, "z", fileConfiguration))
+							&& isDouble(ConfigFactory.getString(thisPath, "yaw", fileConfiguration))
+							&& isDouble(ConfigFactory.getString(thisPath, "pitch", fileConfiguration))) {
 						isValid = true;
 					} else {
-						message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED
-								+ "The lobby coordinates were not set properly. Ask an Admin to check the config.yml";
+						message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+								PluginLoader.getMessages().LOBBY_COORDINATES_NOT_SET);
 						isValid = false;
 						return;
 					}
 				} else {
-					message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED
-							+ "The world key can't be empty. Ask an Admin to check the config.yml";
+					message = ConstantHolder.RAGEMODE_PREFIX
+							+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().WORLDNAME_NOT_SET);
 					isValid = false;
 				}
 			} else {
-				message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED
-						+ "The lobby was not set properly. Ask an Admin to check the config.yml";
+				message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+						PluginLoader.getMessages().LOBBY_NOT_SET_PROPERLY);
 				isValid = false;
 			}
 		}
@@ -102,23 +107,25 @@ public class MapChecker {
 				for (String s : spawnNames) {
 					if (isDouble(ConfigFactory.getString(path + ".spawns." + s, "x", fileConfiguration))
 							&& isDouble(ConfigFactory.getString(path + ".spawns." + s, "y", fileConfiguration))
-							&& isDouble(ConfigFactory.getString(path + ".spawns." + s, "z", fileConfiguration)) && isDouble(ConfigFactory.getString(path + ".spawns." + s, "yaw", fileConfiguration)) && isDouble(ConfigFactory.getString(path + ".spawns." + s, "pitch", fileConfiguration))) {
+							&& isDouble(ConfigFactory.getString(path + ".spawns." + s, "z", fileConfiguration))
+							&& isDouble(ConfigFactory.getString(path + ".spawns." + s, "yaw", fileConfiguration))
+							&& isDouble(ConfigFactory.getString(path + ".spawns." + s, "pitch", fileConfiguration))) {
 						isValid = true;
 					} else {
-						message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED
-								+ "One or more spawns are not set properly!";
+						message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+								PluginLoader.getMessages().SPAWNS_NOT_SET_PROPERLY);
 						isValid = false;
 						break;
 					}
 				}
 			} else {
-				message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED
-						+ "The number of spawns must be greater than or equal the maxplayers value!";
+				message = ConstantHolder.RAGEMODE_PREFIX
+						+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().TOO_FEW_SPAWNS);
 				isValid = false;
 			}
 		} else {
-			message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.DARK_RED + "In " + gameName
-					+ " are no spawns configured!";
+			message = ConstantHolder.RAGEMODE_PREFIX
+					+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().NO_SPAWNS_CONFIGURED);
 			isValid = false;
 		}
 	}

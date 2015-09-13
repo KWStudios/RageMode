@@ -52,10 +52,10 @@
 
   "NOT_PLAYED_YET": "That player hasn't played on this server yet.",
 
-  "BROADCAST_AXE_KILL": "§a$VICTIM$ §3was killed by §a$KILLER$ §3with a §6$WEAPON$ §3.",
-  "BROADCAST_ARROW_KILL": "§a$VICTIM$ §3was killed by a §6$WEAPON$ §3from §a$KILLER$ §3.",
-  "BROADCAST_KNIFE_KILL": "§a$VICTIM$ §3was killed by §a$KILLER$ §3with a §6$WEAPON$ §3.",
-  "BROADCAST_EXPLOSION_KILL": "§a$VICTIM$ §3was §6$WEAPON$ §3by §a$KILLER$ §3.",
+  "BROADCAST_AXE_KILL": "§a$VICTIM$ §3was killed by §a$KILLER$ §3with a §6CombatAxe §3.",
+  "BROADCAST_ARROW_KILL": "§a$VICTIM$ §3was killed by a §6direct arrow hit §3from §a$KILLER$ §3.",
+  "BROADCAST_KNIFE_KILL": "§a$VICTIM$ §3was killed by §a$KILLER$ §3with a §6RageKnife §3.",
+  "BROADCAST_EXPLOSION_KILL": "§a$VICTIM$ §3was §6blown up §3by §a$KILLER$ §3.",
   "BROADCAST_ERROR_KILL": "Whoops, that shouldn't happen normally...",
 
   "UNKNOWN_KILLER": "Do you know who killed you? Because we don't know it...",
@@ -66,10 +66,10 @@
   "MESSAGE_KNIFE_KILL": "§3You killed §6§l$VICTIM$ §r§3with your RageKnife. §6§l$POINTS$",
   "MESSAGE_EXPLOSION_KILL": "§3You killed §6§l$VICTIM$ §r§3by causing heavy explosions with your RageBow. §6§l$POINTS$",
 
-  "MESSAGE_ARROW_DEATH": "§3You were killed by §6§l$KILLER$ §r§3with a direct arrow hit. §6§l$POINTS$",
-  "MESSAGE_AXE_DEATH": "§3You were killed by §6§l$KILLER$ §r§3with a CombatAxe. §6§l$POINTS$",
-  "MESSAGE_KNIFE_DEATH": "§3You were killed by §6§l$KILLER$ §r§3with a RageKnife. §6§l$POINTS$",
-  "MESSAGE_EXPLOSION_DEATH": "§3You were killed by §6§l$KILLER$ §r§3by an explosion. §6§l$POINTS$",
+  "MESSAGE_ARROW_DEATH": "§3You were killed by §6§l$KILLER$ §r§3with a direct arrow hit. §4§l$POINTS$",
+  "MESSAGE_AXE_DEATH": "§3You were killed by §6§l$KILLER$ §r§3with a CombatAxe. §4§l$POINTS$",
+  "MESSAGE_KNIFE_DEATH": "§3You were killed by §6§l$KILLER$ §r§3with a RageKnife. §4§l$POINTS$",
+  "MESSAGE_EXPLOSION_DEATH": "§3You were killed by §6§l$KILLER$ §r§3by an explosion. §4§l$POINTS$",
 
   "MESSAGE_CURRENT_POINTS": "§3You now have §6§l$POINTS$ §r§3points.",
 
@@ -91,5 +91,16 @@
   "GAME_DOES_NOT_EXIST": "The game you wish to join wasn't found.",
 
   "PLAYER_LEFT_GAME": "You left your current Game.",
-  "PLAYER_NOT_IN_GAME": "The fact that you are not in a game caused a Problem while trying to remove you from that game."
+  "PLAYER_NOT_IN_GAME": "The fact that you are not in a game caused a Problem while trying to remove you from that game.",
+
+  "INVALID_GAME": "§e$GAME$ §4is not a valid RageMode Map.",
+  "NAME_OR_MAXPLAYERS_NOT_SET": "§4The worldname or the maxplayers are not set. Please contact an Admin for further information.",
+  "MAXPLAYERS_NOT_SET": "§4The maxplayers value for $GAME$ is not set properly.",
+  "WORLDNAME_NOT_SET": "§4The world key can't be empty! Ask an Admin to check the config.yml",
+  "LOBBY_NOT_SET": "§4The lobby was not set yet for §3$GAME$ §4. Set it with /rm lobby <game name>",
+  "LOBBY_COORDINATES_NOT_SET": "§4The lobby coordinates were not set properly. Ask an Admin to check the config.yml",
+  "LOBBY_NOT_SET_PROPERLY": "§4The lobby was not set properly. Ask an Admin to check the config.yml",
+  "SPAWNS_NOT_SET_PROPERLY": "§4One or more spawns are not set properly!",
+  "TOO_FEW_SPAWNS": "§4The number of spawns must be greater than or equal the maxplayers value!",
+  "NO_SPAWNS_CONFIGURED": "§4In $GAME$ are no spawns configured!"
 }

@@ -68,5 +68,15 @@ public class Messages {
 	public String GAME_DOES_NOT_EXIST;
 	public String PLAYER_LEFT_GAME;
 	public String PLAYER_NOT_IN_GAME;
+	public String INVALID_GAME;
+	public String NAME_OR_MAXPLAYERS_NOT_SET;
+	public String MAXPLAYERS_NOT_SET;
+	public String WORLDNAME_NOT_SET;
+	public String LOBBY_NOT_SET;
+	public String LOBBY_COORDINATES_NOT_SET;
+	public String LOBBY_NOT_SET_PROPERLY;
+	public String SPAWNS_NOT_SET_PROPERLY;
+	public String TOO_FEW_SPAWNS;
+	public String NO_SPAWNS_CONFIGURED;
 
 }

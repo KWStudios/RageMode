@@ -3,6 +3,7 @@ package org.kwstudios.play.ragemode.toolbox;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class ActionBarAPI {
@@ -11,6 +12,8 @@ public class ActionBarAPI {
 
 	public static void sendActionBar(Player player, String message) {
 		try {
+			nmsver = Bukkit.getServer().getClass().getPackage().getName();
+			nmsver = nmsver.substring(nmsver.lastIndexOf(".") + 1);
 			Class<?> c1 = Class.forName("org.bukkit.craftbukkit." + nmsver + ".entity.CraftPlayer");
 			Object p = c1.cast(player);
 			Object ppoc = null;

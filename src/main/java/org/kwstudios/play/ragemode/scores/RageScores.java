@@ -47,13 +47,13 @@ public class RageScores {
 				victimPoints.setDirectArrowDeaths(newDirectArrowDeaths);
 
 				message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
-						PluginLoader.getMessages().MESSAGE_ARROW_KILL.replace("$VICTIM$",
-								victim.getName().replace("$POINTS$", "+" + Integer.toString(bowPoints))));
+						PluginLoader.getMessages().MESSAGE_ARROW_KILL.replace("$VICTIM$", victim.getName())
+								.replace("$POINTS$", "+" + Integer.toString(bowPoints)));
 				killer.sendMessage(message);
 
 				message = ConstantHolder.RAGEMODE_PREFIX
 						+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().MESSAGE_ARROW_DEATH
-								.replace("$KILLER$", killer.getName()).replace("$POINTS", ""));
+								.replace("$KILLER$", killer.getName()).replace("$POINTS$", ""));
 				victim.sendMessage(message);
 
 				message = ConstantHolder.RAGEMODE_PREFIX
@@ -78,13 +78,13 @@ public class RageScores {
 				victimPoints.setAxeDeaths(newAxeDeaths);
 
 				message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
-						PluginLoader.getMessages().MESSAGE_AXE_KILL.replace("$VICTIM$",
-								victim.getName().replace("$POINTS$", "+" + Integer.toString(axePoints))));
+						PluginLoader.getMessages().MESSAGE_AXE_KILL.replace("$VICTIM$", victim.getName())
+								.replace("$POINTS$", "+" + Integer.toString(axePoints)));
 				killer.sendMessage(message);
 
 				message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
 						PluginLoader.getMessages().MESSAGE_AXE_DEATH.replace("$KILLER$", killer.getName())
-								.replace("$POINTS", Integer.toString(axeMinusPoints)));
+								.replace("$POINTS$", Integer.toString(axeMinusPoints)));
 				victim.sendMessage(message);
 
 				message = ConstantHolder.RAGEMODE_PREFIX
@@ -108,13 +108,13 @@ public class RageScores {
 				victimPoints.setKnifeDeaths(newKnifeDeaths);
 
 				message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
-						PluginLoader.getMessages().MESSAGE_KNIFE_KILL.replace("$VICTIM$",
-								victim.getName().replace("$POINTS$", "+" + Integer.toString(knifePoints))));
+						PluginLoader.getMessages().MESSAGE_KNIFE_KILL.replace("$VICTIM$", victim.getName())
+								.replace("$POINTS$", "+" + Integer.toString(knifePoints)));
 				killer.sendMessage(message);
 
 				message = ConstantHolder.RAGEMODE_PREFIX
 						+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().MESSAGE_KNIFE_DEATH
-								.replace("$KILLER$", killer.getName()).replace("$POINTS", ""));
+								.replace("$KILLER$", killer.getName()).replace("$POINTS$", ""));
 				victim.sendMessage(message);
 
 				message = ConstantHolder.RAGEMODE_PREFIX
@@ -138,13 +138,13 @@ public class RageScores {
 				victimPoints.setExplosionDeaths(newExplosionDeaths);
 
 				message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
-						PluginLoader.getMessages().MESSAGE_EXPLOSION_KILL.replace("$VICTIM$",
-								victim.getName().replace("$POINTS$", "+" + Integer.toString(explosionPoints))));
+						PluginLoader.getMessages().MESSAGE_EXPLOSION_KILL.replace("$VICTIM$", victim.getName())
+								.replace("$POINTS$", "+" + Integer.toString(explosionPoints)));
 				killer.sendMessage(message);
 
 				message = ConstantHolder.RAGEMODE_PREFIX
 						+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().MESSAGE_EXPLOSION_DEATH
-								.replace("$KILLER$", killer.getName()).replace("$POINTS", ""));
+								.replace("$KILLER$", killer.getName()).replace("$POINTS$", ""));
 				victim.sendMessage(message);
 
 				message = ConstantHolder.RAGEMODE_PREFIX
@@ -162,15 +162,14 @@ public class RageScores {
 			int currentStreak = currentPoints.getCurrentStreak();
 			if (currentStreak == 3 || currentStreak % 5 == 0) {
 				currentPoints.setPoints(currentPoints.getPoints() + (currentStreak * 10));
+
+				message = ConstantHolder.RAGEMODE_PREFIX
+						+ ChatColor.translateAlternateColorCodes('§',
+								PluginLoader.getMessages().MESSAGE_STREAK
+										.replace("$NUMBER$", Integer.toString(currentStreak))
+										.replace("$POINTS$", "+" + Integer.toString(currentStreak * 10)));
+				killer.sendMessage(message);
 			}
-
-			message = ConstantHolder.RAGEMODE_PREFIX
-					+ ChatColor.translateAlternateColorCodes('§',
-							PluginLoader.getMessages().MESSAGE_STREAK
-									.replace("$NUMBER$", Integer.toString(currentStreak))
-									.replace("$POINTS$", "+" + Integer.toString(currentStreak * 10)));
-			killer.sendMessage(message);
-
 			// -------End of KillStreak messages-------
 
 			ScoreBoard board = ScoreBoard.allScoreBoards.get(PlayerList.getPlayersGame(killer));

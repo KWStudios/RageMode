@@ -79,8 +79,8 @@ public class StopGame {
 							+ Integer.toString(RageScores.getPlayerPoints(winnerUUID).getDeaths()) + ChatColor.GOLD
 							+ ".";
 					PlayerList.removePlayerSynced(player);
-					TitleAPI.sendTitle(player, 20, 160, 20, title, subtitle);
-					player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 200, 25, false, false), true);
+					TitleAPI.sendTitle(player, 20, 200, 20, title, subtitle);
+					player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 200, 5, false, false), true);
 				}
 			}
 			if (!EventListener.waitingGames.containsKey(game)) {

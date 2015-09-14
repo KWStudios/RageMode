@@ -30,9 +30,9 @@ deploy:
     secret_access_key:
       secure: jPl3D5QUqw6+Pl5qHCYY950BeeVTQ17jAjhd/X/6TcMFANr0KiwEfSEWb9+Hn2ieHfZyj1FBdaSXh8erfUKwOxImpLKvFJN3zizXX9yGsxyBkKEGV5VeFl0N/qOb4FUHIW2qK/tdbrgyc8fjRuG2KlMQEW5eoHJhQwahcIRZDCatg8g+esT1X1BQEvjknplYqHcY36DZnzQujYALlHiakW0BCJ/nIvhs5mXuU79sFjnfpe7hepIV1BQS2p+/H3OVPR7BwVCIhHqZfCd65dcLw3OWlkEbpXNbCvUfWSZABg/L6Rwi0VwVTAOsCGM7CjoLkjBXSVOcZ1C1hB4P4NslgU2gtNT4Vu3wEZbzms1vaAWRa9v9qtX6rjr1f44ArplZZSYk4G9ftotE1Ycx778+zepEKqmUvabTwe3/qNHZCPo7YjHCCvjuM6oHwDT5wfZl5rlkE/NieebcxSpd25x/Y1SsuPlloGic05z7GLl3xhTfx/F/t/9TI6QtXYoQIj6azeOa7bOF9MlFCcYMrRh7CDiJAcWi8DTzYHfJK7WbtAIpKr2Dha6QJ7dGuwuCZZh2G3fjebPhCJJ4O1bYjZxctiFBeAPduobpKKZTGGmpud5ytjsIbxgaYEouoop5/R5/F2mjcV1TZI90dvDUHAzxP7FjnCMF85AxlCjnyohvOo8=
     file_glob: true
-    file: ${HOME}/build/${TRAVIS_REPO_SLUG}/target/ragemode*.jar
     bucket: play-kwstudios-org
     local-dir: ${HOME}/build/${TRAVIS_REPO_SLUG}/target
+    upload-dir: travis-builds/${TRAVIS_BUILD_NUMBER}
     skip_cleanup: true
     acl: public-read
     on:

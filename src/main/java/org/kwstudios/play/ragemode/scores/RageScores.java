@@ -155,6 +155,24 @@ public class RageScores {
 			default:
 				break;
 			}
+
+			// -------KillStreak messages-------
+
+			PlayerPoints currentPoints = playerpoints.get(killerUUID);
+			int currentStreak = currentPoints.getCurrentStreak();
+			if (currentStreak == 3 || currentStreak % 5 == 0) {
+				currentPoints.setPoints(currentPoints.getPoints() + (currentStreak * 10));
+			}
+
+			message = ConstantHolder.RAGEMODE_PREFIX
+					+ ChatColor.translateAlternateColorCodes('§',
+							PluginLoader.getMessages().MESSAGE_STREAK
+									.replace("$NUMBER$", Integer.toString(currentStreak))
+									.replace("$POINTS$", "+" + Integer.toString(currentStreak * 10)));
+			killer.sendMessage(message);
+
+			// -------End of KillStreak messages-------
+
 			ScoreBoard board = ScoreBoard.allScoreBoards.get(PlayerList.getPlayersGame(killer));
 			updateScoreBoard(killer, board);
 			updateScoreBoard(victim, board);
@@ -222,8 +240,8 @@ public class RageScores {
 				totalDeaths++;
 				currentStreak = 0;
 			}
-			longestStreak = (pointsHolder.getCurrentStreak() > pointsHolder.getLongestStreak())
-					? pointsHolder.getCurrentStreak() : pointsHolder.getLongestStreak();
+			longestStreak = (currentStreak > pointsHolder.getLongestStreak()) ? currentStreak
+					: pointsHolder.getLongestStreak();
 
 			pointsHolder.setPoints(totalPoints);
 			pointsHolder.setKills(totalKills);
@@ -235,15 +253,22 @@ public class RageScores {
 		} else {
 			int totalKills = 0;
 			int totalDeaths = 0;
+			int currentStreak = 0;
+			int longestStreak = 0;
 			if (killer) {
 				totalKills = 1;
+				currentStreak = 1;
+				longestStreak = 1;
 			} else {
 				totalDeaths = 1;
+				currentStreak = 0;
 			}
 			PlayerPoints pointsHolder = new PlayerPoints(playerUUID);
 			pointsHolder.setPoints(points);
 			pointsHolder.setKills(totalKills);
 			pointsHolder.setDeaths(totalDeaths);
+			pointsHolder.setCurrentStreak(currentStreak);
+			pointsHolder.setLongestStreak(longestStreak);
 			playerpoints.put(playerUUID, pointsHolder);
 			return points;
 		}

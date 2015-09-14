@@ -75,6 +75,8 @@
 
   "MESSAGE_SUICIDE": "§3You killed yourself you silly idiot.",
 
+  "MESSAGE_STREAK": "§6$NUMBER$ §2KILLSTREAK §6$POINTS$",
+
   "MESSAGE_YOU_WON": "§dYou won the game §6$GAME$ §d.",
   "MESSAGE_PLAYER_WON": "§2$PLAYER$ §dwon the game §6$GAME$ §d.",
 

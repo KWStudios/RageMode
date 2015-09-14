@@ -78,5 +78,6 @@ public class Messages {
 	public String SPAWNS_NOT_SET_PROPERLY;
 	public String TOO_FEW_SPAWNS;
 	public String NO_SPAWNS_CONFIGURED;
+	public String MESSAGE_STREAK;
 
 }

@@ -32,7 +32,7 @@ deploy:
     file_glob: true
     bucket: play-kwstudios-org
     local-dir: ${HOME}/build/${TRAVIS_REPO_SLUG}/target
-    upload-dir: travis-builds/${TRAVIS_BUILD_NUMBER}
+    upload-dir: RageMode/travis-builds/${TRAVIS_BUILD_NUMBER}
     skip_cleanup: true
     acl: public-read
     on:

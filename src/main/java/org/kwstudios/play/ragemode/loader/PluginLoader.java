@@ -23,6 +23,7 @@ import org.kwstudios.play.ragemode.metrics.Metrics;
 import org.kwstudios.play.ragemode.signs.SignConfiguration;
 import org.kwstudios.play.ragemode.signs.SignCreator;
 import org.kwstudios.play.ragemode.statistics.YAMLStats;
+import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
 import org.kwstudios.play.ragemode.toolbox.GetGames;
 import org.kwstudios.play.ragemode.updater.Updater;
 
@@ -47,7 +48,7 @@ public class PluginLoader extends JavaPlugin {
 		super.onEnable();
 
 		PluginLoader.instance = this;
-		
+
 		BossbarLib.setPluginInstance(this);
 
 		/*
@@ -89,6 +90,8 @@ public class PluginLoader extends JavaPlugin {
 
 		loadMessages();
 
+		initStatusMessages();
+
 		SignConfiguration.initSignConfiguration();
 
 		String[] games = GetGames.getGameNames(getConfig());
@@ -107,24 +110,23 @@ public class PluginLoader extends JavaPlugin {
 		PluginDescriptionFile pluginDescriptionFile = getDescription();
 		Logger logger = Logger.getLogger("Minecraft");
 
-//		StopGame.stopAllGames(getConfig(), logger);
-		
-		Thread thread = new Thread(new Runnable() {	
-					@Override
-					public void run() {
-						StopGame.stopAllGames(getConfig(), Logger.getLogger("Minecraft"));
-					}});
-				
-					thread.start();
-					while(thread.isAlive()) {
-						try {
-							Thread.sleep(500);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-			
+		// StopGame.stopAllGames(getConfig(), logger);
 
+		Thread thread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				StopGame.stopAllGames(getConfig(), Logger.getLogger("Minecraft"));
+			}
+		});
+
+		thread.start();
+		while (thread.isAlive()) {
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 
 		logger.info(pluginDescriptionFile.getName() + " was unloaded successfully! (Version: "
 				+ pluginDescriptionFile.getVersion() + ")");
@@ -187,6 +189,24 @@ public class PluginLoader extends JavaPlugin {
 			messages = gson.fromJson(reader, Messages.class);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
+		}
+	}
+
+	public void initStatusMessages() {
+		if (getConfig().isSet("settings.global.bossbar")) {
+			if (ConfigFactory.getBoolean("settings.global", "bossbar", getConfig()) == null) {
+				ConfigFactory.setBoolean("settings.global", "bossbar", false, getConfig());
+			}
+		} else {
+			ConfigFactory.setBoolean("settings.global", "bossbar", false, getConfig());
+		}
+		
+		if (getConfig().isSet("settings.global.actionbar")) {
+			if (ConfigFactory.getBoolean("settings.global", "actionbar", getConfig()) == null) {
+				ConfigFactory.setBoolean("settings.global", "actionbar", true, getConfig());
+			}
+		} else {
+			ConfigFactory.setBoolean("settings.global", "actionbar", true, getConfig());
 		}
 	}
 

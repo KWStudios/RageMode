@@ -17,6 +17,7 @@ public class ReloadConfig {
 		pluginLoader.reloadConfig();
 		pluginLoader.initStatistics();
 		pluginLoader.loadMessages();
+		pluginLoader.initStatusMessages();
 
 		SignConfiguration.initSignConfiguration();
 		String[] games = GetGames.getGameNames(pluginLoader.getConfig());

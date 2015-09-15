@@ -129,10 +129,15 @@ public class GameTimer {
 									+ " points. " + ChatColor.GOLD + Integer.toString(points.getKills()) + " / "
 									+ Integer.toString(points.getDeaths()) + ChatColor.DARK_AQUA + " K/D.";
 							for (String playerUUID : playerUUIDs) {
-								BossbarLib.getHandler().getBossbar(Bukkit.getPlayer(UUID.fromString(playerUUID)))
-										.setMessage(message).setPercentage(1f);
-								BossbarLib.getHandler().updateBossbar(Bukkit.getPlayer(UUID.fromString(playerUUID)));
-								ActionBarAPI.sendActionBar(Bukkit.getPlayer(UUID.fromString(playerUUID)), message);
+								if (ConfigFactory.getBoolean("settings.global", "statistics", fileConfiguration)) {
+									BossbarLib.getHandler().getBossbar(Bukkit.getPlayer(UUID.fromString(playerUUID)))
+											.setMessage(message).setPercentage(1f);
+									BossbarLib.getHandler()
+											.updateBossbar(Bukkit.getPlayer(UUID.fromString(playerUUID)));
+								}
+								if (ConfigFactory.getBoolean("settings.global", "actionbar", fileConfiguration)) {
+									ActionBarAPI.sendActionBar(Bukkit.getPlayer(UUID.fromString(playerUUID)), message);
+								}
 							}
 							bossBarPointer++;
 						} else {

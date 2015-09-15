@@ -83,6 +83,12 @@ public class EventListener implements Listener {
 			if (arrow.getShooter() instanceof Player) {
 				Player shooter = (Player) arrow.getShooter();
 				if (PlayerList.isPlayerPlaying(shooter.getUniqueId().toString())) {
+					if(waitingGames.containsKey(PlayerList.getPlayersGame(shooter))) {
+						if(waitingGames.get(PlayerList.getPlayersGame(shooter))) {
+							return;
+						}
+					}
+							
 					Location location = arrow.getLocation();
 					World world = arrow.getWorld();
 					double x = location.getX();
@@ -130,6 +136,12 @@ public class EventListener implements Listener {
 			Player victim = (Player) event.getEntity();
 			if (PlayerList.isPlayerPlaying(killer.getUniqueId().toString())
 					&& PlayerList.isPlayerPlaying(victim.getUniqueId().toString())) {
+				if(waitingGames.containsKey(PlayerList.getPlayersGame(killer))) {
+					if(waitingGames.get(PlayerList.getPlayersGame(killer))) {
+						event.setCancelled(true);
+						return;
+					}
+				}
 				if (killer.getItemInHand() != null && killer.getItemInHand().getItemMeta() != null
 						&& killer.getItemInHand().getItemMeta().getDisplayName() != null) {
 					if (killer.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GOLD + "RageKnife")) {
@@ -164,6 +176,13 @@ public class EventListener implements Listener {
 				if (event.getCause().equals(DamageCause.PROJECTILE)) {
 					Player victim = (Player) event.getEntity();
 					if (PlayerList.isPlayerPlaying(victim.getUniqueId().toString())) {
+						if(waitingGames.containsKey(PlayerList.getPlayersGame(victim))) {
+							if(waitingGames.get(PlayerList.getPlayersGame(victim))) {
+								event.setDamage(0);
+								event.setCancelled(true);
+								return;
+							}
+						}
 						if (event.getDamage() == 0.0d) {
 							event.setDamage(28.34d);
 						} else {
@@ -367,6 +386,11 @@ public class EventListener implements Listener {
 	public void onCombatAxeThrow(PlayerInteractEvent event) {
 		if (PlayerList.isPlayerPlaying(event.getPlayer().getUniqueId().toString())) {
 			Player thrower = event.getPlayer();
+			if(waitingGames.containsKey(PlayerList.getPlayersGame(thrower))) {
+				if(waitingGames.get(PlayerList.getPlayersGame(thrower))) {
+					return;
+				}
+			}
 			if (thrower.getItemInHand() != null && thrower.getItemInHand().getItemMeta() != null
 					&& thrower.getItemInHand().getItemMeta().getDisplayName() != null) {
 				if (thrower.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GOLD + "CombatAxe")) {

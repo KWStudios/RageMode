@@ -38,6 +38,7 @@ public class AddSpawn {
 			i++;
 		}
 		ConfigFactory.setString("settings.games." + args[1] + ".spawns", Integer.toString(i), "", fileConfiguration);
+		ConfigFactory.setString("settings.games." + args[1] + ".spawns." + Integer.toString(i), "world", player.getWorld().getName(), fileConfiguration);
 		ConfigFactory.setDouble("settings.games." + args[1] + ".spawns." + Integer.toString(i), "x", player.getLocation().getX(), fileConfiguration);
 		ConfigFactory.setDouble("settings.games." + args[1] + ".spawns." + Integer.toString(i), "y", player.getLocation().getY(), fileConfiguration);
 		ConfigFactory.setDouble("settings.games." + args[1] + ".spawns." + Integer.toString(i), "z", player.getLocation().getZ(), fileConfiguration);

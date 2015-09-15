@@ -2,7 +2,9 @@ package org.kwstudios.play.ragemode.toolbox;
 
 import java.util.Set;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
 
@@ -105,7 +107,15 @@ public class MapChecker {
 			Set<String> spawnNames = ConfigFactory.getKeysUnderPath(path + ".spawns", false, fileConfiguration);
 			if (spawnNames.size() >= maxPlayers) {
 				for (String s : spawnNames) {
-					if (isDouble(ConfigFactory.getString(path + ".spawns." + s, "x", fileConfiguration))
+					World world = null;
+					try {
+						world = Bukkit
+								.getWorld(ConfigFactory.getString(path + ".spawns." + s, "world", fileConfiguration));
+					} catch (Exception e) {
+						world = null;
+					}
+					if (world != null
+							&& isDouble(ConfigFactory.getString(path + ".spawns." + s, "x", fileConfiguration))
 							&& isDouble(ConfigFactory.getString(path + ".spawns." + s, "y", fileConfiguration))
 							&& isDouble(ConfigFactory.getString(path + ".spawns." + s, "z", fileConfiguration))
 							&& isDouble(ConfigFactory.getString(path + ".spawns." + s, "yaw", fileConfiguration))

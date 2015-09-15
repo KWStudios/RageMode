@@ -29,7 +29,7 @@ public class GameSpawnGetter {
 			String path = ConstantHolder.GAME_PATH + "." + gameName;
 				Set<String> spawnNames = ConfigFactory.getKeysUnderPath(path + ".spawns", false, fileConfiguration);
 				for (String spawnName : spawnNames) {
-					String world = ConfigFactory.getString(path, "world", fileConfiguration);
+					String world = ConfigFactory.getString(path + ".spawns." + spawnName, "world", fileConfiguration);
 					double spawnX = ConfigFactory.getDouble(path + ".spawns." + spawnName, "x", fileConfiguration);
 					double spawnY = ConfigFactory.getDouble(path + ".spawns." + spawnName, "y", fileConfiguration);
 					double spawnZ = ConfigFactory.getDouble(path + ".spawns." + spawnName, "z", fileConfiguration);

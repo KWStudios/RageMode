@@ -1,12 +1,23 @@
 package org.kwstudios.play.ragemode.loader;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Logger;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -24,10 +35,13 @@ import org.kwstudios.play.ragemode.signs.SignConfiguration;
 import org.kwstudios.play.ragemode.signs.SignCreator;
 import org.kwstudios.play.ragemode.statistics.YAMLStats;
 import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
+import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 import org.kwstudios.play.ragemode.toolbox.GetGames;
 import org.kwstudios.play.ragemode.updater.Updater;
 
 import com.google.gson.Gson;
+
+import net.md_5.bungee.api.ChatColor;
 
 /*import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
@@ -181,7 +195,75 @@ public class PluginLoader extends JavaPlugin {
 	}
 
 	public void loadMessages() {
-		InputStream input = getClass().getResourceAsStream("/locale/en.json");
+		HashMap<String, Boolean> fileNames = new HashMap<String, Boolean>();
+		for (File file : listFilesForFolder(new File(getDataFolder(), "locale"))) {
+			if (!fileNames.containsKey(file.getName())) {
+				fileNames.put(file.getName(), true);
+			}
+		}
+
+		if (!fileNames.containsKey("en.json")) {
+			InputStream input = getClass().getResourceAsStream("/locale/en.json");
+			try {
+				File localeFolder = new File(getDataFolder(), "locale");
+				if (!localeFolder.exists()) {
+					localeFolder.mkdirs();
+				}
+				File enFile = new File(localeFolder, "en.json");
+				Path destination = Paths.get(enFile.getAbsolutePath());
+				Files.copy(input, destination, StandardCopyOption.REPLACE_EXISTING);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		if (!fileNames.containsKey("fr.json")) {
+			InputStream input = getClass().getResourceAsStream("/locale/fr.json");
+			try {
+				File localeFolder = new File(getDataFolder(), "locale");
+				if (!localeFolder.exists()) {
+					localeFolder.mkdirs();
+				}
+				File enFile = new File(localeFolder, "fr.json");
+				Path destination = Paths.get(enFile.getAbsolutePath());
+				Files.copy(input, destination, StandardCopyOption.REPLACE_EXISTING);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		fileNames.clear();
+		for (File file : listFilesForFolder(new File(getDataFolder(), "locale"))) {
+			if (!fileNames.containsKey(file.getName())) {
+				fileNames.put(file.getName(), true);
+			}
+		}
+
+		String localeFile;
+		if (getConfig().isSet("settings.global.locale")) {
+			String setName = ConfigFactory.getString("settings.global", "locale", getConfig()) + ".json";
+			if (setName != null && setName != "") {
+				if (fileNames.containsKey(setName)) {
+					localeFile = setName;
+				} else {
+					localeFile = "en.json";
+				}
+			} else {
+				localeFile = "en.json";
+			}
+		} else {
+			ConfigFactory.setString("settings.global", "locale", "en", getConfig());
+			localeFile = "en.json";
+		}
+
+		File folder = new File(getDataFolder(), "locale");
+		File file = new File(folder, localeFile);
+		FileInputStream input = null;
+		try {
+			input = new FileInputStream(file);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
 		BufferedReader reader;
 		try {
 			reader = new BufferedReader(new InputStreamReader(input, "UTF8"));
@@ -192,6 +274,25 @@ public class PluginLoader extends JavaPlugin {
 		}
 	}
 
+	public List<File> listFilesForFolder(File folder) {
+		List<File> fileList = new ArrayList<File>();
+		if (!folder.exists()) {
+			folder.mkdirs();
+		}
+		for (File fileEntry : folder.listFiles()) {
+			if (fileEntry.isDirectory()) {
+				for (File innerFile : listFilesForFolder(fileEntry)) {
+					fileList.add(innerFile);
+				}
+			} else {
+				fileList.add(fileEntry);
+				Bukkit.getConsoleSender().sendMessage(ConstantHolder.RAGEMODE_PREFIX + "Found \""
+						+ ChatColor.DARK_PURPLE + fileEntry.getName() + ChatColor.RESET + "\" localization file.");
+			}
+		}
+		return fileList;
+	}
+
 	public void initStatusMessages() {
 		if (getConfig().isSet("settings.global.bossbar")) {
 			if (ConfigFactory.getBoolean("settings.global", "bossbar", getConfig()) == null) {
@@ -200,7 +301,7 @@ public class PluginLoader extends JavaPlugin {
 		} else {
 			ConfigFactory.setBoolean("settings.global", "bossbar", false, getConfig());
 		}
-		
+
 		if (getConfig().isSet("settings.global.actionbar")) {
 			if (ConfigFactory.getBoolean("settings.global", "actionbar", getConfig()) == null) {
 				ConfigFactory.setBoolean("settings.global", "actionbar", true, getConfig());

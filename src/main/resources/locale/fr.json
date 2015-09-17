@@ -1,0 +1,108 @@
+﻿{
+  "NOT_A_PLAYER": "Tu dois être un joueur!",
+  "WRONG_COMMAND": "§4C'est pas le commandement tu cherches!",
+  "PERMISSION_MESSAGE": "§4Tu ne peux pas utiliser ce commandement!",
+
+  "MISSING_ARGUMENTS": "§4Arguments manquants! Usage: $USAGE$",
+
+  "NOT_A_NUMBER": "§4$WRONG_NUMBER$ n'est pas un nombre.",
+  "ALREADY_EXISTS": "§4$GAME$ existe déjà.",
+  "ADDED_SUCCESSFULLY": "§2Le jeu §3$GAME$ §2a été ajouté avec succès!",
+
+  "NOT_SET_YET": "§4Ce jeu n'a pas été mis en place encore! Mets en place avec $USAGE$",
+  "LOBBY_SUCCESSFULLY": "§2Le hall pour le jeu §3$GAME$ §2a été mis en place avec succès!",
+
+  "SPAWN_SUCCESSFULLY": "§2Le frai $NUMBER$ pour le jeu §3$GAME$ §2a été mis en place avec succès!",
+
+  "PLAYER_JOINED": "§2$PLAYER$ §9est entre dans le jeu.",
+  "PLAYER_COULD_NOT_JOIN": "§4$PLAYER$ ne peut pas entrer le RageMode jeu $GAME$.",
+
+  "REMOVED_NON_EXISTANT_GAME": "§4Ne supprimes pas jeux inexistants!",
+  "GAME_RUNNING": "§4Ce jeu est en marche pour le moment. Patientez jusqu' le jeu est fini.",
+  "REMOVED_SUCCESSFULLY": "Le jeu $GAME$ a été supprimé avec succès.",
+
+  "LISTING_GAMES": "Liste tous les jeux de ragemode disponibles...",
+  "NO_GAMES_AVAILABLE": "Il n'y a pas cartes de RageMode sur le serveur pour le moment.",
+
+  "GAME_NOT_RUNNING": "Ce jeu n'est pas en marche.",
+  "SEARCHING_GAMES_TO_STOP": "RageMode cherche des jeux pour arrêter...",
+  "GAME_STOPPED": "§3$GAME$ §2a été arrêté.",
+  "ALL_GAMES_STOPPED": "Tous les jeux sont arrêtes!",
+
+  "RELOADED_SUCCESSFULLY": "§2RageMode a été rechargé avec succès!",
+
+  "KNIFE_DEATHS": "Mort par couteau: ",
+  "EXPLOSION_DEATHS": "Mort par explosion: ",
+  "ARROW_DEATHS": "Mort par flèche: ",
+  "AXE_DEATHS": "Mort par hache: ",
+  "DEATHS": "Mort: ",
+
+  "KNIFE_KILLS": "Meurtre par couteau: ",
+  "EXPLOSION_KILLS": "Meurtre par explosion: ",
+  "ARROW_KILLS": "Meurtre par flèche: ",
+  "AXE_KILLS": "Meurtre par hache: ",
+  "KILLS": "Meurtres: ",
+
+  "KD": "KD: ",
+
+  "GAMES": "Jeux: ",
+  "WINS": "Victoires: ",
+  "SCORE": "Score: ",
+  "RANK": "Rang: ",
+
+  "NOT_PLAYED_YET": "Ce joueur n'a pas joué sur le serveur jusqu'ici",
+
+  "BROADCAST_AXE_KILL": "§a$VICTIM$ §3a été tué §a$KILLER$ §3par une §6CombatAxe §3.",
+  "BROADCAST_ARROW_KILL": "§a$VICTIM$ §3a été tué par une §6trame directe d'une flèche §3de §a$KILLER$ §3.",
+  "BROADCAST_KNIFE_KILL": "§a$VICTIM$ §3a été tué par §a$KILLER$ §3avec une §6RageKnife §3.",
+  "BROADCAST_EXPLOSION_KILL": "§a$VICTIM$ §3a été §6tué par un explosion §3par §a$KILLER$ §3.",
+  "BROADCAST_ERROR_KILL": "Furrrrz, il y' a une petite problème, parce que c'est un serveur des idiotes...",
+
+  "UNKNOWN_KILLER": "Tu sais qui a tuè toi? Parce que nous ne savons pas...",
+  "UNKNOWN_WEAPON": "§a$VICTIM$ §3a été tue par quelque chose inconnu.",
+
+  "MESSAGE_ARROW_KILL": "§3Tu as tué §6§l$VICTIM$ §r§3avec une trame directe d'une flèche. §6§l$POINTS$",
+  "MESSAGE_AXE_KILL": "§3Tu as tué §6§l$VICTIM$ §r§3avec ton CombatAxe. §6§l$POINTS$",
+  "MESSAGE_KNIFE_KILL": "§3Tu as tué §6§l$VICTIM$ §r§3avec ton RageKnife. §6§l$POINTS$",
+  "MESSAGE_EXPLOSION_KILL": "§3Tu as tué §6§l$VICTIM$ §r§3parce que tu as causé explosions très grandes avec ton RageBow. §6§l$POINTS$",
+
+  "MESSAGE_ARROW_DEATH": "§3Tu as été tué par §6§l$KILLER$ §r§3avec une trame directe d'une flèche. §4§l$POINTS$",
+  "MESSAGE_AXE_DEATH": "§3Tu as été tué par §6§l$KILLER$ §r§3avec un CombatAxe. §4§l$POINTS$",
+  "MESSAGE_KNIFE_DEATH": "§3Tu as été tué par §6§l$KILLER$ §r§3avec un RageKnife. §4§l$POINTS$",
+  "MESSAGE_EXPLOSION_DEATH": "§3Tu as été tué par §6§l$KILLER$ §r§3avec une explosion. §4§l$POINTS$",
+
+  "MESSAGE_CURRENT_POINTS": "§3Maintenent tu as §6§l$POINTS$ §r§3points.",
+
+  "MESSAGE_SUICIDE": "§3Tu t'as suicidé. Tu es une Francais(e) très lâche.",
+.
+  "MESSAGE_STREAK": "§6$NUMBER$ §2KILLSTREAK §6$POINTS$",
+
+  "MESSAGE_YOU_WON": "§dTu as gangné le jeu §6$GAME$ §d.",
+  "MESSAGE_PLAYER_WON": "§2$PLAYER$ §da gagné le jeu §6$GAME$ §d.",
+
+  "GAME_NOT_SET_UP": "§4Le jeu ne marche pas correctement. Contactez un administrateur, s'il vous plaît.",
+
+  "LOBBY_MESSAGE": "§9Ce jeu commenceras en §e$TIME$ §9seconds.",
+
+  "PLAYER_ALREADY_IN_GAME": "Tu es déjà dans un jeu. Pour laisser le jeu, entres $USAGE$",
+  "YOU_JOINED_THE_GAME": "Tu es entré §3$GAME$ §r.",
+
+  "PLAYER_KICKED_FOR_VIP": "Tu as été supprimé pour faire de l'espace pour un VIP.",
+
+  "GAME_FULL": "Ce jeu est pleinement!",
+  "GAME_DOES_NOT_EXIST": "Le jeu tu veux entrer n'existe pas.",
+
+  "PLAYER_LEFT_GAME": "Tu as laissé ton jeu courant.",
+  "PLAYER_NOT_IN_GAME": "Le fait que tu n'etais pas dans un jeu a causé une problème avec supprimer toi de ce jeu. ",
+
+  "INVALID_GAME": "§e$GAME$ §4n'est pas une carte de RageMode valide.",
+  "NAME_OR_MAXPLAYERS_NOT_SET": "§4Le nom du monde ou le nombre de la maximum de joueurs ne sont pas mis en place. Contactez un administrateur, s'il vous plaît.",
+  "MAXPLAYERS_NOT_SET": "§4Le nombre maximum de joueurs pour $GAME$ n'est pas mis en place correctement.",
+  "WORLDNAME_NOT_SET": "§4Le clé du monde ne doit pas être vide! Dire à un administrateur : Please check the config.yml",
+  "LOBBY_NOT_SET": "§4Le hall n'a pas été mis en place jusqu'ici pour §3$GAME$ §4. Mets en place avec /rm lobby <game name>",
+  "LOBBY_COORDINATES_NOT_SET": "§4Les coordinates du hall n'ont pas été mis en place correctement. Dire à un administrateur : Please check the config.yml",
+  "LOBBY_NOT_SET_PROPERLY": "§4Le hall n'a pas été mis en place correctement. Dire à un administrateur : Please check the config.yml",
+  "SPAWNS_NOT_SET_PROPERLY": "§4Un ou plusieurs frais ne sont pas mis en place correctement!",
+  "TOO_FEW_SPAWNS": "§4Le nombre de frais doit être plus grand ou égal que le nombre de joueurs.!",
+  "NO_SPAWNS_CONFIGURED": "§4Dans $GAME$ les frais ne sont pas configurés !"
+}

@@ -24,6 +24,7 @@ public class Messages {
 	public String GAME_STOPPED;
 	public String ALL_GAMES_STOPPED;
 	public String RELOADED_SUCCESSFULLY;
+	public String SUCCESS;
 	public String KNIFE_DEATHS;
 	public String EXPLOSION_DEATHS;
 	public String ARROW_DEATHS;

@@ -35,6 +35,12 @@ public class LobbyTimer {
 			secondsRemaining = 30;
 			ConfigFactory.setInt("settings.global", "lobbydelay", secondsRemaining, fileConfiguration);
 		}
+
+		if (fileConfiguration.isSet(ConstantHolder.GAME_PATH + "." + gameName + ".lobbydelay") && isInt(
+				ConfigFactory.getString(ConstantHolder.GAME_PATH + "." + gameName, "lobbydelay", fileConfiguration))) {
+			secondsRemaining = ConfigFactory.getInt(ConstantHolder.GAME_PATH + "." + gameName, "lobbydelay",
+					fileConfiguration);
+		}
 	}
 
 	private void sendTimerMessages() {

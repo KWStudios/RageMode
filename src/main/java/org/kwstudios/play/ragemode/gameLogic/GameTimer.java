@@ -45,6 +45,12 @@ public class GameTimer {
 			secondsRemaining = 300;
 			ConfigFactory.setInt("settings.global", "gametime", secondsRemaining / 60, fileConfiguration);
 		}
+
+		if (fileConfiguration.isSet(ConstantHolder.GAME_PATH + "." + gameName + ".gametime") && isInt(
+				ConfigFactory.getString(ConstantHolder.GAME_PATH + "." + gameName, "gametime", fileConfiguration))) {
+			secondsRemaining = ConfigFactory.getInt(ConstantHolder.GAME_PATH + "." + gameName, "gametime",
+					fileConfiguration) * 60;
+		}
 	}
 
 	private void startCounting() {

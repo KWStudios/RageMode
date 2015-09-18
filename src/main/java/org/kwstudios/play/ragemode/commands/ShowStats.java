@@ -1,10 +1,8 @@
 package org.kwstudios.play.ragemode.commands;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.UUID;
@@ -20,13 +18,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
-import org.kwstudios.play.ragemode.locale.Messages;
 import org.kwstudios.play.ragemode.scores.RetPlayerPoints;
 import org.kwstudios.play.ragemode.statistics.MySQLStats;
 import org.kwstudios.play.ragemode.statistics.YAMLStats;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
-
-import com.google.gson.Gson;
 
 public class ShowStats {
 	public ShowStats(Player player, String label, String[] args, FileConfiguration fileConfiguration) {
@@ -45,6 +40,7 @@ public class ShowStats {
 	private class UUIDStrings {
 		public String id;
 		public String name;
+		@SuppressWarnings("unused")
 		public boolean legacy;
 	}
 
@@ -75,6 +71,7 @@ public class ShowStats {
 			sUUID = new String(
 					sUUID_SEQ_1 + "-" + sUUID_SEQ_2 + "-" + sUUID_SEQ_3 + "-" + sUUID_SEQ_4 + "-" + sUUID_SEQ_5);
 
+			@SuppressWarnings("unused")
 			Player statsPlayer = Bukkit.getPlayer(UUID.fromString(sUUID));
 			RetPlayerPoints rpp = null;
 

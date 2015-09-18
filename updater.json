@@ -1,0 +1,5 @@
+{
+  "VERSION": "v0.1-alpha",
+  "LINK": "https://github.com/KWStudios/RageMode/releases/download/v0.1-alpha/ragemode-v0.1-alpha.jar",
+  "RELEASE_NOTES": ["Changes:", "- Our first RageMode version. Still buggy but generally it should work.", "- Report issues on GitHub https://github.com/KWStudios/RageMode/"]
+}

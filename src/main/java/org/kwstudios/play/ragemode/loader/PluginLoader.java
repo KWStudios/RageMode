@@ -236,6 +236,8 @@ public class PluginLoader extends JavaPlugin {
 		for (File file : listFilesForFolder(new File(getDataFolder(), "locale"))) {
 			if (!fileNames.containsKey(file.getName())) {
 				fileNames.put(file.getName(), true);
+				Bukkit.getConsoleSender().sendMessage(ConstantHolder.RAGEMODE_PREFIX + "Found \""
+						+ ChatColor.DARK_PURPLE + file.getName() + ChatColor.RESET + "\" localization file.");
 			}
 		}
 
@@ -286,8 +288,6 @@ public class PluginLoader extends JavaPlugin {
 				}
 			} else {
 				fileList.add(fileEntry);
-				Bukkit.getConsoleSender().sendMessage(ConstantHolder.RAGEMODE_PREFIX + "Found \""
-						+ ChatColor.DARK_PURPLE + fileEntry.getName() + ChatColor.RESET + "\" localization file.");
 			}
 		}
 		return fileList;

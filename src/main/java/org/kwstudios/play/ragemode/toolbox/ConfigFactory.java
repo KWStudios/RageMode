@@ -65,7 +65,7 @@ public class ConfigFactory {
 	public static Set<String> getKeysUnderPath(String path, boolean deep, FileConfiguration fileConfiguration) {
 		if(fileConfiguration != null) {
 			if(fileConfiguration.getConfigurationSection(path) != null) {
-				Set<String> keys = fileConfiguration.getConfigurationSection(path).getKeys(deep); //TODO remove nullPointers
+				Set<String> keys = fileConfiguration.getConfigurationSection(path).getKeys(deep);
 				return keys;			
 			}			
 		}

@@ -55,6 +55,7 @@ public class PluginLoader extends JavaPlugin {
 	private static PluginLoader instance = null;
 	private static MySQLConnector mySqlConnector = null;
 	private static Messages messages = null;
+	private static boolean holographicDiaplaysAvailable = false;
 	// private ProtocolManager protocolManager;
 
 	@Override
@@ -64,6 +65,10 @@ public class PluginLoader extends JavaPlugin {
 		PluginLoader.instance = this;
 
 		BossbarLib.setPluginInstance(this);
+		
+		if (Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays")) {
+			holographicDiaplaysAvailable = true;
+		}
 
 		/*
 		 * protocolManager = ProtocolLibrary.getProtocolManager();
@@ -321,6 +326,10 @@ public class PluginLoader extends JavaPlugin {
 
 	public static Messages getMessages() {
 		return messages;
+	}
+	
+	public static boolean getHolographicDisplaysAvailable() {
+		return holographicDiaplaysAvailable;
 	}
 
 }

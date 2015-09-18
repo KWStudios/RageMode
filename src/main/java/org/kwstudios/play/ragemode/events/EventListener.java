@@ -83,12 +83,12 @@ public class EventListener implements Listener {
 			if (arrow.getShooter() instanceof Player) {
 				Player shooter = (Player) arrow.getShooter();
 				if (PlayerList.isPlayerPlaying(shooter.getUniqueId().toString())) {
-					if(waitingGames.containsKey(PlayerList.getPlayersGame(shooter))) {
-						if(waitingGames.get(PlayerList.getPlayersGame(shooter))) {
+					if (waitingGames.containsKey(PlayerList.getPlayersGame(shooter))) {
+						if (waitingGames.get(PlayerList.getPlayersGame(shooter))) {
 							return;
 						}
 					}
-							
+
 					Location location = arrow.getLocation();
 					World world = arrow.getWorld();
 					double x = location.getX();
@@ -136,8 +136,8 @@ public class EventListener implements Listener {
 			Player victim = (Player) event.getEntity();
 			if (PlayerList.isPlayerPlaying(killer.getUniqueId().toString())
 					&& PlayerList.isPlayerPlaying(victim.getUniqueId().toString())) {
-				if(waitingGames.containsKey(PlayerList.getPlayersGame(killer))) {
-					if(waitingGames.get(PlayerList.getPlayersGame(killer))) {
+				if (waitingGames.containsKey(PlayerList.getPlayersGame(killer))) {
+					if (waitingGames.get(PlayerList.getPlayersGame(killer))) {
 						event.setCancelled(true);
 						return;
 					}
@@ -176,8 +176,8 @@ public class EventListener implements Listener {
 				if (event.getCause().equals(DamageCause.PROJECTILE)) {
 					Player victim = (Player) event.getEntity();
 					if (PlayerList.isPlayerPlaying(victim.getUniqueId().toString())) {
-						if(waitingGames.containsKey(PlayerList.getPlayersGame(victim))) {
-							if(waitingGames.get(PlayerList.getPlayersGame(victim))) {
+						if (waitingGames.containsKey(PlayerList.getPlayersGame(victim))) {
+							if (waitingGames.get(PlayerList.getPlayersGame(victim))) {
 								event.setDamage(0);
 								event.setCancelled(true);
 								return;
@@ -211,11 +211,22 @@ public class EventListener implements Listener {
 					|| deceased.getKiller() == null) {
 				String game = PlayerList.getPlayersGame(deceased);
 
-				if (!fileConfiguration.isSet("setting.global.deathmessages")) {
+				if (!fileConfiguration.isSet("settings.global.deathmessages")) {
 					ConfigFactory.setBoolean("settings.global", "deathmessages", false, fileConfiguration);
 				}
 				boolean doDeathBroadcast = ConfigFactory.getBoolean("settings.global", "deathmessages",
 						fileConfiguration);
+
+				if (fileConfiguration.isSet("settings." + PlayerList.getPlayersGame(deceased) + ".deathmessages")) {
+					String gameBroadcast = ConfigFactory.getString("settings." + PlayerList.getPlayersGame(deceased),
+							"deathmessages", fileConfiguration);
+					if (gameBroadcast != null && gameBroadcast != "") {
+						if (gameBroadcast.equalsIgnoreCase("true") || gameBroadcast.equalsIgnoreCase("false")) {
+							doDeathBroadcast = Boolean.parseBoolean(gameBroadcast);
+						}
+					}
+				}
+
 				if (deceased.getLastDamage() == 0.0f) {
 					if (deceased.getKiller() == null) {
 						if (doDeathBroadcast) {
@@ -386,8 +397,8 @@ public class EventListener implements Listener {
 	public void onCombatAxeThrow(PlayerInteractEvent event) {
 		if (PlayerList.isPlayerPlaying(event.getPlayer().getUniqueId().toString())) {
 			Player thrower = event.getPlayer();
-			if(waitingGames.containsKey(PlayerList.getPlayersGame(thrower))) {
-				if(waitingGames.get(PlayerList.getPlayersGame(thrower))) {
+			if (waitingGames.containsKey(PlayerList.getPlayersGame(thrower))) {
+				if (waitingGames.get(PlayerList.getPlayersGame(thrower))) {
 					return;
 				}
 			}

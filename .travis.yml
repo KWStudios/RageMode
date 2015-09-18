@@ -10,6 +10,7 @@ notifications:
     - simon.artner@gmail.com
     on_success: change
     on_failure: always
+  webhooks: http://api.kwstudios.org/travis/webhooks/RageMode
 before_deploy:
 - ls
 - cd target/

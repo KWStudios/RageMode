@@ -157,4 +157,25 @@ public class MapChecker {
 		return message;
 	}
 
+	public static boolean isGameWorld(String gameName, World world) {
+		String spawnsPath = ConstantHolder.GAME_PATH + "." + gameName + "." + "spawns";
+		Set<String> allSpawns = ConfigFactory.getKeysUnderPath(spawnsPath, false,
+				PluginLoader.getInstance().getConfig());
+		for (String spawn : allSpawns) {
+			String worldName = ConfigFactory.getString(spawnsPath + "." + spawn, "world",
+					PluginLoader.getInstance().getConfig());
+			if (worldName.trim().equals(world.getName().trim())) {
+				return true;
+			}
+		}
+
+		String lobbyPath = ConstantHolder.GAME_PATH + "." + gameName + "." + "lobby";
+		String worldName = ConfigFactory.getString(lobbyPath, "world", PluginLoader.getInstance().getConfig());
+		if (worldName.trim().equals(world.getName().trim())) {
+			return true;
+		}
+
+		return false;
+	}
+
 }

@@ -35,6 +35,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.kwstudios.play.ragemode.commands.PlayerJoin;
 import org.kwstudios.play.ragemode.gameLogic.GameSpawnGetter;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
@@ -46,6 +47,7 @@ import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 import org.kwstudios.play.ragemode.toolbox.GameBroadcast;
 import org.kwstudios.play.ragemode.toolbox.GetGames;
+import org.kwstudios.play.ragemode.toolbox.MapChecker;
 
 public class EventListener implements Listener {
 
@@ -480,6 +482,15 @@ public class EventListener implements Listener {
 						}
 					}
 				}
+			}
+		}
+	}
+
+	@EventHandler
+	public void onWorldChangedEvent(PlayerTeleportEvent event) {
+		if (PlayerList.isPlayerPlaying(event.getPlayer().getUniqueId().toString())) {
+			if (!MapChecker.isGameWorld(PlayerList.getPlayersGame(event.getPlayer()), event.getTo().getWorld())) {
+				event.getPlayer().performCommand("rm leave");
 			}
 		}
 	}

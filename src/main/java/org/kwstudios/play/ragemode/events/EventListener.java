@@ -220,8 +220,9 @@ public class EventListener implements Listener {
 						fileConfiguration);
 
 				if (fileConfiguration.isSet("settings." + PlayerList.getPlayersGame(deceased) + ".deathmessages")) {
-					String gameBroadcast = ConfigFactory.getString("settings." + PlayerList.getPlayersGame(deceased),
-							"deathmessages", fileConfiguration);
+					String gameBroadcast = ConfigFactory.getString(
+							ConstantHolder.GAME_PATH + "." + PlayerList.getPlayersGame(deceased), "deathmessages",
+							fileConfiguration);
 					if (gameBroadcast != null && gameBroadcast != "") {
 						if (gameBroadcast.equalsIgnoreCase("true") || gameBroadcast.equalsIgnoreCase("false")) {
 							doDeathBroadcast = Boolean.parseBoolean(gameBroadcast);
@@ -388,9 +389,9 @@ public class EventListener implements Listener {
 				if (cmd.equals("/rm leave") || cmd.equals("/ragemode leave") || cmd.equals("/rm list")
 						|| cmd.equals("/ragemode list") || cmd.equals("/rm stop") || cmd.equals("/ragemode stop")
 						|| cmd.equals("/l") || cmd.equals("/lobby") || cmd.equals("/spawn")) {
-					if(waitingGames.containsKey(PlayerList.getPlayersGame(event.getPlayer())))
-						 if(waitingGames.get(PlayerList.getPlayersGame(event.getPlayer())))
-							 event.setCancelled(true); 
+					if (waitingGames.containsKey(PlayerList.getPlayersGame(event.getPlayer())))
+						if (waitingGames.get(PlayerList.getPlayersGame(event.getPlayer())))
+							event.setCancelled(true);
 				} else {
 					event.setCancelled(true);
 				}

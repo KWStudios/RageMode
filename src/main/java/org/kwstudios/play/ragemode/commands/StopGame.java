@@ -65,22 +65,25 @@ public class StopGame {
 		if (PlayerList.isGameRunning(game)) {
 			String[] players = PlayerList.getPlayersInGame(game);
 			String winnerUUID = RageScores.calculateWinner(game, players);
-			if (Bukkit.getPlayer(UUID.fromString(winnerUUID)) != null) {
-				Player winner = Bukkit.getPlayer(UUID.fromString(winnerUUID));
-				for (String playerUUID : players) {
-					Player player = Bukkit.getPlayer(UUID.fromString(playerUUID));
-					String title = ChatColor.DARK_GREEN + winner.getName() + ChatColor.GOLD + " won this round!";
-					String subtitle = ChatColor.GOLD + "He has got " + ChatColor.DARK_PURPLE
-							+ Integer.toString(RageScores.getPlayerPoints(winnerUUID).getPoints()) + ChatColor.GOLD
-							+ " points and his K/D is " + ChatColor.DARK_PURPLE
-							+ Integer.toString(RageScores.getPlayerPoints(winnerUUID).getKills()) + " / "
-							+ Integer.toString(RageScores.getPlayerPoints(winnerUUID).getDeaths()) + ChatColor.GOLD
-							+ ".";
-					PlayerList.removePlayerSynced(player);
-					TitleAPI.sendTitle(player, 20, 200, 20, title, subtitle);
-//					player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 200, 5, false, false), true);
-				}
+			if(UUID.fromString(winnerUUID) != null) {
+				if (Bukkit.getPlayer(UUID.fromString(winnerUUID)) != null) {
+					Player winner = Bukkit.getPlayer(UUID.fromString(winnerUUID));
+					for (String playerUUID : players) {
+						Player player = Bukkit.getPlayer(UUID.fromString(playerUUID));
+						String title = ChatColor.DARK_GREEN + winner.getName() + ChatColor.GOLD + " won this round!";
+						String subtitle = ChatColor.GOLD + "He has got " + ChatColor.DARK_PURPLE
+								+ Integer.toString(RageScores.getPlayerPoints(winnerUUID).getPoints()) + ChatColor.GOLD
+								+ " points and his K/D is " + ChatColor.DARK_PURPLE
+								+ Integer.toString(RageScores.getPlayerPoints(winnerUUID).getKills()) + " / "
+								+ Integer.toString(RageScores.getPlayerPoints(winnerUUID).getDeaths()) + ChatColor.GOLD
+								+ ".";
+						PlayerList.removePlayerSynced(player);
+						TitleAPI.sendTitle(player, 20, 200, 20, title, subtitle);
+	//					player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 200, 5, false, false), true);
+					}
+				}				
 			}
+
 			if (!EventListener.waitingGames.containsKey(game)) {
 				EventListener.waitingGames.put(game, true);
 			} else {

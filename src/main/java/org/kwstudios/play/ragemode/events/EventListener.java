@@ -388,6 +388,9 @@ public class EventListener implements Listener {
 				if (cmd.equals("/rm leave") || cmd.equals("/ragemode leave") || cmd.equals("/rm list")
 						|| cmd.equals("/ragemode list") || cmd.equals("/rm stop") || cmd.equals("/ragemode stop")
 						|| cmd.equals("/l") || cmd.equals("/lobby") || cmd.equals("/spawn")) {
+					if(waitingGames.containsKey(PlayerList.getPlayersGame(event.getPlayer())))
+						 if(waitingGames.get(PlayerList.getPlayersGame(event.getPlayer())))
+							 event.setCancelled(true); 
 				} else {
 					event.setCancelled(true);
 				}

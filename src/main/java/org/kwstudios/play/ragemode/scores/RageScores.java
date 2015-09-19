@@ -275,6 +275,7 @@ public class RageScores {
 
 	public static String calculateWinner(String game, String[] players) {
 		String highest = UUID.randomUUID().toString();
+		String goy = highest;
 		int highestPoints = -200000000;
 		int i = 0;
 		int imax = players.length;
@@ -297,23 +298,39 @@ public class RageScores {
 
 		}
 
-		playerpoints.get(highest).setWinner(true);
-
-		i = 0;
-		while (i < imax) {
-			if (players[i].equals(highest)) {
-				String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
-						PluginLoader.getMessages().MESSAGE_YOU_WON.replace("$GAME$", game));
-				Bukkit.getPlayer(UUID.fromString(highest)).sendMessage(message);
-			} else {
-				String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
-						PluginLoader.getMessages().MESSAGE_PLAYER_WON
-								.replace("$PLAYER$", Bukkit.getPlayer(UUID.fromString(highest)).getName())
-								.replace("$GAME$", game));
-				Bukkit.getPlayer(UUID.fromString(players[i])).sendMessage(message);
+		if(goy == highest) {
+			i = 0;
+			while (i < imax) {
+					String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+							PluginLoader.getMessages().MESSAGE_PLAYER_WON
+									.replace("$PLAYER$", "Herobrine")
+									.replace("$GAME$", game));
+					Bukkit.getPlayer(UUID.fromString(players[i])).sendMessage(message);
+				i++;
 			}
-			i++;
+			return null;
 		}
+		else {
+			playerpoints.get(highest).setWinner(true);
+	
+			i = 0;
+			while (i < imax) {
+				if (players[i].equals(highest)) {
+					String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+							PluginLoader.getMessages().MESSAGE_YOU_WON.replace("$GAME$", game));
+					Bukkit.getPlayer(UUID.fromString(highest)).sendMessage(message);
+				} else {
+					String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+							PluginLoader.getMessages().MESSAGE_PLAYER_WON
+									.replace("$PLAYER$", Bukkit.getPlayer(UUID.fromString(highest)).getName())
+									.replace("$GAME$", game));
+					Bukkit.getPlayer(UUID.fromString(players[i])).sendMessage(message);
+				}
+				i++;
+			}			
+		}
+
+
 
 		return highest;
 	}

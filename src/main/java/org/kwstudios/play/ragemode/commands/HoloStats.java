@@ -27,12 +27,11 @@ public class HoloStats {
 
 
 	private void addHolo() {
-		//TODO add a hologram via HoloHolder
 		HoloHolder.addHolo(player.getLocation());
 	}
 	
 	private void removeHolo() {
-		//TODO remove hologram via HoloHolder
+		HoloHolder.deleteHologram(HoloHolder.getClosest(player));
 	}	
 
 	/*private void addLobbyToConfig() { //nur zum abschauen ;)

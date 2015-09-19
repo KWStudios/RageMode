@@ -56,4 +56,17 @@ public class HoloHolder {
 		//     remove holo from the file
 		return false;
 	}
+
+	public static Hologram getClosest(Player player) {
+		int i = 0;
+		int imax = existingHolos.size();
+		
+		while(i < imax) {
+			player.getLocation().distance(existingHolos.get(i));
+			
+			i++;
+		}
+		
+		return null;
+	}
 }

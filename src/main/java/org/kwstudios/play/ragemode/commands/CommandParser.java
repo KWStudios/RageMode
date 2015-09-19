@@ -164,6 +164,14 @@ public class CommandParser {
 						ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PERMISSION_MESSAGE));
 			}
 			break;
+		case "holo":
+			if (player.hasPermission("ragemode.admin.holo")) {
+				new HoloStats(player, label, args, fileConfiguration);
+			} else {
+				player.sendMessage(
+						ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PERMISSION_MESSAGE));
+			}
+			break;
 		default:
 			player.sendMessage(
 					ChatColor.DARK_RED + "This is not a valid RageMode command! Type /help ragemode for more help.");

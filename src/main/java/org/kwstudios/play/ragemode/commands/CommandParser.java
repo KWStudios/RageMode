@@ -164,6 +164,22 @@ public class CommandParser {
 						ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PERMISSION_MESSAGE));
 			}
 			break;
+		case "bossbar":
+			if (player.hasPermission("ragemode.admin.bossbar")) {
+				new SetBossBar(player, label, args, fileConfiguration);
+			} else {
+				player.sendMessage(
+						ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PERMISSION_MESSAGE));
+			}
+			break;
+		case "actionbar":
+			if (player.hasPermission("ragemode.admin.actionbar")) {
+				new SetActionBar(player, label, args, fileConfiguration);
+			} else {
+				player.sendMessage(
+						ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PERMISSION_MESSAGE));
+			}
+			break;
 		case "holo":
 			if (player.hasPermission("ragemode.admin.holo")) {
 				new HoloStats(player, label, args, fileConfiguration);

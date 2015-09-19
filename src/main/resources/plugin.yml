@@ -80,6 +80,21 @@ commands:
     aliases: ['ragemode global']
     permission: ragemode.admin.global
     permission-message: You may not use that command!
+  rm bossbar:
+    description: Activates/Deactivates the bossbar status in game.
+    aliases: ['ragemode bossbar']
+    permission: ragemode.admin.bossbar
+    permission-message: You may not use that command!
+  rm actionbar:
+    description: Activates/Deactivates the actionbar status in game.
+    aliases: ['ragemode actionbar']
+    permission: ragemode.admin.actionbar
+    permission-message: You may not use that command!
+  rm holo:
+    description: Configures the holo stats.
+    aliases: ['ragemode holo']
+    permission: ragemode.admin.holo
+    permission-message: You may not use that command!
     
 permissions:
     ragemode.rm:
@@ -107,6 +122,9 @@ permissions:
             ragemode.admin.gametime: true
             ragemode.admin.globalmessages: true
             ragemode.admin.global: true
+            ragemode.admin.bossbar: true
+            ragemode.admin.actionbar: true
+            ragemode.admin.holo: true
     ragemode.vip:
         description: Gives access to the VIP functions.
         default: op

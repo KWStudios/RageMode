@@ -25,9 +25,9 @@ public class PlayerLeave {
 
 	private void doPlayerLeave() {
 		String gameName = PlayerList.getPlayersGame(player);
+		PlayerList.removePlayerSynced(player);
 		PlayerList.removePlayer(player);
 		SignCreator.updateAllSigns(gameName);
-		PlayerList.removePlayerSynced(player);
 	}
 
 }

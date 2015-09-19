@@ -1,11 +1,8 @@
 package org.kwstudios.play.ragemode.commands;
 
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.kwstudios.play.ragemode.loader.PluginLoader;
-import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
-import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
+import org.kwstudios.play.ragemode.holo.HoloHolder;
 
 public class HoloStats {
 
@@ -30,11 +27,12 @@ public class HoloStats {
 
 
 	private void addHolo() {
-		//TODO add a hologram to the file and add it to the server
+		//TODO add a hologram via HoloHolder
+		HoloHolder.addHolo(player.getLocation());
 	}
 	
 	private void removeHolo() {
-		//TODO get the right hologram and remove it frome the file and from the server
+		//TODO remove hologram via HoloHolder
 	}	
 
 	/*private void addLobbyToConfig() { //nur zum abschauen ;)

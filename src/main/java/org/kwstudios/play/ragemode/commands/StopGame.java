@@ -62,12 +62,14 @@ public class StopGame {
 	}
 
 	public static void stopGame(String game) {
+		boolean winnervalid = false;
 		if (PlayerList.isGameRunning(game)) {
 			String[] players = PlayerList.getPlayersInGame(game);
 			String winnerUUID = RageScores.calculateWinner(game, players);
 			if(winnerUUID != null) {
 				if(UUID.fromString(winnerUUID) != null) {
 					if (Bukkit.getPlayer(UUID.fromString(winnerUUID)) != null) {
+						winnervalid = true;
 						Player winner = Bukkit.getPlayer(UUID.fromString(winnerUUID));
 						for (String playerUUID : players) {
 							Player player = Bukkit.getPlayer(UUID.fromString(playerUUID));
@@ -84,6 +86,14 @@ public class StopGame {
 						}
 					}				
 				}				
+			}
+			if(winnervalid == false) {
+				for (String playerUUID : players) {
+					Player player = Bukkit.getPlayer(UUID.fromString(playerUUID));
+					String title = ChatColor.DARK_GREEN + "Herobrine" + ChatColor.GOLD + " won this round!";
+					PlayerList.removePlayerSynced(player);
+					TitleAPI.sendTitle(player, 20, 200, 20, title, null);
+				}
 			}
 
 

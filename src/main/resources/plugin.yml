@@ -60,6 +60,26 @@ commands:
     aliases: ['ragemode reload']
     permission: ragemode.admin.reload
     permission-message: You may not use that command!
+  rm lobbydelay:
+    description: Changes the time to wait for players before starting the game.
+    aliases: ['ragemode lobbydelay']
+    permission: ragemode.admin.lobbydelay
+    permission-message: You may not use that command!
+  rm gametime:
+    description: Changes the gametime for the given game.
+    aliases: ['ragemode gametime']
+    permission: ragemode.admin.gametime
+    permission-message: You may not use that command!
+  rm globalmessages:
+    description: Activates/Deactivates the broadcast messages for the given game.
+    aliases: ['ragemode globalmessages']
+    permission: ragemode.admin.globalmessages
+    permission-message: You may not use that command!
+  rm global:
+    description: Changes the given global value (lobbydelay, gametime, deathmessages).
+    aliases: ['ragemode global']
+    permission: ragemode.admin.global
+    permission-message: You may not use that command!
     
 permissions:
     ragemode.rm:
@@ -83,6 +103,10 @@ permissions:
             ragemode.admin.remove: true
             ragemode.admin.reload: true
             ragemode.admin.stop: true
+            ragemode.admin.lobbydelay: true
+            ragemode.admin.gametime: true
+            ragemode.admin.globalmessages: true
+            ragemode.admin.global: true
     ragemode.vip:
         description: Gives access to the VIP functions.
         default: op

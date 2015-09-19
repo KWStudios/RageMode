@@ -132,9 +132,75 @@ public class CommandParser {
 						ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PERMISSION_MESSAGE));
 			}
 			break;
+		case "lobbydelay":
+			if (player.hasPermission("ragemode.admin.lobbydelay")) {
+				new SetLobbyDelay(player, label, args, fileConfiguration);
+			} else {
+				player.sendMessage(
+						ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PERMISSION_MESSAGE));
+			}
+			break;
+		case "gametime":
+			if (player.hasPermission("ragemode.admin.gametime")) {
+				new SetGameTime(player, label, args, fileConfiguration);
+			} else {
+				player.sendMessage(
+						ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PERMISSION_MESSAGE));
+			}
+			break;
+		case "globalmessages":
+			if (player.hasPermission("ragemode.admin.globalmessages")) {
+				new SetGlobalMessages(player, label, args, fileConfiguration);
+			} else {
+				player.sendMessage(
+						ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PERMISSION_MESSAGE));
+			}
+			break;
+		case "global":
+			if (player.hasPermission("ragemode.admin.global")) {
+				parseSecondArg();
+			} else {
+				player.sendMessage(
+						ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PERMISSION_MESSAGE));
+			}
+			break;
 		default:
 			player.sendMessage(
 					ChatColor.DARK_RED + "This is not a valid RageMode command! Type /help ragemode for more help.");
+			break;
+		}
+	}
+
+	private void parseSecondArg() {
+		switch (args[1].toLowerCase()) {
+		case "lobbydelay":
+			if (player.hasPermission("ragemode.admin.lobbydelay")) {
+				new SetLobbyDelay(player, label, args, fileConfiguration);
+			} else {
+				player.sendMessage(
+						ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PERMISSION_MESSAGE));
+			}
+			break;
+		case "gametime":
+			if (player.hasPermission("ragemode.admin.gametime")) {
+				new SetGameTime(player, label, args, fileConfiguration);
+			} else {
+				player.sendMessage(
+						ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PERMISSION_MESSAGE));
+			}
+			break;
+		case "globalmessages":
+			if (player.hasPermission("ragemode.admin.globalmessages")) {
+				new SetGlobalMessages(player, label, args, fileConfiguration);
+			} else {
+				player.sendMessage(
+						ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PERMISSION_MESSAGE));
+			}
+			break;
+		default:
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+					PluginLoader.getMessages().MISSING_ARGUMENTS.replace("$USAGE$",
+							"/rm global <lobbydelay|gametime|globalmessages> <Seconds|Minutes|true,false>")));
 			break;
 		}
 	}

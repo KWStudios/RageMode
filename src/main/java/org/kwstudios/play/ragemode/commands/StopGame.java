@@ -104,10 +104,7 @@ public class StopGame {
 				EventListener.waitingGames.remove(game);
 				EventListener.waitingGames.put(game, true);
 			}
-			
-			for (String playerUUID : players) {				
-				HoloHolder.updateHolosForPlayer(Bukkit.getPlayer(UUID.fromString(playerUUID)));				
-			}			
+		
 			
 			final String gameName = game;
 			PluginLoader.getInstance().getServer().getScheduler().scheduleSyncDelayedTask(PluginLoader.getInstance(),
@@ -166,6 +163,10 @@ public class StopGame {
 							PluginLoader.getMessages().GAME_STOPPED.replace("$GAME$", game)));
 			PlayerList.setGameNotRunning(game);
 			SignCreator.updateAllSigns(game);
+			
+			for (String playerUUID : players) {				
+				HoloHolder.updateHolosForPlayer(Bukkit.getPlayer(UUID.fromString(playerUUID)));				
+			}	
 		}
 	}
 

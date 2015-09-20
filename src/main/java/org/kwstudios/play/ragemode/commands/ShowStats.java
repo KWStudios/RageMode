@@ -100,8 +100,8 @@ public class ShowStats {
 				player.sendMessage(PluginLoader.getMessages().ARROW_KILLS + rpp.getDirectArrowKills());
 				player.sendMessage(PluginLoader.getMessages().AXE_KILLS + rpp.getAxeKills());
 				player.sendMessage("---------------");
-				player.sendMessage(PluginLoader.getMessages().DEATHS + rpp.getDeaths());
 				player.sendMessage(PluginLoader.getMessages().KILLS + rpp.getKills());
+				player.sendMessage(PluginLoader.getMessages().DEATHS + rpp.getDeaths());
 				player.sendMessage(PluginLoader.getMessages().KD + rpp.getKD());
 				player.sendMessage("---------------");
 				player.sendMessage(PluginLoader.getMessages().GAMES + rpp.getGames());

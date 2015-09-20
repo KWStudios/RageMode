@@ -13,6 +13,8 @@ import org.kwstudios.play.ragemode.toolbox.GetGames;
 public class ReloadConfig {
 
 	public ReloadConfig(Player player, String label, String[] args, FileConfiguration fileConfiguration) {
+		StopGame.stopAllGames(PluginLoader.getInstance().getConfig(), PluginLoader.getInstance().getLogger());
+		
 		PluginLoader pluginLoader = PluginLoader.getInstance();
 
 		pluginLoader.reloadConfig();

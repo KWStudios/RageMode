@@ -421,7 +421,7 @@ public class EventListener implements Listener {
 			if (thrower.getItemInHand() != null && thrower.getItemInHand().getItemMeta() != null
 					&& thrower.getItemInHand().getItemMeta().getDisplayName() != null) {
 				if (thrower.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GOLD + "CombatAxe")) {
-					SmallFireball sf = thrower.launchProjectile(SmallFireball.class);
+					Snowball sb = thrower.launchProjectile(Snowball.class);
 					thrower.getInventory().setItemInHand(null);
 				}
 			}

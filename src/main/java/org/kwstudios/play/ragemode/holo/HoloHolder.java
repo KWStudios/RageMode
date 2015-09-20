@@ -91,7 +91,7 @@ public class HoloHolder {
 			rpp = MySQLStats.getPlayerStatistics((player), PluginLoader.getMySqlConnector());
 		}
 		
-		hologram.appendTextLine(ConstantHolder.RAGEMODE_PREFIX.replace(" ", ""));
+		hologram.appendTextLine(ConstantHolder.RAGEMODE_PREFIX);
 		hologram.appendTextLine(PluginLoader.getMessages().RANK + "Ranker™ hasn't been added jet :(");
 		hologram.appendTextLine(PluginLoader.getMessages().SCORE + rpp.getPoints());
 		hologram.appendTextLine(PluginLoader.getMessages().WINS + rpp.getWins());

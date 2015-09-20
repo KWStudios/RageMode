@@ -15,6 +15,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.SmallFireball;
 import org.bukkit.entity.Snowball;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -420,7 +421,7 @@ public class EventListener implements Listener {
 			if (thrower.getItemInHand() != null && thrower.getItemInHand().getItemMeta() != null
 					&& thrower.getItemInHand().getItemMeta().getDisplayName() != null) {
 				if (thrower.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GOLD + "CombatAxe")) {
-					thrower.launchProjectile(Snowball.class);
+					SmallFireball sf = thrower.launchProjectile(SmallFireball.class);
 					thrower.getInventory().setItemInHand(null);
 				}
 			}

@@ -28,6 +28,8 @@ public class HoloHolder {
 
 	public static void addHolo(Location loc) {
 		loc.add(0d, 2d, 0d);
+		loc.setPitch(0f);
+		loc.setYaw(0f);
 		List<Location> savedHolos;
 		if(holosConfiguration.isSet("data.holos")) {
 			if(holosConfiguration.getList("data.holos") != null) {
@@ -38,7 +40,7 @@ public class HoloHolder {
 			}
 		}
 		else {
-			savedHolos = new ArrayList<Location>();			
+			savedHolos = new ArrayList<Location>();
 		}
 
 //		Bukkit.getConsoleSender().sendMessage(ConstantHolder.RAGEMODE_PREFIX + "Some idiot tried to change the holos.yml");
@@ -89,7 +91,7 @@ public class HoloHolder {
 			rpp = MySQLStats.getPlayerStatistics((player), PluginLoader.getMySqlConnector());
 		}
 		
-		hologram.appendTextLine(ConstantHolder.RAGEMODE_PREFIX);
+		hologram.appendTextLine(ConstantHolder.RAGEMODE_PREFIX.replace(" ", ""));
 		hologram.appendTextLine(PluginLoader.getMessages().RANK + "Ranker™ hasn't been added jet :(");
 		hologram.appendTextLine(PluginLoader.getMessages().SCORE + rpp.getPoints());
 		hologram.appendTextLine(PluginLoader.getMessages().WINS + rpp.getWins());
@@ -109,8 +111,14 @@ public class HoloHolder {
 	}
 	
 	public static void deleteHologram(Hologram holo) {
+		if(holo == null) {
+			return;
+		}
+		
 		List<Location> locList = (List<Location>) holosConfiguration.getList("data.holos");
-		locList.remove(holo.getLocation());
+		if(locList.contains(holo.getLocation()))
+			locList.remove(holo.getLocation());
+		
 		holosConfiguration.set("data.holos", locList);
 		
 		try {
@@ -120,6 +128,7 @@ public class HoloHolder {
 		}
 		
 		holo.delete();
+		loadHolos();
 	}
 
 	public static Hologram getClosest(Player player) {
@@ -192,10 +201,9 @@ public class HoloHolder {
 			displayHoloToPlayer(player, holoList.get(i));
 			i++;
 		}
-		
 	}
 	
-	public void updateHolosForPlayer(Player player) {
+	public static void updateHolosForPlayer(Player player) {
 		//TODO call whenever the stats of this player change
 		deleteHoloObjectsOfPlayer(player);
 		showAllHolosToPlayer(player);

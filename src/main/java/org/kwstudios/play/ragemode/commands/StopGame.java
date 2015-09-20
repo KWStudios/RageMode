@@ -11,6 +11,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.kwstudios.play.ragemode.events.EventListener;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
+import org.kwstudios.play.ragemode.holo.HoloHolder;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
 import org.kwstudios.play.ragemode.scores.PlayerPoints;
 import org.kwstudios.play.ragemode.scores.RageScores;
@@ -103,6 +104,11 @@ public class StopGame {
 				EventListener.waitingGames.remove(game);
 				EventListener.waitingGames.put(game, true);
 			}
+			
+			for (String playerUUID : players) {				
+				HoloHolder.updateHolosForPlayer(Bukkit.getPlayer(UUID.fromString(playerUUID)));				
+			}			
+			
 			final String gameName = game;
 			PluginLoader.getInstance().getServer().getScheduler().scheduleSyncDelayedTask(PluginLoader.getInstance(),
 					new Runnable() {

@@ -32,6 +32,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -39,6 +40,7 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.kwstudios.play.ragemode.commands.PlayerJoin;
 import org.kwstudios.play.ragemode.gameLogic.GameSpawnGetter;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
+import org.kwstudios.play.ragemode.holo.HoloHolder;
 import org.kwstudios.play.ragemode.items.CombatAxe;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
 import org.kwstudios.play.ragemode.scores.RageScores;
@@ -75,6 +77,13 @@ public class EventListener implements Listener {
 			}
 
 		}
+		HoloHolder.deleteHoloObjectsOfPlayer(player);
+	}
+	
+	@EventHandler
+	public void onPlayerJoin(PlayerJoinEvent event) {
+		Player player = event.getPlayer();
+		HoloHolder.showAllHolosToPlayer(player);
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST)

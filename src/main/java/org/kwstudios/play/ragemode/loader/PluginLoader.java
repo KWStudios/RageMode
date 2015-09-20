@@ -29,6 +29,7 @@ import org.kwstudios.play.ragemode.commands.StopGame;
 import org.kwstudios.play.ragemode.database.MySQLConnector;
 import org.kwstudios.play.ragemode.events.EventListener;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
+import org.kwstudios.play.ragemode.holo.HoloHolder;
 import org.kwstudios.play.ragemode.locale.Messages;
 import org.kwstudios.play.ragemode.metrics.Metrics;
 import org.kwstudios.play.ragemode.signs.SignConfiguration;
@@ -112,6 +113,8 @@ public class PluginLoader extends JavaPlugin {
 		initStatusMessages();
 
 		SignConfiguration.initSignConfiguration();
+		
+		HoloHolder.initHoloHolder();
 
 		String[] games = GetGames.getGameNames(getConfig());
 		for (String game : games) {

@@ -4,6 +4,7 @@
   "PERMISSION_MESSAGE": "§4Tu ne peux pas utiliser ce commandement!",
 
   "MISSING_ARGUMENTS": "§4Arguments manquants! Usage: $USAGE$",
+  "MSSING_DEPENDENCIES": "§4$DEPENDENCIE$ must be installed to use this!",
 
   "NOT_A_NUMBER": "§4$WRONG_NUMBER$ n'est pas un nombre.",
   "ALREADY_EXISTS": "§4$GAME$ existe déjà.",
@@ -30,7 +31,7 @@
   "ALL_GAMES_STOPPED": "Tous les jeux sont arrêtes!",
 
   "RELOADED_SUCCESSFULLY": "§2RageMode a été rechargé avec succès!",
-  
+
   "SUCCESS": "§2Succès!",
 
   "KNIFE_DEATHS": "Mort par couteau: ",
@@ -76,7 +77,7 @@
   "MESSAGE_CURRENT_POINTS": "§3Maintenent tu as §6§l$POINTS$ §r§3points.",
 
   "MESSAGE_SUICIDE": "§3Tu t'as suicidé. Tu es une Francais(e) très lâche.",
-  
+
   "MESSAGE_STREAK": "§6$NUMBER$ §2KILLSTREAK §6$POINTS$",
 
   "MESSAGE_YOU_WON": "§dTu as gangné le jeu §6$GAME$ §d.",
@@ -107,4 +108,5 @@
   "SPAWNS_NOT_SET_PROPERLY": "§4Un ou plusieurs frais ne sont pas mis en place correctement!",
   "TOO_FEW_SPAWNS": "§4Le nombre de frais doit être plus grand ou égal que le nombre de joueurs.!",
   "NO_SPAWNS_CONFIGURED": "§4Dans $GAME$ les frais ne sont pas configurés !"
+
 }

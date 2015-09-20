@@ -3,6 +3,7 @@ package org.kwstudios.play.ragemode.commands;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.kwstudios.play.ragemode.holo.HoloHolder;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
 import org.kwstudios.play.ragemode.signs.SignConfiguration;
 import org.kwstudios.play.ragemode.signs.SignCreator;
@@ -24,6 +25,7 @@ public class ReloadConfig {
 		for (String game : games) {
 			SignCreator.updateAllSigns(game);
 		}
+		HoloHolder.initHoloHolder();
 
 		player.sendMessage(ConstantHolder.RAGEMODE_PREFIX
 				+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().RELOADED_SUCCESSFULLY));

@@ -6,6 +6,7 @@ public class Messages {
 	public String WRONG_COMMAND;
 	public String PERMISSION_MESSAGE;
 	public String MISSING_ARGUMENTS;
+	public String MISSING_DEPENDENCIES;
 	public String NOT_A_NUMBER;
 	public String ALREADY_EXISTS;
 	public String ADDED_SUCCESSFULLY;

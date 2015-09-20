@@ -4,6 +4,7 @@
   "PERMISSION_MESSAGE": "§4You may not use that command!",
 
   "MISSING_ARGUMENTS": "§4Missing arguments! Usage: $USAGE$",
+  "MSSING_DEPENDENCIES": "§4$DEPENDENCIE$ must be installed to use this!",
 
   "NOT_A_NUMBER": "§4$WRONG_NUMBER$ is not a number.",
   "ALREADY_EXISTS": "§4$GAME$ already exists.",
@@ -30,7 +31,7 @@
   "ALL_GAMES_STOPPED": "All games stopped!",
 
   "RELOADED_SUCCESSFULLY": "§2RageMode was reloaded successfully!",
-  
+
   "SUCCESS": "§2Success!",
 
   "KNIFE_DEATHS": "Knife Deaths: ",
@@ -107,4 +108,5 @@
   "SPAWNS_NOT_SET_PROPERLY": "§4One or more spawns are not set properly!",
   "TOO_FEW_SPAWNS": "§4The number of spawns must be greater than or equal the maxplayers value!",
   "NO_SPAWNS_CONFIGURED": "§4In $GAME$ are no spawns configured!"
+
 }

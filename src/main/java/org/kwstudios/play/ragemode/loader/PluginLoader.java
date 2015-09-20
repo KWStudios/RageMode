@@ -210,34 +210,36 @@ public class PluginLoader extends JavaPlugin {
 			}
 		}
 
-		if (!fileNames.containsKey("en.json")) {
-			InputStream input = getClass().getResourceAsStream("/locale/en.json");
-			try {
-				File localeFolder = new File(getDataFolder(), "locale");
-				if (!localeFolder.exists()) {
-					localeFolder.mkdirs();
-				}
-				File enFile = new File(localeFolder, "en.json");
-				Path destination = Paths.get(enFile.getAbsolutePath());
-				Files.copy(input, destination, StandardCopyOption.REPLACE_EXISTING);
-			} catch (Exception e) {
-				e.printStackTrace();
+		InputStream input = getClass().getResourceAsStream("/locale/en.json");
+		try {
+			File localeFolder = new File(getDataFolder(), "locale");
+			if (!localeFolder.exists()) {
+				localeFolder.mkdirs();
 			}
+			File enFile = new File(localeFolder, "en.json");
+			if (enFile.exists()) {
+				enFile.delete();
+			}
+			Path destination = Paths.get(enFile.getAbsolutePath());
+			Files.copy(input, destination, StandardCopyOption.REPLACE_EXISTING);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
-		if (!fileNames.containsKey("fr.json")) {
-			InputStream input = getClass().getResourceAsStream("/locale/fr.json");
-			try {
-				File localeFolder = new File(getDataFolder(), "locale");
-				if (!localeFolder.exists()) {
-					localeFolder.mkdirs();
-				}
-				File enFile = new File(localeFolder, "fr.json");
-				Path destination = Paths.get(enFile.getAbsolutePath());
-				Files.copy(input, destination, StandardCopyOption.REPLACE_EXISTING);
-			} catch (Exception e) {
-				e.printStackTrace();
+		input = getClass().getResourceAsStream("/locale/fr.json");
+		try {
+			File localeFolder = new File(getDataFolder(), "locale");
+			if (!localeFolder.exists()) {
+				localeFolder.mkdirs();
 			}
+			File frFile = new File(localeFolder, "fr.json");
+			if (frFile.exists()) {
+				frFile.delete();
+			}
+			Path destination = Paths.get(frFile.getAbsolutePath());
+			Files.copy(input, destination, StandardCopyOption.REPLACE_EXISTING);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 		fileNames.clear();
@@ -268,15 +270,15 @@ public class PluginLoader extends JavaPlugin {
 
 		File folder = new File(getDataFolder(), "locale");
 		File file = new File(folder, localeFile);
-		FileInputStream input = null;
+		FileInputStream fileInput = null;
 		try {
-			input = new FileInputStream(file);
+			fileInput = new FileInputStream(file);
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
 		BufferedReader reader;
 		try {
-			reader = new BufferedReader(new InputStreamReader(input, "UTF8"));
+			reader = new BufferedReader(new InputStreamReader(fileInput, "UTF8"));
 			Gson gson = new Gson();
 			messages = gson.fromJson(reader, Messages.class);
 		} catch (UnsupportedEncodingException e) {

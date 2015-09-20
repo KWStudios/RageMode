@@ -66,7 +66,7 @@ public class PluginLoader extends JavaPlugin {
 		PluginLoader.instance = this;
 
 		BossbarLib.setPluginInstance(this);
-		
+
 		if (Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays")) {
 			holographicDiaplaysAvailable = true;
 		}
@@ -113,7 +113,7 @@ public class PluginLoader extends JavaPlugin {
 		initStatusMessages();
 
 		SignConfiguration.initSignConfiguration();
-		
+
 		HoloHolder.initHoloHolder();
 
 		String[] games = GetGames.getGameNames(getConfig());
@@ -284,23 +284,6 @@ public class PluginLoader extends JavaPlugin {
 		}
 	}
 
-	public List<File> listFilesForFolder(File folder) {
-		List<File> fileList = new ArrayList<File>();
-		if (!folder.exists()) {
-			folder.mkdirs();
-		}
-		for (File fileEntry : folder.listFiles()) {
-			if (fileEntry.isDirectory()) {
-				for (File innerFile : listFilesForFolder(fileEntry)) {
-					fileList.add(innerFile);
-				}
-			} else {
-				fileList.add(fileEntry);
-			}
-		}
-		return fileList;
-	}
-
 	public void initStatusMessages() {
 		if (getConfig().isSet("settings.global.bossbar")) {
 			if (ConfigFactory.getBoolean("settings.global", "bossbar", getConfig()) == null) {
@@ -319,6 +302,23 @@ public class PluginLoader extends JavaPlugin {
 		}
 	}
 
+	public static List<File> listFilesForFolder(File folder) {
+		List<File> fileList = new ArrayList<File>();
+		if (!folder.exists()) {
+			folder.mkdirs();
+		}
+		for (File fileEntry : folder.listFiles()) {
+			if (fileEntry.isDirectory()) {
+				for (File innerFile : listFilesForFolder(fileEntry)) {
+					fileList.add(innerFile);
+				}
+			} else {
+				fileList.add(fileEntry);
+			}
+		}
+		return fileList;
+	}
+
 	public static PluginLoader getInstance() {
 		return PluginLoader.instance;
 	}
@@ -330,7 +330,7 @@ public class PluginLoader extends JavaPlugin {
 	public static Messages getMessages() {
 		return messages;
 	}
-	
+
 	public static boolean getHolographicDisplaysAvailable() {
 		return holographicDiaplaysAvailable;
 	}

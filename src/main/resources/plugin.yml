@@ -95,6 +95,11 @@ commands:
     aliases: ['ragemode holo']
     permission: ragemode.admin.holo
     permission-message: You may not use that command!
+  rm locale:
+    description: Changes the localization.
+    aliases: ['ragemode locale']
+    permission: ragemode.admin.locale
+    permission-message: You may not use that command!
     
 permissions:
     ragemode.rm:
@@ -125,6 +130,7 @@ permissions:
             ragemode.admin.bossbar: true
             ragemode.admin.actionbar: true
             ragemode.admin.holo: true
+            ragemode.admin.locale: true
     ragemode.vip:
         description: Gives access to the VIP functions.
         default: op

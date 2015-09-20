@@ -188,6 +188,14 @@ public class CommandParser {
 						ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PERMISSION_MESSAGE));
 			}
 			break;
+		case "locale":
+			if (player.hasPermission("ragemode.admin.locale")) {
+				new SetLocale(player, label, args, fileConfiguration);
+			} else {
+				player.sendMessage(
+						ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PERMISSION_MESSAGE));
+			}
+			break;
 		default:
 			player.sendMessage(
 					ChatColor.DARK_RED + "This is not a valid RageMode command! Type /help ragemode for more help.");

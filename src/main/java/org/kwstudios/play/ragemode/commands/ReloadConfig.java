@@ -27,7 +27,8 @@ public class ReloadConfig {
 		for (String game : games) {
 			SignCreator.updateAllSigns(game);
 		}
-		HoloHolder.initHoloHolder();
+		if(!PluginLoader.getHolographicDisplaysAvailable())
+			HoloHolder.initHoloHolder();
 
 		player.sendMessage(ConstantHolder.RAGEMODE_PREFIX
 				+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().RELOADED_SUCCESSFULLY));

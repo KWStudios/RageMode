@@ -38,10 +38,12 @@ public class HoloStats {
 
 
 	private void addHolo() {
-		HoloHolder.addHolo(player.getLocation());
+		if(PluginLoader.getHolographicDisplaysAvailable())
+			HoloHolder.addHolo(player.getLocation());
 	}
 	
 	private void removeHolo() {
-		HoloHolder.deleteHologram(HoloHolder.getClosest(player));
+		if(!PluginLoader.getHolographicDisplaysAvailable())
+			HoloHolder.deleteHologram(HoloHolder.getClosest(player));
 	}	
 }

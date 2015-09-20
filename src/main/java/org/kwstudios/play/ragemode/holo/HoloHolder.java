@@ -27,7 +27,7 @@ public class HoloHolder {
 	private static FileConfiguration holosConfiguration;
 
 	public static void addHolo(Location loc) {
-		if(!PluginLoader.getHolographicDisplaysAvailable())
+		if(!Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays"))
 			return;
 		loc.add(0d, 2d, 0d);
 		loc.setPitch(0f);
@@ -63,7 +63,7 @@ public class HoloHolder {
 	}
 	
 	public static void loadHolos() {
-		if(!PluginLoader.getHolographicDisplaysAvailable())
+		if(!Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays"))
 			return;
 		Collection<Hologram> holos = HologramsAPI.getHolograms(PluginLoader.getInstance());
 		for(Hologram holo : holos){
@@ -76,7 +76,7 @@ public class HoloHolder {
 	}
 	
 	public static void displayHoloToPlayer(Player player, Location loc) {
-		if(!PluginLoader.getHolographicDisplaysAvailable())
+		if(!Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays"))
 			return;
 		Hologram hologram  = HologramsAPI.createHologram(PluginLoader.getInstance(), loc);
 
@@ -109,7 +109,7 @@ public class HoloHolder {
 	}
 	
 	public static void deleteHoloObjectsOfPlayer(Player player) {
-		if(!PluginLoader.getHolographicDisplaysAvailable())
+		if(!Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays"))
 			return;
 		Collection<Hologram> holos = HologramsAPI.getHolograms(PluginLoader.getInstance());
 		for(Hologram holo : holos){
@@ -119,7 +119,7 @@ public class HoloHolder {
 	}
 	
 	public static void deleteHologram(Hologram holo) {
-		if(!PluginLoader.getHolographicDisplaysAvailable())
+		if(!Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays"))
 			return;
 		if(holo == null) {
 			return;
@@ -142,7 +142,7 @@ public class HoloHolder {
 	}
 
 	public static Hologram getClosest(Player player) {
-		if(!PluginLoader.getHolographicDisplaysAvailable())
+		if(!Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays"))
 			return null;
 		Collection<Hologram> holos = HologramsAPI.getHolograms(PluginLoader.getInstance());
 		Hologram closest = null;
@@ -159,7 +159,7 @@ public class HoloHolder {
 	}
 	
 	public static void initHoloHolder() {
-		if(!PluginLoader.getHolographicDisplaysAvailable())
+		if(!Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays"))
 			return;
 		File file = new File(PluginLoader.getInstance().getDataFolder(), "holos.yml");
 		YamlConfiguration config = null;
@@ -196,7 +196,7 @@ public class HoloHolder {
 	}
 
 	public static void showAllHolosToPlayer(Player player) {
-		if(!PluginLoader.getHolographicDisplaysAvailable())
+		if(!Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays"))
 			return;
 		List<Location> holoList;
 		if(holosConfiguration.isSet("data.holos")) {
@@ -220,7 +220,7 @@ public class HoloHolder {
 	}
 	
 	public static void updateHolosForPlayer(Player player) {
-		if(!PluginLoader.getHolographicDisplaysAvailable())
+		if(!Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays"))
 			return;
 		//TODO call whenever the stats of this player change
 		deleteHoloObjectsOfPlayer(player);

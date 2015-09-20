@@ -168,6 +168,8 @@ public class SignCreator {
 	public static boolean isJoinSign(Sign sign) {
 		FileConfiguration fileConfiguration = SignConfiguration.getSignConfiguration();
 
+		Location signPosition = sign.getLocation();
+
 		Set<String> signs = ConfigFactory.getKeysUnderPath("signs", false, fileConfiguration);
 		if (signs != null) {
 			for (String signString : signs) {
@@ -180,8 +182,11 @@ public class SignCreator {
 						int z = ConfigFactory.getInt(path, "z", fileConfiguration);
 						String world = ConfigFactory.getString(path, "world", fileConfiguration);
 						Location signLocation = new Location(Bukkit.getWorld(world), x, y, z);
-						if (signLocation.getBlock().getState() instanceof Sign) {
-							return true;
+						if (signPosition.getBlockX() == x && signPosition.getBlockY() == y
+								&& signPosition.getBlockZ() == z) {
+							if (signLocation.getBlock().getState() instanceof Sign) {
+								return true;
+							}
 						}
 					}
 				}

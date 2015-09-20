@@ -27,6 +27,8 @@ public class HoloHolder {
 	private static FileConfiguration holosConfiguration;
 
 	public static void addHolo(Location loc) {
+		if(!PluginLoader.getHolographicDisplaysAvailable())
+			return;
 		loc.add(0d, 2d, 0d);
 		loc.setPitch(0f);
 		loc.setYaw(0f);
@@ -61,6 +63,8 @@ public class HoloHolder {
 	}
 	
 	public static void loadHolos() {
+		if(!PluginLoader.getHolographicDisplaysAvailable())
+			return;
 		Collection<Hologram> holos = HologramsAPI.getHolograms(PluginLoader.getInstance());
 		for(Hologram holo : holos){
 		    holo.delete();
@@ -72,6 +76,8 @@ public class HoloHolder {
 	}
 	
 	public static void displayHoloToPlayer(Player player, Location loc) {
+		if(!PluginLoader.getHolographicDisplaysAvailable())
+			return;
 		Hologram hologram  = HologramsAPI.createHologram(PluginLoader.getInstance(), loc);
 
 		VisibilityManager visibilityManager = hologram.getVisibilityManager();
@@ -103,6 +109,8 @@ public class HoloHolder {
 	}
 	
 	public static void deleteHoloObjectsOfPlayer(Player player) {
+		if(!PluginLoader.getHolographicDisplaysAvailable())
+			return;
 		Collection<Hologram> holos = HologramsAPI.getHolograms(PluginLoader.getInstance());
 		for(Hologram holo : holos){
 		    if(holo.getVisibilityManager().isVisibleTo(player))
@@ -111,6 +119,8 @@ public class HoloHolder {
 	}
 	
 	public static void deleteHologram(Hologram holo) {
+		if(!PluginLoader.getHolographicDisplaysAvailable())
+			return;
 		if(holo == null) {
 			return;
 		}
@@ -132,6 +142,8 @@ public class HoloHolder {
 	}
 
 	public static Hologram getClosest(Player player) {
+		if(!PluginLoader.getHolographicDisplaysAvailable())
+			return null;
 		Collection<Hologram> holos = HologramsAPI.getHolograms(PluginLoader.getInstance());
 		Hologram closest = null;
 		double lowestDist = Double.MAX_VALUE;		
@@ -147,6 +159,8 @@ public class HoloHolder {
 	}
 	
 	public static void initHoloHolder() {
+		if(!PluginLoader.getHolographicDisplaysAvailable())
+			return;
 		File file = new File(PluginLoader.getInstance().getDataFolder(), "holos.yml");
 		YamlConfiguration config = null;
 		yamlHolosFile = file;
@@ -182,6 +196,8 @@ public class HoloHolder {
 	}
 
 	public static void showAllHolosToPlayer(Player player) {
+		if(!PluginLoader.getHolographicDisplaysAvailable())
+			return;
 		List<Location> holoList;
 		if(holosConfiguration.isSet("data.holos")) {
 			if(holosConfiguration.getList("data.holos") != null) {
@@ -204,6 +220,8 @@ public class HoloHolder {
 	}
 	
 	public static void updateHolosForPlayer(Player player) {
+		if(!PluginLoader.getHolographicDisplaysAvailable())
+			return;
 		//TODO call whenever the stats of this player change
 		deleteHoloObjectsOfPlayer(player);
 		showAllHolosToPlayer(player);

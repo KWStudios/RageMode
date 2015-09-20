@@ -19,6 +19,8 @@ import org.kwstudios.play.ragemode.loader.PluginLoader;
 import org.kwstudios.play.ragemode.scoreboard.ScoreBoard;
 import org.kwstudios.play.ragemode.scoreboard.ScoreBoardHolder;
 import org.kwstudios.play.ragemode.signs.SignCreator;
+import org.kwstudios.play.ragemode.toolbox.ActionBarAPI;
+import org.kwstudios.play.ragemode.toolbox.ConfigFactory;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
 import org.kwstudios.play.ragemode.toolbox.GameBroadcast;
 
@@ -58,10 +60,18 @@ public class GameLoader {
 
 		String initialMessage = ChatColor.DARK_AQUA + "Welcome to " + ChatColor.DARK_PURPLE + gameName
 				+ ChatColor.DARK_AQUA + "!";
-		for (String player : players) {
-			BossbarLib.getHandler().getBossbar(Bukkit.getPlayer(UUID.fromString(player))).setMessage(initialMessage)
-					.setPercentage(1f);
-			BossbarLib.getHandler().updateBossbar(Bukkit.getPlayer(UUID.fromString(player)));
+		if (ConfigFactory.getBoolean("settings.global", "bossbar", fileConfiguration)) {
+			for (String player : players) {
+				BossbarLib.getHandler().getBossbar(Bukkit.getPlayer(UUID.fromString(player))).setMessage(initialMessage)
+						.setPercentage(1f);
+				BossbarLib.getHandler().updateBossbar(Bukkit.getPlayer(UUID.fromString(player)));
+			}
+		}
+
+		if (ConfigFactory.getBoolean("settings.global", "actionbar", fileConfiguration)) {
+			for (String player : players) {
+				ActionBarAPI.sendActionBar(Bukkit.getPlayer(UUID.fromString(player)), initialMessage);
+			}
 		}
 	}
 

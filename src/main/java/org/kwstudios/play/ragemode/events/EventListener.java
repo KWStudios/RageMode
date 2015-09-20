@@ -80,7 +80,7 @@ public class EventListener implements Listener {
 		}
 		HoloHolder.deleteHoloObjectsOfPlayer(player);
 	}
-	
+
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
@@ -504,7 +504,9 @@ public class EventListener implements Listener {
 	public void onWorldChangedEvent(PlayerTeleportEvent event) {
 		if (PlayerList.isPlayerPlaying(event.getPlayer().getUniqueId().toString())) {
 			if (!MapChecker.isGameWorld(PlayerList.getPlayersGame(event.getPlayer()), event.getTo().getWorld())) {
-				event.getPlayer().performCommand("rm leave");
+				if (!event.getPlayer().hasMetadata("Leaving")) {
+					event.getPlayer().performCommand("rm leave");
+				}
 			}
 		}
 	}

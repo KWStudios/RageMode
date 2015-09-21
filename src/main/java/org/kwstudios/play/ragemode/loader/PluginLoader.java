@@ -104,7 +104,7 @@ public class PluginLoader extends JavaPlugin {
 			// Failed to submit the stats :-(
 		}
 
-		new Updater(this, "http://mc.kwstudios.org/plugin-updater/ragemode.html");
+		new Updater(this, "https://raw.githubusercontent.com/KWStudios/RageMode/master/updater.json");
 
 		initStatistics();
 

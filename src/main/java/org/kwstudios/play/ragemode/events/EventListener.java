@@ -395,10 +395,10 @@ public class EventListener implements Listener {
 		if (PlayerList.isPlayerPlaying(event.getPlayer().getUniqueId().toString())
 				&& !event.getPlayer().hasPermission("ragemode.admin.cmd")) {
 			if (event.getMessage() != null) {
-				String cmd = event.getMessage().toLowerCase();
+				String cmd = event.getMessage().trim().toLowerCase();
 				if (cmd.equals("/rm leave") || cmd.equals("/ragemode leave") || cmd.equals("/rm list")
 						|| cmd.equals("/ragemode list") || cmd.equals("/rm stop") || cmd.equals("/ragemode stop")
-						|| cmd.equals("/l") || cmd.equals("/lobby") || cmd.equals("/spawn")) {
+						|| PluginLoader.getInGameCommands().contains(cmd)) {
 					if (waitingGames.containsKey(PlayerList.getPlayersGame(event.getPlayer())))
 						if (waitingGames.get(PlayerList.getPlayersGame(event.getPlayer())))
 							event.setCancelled(true);

@@ -356,4 +356,8 @@ public class PluginLoader extends JavaPlugin {
 		return holographicDiaplaysAvailable;
 	}
 
+	public static Set<String> getInGameCommands() {
+		return inGameCommands;
+	}
+
 }

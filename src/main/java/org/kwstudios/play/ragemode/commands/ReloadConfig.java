@@ -14,20 +14,21 @@ public class ReloadConfig {
 
 	public ReloadConfig(Player player, String label, String[] args, FileConfiguration fileConfiguration) {
 		StopGame.stopAllGames(PluginLoader.getInstance().getConfig(), PluginLoader.getInstance().getLogger());
-		
+
 		PluginLoader pluginLoader = PluginLoader.getInstance();
 
 		pluginLoader.reloadConfig();
 		pluginLoader.initStatistics();
 		pluginLoader.loadMessages();
 		pluginLoader.initStatusMessages();
+		pluginLoader.loadInGameCommands();
 
 		SignConfiguration.initSignConfiguration();
 		String[] games = GetGames.getGameNames(pluginLoader.getConfig());
 		for (String game : games) {
 			SignCreator.updateAllSigns(game);
 		}
-		if(!PluginLoader.getHolographicDisplaysAvailable())
+		if (PluginLoader.getHolographicDisplaysAvailable())
 			HoloHolder.initHoloHolder();
 
 		player.sendMessage(ConstantHolder.RAGEMODE_PREFIX

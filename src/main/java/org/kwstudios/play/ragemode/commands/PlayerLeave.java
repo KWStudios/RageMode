@@ -2,6 +2,7 @@ package org.kwstudios.play.ragemode.commands;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
 import org.kwstudios.play.ragemode.signs.SignCreator;
@@ -25,13 +26,13 @@ public class PlayerLeave {
 	}
 
 	private void doPlayerLeave() {
-		player.setMetadata("Leaving", null);
-		
+		player.setMetadata("Leaving", new FixedMetadataValue(PluginLoader.getInstance(), true));
+
 		String gameName = PlayerList.getPlayersGame(player);
 		PlayerList.removePlayerSynced(player);
 		PlayerList.removePlayer(player);
 		SignCreator.updateAllSigns(gameName);
-		
+
 		player.removeMetadata("Leaving", PluginLoader.getInstance());
 	}
 

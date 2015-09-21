@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -92,7 +93,16 @@ public class HoloHolder {
 
 				@Override
 				public void run() {
-					setHologramLines(yamlHologram, YAMLStats.getPlayerStatistics(yamlPlayer.getUniqueId().toString()));
+					final RetPlayerPoints rpp = YAMLStats.getPlayerStatistics(yamlPlayer.getUniqueId().toString());
+					Bukkit.getServer().getScheduler().callSyncMethod(PluginLoader.getInstance(),
+							new Callable<String>() {
+
+						@Override
+						public String call() throws Exception {
+							setHologramLines(yamlHologram, rpp);
+							return "Done";
+						}
+					});
 				}
 			});
 		}
@@ -103,11 +113,19 @@ public class HoloHolder {
 			final Player mySQLPlayer = player;
 			final Hologram mySQLHologram = hologram;
 			Bukkit.getServer().getScheduler().runTaskAsynchronously(PluginLoader.getInstance(), new Runnable() {
-
 				@Override
 				public void run() {
-					setHologramLines(mySQLHologram,
-							MySQLStats.getPlayerStatistics((mySQLPlayer), PluginLoader.getMySqlConnector()));
+					final RetPlayerPoints rpp = MySQLStats.getPlayerStatistics((mySQLPlayer),
+							PluginLoader.getMySqlConnector());
+					Bukkit.getServer().getScheduler().callSyncMethod(PluginLoader.getInstance(),
+							new Callable<String>() {
+
+						@Override
+						public String call() throws Exception {
+							setHologramLines(mySQLHologram, rpp);
+							return "Done";
+						}
+					});
 				}
 			});
 		}

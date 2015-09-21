@@ -82,19 +82,39 @@ public class HoloHolder {
 		visibilityManager.showTo(player);
 		visibilityManager.setVisibleByDefault(false);
 
-		RetPlayerPoints rpp = null;
+		// RetPlayerPoints rpp = null;
 
 		if (PluginLoader.getInstance().getConfig().getString("settings.global.statistics.type")
 				.equalsIgnoreCase("yaml")) {
-			rpp = YAMLStats.getPlayerStatistics(player.getUniqueId().toString());
+			final Player yamlPlayer = player;
+			final Hologram yamlHologram = hologram;
+			Bukkit.getServer().getScheduler().runTaskAsynchronously(PluginLoader.getInstance(), new Runnable() {
+
+				@Override
+				public void run() {
+					setHologramLines(yamlHologram, YAMLStats.getPlayerStatistics(yamlPlayer.getUniqueId().toString()));
+				}
+			});
 		}
 
 		if (PluginLoader.getInstance().getConfig().getString("settings.global.statistics.type")
 				.equalsIgnoreCase("mySQL")) {
 			// Bukkit.broadcastMessage(sUUID);
-			rpp = MySQLStats.getPlayerStatistics((player), PluginLoader.getMySqlConnector());
+			final Player mySQLPlayer = player;
+			final Hologram mySQLHologram = hologram;
+			Bukkit.getServer().getScheduler().runTaskAsynchronously(PluginLoader.getInstance(), new Runnable() {
+
+				@Override
+				public void run() {
+					setHologramLines(mySQLHologram,
+							MySQLStats.getPlayerStatistics((mySQLPlayer), PluginLoader.getMySqlConnector()));
+				}
+			});
 		}
 
+	}
+
+	private static void setHologramLines(Hologram hologram, RetPlayerPoints rpp) {
 		if (rpp != null) {
 			hologram.appendTextLine(ConstantHolder.RAGEMODE_PREFIX);
 			hologram.appendTextLine(PluginLoader.getMessages().RANK + "Ranker™ hasn't been added jet :(");
@@ -114,7 +134,6 @@ public class HoloHolder {
 			hologram.appendTextLine(PluginLoader.getMessages().KILLS + "---------------");
 			hologram.appendTextLine(PluginLoader.getMessages().DEATHS + "---------------");
 		}
-
 	}
 
 	public static void deleteHoloObjectsOfPlayer(Player player) {

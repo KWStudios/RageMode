@@ -14,7 +14,9 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
@@ -57,6 +59,7 @@ public class PluginLoader extends JavaPlugin {
 	private static MySQLConnector mySqlConnector = null;
 	private static Messages messages = null;
 	private static boolean holographicDiaplaysAvailable = false;
+	private static Set<String> inGameCommands = null;
 	// private ProtocolManager protocolManager;
 
 	@Override
@@ -120,6 +123,8 @@ public class PluginLoader extends JavaPlugin {
 		for (String game : games) {
 			SignCreator.updateAllSigns(game);
 		}
+
+		loadInGameCommands();
 
 		saveConfig();
 
@@ -301,6 +306,20 @@ public class PluginLoader extends JavaPlugin {
 			}
 		} else {
 			ConfigFactory.setBoolean("settings.global", "actionbar", true, getConfig());
+		}
+	}
+
+	public void loadInGameCommands() {
+		List<String> commands = getConfig().getStringList("settings.global.commands");
+		inGameCommands = new HashSet<String>();
+		for (String command : commands) {
+			String commandForSet = command.trim().toLowerCase();
+			if (!commandForSet.startsWith("/")) {
+				commandForSet = "/" + commandForSet;
+			}
+			if (!inGameCommands.contains(commandForSet)) {
+				inGameCommands.add(commandForSet);
+			}
 		}
 	}
 

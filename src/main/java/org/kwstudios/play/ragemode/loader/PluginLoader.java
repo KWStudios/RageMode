@@ -176,10 +176,10 @@ public class PluginLoader extends JavaPlugin {
 	public void initStatistics() {
 		if (getConfig().isSet("settings.global.statistics")) {
 			if (getConfig().isSet("settings.global.statistics.type")) {
-				if (getConfig().getString("settings.global.statistics.type").equals("yaml"))
+				if (getConfig().getString("settings.global.statistics.type").equalsIgnoreCase("yaml"))
 					YAMLStats.initS();
 
-				if (getConfig().getString("settings.global.statistics.type").equals("mySQL")) {
+				if (getConfig().getString("settings.global.statistics.type").equalsIgnoreCase("mySQL")) {
 					String databaseURL = getConfig().getString("settings.global.statistics.mySQL.url");
 					int port = getConfig().getInt("settings.global.statistics.mySQL.port");
 					String database = getConfig().getString("settings.global.statistics.mySQL.database");

@@ -24,9 +24,9 @@ public class HoloStats {
 		this.fileConfiguration = fileConfiguration;
 		if(PluginLoader.getHolographicDisplaysAvailable()){
 			if(args.length >= 2) {
-				if(args[1].equals("add"))
+				if(args[1].equalsIgnoreCase("add"))
 					addHolo();
-				if(args[1].equals("remove"))
+				if(args[1].equalsIgnoreCase("remove"))
 					removeHolo();
 			}
 			else

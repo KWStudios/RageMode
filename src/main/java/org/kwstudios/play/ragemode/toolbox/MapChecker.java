@@ -17,6 +17,12 @@ public class MapChecker {
 	private int maxPlayers;
 
 	public MapChecker(String gameName, FileConfiguration fileConfiguration) {
+		if (gameName == null) {
+			throw new NullPointerException("The variable (String) gameName cannot be null!");
+		}
+		if (fileConfiguration == null) {
+			throw new NullPointerException("The variable (FileConfiguration) fileConfiguration cannot be null!");
+		}
 		this.gameName = gameName;
 		this.fileConfiguration = fileConfiguration;
 		checkMapName();
@@ -158,6 +164,12 @@ public class MapChecker {
 	}
 
 	public static boolean isGameWorld(String gameName, World world) {
+		if (gameName == null) {
+			throw new NullPointerException("The variable (String) gameName cannot be null!");
+		}
+		if (world == null) {
+			throw new NullPointerException("The variable (World) world cannot be null!");
+		}
 		String spawnsPath = ConstantHolder.GAME_PATH + "." + gameName + "." + "spawns";
 		Set<String> allSpawns = ConfigFactory.getKeysUnderPath(spawnsPath, false,
 				PluginLoader.getInstance().getConfig());

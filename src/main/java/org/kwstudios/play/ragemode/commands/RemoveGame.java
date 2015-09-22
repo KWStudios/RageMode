@@ -15,7 +15,7 @@ public class RemoveGame {
 
 			if (!GetGames.isGameExistent(game, fileConfiguration)) {
 				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
-						PluginLoader.getMessages().REMOVED_NON_EXISTANT_GAME));
+						PluginLoader.getMessages().REMOVED_NON_EXISTENT_GAME));
 				return;
 			} else {
 				if (PlayerList.isGameRunning(game)) {

@@ -183,6 +183,11 @@ public class MySQLStats {
 				e.printStackTrace();
 			}
 		}
+
+		if (currentGames == 0) {
+			return null;
+		}
+
 		RetPlayerPoints retPlayerPoints = new RetPlayerPoints(player);
 		retPlayerPoints.setKills(currentKills);
 		retPlayerPoints.setAxeKills(currentAxeKills);

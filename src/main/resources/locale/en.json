@@ -4,7 +4,7 @@
   "PERMISSION_MESSAGE": "§4You may not use that command!",
 
   "MISSING_ARGUMENTS": "§4Missing arguments! Usage: $USAGE$",
-  "MSSING_DEPENDENCIES": "§4$DEPENDENCIE$ must be installed to use this!",
+  "MISSING_DEPENDENCIES": "§4$DEPENDENCIE$ must be installed to use this!",
 
   "NOT_A_NUMBER": "§4$WRONG_NUMBER$ is not a number.",
   "ALREADY_EXISTS": "§4$GAME$ already exists.",

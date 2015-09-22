@@ -27,6 +27,9 @@ public class MySQLStats {
 	 *            database.
 	 */
 	public static void addPlayerStatistics(PlayerPoints playerPoints, MySQLConnector mySQLConnector) {
+
+		testConnection();
+
 		Connection connection = mySQLConnector.getConnection();
 
 		Statement statement = null;
@@ -129,16 +132,10 @@ public class MySQLStats {
 	 * @return
 	 */
 	public static RetPlayerPoints getPlayerStatistics(String player, MySQLConnector mySQLConnector) {
-		Connection connection = mySQLConnector.getConnection();
 
-		try {
-			if (!connection.isValid(2)) {
-				PluginLoader.getInstance().initStatistics();
-				connection = mySQLConnector.getConnection();
-			}
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
+		testConnection();
+
+		Connection connection = mySQLConnector.getConnection();
 
 		Statement statement = null;
 		String query = "SELECT * FROM rm_stats_players WHERE uuid LIKE '" + player + "';";
@@ -216,6 +213,17 @@ public class MySQLStats {
 		retPlayerPoints.setKD(currentKD);
 
 		return retPlayerPoints;
+	}
+
+	private synchronized static void testConnection() {
+		Connection connection = PluginLoader.getMySqlConnector().getConnection();
+		try {
+			if (!connection.isValid(2)) {
+				PluginLoader.getInstance().initStatistics();
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 }

@@ -43,7 +43,7 @@ public class HoloStats {
 	}
 	
 	private void removeHolo() {
-		if(!PluginLoader.getHolographicDisplaysAvailable())
+		if(PluginLoader.getHolographicDisplaysAvailable())
 			HoloHolder.deleteHologram(HoloHolder.getClosest(player));
 	}	
 }

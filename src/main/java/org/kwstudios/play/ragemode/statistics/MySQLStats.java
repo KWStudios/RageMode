@@ -30,7 +30,7 @@ public class MySQLStats {
 
 		testConnection();
 
-		Connection connection = mySQLConnector.getConnection();
+		Connection connection = PluginLoader.getMySqlConnector().getConnection();
 
 		Statement statement = null;
 		String query = "SELECT * FROM rm_stats_players WHERE uuid LIKE '" + playerPoints.getPlayerUUID() + "';";
@@ -135,7 +135,7 @@ public class MySQLStats {
 
 		testConnection();
 
-		Connection connection = mySQLConnector.getConnection();
+		Connection connection = PluginLoader.getMySqlConnector().getConnection();
 
 		Statement statement = null;
 		String query = "SELECT * FROM rm_stats_players WHERE uuid LIKE '" + player + "';";

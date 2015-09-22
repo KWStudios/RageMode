@@ -115,7 +115,7 @@ public class HoloHolder {
 			Bukkit.getServer().getScheduler().runTaskAsynchronously(PluginLoader.getInstance(), new Runnable() {
 				@Override
 				public void run() {
-					final RetPlayerPoints rpp = MySQLStats.getPlayerStatistics((mySQLPlayer),
+					final RetPlayerPoints rpp = MySQLStats.getPlayerStatistics(mySQLPlayer.getUniqueId().toString(),
 							PluginLoader.getMySqlConnector());
 					Bukkit.getServer().getScheduler().callSyncMethod(PluginLoader.getInstance(),
 							new Callable<String>() {

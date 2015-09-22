@@ -7,8 +7,8 @@ import java.sql.Statement;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.kwstudios.play.ragemode.database.MySQLConnector;
+import org.kwstudios.play.ragemode.loader.PluginLoader;
 import org.kwstudios.play.ragemode.scores.PlayerPoints;
 import org.kwstudios.play.ragemode.scores.RetPlayerPoints;
 import org.kwstudios.play.ragemode.toolbox.ConstantHolder;
@@ -130,6 +130,15 @@ public class MySQLStats {
 	 */
 	public static RetPlayerPoints getPlayerStatistics(String player, MySQLConnector mySQLConnector) {
 		Connection connection = mySQLConnector.getConnection();
+
+		try {
+			if (!connection.isValid(2)) {
+				PluginLoader.getInstance().initStatistics();
+				connection = mySQLConnector.getConnection();
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
 
 		Statement statement = null;
 		String query = "SELECT * FROM rm_stats_players WHERE uuid LIKE '" + player + "';";

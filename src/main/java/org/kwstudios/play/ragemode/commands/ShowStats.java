@@ -61,8 +61,12 @@ public class ShowStats {
 			// "");
 			https();
 
-			if (sUUID == null)
-				return;
+			if (sUUID == null) {
+				String message = ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PLAYER_NONEXISTENT);
+				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + message);
+				return;				
+			}
+
 
 			CharSequence sUUID_SEQ_1 = sUUID.subSequence(0, 8);
 			CharSequence sUUID_SEQ_2 = sUUID.subSequence(8, 12);
@@ -87,6 +91,7 @@ public class ShowStats {
 				rpp = MySQLStats.getPlayerStatistics(sUUID,
 						PluginLoader.getMySqlConnector());
 			}
+
 
 			if (rpp != null) {
 				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + "Showing the stats of " + name + ":");
@@ -142,14 +147,18 @@ public class ShowStats {
 				URLConnection con = url.openConnection();
 				InputStream in = con.getInputStream();
 				BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF8"));
+				try {
+					com.google.gson.Gson gson = new com.google.gson.Gson();
+					UUIDStrings data = gson.fromJson(reader, UUIDStrings.class);
+					if ((data.id != null) && (data.name != null)) {
+						// Bukkit.broadcastMessage(data.id + data.name);
+						this.sUUID = data.id;
+					} else
+						return;					
+				} catch (NullPointerException i) {
+					this.sUUID = null;
+				}
 
-				com.google.gson.Gson gson = new com.google.gson.Gson();
-				UUIDStrings data = gson.fromJson(reader, UUIDStrings.class);
-				if ((data.id != null) && (data.name != null)) {
-					// Bukkit.broadcastMessage(data.id + data.name);
-					this.sUUID = data.id;
-				} else
-					return;
 
 			} catch (Exception i) {
 				i.printStackTrace();

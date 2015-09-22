@@ -18,7 +18,7 @@
   "PLAYER_JOINED": "§2$PLAYER$ §9joined the game.",
   "PLAYER_COULD_NOT_JOIN": "§4$PLAYER$ could not join the RageMode game $GAME$.",
 
-  "REMOVED_NON_EXISTANT_GAME": "§4Don't remove nonexistent games!",
+  "REMOVED_NON_EXISTENT_GAME": "§4Don't remove nonexistent games!",
   "GAME_RUNNING": "§4This game is running at the moment. Please wait until it is over.",
   "REMOVED_SUCCESSFULLY": "The game $GAME$ was removed successfully.",
 
@@ -54,6 +54,7 @@
   "RANK": "Rank: ",
 
   "NOT_PLAYED_YET": "That player hasn't played on this server yet.",
+  "PLAYER_NONEXISTENT": "That player doesn't even exist.",
 
   "BROADCAST_AXE_KILL": "§a$VICTIM$ §3was killed by §a$KILLER$ §3with a §6CombatAxe §3.",
   "BROADCAST_ARROW_KILL": "§a$VICTIM$ §3was killed by a §6direct arrow hit §3from §a$KILLER$ §3.",

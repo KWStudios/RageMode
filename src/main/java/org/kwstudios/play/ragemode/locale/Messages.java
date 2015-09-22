@@ -15,7 +15,7 @@ public class Messages {
 	public String SPAWN_SUCCESSFULLY;
 	public String PLAYER_JOINED;
 	public String PLAYER_COULD_NOT_JOIN;
-	public String REMOVED_NON_EXISTANT_GAME;
+	public String REMOVED_NON_EXISTENT_GAME;
 	public String GAME_RUNNING;
 	public String REMOVED_SUCCESSFULLY;
 	public String LISTING_GAMES;
@@ -42,6 +42,7 @@ public class Messages {
 	public String SCORE;
 	public String RANK;
 	public String NOT_PLAYED_YET;
+	public String PLAYER_NONEXISTENT;
 	public String BROADCAST_AXE_KILL;
 	public String BROADCAST_ARROW_KILL;
 	public String BROADCAST_KNIFE_KILL;

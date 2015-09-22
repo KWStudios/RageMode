@@ -128,11 +128,11 @@ public class MySQLStats {
 	 *            database.
 	 * @return
 	 */
-	public static RetPlayerPoints getPlayerStatistics(Player player, MySQLConnector mySQLConnector) {
+	public static RetPlayerPoints getPlayerStatistics(String player, MySQLConnector mySQLConnector) {
 		Connection connection = mySQLConnector.getConnection();
 
 		Statement statement = null;
-		String query = "SELECT * FROM rm_stats_players WHERE uuid LIKE '" + player.getUniqueId().toString() + "';";
+		String query = "SELECT * FROM rm_stats_players WHERE uuid LIKE '" + player + "';";
 
 		int currentKills = 0;
 		int currentAxeKills = 0;
@@ -183,7 +183,7 @@ public class MySQLStats {
 				e.printStackTrace();
 			}
 		}
-		RetPlayerPoints retPlayerPoints = new RetPlayerPoints(player.getUniqueId().toString());
+		RetPlayerPoints retPlayerPoints = new RetPlayerPoints(player);
 		retPlayerPoints.setKills(currentKills);
 		retPlayerPoints.setAxeKills(currentAxeKills);
 		retPlayerPoints.setDirectArrowKills(currentDirectArrowKills);

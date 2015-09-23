@@ -107,7 +107,16 @@ public class PluginLoader extends JavaPlugin {
 			// Failed to submit the stats :-(
 		}
 
-		new Updater(this, "https://raw.githubusercontent.com/KWStudios/RageMode/master/updater.json");
+		if (getConfig().isSet("settings.global.auto-updater")) {
+			String update = getConfig().getString("settings.global.auto-updater");
+			if (update != null && !update.isEmpty()) {
+				if (Boolean.parseBoolean(update)) {
+					new Updater(this, "https://raw.githubusercontent.com/KWStudios/RageMode/master/updater.json");
+				}
+			} else {
+				ConfigFactory.setBoolean("settings.global", "auto-updater", true, getConfig());
+			}
+		}
 
 		initStatistics();
 

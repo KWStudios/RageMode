@@ -146,9 +146,11 @@ public class Updater {
 
 				int vnum = Integer.valueOf(oldv.split("_")[0]);
 				int vsec = Integer.valueOf(oldv.split("_")[1]);
+				int vbuild = (oldv.split("_").length >= 3) ? Integer.valueOf(oldv.split("_")[2]) : 0;
 
 				int newvnum = Integer.valueOf(newv.split("_")[0]);
 				int newvsec = Integer.valueOf(newv.split("_")[1]);
+				int newvbuild = (newv.split("_").length >= 3) ? Integer.valueOf(newv.split("_")[2]) : 0;
 				// System.out.println("Check2: " + vnum + " ? " + newvnum + " ||
 				// " + vsec + " ? " + newvsec);
 				if (newvnum > vnum)
@@ -157,6 +159,11 @@ public class Updater {
 				if (newvnum == vnum) {
 					if (newvsec > vsec) {
 						return true;
+					}
+					if (newvsec == vsec) {
+						if (newvbuild > vbuild) {
+							return true;
+						}
 					}
 				}
 			}

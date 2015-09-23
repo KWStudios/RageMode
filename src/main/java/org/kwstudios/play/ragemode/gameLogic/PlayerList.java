@@ -376,7 +376,7 @@ public class PlayerList {
 		int imax = runningGames.length;
 		while (i < imax) {
 			if (runningGames[i] != null) {
-				if (runningGames[i].trim().equalsIgnoreCase(game)) {
+				if (runningGames[i].trim().equalsIgnoreCase(game.trim())) {
 					return true;
 				}
 			}

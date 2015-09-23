@@ -116,6 +116,8 @@ public class PluginLoader extends JavaPlugin {
 			} else {
 				ConfigFactory.setBoolean("settings.global", "auto-updater", true, getConfig());
 			}
+		} else {
+			ConfigFactory.setBoolean("settings.global", "auto-updater", true, getConfig());
 		}
 
 		initStatistics();

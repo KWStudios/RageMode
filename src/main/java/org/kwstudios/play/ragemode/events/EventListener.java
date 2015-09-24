@@ -508,6 +508,8 @@ public class EventListener implements Listener {
 			if (!MapChecker.isGameWorld(PlayerList.getPlayersGame(event.getPlayer()), event.getTo().getWorld())) {
 				if (!event.getPlayer().hasMetadata("Leaving")) {
 					event.getPlayer().performCommand("rm leave");
+				} else {
+					event.getPlayer().removeMetadata("Leaving", PluginLoader.getInstance());
 				}
 			}
 		}

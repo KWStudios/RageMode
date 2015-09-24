@@ -140,8 +140,8 @@ public class MapChecker {
 				isValid = false;
 			}
 		} else {
-			message = ConstantHolder.RAGEMODE_PREFIX
-					+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().NO_SPAWNS_CONFIGURED);
+			message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+					PluginLoader.getMessages().NO_SPAWNS_CONFIGURED.replace("$GAME$", gameName));
 			isValid = false;
 		}
 	}

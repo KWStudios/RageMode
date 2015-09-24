@@ -131,6 +131,7 @@ permissions:
             ragemode.admin.actionbar: true
             ragemode.admin.holo: true
             ragemode.admin.locale: true
+            ragemode.admin.signs: true
     ragemode.vip:
         description: Gives access to the VIP functions.
         default: op

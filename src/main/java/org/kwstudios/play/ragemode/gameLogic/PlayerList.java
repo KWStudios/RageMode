@@ -12,6 +12,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.metadata.MetadataValue;
+import org.bukkit.plugin.Plugin;
 import org.kwstudios.play.ragemode.bossbar.BossbarLib;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
 import org.kwstudios.play.ragemode.scoreboard.ScoreBoard;
@@ -140,7 +142,7 @@ public class PlayerList {
 							playerToKick = Bukkit.getPlayer(UUID.fromString(list[kickposition]));
 							isVIP = playerToKick.hasPermission("ragemode.vip");
 						} while (isVIP);
-						
+
 						player.setMetadata("Leaving", new FixedMetadataValue(PluginLoader.getInstance(), true));
 						
 						while (n < oldLocations.getFirstLength()) { // Get him
@@ -272,9 +274,9 @@ public class PlayerList {
 					String message = ConstantHolder.RAGEMODE_PREFIX
 							+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PLAYER_LEFT_GAME);
 					player.sendMessage(message);
-
-					player.setMetadata("Leaving", new FixedMetadataValue(PluginLoader.getInstance(), true));
 					
+					player.setMetadata("Leaving", new FixedMetadataValue(PluginLoader.getInstance(), true));
+
 					while (n < oldLocations.getFirstLength()) { // Bring him
 																// back to his
 																// old location

@@ -26,14 +26,12 @@ public class PlayerLeave {
 	}
 
 	private void doPlayerLeave() {
-		player.setMetadata("Leaving", new FixedMetadataValue(PluginLoader.getInstance(), true));
 
 		String gameName = PlayerList.getPlayersGame(player);
 		PlayerList.removePlayerSynced(player);
 		PlayerList.removePlayer(player);
 		SignCreator.updateAllSigns(gameName);
 
-		player.removeMetadata("Leaving", PluginLoader.getInstance());
 	}
 
 }

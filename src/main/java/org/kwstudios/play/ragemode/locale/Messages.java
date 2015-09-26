@@ -9,6 +9,7 @@ public class Messages {
 	public String MISSING_DEPENDENCIES;
 	public String NOT_A_NUMBER;
 	public String ALREADY_EXISTS;
+	public String AT_LEAST_TWO;
 	public String ADDED_SUCCESSFULLY;
 	public String NOT_SET_YET;
 	public String LOBBY_SUCCESSFULLY;

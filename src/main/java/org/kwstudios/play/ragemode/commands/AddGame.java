@@ -29,7 +29,6 @@ public class AddGame {
 							.replace("$USAGE$", "/rm add <GameName> <MaxPlayers>")));
 			return;
 		}
-		@SuppressWarnings("unused")
 		int x;
 		try {
 			x = Integer.parseInt(args[2]);
@@ -44,8 +43,14 @@ public class AddGame {
 					PluginLoader.getMessages().ALREADY_EXISTS.replace("$GAME$", args[1])));
 			return;
 		}
+		
+		if(x < 2) {
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+					PluginLoader.getMessages().AT_LEAST_TWO));
+			return;
+		}
 
-		PlayerList.addGameToList(args[1], Integer.parseInt(args[2]));
+		PlayerList.addGameToList(args[1], x);
 
 		ConfigFactory.setString("settings.games", args[1], "", fileConfiguration);
 		ConfigFactory.setInt("settings.games." + args[1], "maxplayers", Integer.parseInt(args[2]), fileConfiguration);

@@ -8,6 +8,7 @@
 
   "NOT_A_NUMBER": "§4$WRONG_NUMBER$ n'est pas un nombre.",
   "ALREADY_EXISTS": "§4$GAME$ existe déjà.",
+  "AT_LEAST_TWO": "§4The maxplayers value must be at least two.",
   "ADDED_SUCCESSFULLY": "§2Le jeu §3$GAME$ §2a été ajouté avec succès!",
 
   "NOT_SET_YET": "§4Ce jeu n'a pas été mis en place encore! Mets en place avec $USAGE$",

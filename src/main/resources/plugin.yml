@@ -1,6 +1,6 @@
 name: RageMode
 main: org.kwstudios.play.ragemode.loader.PluginLoader
-version: v0.1-alpha
+version: 0.2.1
 
 softdepend: [HolographicDisplays, ProtocolLib]
 
@@ -100,7 +100,7 @@ commands:
     aliases: ['ragemode locale']
     permission: ragemode.admin.locale
     permission-message: You may not use that command!
-    
+
 permissions:
     ragemode.rm:
         description: Gives access to the main command.
@@ -135,4 +135,3 @@ permissions:
     ragemode.vip:
         description: Gives access to the VIP functions.
         default: op
-    

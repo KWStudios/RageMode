@@ -213,9 +213,9 @@ public class Updater {
 				String oldFileName = splittedPath[splittedPath.length - 1];
 				File oldFile = new File(PluginLoader.getInstance().getDataFolder().getParentFile(), oldFileName);
 
-				if (oldFile.exists()) {
-					oldFile.delete();
-				}
+//				if (oldFile.exists()) {
+//					oldFile.delete();
+//				}
 
 				// File newPluginFile = new
 				// File(PluginLoader.getInstance().getDataFolder().getParentFile(),

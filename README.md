@@ -3,4 +3,4 @@ Minecraft RageMode Minigame Plugin
 
 You can find the newest dev builds [here](http://api.kwstudios.org/plugins/KWStudios/RageMode/versions/newest). (Please don't use them if you don't want to have many bugs, wait for the [stable releases](https://github.com/KWStudios/RageMode/releases) instead.)
 
-See Spigot wiki for details.
+See [Spigot wiki](https://www.spigotmc.org/resources/ragemode.12690/) for details.

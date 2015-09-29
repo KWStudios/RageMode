@@ -62,7 +62,7 @@ public class ShowStats {
 			https();
 
 			if (sUUID == null) {
-				String message = ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PLAYER_NONEXISTENT);
+				String message = ChatColor.translateAlternateColorCodes('Â§', PluginLoader.getMessages().PLAYER_NONEXISTENT);
 				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + message);
 				return;				
 			}
@@ -115,9 +115,9 @@ public class ShowStats {
 				player.sendMessage(PluginLoader.getMessages().WINS + rpp.getWins());
 				player.sendMessage("---------------");
 				player.sendMessage(PluginLoader.getMessages().SCORE + rpp.getPoints());
-				player.sendMessage(PluginLoader.getMessages().RANK + "Ranker™ hasn't been added jet :(");
+				player.sendMessage(PluginLoader.getMessages().RANK + "RankerÂ§ hasn't been added jet :(");
 			} else {
-				String message = ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().NOT_PLAYED_YET);
+				String message = ChatColor.translateAlternateColorCodes('Â§', PluginLoader.getMessages().NOT_PLAYED_YET);
 				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + message);
 			}
 		}

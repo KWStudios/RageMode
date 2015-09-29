@@ -135,7 +135,7 @@ public class HoloHolder {
 	private static void setHologramLines(Hologram hologram, RetPlayerPoints rpp) {
 		if (rpp != null) {
 			hologram.appendTextLine(ConstantHolder.RAGEMODE_PREFIX);
-			hologram.appendTextLine(PluginLoader.getMessages().RANK + "Ranker™ hasn't been added jet :(");
+			hologram.appendTextLine(PluginLoader.getMessages().RANK + "RankerÂ§ hasn't been added jet :(");
 			hologram.appendTextLine(PluginLoader.getMessages().SCORE + rpp.getPoints());
 			hologram.appendTextLine(PluginLoader.getMessages().WINS + rpp.getWins());
 			hologram.appendTextLine(PluginLoader.getMessages().GAMES + rpp.getGames());
@@ -144,7 +144,7 @@ public class HoloHolder {
 			hologram.appendTextLine(PluginLoader.getMessages().DEATHS + rpp.getDeaths());
 		} else {
 			hologram.appendTextLine(ConstantHolder.RAGEMODE_PREFIX);
-			hologram.appendTextLine(PluginLoader.getMessages().RANK + "Ranker™ hasn't been added jet :(");
+			hologram.appendTextLine(PluginLoader.getMessages().RANK + "RankerÂ§ hasn't been added jet :(");
 			hologram.appendTextLine(PluginLoader.getMessages().SCORE + "---------------");
 			hologram.appendTextLine(PluginLoader.getMessages().WINS + "---------------");
 			hologram.appendTextLine(PluginLoader.getMessages().GAMES + "---------------");

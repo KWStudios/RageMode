@@ -85,7 +85,7 @@ public class PlayerList {
 	public static boolean addPlayer(Player player, String game, FileConfiguration fileConfiguration) {
 		if (isGameRunning(game)) {
 			String message = ConstantHolder.RAGEMODE_PREFIX
-					+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().GAME_RUNNING);
+					+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().GAME_RUNNING);
 			player.sendMessage(message);
 			return false;
 		}
@@ -100,7 +100,7 @@ public class PlayerList {
 		while (i < imax) {
 			if (list[i] != null) {
 				if (player.getUniqueId().toString().equals(list[i])) {
-					String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
+					String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
 							PluginLoader.getMessages().PLAYER_ALREADY_IN_GAME.replace("$USAGE$", "/rm leave"));
 					player.sendMessage(message);
 					return false;
@@ -120,7 +120,7 @@ public class PlayerList {
 						if (list[n] == null) {
 							list[n] = player.getUniqueId().toString();
 							String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes(
-									'ง', PluginLoader.getMessages().YOU_JOINED_THE_GAME.replace("$GAME$", game));
+									'ยง', PluginLoader.getMessages().YOU_JOINED_THE_GAME.replace("$GAME$", game));
 							player.sendMessage(message);
 
 							if (getPlayersInGame(game).length == 2) {
@@ -220,21 +220,21 @@ public class PlayerList {
 						}
 
 						list[kickposition] = player.getUniqueId().toString();
-						String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
+						String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
 								PluginLoader.getMessages().PLAYER_KICKED_FOR_VIP);
 						playerToKick.sendMessage(message);
 
 						if (getPlayersInGame(game).length == 2) {
 							new LobbyTimer(game, fileConfiguration);
 						}
-						message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
+						message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
 								PluginLoader.getMessages().YOU_JOINED_THE_GAME.replace("$GAME$", game));
 						player.sendMessage(message);
 						return true;
 
 					} else {
 						String message = ConstantHolder.RAGEMODE_PREFIX
-								+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().GAME_FULL);
+								+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().GAME_FULL);
 						player.sendMessage(message);
 						return false;
 					}
@@ -244,7 +244,7 @@ public class PlayerList {
 		}
 
 		String message = ConstantHolder.RAGEMODE_PREFIX
-				+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().GAME_DOES_NOT_EXIST);
+				+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().GAME_DOES_NOT_EXIST);
 		player.sendMessage(message);
 		return false;
 	}
@@ -272,7 +272,7 @@ public class PlayerList {
 
 					player.getInventory().clear();
 					String message = ConstantHolder.RAGEMODE_PREFIX
-							+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().PLAYER_LEFT_GAME);
+							+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().PLAYER_LEFT_GAME);
 					player.sendMessage(message);
 					
 					player.setMetadata("Leaving", new FixedMetadataValue(PluginLoader.getInstance(), true));
@@ -354,7 +354,7 @@ public class PlayerList {
 			i++;
 		}
 		String message = ConstantHolder.RAGEMODE_PREFIX
-				+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().PLAYER_NOT_IN_GAME);
+				+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().PLAYER_NOT_IN_GAME);
 		player.sendMessage(message);
 		return false;
 	}

@@ -45,7 +45,7 @@ public class StopGame {
 					}
 				}
 				GameBroadcast.broadcastToGame(args[1],
-						ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
+						ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
 								PluginLoader.getMessages().GAME_STOPPED.replace("$GAME$", args[1])));
 
 				RageScores.removePointsForPlayers(players);
@@ -54,10 +54,10 @@ public class StopGame {
 
 			} else {
 				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX
-						+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().GAME_NOT_RUNNING));
+						+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().GAME_NOT_RUNNING));
 			}
 		} else {
-			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
 					PluginLoader.getMessages().MISSING_ARGUMENTS.replace("$USAGE$", "/rm stop <GameName>")));
 		}
 	}
@@ -159,7 +159,7 @@ public class StopGame {
 			RageScores.removePointsForPlayers(players);
 
 			GameBroadcast.broadcastToGame(game,
-					ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
+					ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
 							PluginLoader.getMessages().GAME_STOPPED.replace("$GAME$", game)));
 			PlayerList.setGameNotRunning(game);
 			SignCreator.updateAllSigns(game);

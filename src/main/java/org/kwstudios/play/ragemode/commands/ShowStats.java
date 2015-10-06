@@ -18,7 +18,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
-import org.kwstudios.play.ragemode.scores.PlayerPoints;
 import org.kwstudios.play.ragemode.scores.RetPlayerPoints;
 import org.kwstudios.play.ragemode.statistics.MySQLStats;
 import org.kwstudios.play.ragemode.statistics.YAMLStats;

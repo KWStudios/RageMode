@@ -2,9 +2,7 @@ package org.kwstudios.play.ragemode.commands;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.metadata.FixedMetadataValue;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
-import org.kwstudios.play.ragemode.loader.PluginLoader;
 import org.kwstudios.play.ragemode.signs.SignCreator;
 
 public class PlayerLeave {

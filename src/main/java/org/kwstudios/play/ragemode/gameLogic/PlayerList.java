@@ -142,7 +142,7 @@ public class PlayerList {
 						} while (isVIP);
 
 						player.setMetadata("Leaving", new FixedMetadataValue(PluginLoader.getInstance(), true));
-						
+
 						while (n < oldLocations.getFirstLength()) { // Get him
 																	// back to
 																	// his old
@@ -248,112 +248,126 @@ public class PlayerList {
 	}
 
 	public static boolean removePlayer(Player player) {
-		int i = 0;
-		int n = 0;
-		int imax = GetGames.getConfigGamesCount(fileConfiguration)
-				* (GetGames.getOverallMaxPlayers(fileConfiguration) + 1);
+		if (!player.hasMetadata("leavingRageMode")) {
+			player.setMetadata("leavingRageMode", new FixedMetadataValue(PluginLoader.getInstance(), true));
 
-		while (i < imax) {
-			if (list[i] != null) {
-				if (list[i].equals(player.getUniqueId().toString())) {
-					// TabGuiUpdater.removeTabForPlayer(player);
+			int i = 0;
+			int n = 0;
+			int imax = GetGames.getConfigGamesCount(fileConfiguration)
+					* (GetGames.getOverallMaxPlayers(fileConfiguration) + 1);
 
-					// org.mcsg.double0negative.tabapi.TabAPI.disableTabForPlayer(player);
-					// org.mcsg.double0negative.tabapi.TabAPI.updatePlayer(player);
+			while (i < imax) {
+				if (list[i] != null) {
+					if (list[i].equals(player.getUniqueId().toString())) {
+						// TabGuiUpdater.removeTabForPlayer(player);
 
-					// if(ScoreBoard.allScoreBoards.containsKey(PlayerList.getPlayersGame(player)))
-					// ScoreBoard.allScoreBoards.get(PlayerList.getPlayersGame(player)).removeScoreBoard(player);
+						// org.mcsg.double0negative.tabapi.TabAPI.disableTabForPlayer(player);
+						// org.mcsg.double0negative.tabapi.TabAPI.updatePlayer(player);
 
-					RageScores.removePointsForPlayers(new String[] { player.getUniqueId().toString() });
+						// if(ScoreBoard.allScoreBoards.containsKey(PlayerList.getPlayersGame(player)))
+						// ScoreBoard.allScoreBoards.get(PlayerList.getPlayersGame(player)).removeScoreBoard(player);
 
-					// BossbarLib.getHandler().clearBossbar(player);
+						RageScores.removePointsForPlayers(new String[] { player.getUniqueId().toString() });
 
-					player.getInventory().clear();
-					String message = ConstantHolder.RAGEMODE_PREFIX
-							+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PLAYER_LEFT_GAME);
-					player.sendMessage(message);
-					
-					player.setMetadata("Leaving", new FixedMetadataValue(PluginLoader.getInstance(), true));
+						// BossbarLib.getHandler().clearBossbar(player);
 
-					while (n < oldLocations.getFirstLength()) { // Bring him
-																// back to his
-																// old location
-						if (oldLocations.getFromFirstObject(n) == player) {
-							player.teleport(oldLocations.getFromSecondObject(n));
-							oldLocations.removeFromBoth(n);
-						}
-						n++;
-					}
+						player.getInventory().clear();
+						String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
+								PluginLoader.getMessages().PLAYER_LEFT_GAME);
+						player.sendMessage(message);
 
-					n = 0;
+						player.setMetadata("Leaving", new FixedMetadataValue(PluginLoader.getInstance(), true));
 
-					while (n < oldInventories.getFirstLength()) { // Give him
+						while (n < oldLocations.getFirstLength()) { // Bring him
+																	// back to
 																	// his
-																	// inventory
-																	// back
-						if (oldInventories.getFromFirstObject(n) == player) {
-							player.getInventory().clear();
-							player.getInventory().setContents(oldInventories.getFromSecondObject(n));
-							oldInventories.removeFromBoth(n);
+																	// old
+																	// location
+							if (oldLocations.getFromFirstObject(n) == player) {
+								player.teleport(oldLocations.getFromSecondObject(n));
+								oldLocations.removeFromBoth(n);
+							}
+							n++;
 						}
-						n++;
-					}
 
-					n = 0;
+						n = 0;
 
-					while (n < oldArmor.getFirstLength()) {
-						if (oldArmor.getFromFirstObject(n) == player) { // Give
+						while (n < oldInventories.getFirstLength()) { // Give
 																		// him
 																		// his
-																		// armor
+																		// inventory
 																		// back
-							player.getInventory().setArmorContents(oldArmor.getFromSecondObject(n));
-							oldArmor.removeFromBoth(n);
+							if (oldInventories.getFromFirstObject(n) == player) {
+								player.getInventory().clear();
+								player.getInventory().setContents(oldInventories.getFromSecondObject(n));
+								oldInventories.removeFromBoth(n);
+							}
+							n++;
 						}
-						n++;
-					}
 
-					n = 0;
+						n = 0;
 
-					while (n < oldHealth.getFirstLength()) { // Give him his
-																// health back.
-						if (oldHealth.getFromFirstObject(n) == player) {
-							player.setHealth(oldHealth.getFromSecondObject(n));
-							oldHealth.removeFromBoth(n);
+						while (n < oldArmor.getFirstLength()) {
+							if (oldArmor.getFromFirstObject(n) == player) { // Give
+																			// him
+																			// his
+																			// armor
+																			// back
+								player.getInventory().setArmorContents(oldArmor.getFromSecondObject(n));
+								oldArmor.removeFromBoth(n);
+							}
+							n++;
 						}
-						n++;
-					}
 
-					n = 0;
+						n = 0;
 
-					while (n < oldHunger.getFirstLength()) { // Give him his
-																// hunger back.
-						if (oldHunger.getFromFirstObject(n) == player) {
-							player.setFoodLevel(oldHunger.getFromSecondObject(n));
-							oldHunger.removeFromBoth(n);
+						while (n < oldHealth.getFirstLength()) { // Give him his
+																	// health
+																	// back.
+							if (oldHealth.getFromFirstObject(n) == player) {
+								player.setHealth(oldHealth.getFromSecondObject(n));
+								oldHealth.removeFromBoth(n);
+							}
+							n++;
 						}
-						n++;
+
+						n = 0;
+
+						while (n < oldHunger.getFirstLength()) { // Give him his
+																	// hunger
+																	// back.
+							if (oldHunger.getFromFirstObject(n) == player) {
+								player.setFoodLevel(oldHunger.getFromSecondObject(n));
+								oldHunger.removeFromBoth(n);
+							}
+							n++;
+						}
+
+						n = 0;
+
+						/*
+						 * while (n < oldGameMode.getFirstLength()) { //Give him
+						 * his gamemode back. if
+						 * (oldGameMode.getFromFirstObject(n) == player) {
+						 * player.setGameMode(oldGameMode.getFromSecondObject(n)
+						 * ); oldGameMode.removeFromBoth(n); } n++; }
+						 */
+
+						list[i] = null;
+
+						player.removeMetadata("leavingRageMode", PluginLoader.getInstance());
+
+						return true;
 					}
-
-					n = 0;
-
-					/*
-					 * while (n < oldGameMode.getFirstLength()) { //Give him his
-					 * gamemode back. if (oldGameMode.getFromFirstObject(n) ==
-					 * player) {
-					 * player.setGameMode(oldGameMode.getFromSecondObject(n));
-					 * oldGameMode.removeFromBoth(n); } n++; }
-					 */
-
-					list[i] = null;
-					return true;
 				}
+				i++;
 			}
-			i++;
+			String message = ConstantHolder.RAGEMODE_PREFIX
+					+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PLAYER_NOT_IN_GAME);
+			player.sendMessage(message);
+			return false;
 		}
-		String message = ConstantHolder.RAGEMODE_PREFIX
-				+ ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().PLAYER_NOT_IN_GAME);
-		player.sendMessage(message);
+		player.removeMetadata("leavingRageMode", PluginLoader.getInstance());
 		return false;
 	}
 

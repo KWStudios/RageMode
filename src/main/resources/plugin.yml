@@ -1,6 +1,6 @@
 name: RageMode
 main: org.kwstudios.play.ragemode.loader.PluginLoader
-version: 0.2.1
+version: 0.2.2
 
 softdepend: [HolographicDisplays, ProtocolLib]
 

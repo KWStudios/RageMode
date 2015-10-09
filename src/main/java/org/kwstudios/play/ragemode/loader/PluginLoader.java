@@ -307,13 +307,13 @@ public class PluginLoader extends JavaPlugin {
 	}
 
 	private void loadDefaultLocaleFiles(String name) {
-		InputStream input = getClass().getResourceAsStream("/locale/name");
+		InputStream input = getClass().getResourceAsStream("/locale/" + name);
 		try {
 			File localeFolder = new File(getDataFolder(), "locale");
 			if (!localeFolder.exists()) {
 				localeFolder.mkdirs();
 			}
-			File frFile = new File(localeFolder, "name");
+			File frFile = new File(localeFolder, name);
 			if (frFile.exists()) {
 				frFile.delete();
 			}

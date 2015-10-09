@@ -225,38 +225,10 @@ public class PluginLoader extends JavaPlugin {
 				fileNames.put(file.getName(), true);
 			}
 		}
-
-		InputStream input = getClass().getResourceAsStream("/locale/en.json");
-		try {
-			File localeFolder = new File(getDataFolder(), "locale");
-			if (!localeFolder.exists()) {
-				localeFolder.mkdirs();
-			}
-			File enFile = new File(localeFolder, "en.json");
-			if (enFile.exists()) {
-				enFile.delete();
-			}
-			Path destination = Paths.get(enFile.getAbsolutePath());
-			Files.copy(input, destination, StandardCopyOption.REPLACE_EXISTING);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		input = getClass().getResourceAsStream("/locale/fr.json");
-		try {
-			File localeFolder = new File(getDataFolder(), "locale");
-			if (!localeFolder.exists()) {
-				localeFolder.mkdirs();
-			}
-			File frFile = new File(localeFolder, "fr.json");
-			if (frFile.exists()) {
-				frFile.delete();
-			}
-			Path destination = Paths.get(frFile.getAbsolutePath());
-			Files.copy(input, destination, StandardCopyOption.REPLACE_EXISTING);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
+		loadDefaultLocaleFiles("en.json");
+		loadDefaultLocaleFiles("fr.json");
+		loadDefaultLocaleFiles("de.json");
 
 		fileNames.clear();
 		for (File file : listFilesForFolder(new File(getDataFolder(), "locale"))) {
@@ -331,6 +303,24 @@ public class PluginLoader extends JavaPlugin {
 			if (!inGameCommands.contains(commandForSet)) {
 				inGameCommands.add(commandForSet);
 			}
+		}
+	}
+
+	private void loadDefaultLocaleFiles(String name) {
+		InputStream input = getClass().getResourceAsStream("/locale/name");
+		try {
+			File localeFolder = new File(getDataFolder(), "locale");
+			if (!localeFolder.exists()) {
+				localeFolder.mkdirs();
+			}
+			File frFile = new File(localeFolder, "name");
+			if (frFile.exists()) {
+				frFile.delete();
+			}
+			Path destination = Paths.get(frFile.getAbsolutePath());
+			Files.copy(input, destination, StandardCopyOption.REPLACE_EXISTING);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 

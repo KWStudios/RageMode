@@ -1,0 +1,114 @@
+{
+  "NOT_A_PLAYER": "Du musst ein Spieler sein!",
+  "WRONG_COMMAND": "§4Das ist nicht der Befehl den du suchst!",
+  "PERMISSION_MESSAGE": "§4Du darfst diesen Befehl nicht verwenden!",
+
+  "MISSING_ARGUMENTS": "§4Fehlende Argumente! Struktur: $USAGE$",
+  "MISSING_DEPENDENCIES": "§4$DEPENDENCIE$ muss installiert werden um diese Funktion zu verwenden!",
+
+  "NOT_A_NUMBER": "§4$WRONG_NUMBER$ ist keine Zahl.",
+  "ALREADY_EXISTS": "§4$GAME$ existiert bereits.",
+  "AT_LEAST_TWO": "§4Das maxplayers Argument muss den Wert zwei oder mehr haben",
+  "ADDED_SUCCESSFULLY": "§2Das Spiel §3$GAME$ §2wurde erfolgreich hinzugefügt!",
+
+  "NOT_SET_YET": "§4Dieses Spiel wurde noch nicht hinzugefügt! Du kannst es mit dem Befehl $USAGE$ hinzufügen.",
+  "LOBBY_SUCCESSFULLY": "§2Die Lobby für das Spiel §3$GAME$ §2wurde erfolgreich gesetzt!",
+
+  "SPAWN_SUCCESSFULLY": "§2Spawn $NUMBER$ für das Spiel §3$GAME$ §2wurde erfolgreich gesetzt!",
+
+  "PLAYER_JOINED": "§2$PLAYER$ §9hat das Spiel betreten.",
+  "PLAYER_COULD_NOT_JOIN": "§4$PLAYER$ konnte dem Spiel $GAME$ nicht beitreten.",
+
+  "REMOVED_NON_EXISTENT_GAME": "§4Entferne keine nicht existenten Spiele!",
+  "GAME_RUNNING": "§4Dieses Spiel läuft bereits. Bitte warte bis es vorbei ist.",
+  "REMOVED_SUCCESSFULLY": "Das Spiel $GAME$ wurde erfolgreich entfernt.",
+
+  "LISTING_GAMES": "Folgende RageMode Spiele sind verfügbar...",
+  "NO_GAMES_AVAILABLE": "Zurzeit sind auf diesem Server keine RageMode Spiele verfügbar.",
+
+  "GAME_NOT_RUNNING": "Dieses Spiel läuft zurzeit nicht.",
+  "SEARCHING_GAMES_TO_STOP": "RageMode sucht nach Spielen um sie zu stoppen...",
+  "GAME_STOPPED": "§3$GAME$ §2wurde gestoppt.",
+  "ALL_GAMES_STOPPED": "Alle Spiele wurden gestoppt!",
+
+  "RELOADED_SUCCESSFULLY": "§2RageMode wurde erfolgreich aktualisiert!",
+
+  "SUCCESS": "§2Erfolg!",
+
+  "KNIFE_DEATHS": "Knife Tode: ",
+  "EXPLOSION_DEATHS": "Explosions Tode: ",
+  "ARROW_DEATHS": "Pfeil Tode: ",
+  "AXE_DEATHS": "Axt Tode: ",
+  "DEATHS": "Tode: ",
+
+  "KNIFE_KILLS": "Knife Kills: ",
+  "EXPLOSION_KILLS": "Explosions Kills: ",
+  "ARROW_KILLS": "Pfeil Kills: ",
+  "AXE_KILLS": "Axt Kills: ",
+  "KILLS": "Kills: ",
+
+  "KD": "KD: ",
+
+  "GAMES": "Spiele: ",
+  "WINS": "Gewonnen: ",
+  "SCORE": "Score: ",
+  "RANK": "Rang: ",
+
+  "NOT_PLAYED_YET": "Dieser Spieler hat noch nicht auf diesem Server gespielt.",
+  "PLAYER_NONEXISTENT": "Dieser Spieler existiert nicht einmal.",
+
+  "BROADCAST_AXE_KILL": "§a$VICTIM$ §3wurde von §a$KILLER$ §3mit einer §6CombatAxe §3getötet.",
+  "BROADCAST_ARROW_KILL": "§a$VICTIM$ §3wurde durch einen §6direkten Pfeilabschuss §3von §a$KILLER$ §3getötet.",
+  "BROADCAST_KNIFE_KILL": "§a$VICTIM$ §3wurde getötet von §a$KILLER$ §3mit einer §6RageKnife §3.",
+  "BROADCAST_EXPLOSION_KILL": "§a$VICTIM$ §3wurde §6in die Luft gesprengt §3von §a$KILLER$ §3.",
+  "BROADCAST_ERROR_KILL": "Whoops, das sollte normalerweise nicht passieren...",
+
+  "UNKNOWN_KILLER": "Weißt du wer dich getötet hat? Denn wir wissen es nicht...",
+  "UNKNOWN_WEAPON": "§a$VICTIM$ §3wurde durch etwas unerwartetes getötet.",
+
+  "MESSAGE_ARROW_KILL": "§3Du hast §6§l$VICTIM$ §r§3mit einem direkten Pfeilabschuss getötet. §6§l$POINTS$",
+  "MESSAGE_AXE_KILL": "§3Du hast §6§l$VICTIM$ §r§3mit deiner CombatAxe getötet. §6§l$POINTS$",
+  "MESSAGE_KNIFE_KILL": "§3Du hast §6§l$VICTIM$ §r§3mit deiner RageKnife getötet. §6§l$POINTS$",
+  "MESSAGE_EXPLOSION_KILL": "§3Du hast §6§l$VICTIM$ §r§3getötet indem du starke Explosionen mit deinem RageBow verursacht hast. §6§l$POINTS$",
+
+  "MESSAGE_ARROW_DEATH": "§3Du wurdest von §6§l$KILLER$ §r§3mit einem direkten Pfeilabschuss getötet. §4§l$POINTS$",
+  "MESSAGE_AXE_DEATH": "§3Du wurdest von §6§l$KILLER$ §r§3mit einer CombatAxe getötet. §4§l$POINTS$",
+  "MESSAGE_KNIFE_DEATH": "§3Du wurdest von §6§l$KILLER$ §r§3mit einer RageKnife getötet. §4§l$POINTS$",
+  "MESSAGE_EXPLOSION_DEATH": "§3Du wurdest von §6§l$KILLER$ §r§3durch eine Explosion getötet. §4§l$POINTS$",
+
+  "MESSAGE_CURRENT_POINTS": "§3Du hast jetzt §6§l$POINTS$ §r§3Punkte.",
+
+  "MESSAGE_SUICIDE": "§3Du hast dich selber getötet.",
+
+  "MESSAGE_STREAK": "§6$NUMBER$ §2KILLSTREAK §6$POINTS$",
+
+  "MESSAGE_YOU_WON": "§dDu hast das Spiel §6$GAME$ §dgewonnen",
+  "MESSAGE_PLAYER_WON": "§2$PLAYER$ §dhat das Spiel §6$GAME$ §dgewonnen.",
+
+  "GAME_NOT_SET_UP": "§4Das Spiel wurde nicht richtig konfiguriert. Bitte kontaktiere einen Admin.",
+
+  "LOBBY_MESSAGE": "§9Diese Runde wird in §e$TIME$ §9Sekunden starten.",
+
+  "PLAYER_ALREADY_IN_GAME": "Du bist bereits in einem Spiel. Du kannst es mithilfe des Befehls $USAGE$ verlassen.",
+  "YOU_JOINED_THE_GAME": "Du bist dem Spiel §3$GAME$ §rbeigetreten.",
+
+  "PLAYER_KICKED_FOR_VIP": "Du wurdest aus dem Spiel gekickt um Platz für einen VIP zu machen.",
+
+  "GAME_FULL": "Dieses Spiel ist bereits voll!",
+  "GAME_DOES_NOT_EXIST": "Das Spiel, welchem du beitreten wolltest, wurde nicht gefunden.",
+
+  "PLAYER_LEFT_GAME": "Du hast das Spiel erfolgreich verlassen.",
+  "PLAYER_NOT_IN_GAME": "Du befindest dich gerade nicht in einem RageMode Spiel.",
+
+  "INVALID_GAME": "§e$GAME$ §4ist kein gültiges RageMode Spiel.",
+  "NAME_OR_MAXPLAYERS_NOT_SET": "§4Der Weltname oder das maxplayers Argument wurden nicht gesetzt. Bitte kontaktiere einen Admin für weitere Details.",
+  "MAXPLAYERS_NOT_SET": "§4Das maxplayers Argument für $GAME$ wurde nicht richtig gesetzt.",
+  "WORLDNAME_NOT_SET": "§4Der world Schlüssel darf nicht leer sein! Sag einem Admin, er soll die config.yml überprüfen.",
+  "LOBBY_NOT_SET": "§4Die Lobby für das Spiel §3$GAME$ §4wurde noch nicht gesetzt. Du kannst sie mit dem Befehl /rm lobby <game name> setzen.",
+  "LOBBY_COORDINATES_NOT_SET": "§4Die Lobby Koordinaten wurden nict korrekt gesetzt. Sag einem Admin, er soll die config.yml überprüfen.",
+  "LOBBY_NOT_SET_PROPERLY": "§4Die Lobby wurde nicht korrekt gesetzt. Sag einem Admin, er soll die config.yml überprüfen.",
+  "SPAWNS_NOT_SET_PROPERLY": "§4Ein oder mehrere Spawns wurden nicht korrekt gesetzt!",
+  "TOO_FEW_SPAWNS": "§4Die Anzahl an Spawns muss größer oder gleich wie das maxplayers Argument sein!",
+  "NO_SPAWNS_CONFIGURED": "§4In $GAME$ wurden keine Spawns konfiguriert!"
+
+}

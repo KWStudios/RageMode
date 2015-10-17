@@ -15,11 +15,7 @@ public class RuntimeRPPManager {
 	public static List<RetPlayerPoints> RuntimeRPPList;
 	
 	public static void getRPPListFromMySQL() {
-		Bukkit.getServer().getScheduler().runTaskAsynchronously(PluginLoader.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				RuntimeRPPList = MySQLStats.getAllPlayerStatistics();
-			}});
+		RuntimeRPPList = MySQLStats.getAllPlayerStatistics();
 		MergeSort ms = new MergeSort();
 		ms.sort(RuntimeRPPList);
 	}

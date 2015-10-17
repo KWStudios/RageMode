@@ -123,7 +123,7 @@ public class StopGame {
 
 	private static void finishStopping(String game) {
 		if (PlayerList.isGameRunning(game)) {
-			String[] players = PlayerList.getPlayersInGame(game);
+			final String[] players = PlayerList.getPlayersInGame(game);
 			int f = 0;
 			int fmax = players.length;
 			List<PlayerPoints> lPP = new ArrayList<PlayerPoints>();
@@ -162,6 +162,16 @@ public class StopGame {
 					}
 					i++;
 				}
+				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(PluginLoader.getInstance(), new Runnable() {
+
+					@Override
+					public void run() {
+						for (String playerUUID : players) {				
+							HoloHolder.updateHolosForPlayer(Bukkit.getPlayer(UUID.fromString(playerUUID)));				
+						}	
+					}
+					
+				});
 			}
 			RageScores.removePointsForPlayers(players);
 
@@ -169,11 +179,7 @@ public class StopGame {
 					ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('§',
 							PluginLoader.getMessages().GAME_STOPPED.replace("$GAME$", game)));
 			PlayerList.setGameNotRunning(game);
-			SignCreator.updateAllSigns(game);
-			
-			for (String playerUUID : players) {				
-				HoloHolder.updateHolosForPlayer(Bukkit.getPlayer(UUID.fromString(playerUUID)));				
-			}	
+			SignCreator.updateAllSigns(game);			
 		}
 	}
 

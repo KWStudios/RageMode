@@ -13,6 +13,7 @@ import org.kwstudios.play.ragemode.events.EventListener;
 import org.kwstudios.play.ragemode.gameLogic.PlayerList;
 import org.kwstudios.play.ragemode.holo.HoloHolder;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
+import org.kwstudios.play.ragemode.runtimeRPP.RuntimeRPPManager;
 import org.kwstudios.play.ragemode.scores.PlayerPoints;
 import org.kwstudios.play.ragemode.scores.RageScores;
 import org.kwstudios.play.ragemode.signs.SignCreator;
@@ -137,7 +138,7 @@ public class StopGame {
 						Thread sthread = new Thread(new MySQLThread(pP));
 						sthread.start();
 					}
-
+					RuntimeRPPManager.updatePlayerEntry(pP);
 				}
 				f++;
 			}

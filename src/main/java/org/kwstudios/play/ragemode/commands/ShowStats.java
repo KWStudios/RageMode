@@ -18,6 +18,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
+import org.kwstudios.play.ragemode.runtimeRPP.RuntimeRPPManager;
 import org.kwstudios.play.ragemode.scores.RetPlayerPoints;
 import org.kwstudios.play.ragemode.statistics.MySQLStats;
 import org.kwstudios.play.ragemode.statistics.YAMLStats;
@@ -81,14 +82,16 @@ public class ShowStats {
 
 			if (PluginLoader.getInstance().getConfig().getString("settings.global.statistics.type")
 					.equalsIgnoreCase("yaml")) {
-				rpp = YAMLStats.getPlayerStatistics(sUUID);
+//				rpp = YAMLStats.getPlayerStatistics(sUUID);
+				rpp = RuntimeRPPManager.getRPPForPlayer(sUUID);
 			}
 
 			if (PluginLoader.getInstance().getConfig().getString("settings.global.statistics.type")
 					.equalsIgnoreCase("mySQL")) {
 				// Bukkit.broadcastMessage(sUUID);
-				rpp = MySQLStats.getPlayerStatistics(sUUID,
-						PluginLoader.getMySqlConnector());
+//				rpp = MySQLStats.getPlayerStatistics(sUUID,
+//						PluginLoader.getMySqlConnector());
+				rpp = RuntimeRPPManager.getRPPForPlayer(sUUID);
 			}
 
 
@@ -114,7 +117,7 @@ public class ShowStats {
 				player.sendMessage(PluginLoader.getMessages().WINS + rpp.getWins());
 				player.sendMessage("---------------");
 				player.sendMessage(PluginLoader.getMessages().SCORE + rpp.getPoints());
-				player.sendMessage(PluginLoader.getMessages().RANK + "Ranker§ hasn't been added jet :(");
+				player.sendMessage(PluginLoader.getMessages().RANK + Integer.toString(rpp.getRank()));
 			} else {
 				String message = ChatColor.translateAlternateColorCodes('§', PluginLoader.getMessages().NOT_PLAYED_YET);
 				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + message);

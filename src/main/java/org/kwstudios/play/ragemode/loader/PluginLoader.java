@@ -34,6 +34,7 @@ import org.kwstudios.play.ragemode.gameLogic.PlayerList;
 import org.kwstudios.play.ragemode.holo.HoloHolder;
 import org.kwstudios.play.ragemode.locale.Messages;
 import org.kwstudios.play.ragemode.metrics.Metrics;
+import org.kwstudios.play.ragemode.runtimeRPP.RuntimeRPPManager;
 import org.kwstudios.play.ragemode.signs.SignConfiguration;
 import org.kwstudios.play.ragemode.signs.SignCreator;
 import org.kwstudios.play.ragemode.statistics.YAMLStats;
@@ -194,6 +195,7 @@ public class PluginLoader extends JavaPlugin {
 			if (getConfig().isSet("settings.global.statistics.type")) {
 				if (getConfig().getString("settings.global.statistics.type").equalsIgnoreCase("yaml"))
 					YAMLStats.initS();
+					RuntimeRPPManager.getRPPListFromYAML();
 
 				if (getConfig().getString("settings.global.statistics.type").equalsIgnoreCase("mySQL")) {
 					String databaseURL = getConfig().getString("settings.global.statistics.mySQL.url");
@@ -202,9 +204,12 @@ public class PluginLoader extends JavaPlugin {
 					String username = getConfig().getString("settings.global.statistics.mySQL.username");
 					String password = getConfig().getString("settings.global.statistics.mySQL.password");
 					mySqlConnector = new MySQLConnector(databaseURL, port, database, username, password);
+					RuntimeRPPManager.getRPPListFromMySQL();
 				}
 			} else
 				getConfig().set("settings.global.statistics.type", "yaml");
+				YAMLStats.initS();
+				RuntimeRPPManager.getRPPListFromYAML();
 
 		} else {
 			getConfig().set("settings.global.statistics.type", "yaml");
@@ -215,6 +220,8 @@ public class PluginLoader extends JavaPlugin {
 			getConfig().set("settings.global.statistics.mySQL.database", "put.your.databaseName.here");
 			getConfig().set("settings.global.statistics.mySQL.username", "put.your.databaseUsername.here");
 			getConfig().set("settings.global.statistics.mySQL.password", "put.your.databasePassword.here");
+			YAMLStats.initS();
+			RuntimeRPPManager.getRPPListFromYAML();
 		}
 	}
 

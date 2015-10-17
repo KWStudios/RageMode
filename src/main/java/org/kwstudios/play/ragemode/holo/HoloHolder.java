@@ -13,6 +13,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.kwstudios.play.ragemode.loader.PluginLoader;
+import org.kwstudios.play.ragemode.runtimeRPP.RuntimeRPPManager;
 import org.kwstudios.play.ragemode.scores.RetPlayerPoints;
 import org.kwstudios.play.ragemode.statistics.MySQLStats;
 import org.kwstudios.play.ragemode.statistics.YAMLStats;
@@ -93,7 +94,8 @@ public class HoloHolder {
 
 				@Override
 				public void run() {
-					final RetPlayerPoints rpp = YAMLStats.getPlayerStatistics(yamlPlayer.getUniqueId().toString());
+//					final RetPlayerPoints rpp = YAMLStats.getPlayerStatistics(yamlPlayer.getUniqueId().toString());
+					final RetPlayerPoints rpp = RuntimeRPPManager.getRPPForPlayer(yamlPlayer.getUniqueId().toString());
 					Bukkit.getServer().getScheduler().callSyncMethod(PluginLoader.getInstance(),
 							new Callable<String>() {
 
@@ -115,8 +117,9 @@ public class HoloHolder {
 			Bukkit.getServer().getScheduler().runTaskAsynchronously(PluginLoader.getInstance(), new Runnable() {
 				@Override
 				public void run() {
-					final RetPlayerPoints rpp = MySQLStats.getPlayerStatistics(mySQLPlayer.getUniqueId().toString(),
-							PluginLoader.getMySqlConnector());
+//					final RetPlayerPoints rpp = MySQLStats.getPlayerStatistics(mySQLPlayer.getUniqueId().toString(),
+//							PluginLoader.getMySqlConnector());
+					final RetPlayerPoints rpp = RuntimeRPPManager.getRPPForPlayer(mySQLPlayer.getUniqueId().toString());
 					Bukkit.getServer().getScheduler().callSyncMethod(PluginLoader.getInstance(),
 							new Callable<String>() {
 

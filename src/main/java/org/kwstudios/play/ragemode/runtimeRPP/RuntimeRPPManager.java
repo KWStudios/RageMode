@@ -2,9 +2,11 @@ package org.kwstudios.play.ragemode.runtimeRPP;
 
 import java.util.List;
 
-import org.kwstudios.play.ragemode.database.MySQLConnector;
+import org.bukkit.Bukkit;
+import org.kwstudios.play.ragemode.loader.PluginLoader;
 import org.kwstudios.play.ragemode.scores.PlayerPoints;
 import org.kwstudios.play.ragemode.scores.RetPlayerPoints;
+import org.kwstudios.play.ragemode.statistics.MySQLStats;
 import org.kwstudios.play.ragemode.statistics.YAMLStats;
 import org.kwstudios.play.ragemode.toolbox.MergeSort;
 
@@ -12,8 +14,12 @@ public class RuntimeRPPManager {
 	
 	public static List<RetPlayerPoints> RuntimeRPPList;
 	
-	public static void getRPPListFromMySQL(MySQLConnector mySqlConnector) {
-		//TODO get all Stats from the mySQL database
+	public static void getRPPListFromMySQL() {
+		Bukkit.getServer().getScheduler().runTaskAsynchronously(PluginLoader.getInstance(), new Runnable() {
+			@Override
+			public void run() {
+				RuntimeRPPList = MySQLStats.getAllPlayerStatistics();
+			}});
 	}
 	
 	public static void getRPPListFromYAML() {

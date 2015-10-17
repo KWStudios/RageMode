@@ -80,15 +80,18 @@ public class RuntimeRPPManager {
 
 			RuntimeRPPList.add(i + 1, newRPP);
 		} else if(pp.getPoints() == oldRPP.getPoints())
-			return;
+			return;//TODO kills&deaths...
 		else if(pp.getPoints() > oldRPP.getPoints()) {
+			boolean norankchange = false;
 			int i = oldRPP.getRank() - 2;
+			
 			if(RuntimeRPPList.get(i).getPoints() < pp.getPoints()) {
 				RuntimeRPPList.remove(i + 1);
 				i--;
 			}
 			else
-				return;
+				norankchange = true;
+			
 			while(RuntimeRPPList.get(i).getPoints() < pp.getPoints()) {
 				i--;
 				if(i < 0)
@@ -122,18 +125,24 @@ public class RuntimeRPPManager {
 				newRPP.setKD(1.0d);
 			
 			newRPP.setGames(oldRPP.getGames() + 1);
-
-			RuntimeRPPList.add(i + 1, newRPP);
+			
+			if(norankchange)
+				RuntimeRPPList.set(oldRPP.getRank() - 1, newRPP);
+			else
+				RuntimeRPPList.add(i + 1, newRPP);
 		}
 		else {
+			boolean norankchange = false;
+			boolean last = false;
 			int i = oldRPP.getRank();
+			int imax = RuntimeRPPList.size();
+			
 			if(RuntimeRPPList.get(i).getPoints() > pp.getPoints()) {
-				RuntimeRPPList.remove(i + 1);
+				RuntimeRPPList.remove(i - 1);
 			}
 			else
-				return;
-			int imax = RuntimeRPPList.size();
-			boolean last = false;
+				norankchange = true;
+
 			while(RuntimeRPPList.get(i).getPoints() > pp.getPoints()) {
 				i++;
 				if(i >= imax) {
@@ -169,7 +178,9 @@ public class RuntimeRPPManager {
 				newRPP.setKD(1.0d);
 			
 			newRPP.setGames(oldRPP.getGames() + 1);
-			if(last)
+			if(norankchange)
+				RuntimeRPPList.set(oldRPP.getRank() - 1, newRPP);
+			else if(last)
 				RuntimeRPPList.add(newRPP);
 			else
 				RuntimeRPPList.add(i, newRPP);

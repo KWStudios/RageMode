@@ -44,13 +44,7 @@ public class RuntimeRPPManager {
 	public synchronized static void updatePlayerEntry(PlayerPoints pp) {
 		RetPlayerPoints oldRPP = getRPPForPlayer(pp.getPlayerUUID());
 		if(oldRPP == null) {
-			int i = RuntimeRPPList.size();
-			if(RuntimeRPPList.get(i).getPoints() < pp.getPoints()) {
-				RuntimeRPPList.remove(i + 1);
-				i--;
-			}
-			else
-				return;
+			int i = RuntimeRPPList.size() - 1;
 			while(RuntimeRPPList.get(i).getPoints() < pp.getPoints()) {
 				i--;
 			}
@@ -69,10 +63,9 @@ public class RuntimeRPPManager {
 			newRPP.setGames(1);
 
 			RuntimeRPPList.add(i + 1, newRPP);
-		}
-		if(pp.getPoints() == oldRPP.getPoints())
+		} else if(pp.getPoints() == oldRPP.getPoints())
 			return;
-		if(pp.getPoints() > oldRPP.getPoints()) {
+		else if(pp.getPoints() > oldRPP.getPoints()) {
 			int i = oldRPP.getRank() - 2;
 			if(RuntimeRPPList.get(i).getPoints() < pp.getPoints()) {
 				RuntimeRPPList.remove(i + 1);
@@ -82,9 +75,11 @@ public class RuntimeRPPManager {
 				return;
 			while(RuntimeRPPList.get(i).getPoints() < pp.getPoints()) {
 				i--;
+				if(i < 0)
+					i = 0;
+					break;
 			}
 			RetPlayerPoints newRPP = (RetPlayerPoints) pp;
-			newRPP.setRank(i + 2);
 			if(pp.isWinner())
 				newRPP.setWins(oldRPP.getWins() + 1);
 			else
@@ -106,11 +101,16 @@ public class RuntimeRPPManager {
 			}
 			else
 				return;
+			int imax = RuntimeRPPList.size();
+			boolean last = false;
 			while(RuntimeRPPList.get(i).getPoints() > pp.getPoints()) {
-				i--;
+				i++;
+				if(i < imax) {
+					i = imax;
+					last = true;
+				}
 			}
 			RetPlayerPoints newRPP = (RetPlayerPoints) pp;
-			newRPP.setRank(i + 1);
 			if(pp.isWinner())
 				newRPP.setWins(oldRPP.getWins() + 1);
 			else
@@ -122,8 +122,10 @@ public class RuntimeRPPManager {
 				newRPP.setKD(1.0d);
 			
 			newRPP.setGames(oldRPP.getGames() + 1);
-
-			RuntimeRPPList.add(i, newRPP);
+			if(last)
+				RuntimeRPPList.add(newRPP);
+			else
+				RuntimeRPPList.add(i, newRPP);
 		}
 	}
 }

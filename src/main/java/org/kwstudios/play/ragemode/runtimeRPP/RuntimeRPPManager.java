@@ -105,9 +105,10 @@ public class RuntimeRPPManager {
 			boolean last = false;
 			while(RuntimeRPPList.get(i).getPoints() > pp.getPoints()) {
 				i++;
-				if(i < imax) {
+				if(i > imax) {
 					i = imax;
 					last = true;
+					break;
 				}
 			}
 			RetPlayerPoints newRPP = (RetPlayerPoints) pp;

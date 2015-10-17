@@ -131,14 +131,20 @@ public class StopGame {
 					.equalsIgnoreCase("mySQL");
 			while (f < fmax) {
 				if (RageScores.getPlayerPoints(players[f]) != null) {
-					PlayerPoints pP = RageScores.getPlayerPoints(players[f]);
+					final PlayerPoints pP = RageScores.getPlayerPoints(players[f]);
 					lPP.add(pP);
 
 					if (doSQL) {
 						Thread sthread = new Thread(new MySQLThread(pP));
 						sthread.start();
 					}
-					RuntimeRPPManager.updatePlayerEntry(pP);
+					Bukkit.getServer().getScheduler().runTaskAsynchronously(PluginLoader.getInstance(), new Runnable() {
+						
+						@Override
+						public void run() {
+							RuntimeRPPManager.updatePlayerEntry(pP);						
+						}
+					});		
 				}
 				f++;
 			}

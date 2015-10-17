@@ -193,9 +193,15 @@ public class PluginLoader extends JavaPlugin {
 	public void initStatistics() {
 		if (getConfig().isSet("settings.global.statistics")) {
 			if (getConfig().isSet("settings.global.statistics.type")) {
-				if (getConfig().getString("settings.global.statistics.type").equalsIgnoreCase("yaml"))
+				if (getConfig().getString("settings.global.statistics.type").equalsIgnoreCase("yaml")) {
 					YAMLStats.initS();
-					RuntimeRPPManager.getRPPListFromYAML();
+					Bukkit.getServer().getScheduler().runTaskAsynchronously(this, new Runnable() {					
+						@Override
+						public void run() {
+							RuntimeRPPManager.getRPPListFromYAML();
+							}
+					});
+				}
 
 				if (getConfig().getString("settings.global.statistics.type").equalsIgnoreCase("mySQL")) {
 					String databaseURL = getConfig().getString("settings.global.statistics.mySQL.url");
@@ -204,13 +210,23 @@ public class PluginLoader extends JavaPlugin {
 					String username = getConfig().getString("settings.global.statistics.mySQL.username");
 					String password = getConfig().getString("settings.global.statistics.mySQL.password");
 					mySqlConnector = new MySQLConnector(databaseURL, port, database, username, password);
-					RuntimeRPPManager.getRPPListFromMySQL();
+					Bukkit.getServer().getScheduler().runTaskAsynchronously(this, new Runnable() {					
+						@Override
+						public void run() {
+							RuntimeRPPManager.getRPPListFromMySQL();							
+						}
+					});
 				}
-			} else
+			} else {
 				getConfig().set("settings.global.statistics.type", "yaml");
 				YAMLStats.initS();
-				RuntimeRPPManager.getRPPListFromYAML();
-
+				Bukkit.getServer().getScheduler().runTaskAsynchronously(this, new Runnable() {					
+					@Override
+					public void run() {
+						RuntimeRPPManager.getRPPListFromYAML();
+						}
+				});
+			}
 		} else {
 			getConfig().set("settings.global.statistics.type", "yaml");
 			getConfig().set("settings.global.statistics.mySQL",
@@ -221,7 +237,12 @@ public class PluginLoader extends JavaPlugin {
 			getConfig().set("settings.global.statistics.mySQL.username", "put.your.databaseUsername.here");
 			getConfig().set("settings.global.statistics.mySQL.password", "put.your.databasePassword.here");
 			YAMLStats.initS();
-			RuntimeRPPManager.getRPPListFromYAML();
+			Bukkit.getServer().getScheduler().runTaskAsynchronously(this, new Runnable() {					
+				@Override
+				public void run() {
+					RuntimeRPPManager.getRPPListFromYAML();
+					}
+			});
 		}
 	}
 

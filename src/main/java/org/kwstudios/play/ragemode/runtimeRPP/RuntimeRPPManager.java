@@ -43,8 +43,35 @@ public class RuntimeRPPManager {
 		return rpp;
 	}
 	
-	public static void updatePlayerEntry(PlayerPoints pp) {
+	public synchronized static void updatePlayerEntry(PlayerPoints pp) {
 		RetPlayerPoints oldRPP = getRPPForPlayer(pp.getPlayerUUID());
+		if(oldRPP == null) {
+			int i = RuntimeRPPList.size();
+			if(RuntimeRPPList.get(i).getPoints() < pp.getPoints()) {
+				RuntimeRPPList.remove(i + 1);
+				i--;
+			}
+			else
+				return;
+			while(RuntimeRPPList.get(i).getPoints() < pp.getPoints()) {
+				i--;
+			}
+			RetPlayerPoints newRPP = (RetPlayerPoints) pp;
+			newRPP.setRank(i + 2);
+			if(pp.isWinner())
+				newRPP.setWins(1);
+			else
+				newRPP.setWins(0);
+			
+			if(pp.getDeaths() != 0)
+				newRPP.setKD(((double)(pp.getKills()))/((double)(pp.getDeaths())));
+			else
+				newRPP.setKD(1.0d);
+			
+			newRPP.setGames(1);
+
+			RuntimeRPPList.add(i + 1, newRPP);
+		}
 		if(pp.getPoints() == oldRPP.getPoints())
 			return;
 		if(pp.getPoints() > oldRPP.getPoints()) {

@@ -48,8 +48,21 @@ public class RuntimeRPPManager {
 			while(RuntimeRPPList.get(i).getPoints() < pp.getPoints()) {
 				i--;
 			}
-			RetPlayerPoints newRPP = (RetPlayerPoints) pp;
-			newRPP.setRank(i + 2);
+			RetPlayerPoints newRPP =  new RetPlayerPoints(pp.getPlayerUUID());
+			newRPP.setAxeDeaths(pp.getAxeDeaths());
+			newRPP.setAxeKills(pp.getAxeKills());
+			newRPP.setCurrentStreak(pp.getCurrentStreak());
+			newRPP.setDeaths(pp.getDeaths());
+			newRPP.setDirectArrowDeaths(pp.getDirectArrowDeaths());
+			newRPP.setDirectArrowKills(pp.getDirectArrowKills());
+			newRPP.setExplosionDeaths(pp.getExplosionDeaths());
+			newRPP.setExplosionKills(pp.getExplosionKills());
+			newRPP.setKills(pp.getKills());
+			newRPP.setKnifeDeaths(pp.getKnifeDeaths());
+			newRPP.setKnifeKills(pp.getKnifeKills());
+			newRPP.setLongestStreak(pp.getLongestStreak());
+			newRPP.setPoints(pp.getPoints());
+			
 			if(pp.isWinner())
 				newRPP.setWins(1);
 			else
@@ -79,7 +92,22 @@ public class RuntimeRPPManager {
 					i = 0;
 					break;
 			}
-			RetPlayerPoints newRPP = (RetPlayerPoints) pp;
+			RetPlayerPoints newRPP = new RetPlayerPoints(pp.getPlayerUUID());
+			
+			newRPP.setAxeDeaths(pp.getAxeDeaths());
+			newRPP.setAxeKills(pp.getAxeKills());
+			newRPP.setCurrentStreak(pp.getCurrentStreak());
+			newRPP.setDeaths(pp.getDeaths());
+			newRPP.setDirectArrowDeaths(pp.getDirectArrowDeaths());
+			newRPP.setDirectArrowKills(pp.getDirectArrowKills());
+			newRPP.setExplosionDeaths(pp.getExplosionDeaths());
+			newRPP.setExplosionKills(pp.getExplosionKills());
+			newRPP.setKills(pp.getKills());
+			newRPP.setKnifeDeaths(pp.getKnifeDeaths());
+			newRPP.setKnifeKills(pp.getKnifeKills());
+			newRPP.setLongestStreak(pp.getLongestStreak());
+			newRPP.setPoints(pp.getPoints());
+			
 			if(pp.isWinner())
 				newRPP.setWins(oldRPP.getWins() + 1);
 			else
@@ -105,13 +133,28 @@ public class RuntimeRPPManager {
 			boolean last = false;
 			while(RuntimeRPPList.get(i).getPoints() > pp.getPoints()) {
 				i++;
-				if(i > imax) {
+				if(i >= imax) {
 					i = imax;
 					last = true;
 					break;
 				}
 			}
-			RetPlayerPoints newRPP = (RetPlayerPoints) pp;
+			RetPlayerPoints newRPP = new RetPlayerPoints(pp.getPlayerUUID());
+			
+			newRPP.setAxeDeaths(pp.getAxeDeaths());
+			newRPP.setAxeKills(pp.getAxeKills());
+			newRPP.setCurrentStreak(pp.getCurrentStreak());
+			newRPP.setDeaths(pp.getDeaths());
+			newRPP.setDirectArrowDeaths(pp.getDirectArrowDeaths());
+			newRPP.setDirectArrowKills(pp.getDirectArrowKills());
+			newRPP.setExplosionDeaths(pp.getExplosionDeaths());
+			newRPP.setExplosionKills(pp.getExplosionKills());
+			newRPP.setKills(pp.getKills());
+			newRPP.setKnifeDeaths(pp.getKnifeDeaths());
+			newRPP.setKnifeKills(pp.getKnifeKills());
+			newRPP.setLongestStreak(pp.getLongestStreak());
+			newRPP.setPoints(pp.getPoints());
+			
 			if(pp.isWinner())
 				newRPP.setWins(oldRPP.getWins() + 1);
 			else

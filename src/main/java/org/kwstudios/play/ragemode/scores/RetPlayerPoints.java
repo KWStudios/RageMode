@@ -5,6 +5,7 @@ public class RetPlayerPoints extends PlayerPoints {
 	private int wins = 0;
 	private int games = 0;
 	private double kd = 0d;
+	private int rank = 0;
 	
 	public RetPlayerPoints(String playerUUID) {
 		super(playerUUID);
@@ -32,5 +33,13 @@ public class RetPlayerPoints extends PlayerPoints {
 	
 	public double getKD() {
 		return this.kd;
+	}
+	
+	public void setRank(int r) {
+		this.rank = r;
+	}
+	
+	public int getRank() {
+		return this.rank;
 	}
 }

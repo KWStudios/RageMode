@@ -2,6 +2,7 @@ package org.kwstudios.play.ragemode.statistics;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -184,6 +185,20 @@ public class YAMLStats {
 		else 
 			return null;
 		return plPo;
+	}
+	
+	public static List<RetPlayerPoints> getAllPlayerStatistics() { //returns a List of all RetPlayerPoints that are stored
+		if(!inited)
+			return null;
+		
+		List<RetPlayerPoints> allRPPs = new ArrayList<RetPlayerPoints>();
+		
+		Set<String> allUUIDs = ConfigFactory.getKeysUnderPath("data", false, statsConfiguration);
+		
+		for(String UUID : allUUIDs) {
+			allRPPs.add(getPlayerStatistics(UUID));
+		}	
+		return allRPPs;
 	}
 	
 	private static class AddToPlayersStats implements Runnable{

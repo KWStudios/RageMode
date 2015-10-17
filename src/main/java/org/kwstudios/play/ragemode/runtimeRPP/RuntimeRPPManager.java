@@ -20,6 +20,8 @@ public class RuntimeRPPManager {
 			public void run() {
 				RuntimeRPPList = MySQLStats.getAllPlayerStatistics();
 			}});
+		MergeSort ms = new MergeSort();
+		ms.sort(RuntimeRPPList);
 	}
 	
 	public static void getRPPListFromYAML() {

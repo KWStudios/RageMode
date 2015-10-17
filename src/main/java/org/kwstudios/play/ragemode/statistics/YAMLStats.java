@@ -26,8 +26,11 @@ public class YAMLStats {
 	
 	
 	public static void initS() {
-		if(inited)
-			return;
+		if(inited) {
+			statsConfiguration = YamlConfiguration.loadConfiguration(yamlStatsFile);
+			return;			
+		}
+
 		else
 			inited = true;
 		

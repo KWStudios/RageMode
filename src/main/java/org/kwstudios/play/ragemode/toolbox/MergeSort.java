@@ -39,7 +39,7 @@ public class MergeSort {
 		int j = middle + 1;
 		int k = lowerIndex;
 		while (i <= middle && j <= higherIndex) {
-			if (tempMergArr[i].getPoints() <= tempMergArr[j].getPoints()) {
+			if (tempMergArr[i].getPoints() > tempMergArr[j].getPoints()) {
 				array.set(k, tempMergArr[i]);
 				i++;
 			} else {

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -213,6 +215,95 @@ public class MySQLStats {
 		retPlayerPoints.setKD(currentKD);
 
 		return retPlayerPoints;
+	}
+	
+	/**
+	 * Retrieves all rows from the mySQL database and returns them as a List of RetPlayerPoints.
+	 * 
+	 * @return A List of all RetPlayerPoints objects which are stored in the mySQL database.
+	 */
+	public static List<RetPlayerPoints> getAllPlayerStatistics() {
+		List<RetPlayerPoints> rppList = new ArrayList<RetPlayerPoints>();
+		
+		testConnection();
+
+		Connection connection = PluginLoader.getMySqlConnector().getConnection();
+
+		Statement statement = null;
+		String query = "SELECT * FROM rm_stats_players;";
+
+		int currentKills = 0;
+		int currentAxeKills = 0;
+		int currentDirectArrowKills = 0;
+		int currentExplosionKills = 0;
+		int currentKnifeKills = 0;
+
+		int currentDeaths = 0;
+		int currentAxeDeaths = 0;
+		int currentDirectArrowDeaths = 0;
+		int currentExplosionDeaths = 0;
+		int currentKnifeDeaths = 0;
+
+		int currentWins = 0;
+		int currentScore = 0;
+		int currentGames = 0;
+		double currentKD = 0;
+
+		try {
+			statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery(query);
+			while (rs.next()) {
+				currentKills = rs.getInt("kills");
+				currentAxeKills = rs.getInt("axe_kills");
+				currentDirectArrowKills = rs.getInt("direct_arrow_kills");
+				currentExplosionKills = rs.getInt("explosion_kills");
+				currentKnifeKills = rs.getInt("knife_kills");
+
+				currentDeaths = rs.getInt("deaths");
+				currentAxeDeaths = rs.getInt("axe_deaths");
+				currentDirectArrowDeaths = rs.getInt("direct_arrow_deaths");
+				currentExplosionDeaths = rs.getInt("explosion_deaths");
+				currentKnifeDeaths = rs.getInt("knife_deaths");
+
+				currentWins = rs.getInt("wins");
+				currentScore = rs.getInt("score");
+				currentGames = rs.getInt("games");
+				currentKD = rs.getDouble("kd");
+				
+				String playerUUID = rs.getString("uuid");
+				RetPlayerPoints retPlayerPoints = new RetPlayerPoints(playerUUID);
+				retPlayerPoints.setKills(currentKills);
+				retPlayerPoints.setAxeKills(currentAxeKills);
+				retPlayerPoints.setDirectArrowKills(currentDirectArrowKills);
+				retPlayerPoints.setExplosionKills(currentExplosionKills);
+				retPlayerPoints.setKnifeKills(currentKnifeKills);
+
+				retPlayerPoints.setDeaths(currentDeaths);
+				retPlayerPoints.setAxeDeaths(currentAxeDeaths);
+				retPlayerPoints.setDirectArrowDeaths(currentDirectArrowDeaths);
+				retPlayerPoints.setExplosionDeaths(currentExplosionDeaths);
+				retPlayerPoints.setKnifeDeaths(currentKnifeDeaths);
+
+				retPlayerPoints.setWins(currentWins);
+				retPlayerPoints.setPoints(currentScore);
+				retPlayerPoints.setGames(currentGames);
+				retPlayerPoints.setKD(currentKD);
+				
+				rppList.add(retPlayerPoints);
+			}
+		} catch (SQLException e) {
+			// System.out.println("Something went wrong!");
+			return null;
+		}
+		if (statement != null) {
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return rppList;
 	}
 
 	private synchronized static void testConnection() {

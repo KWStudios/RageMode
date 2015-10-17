@@ -28,16 +28,19 @@ public class RuntimeRPPManager {
 	
 	public static RetPlayerPoints getRPPForPlayer(String sUUID) {
 		RetPlayerPoints rpp = null;
-		int i = 0;
-		int imax = RuntimeRPPList.size();
-		while(i < imax) {
-			if(RuntimeRPPList.get(i).getPlayerUUID().equals(sUUID)) {
-				rpp = RuntimeRPPList.get(i);
-				rpp.setRank(i + 1);
-				break;
-			}
-			i++;
+		if(RuntimeRPPList != null) {
+			int i = 0;
+			int imax = RuntimeRPPList.size();
+			while(i < imax) {
+				if(RuntimeRPPList.get(i).getPlayerUUID().equals(sUUID)) {
+					rpp = RuntimeRPPList.get(i);
+					rpp.setRank(i + 1);
+					break;
+				}
+				i++;
+			}			
 		}
+
 		return rpp;
 	}
 	

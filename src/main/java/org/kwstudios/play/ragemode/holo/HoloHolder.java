@@ -94,8 +94,13 @@ public class HoloHolder {
 
 				@Override
 				public void run() {
-//					final RetPlayerPoints rpp = YAMLStats.getPlayerStatistics(yamlPlayer.getUniqueId().toString());
-					final RetPlayerPoints rpp = RuntimeRPPManager.getRPPForPlayer(yamlPlayer.getUniqueId().toString());
+					final RetPlayerPoints rpp;
+					if(RuntimeRPPManager.getRPPForPlayer(yamlPlayer.getUniqueId().toString()) == null) {
+						rpp = YAMLStats.getPlayerStatistics(yamlPlayer.getUniqueId().toString());						
+					}
+					else {
+						rpp = RuntimeRPPManager.getRPPForPlayer(yamlPlayer.getUniqueId().toString());						
+					}
 					Bukkit.getServer().getScheduler().callSyncMethod(PluginLoader.getInstance(),
 							new Callable<String>() {
 
@@ -117,9 +122,14 @@ public class HoloHolder {
 			Bukkit.getServer().getScheduler().runTaskAsynchronously(PluginLoader.getInstance(), new Runnable() {
 				@Override
 				public void run() {
-//					final RetPlayerPoints rpp = MySQLStats.getPlayerStatistics(mySQLPlayer.getUniqueId().toString(),
-//							PluginLoader.getMySqlConnector());
-					final RetPlayerPoints rpp = RuntimeRPPManager.getRPPForPlayer(mySQLPlayer.getUniqueId().toString());
+					final RetPlayerPoints rpp;
+					if(RuntimeRPPManager.getRPPForPlayer(mySQLPlayer.getUniqueId().toString()) == null) {
+						rpp = MySQLStats.getPlayerStatistics(mySQLPlayer.getUniqueId().toString(),
+							PluginLoader.getMySqlConnector());						
+					}
+					else {
+						rpp = RuntimeRPPManager.getRPPForPlayer(mySQLPlayer.getUniqueId().toString());					
+					}
 					Bukkit.getServer().getScheduler().callSyncMethod(PluginLoader.getInstance(),
 							new Callable<String>() {
 
@@ -132,7 +142,6 @@ public class HoloHolder {
 				}
 			});
 		}
-
 	}
 
 	private static void setHologramLines(Hologram hologram, RetPlayerPoints rpp) {

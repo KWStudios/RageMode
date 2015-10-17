@@ -142,7 +142,17 @@ public class StopGame {
 						
 						@Override
 						public void run() {
-							RuntimeRPPManager.updatePlayerEntry(pP);						
+							RuntimeRPPManager.updatePlayerEntry(pP);
+							Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(PluginLoader.getInstance(), new Runnable() {
+
+								@Override
+								public void run() {
+									for (String playerUUID : players) {				
+										HoloHolder.updateHolosForPlayer(Bukkit.getPlayer(UUID.fromString(playerUUID)));				
+									}	
+								}
+								
+							});
 						}
 					});		
 				}
@@ -162,16 +172,6 @@ public class StopGame {
 					}
 					i++;
 				}
-				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(PluginLoader.getInstance(), new Runnable() {
-
-					@Override
-					public void run() {
-						for (String playerUUID : players) {				
-							HoloHolder.updateHolosForPlayer(Bukkit.getPlayer(UUID.fromString(playerUUID)));				
-						}	
-					}
-					
-				});
 			}
 			RageScores.removePointsForPlayers(players);
 

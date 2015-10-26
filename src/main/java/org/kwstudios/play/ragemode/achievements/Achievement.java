@@ -9,6 +9,16 @@ public class Achievement {
 	private String name;
 	private int points;
 	private AchievementReason reason;
+	
+	public String[] names = 
+		{
+			"First Kill", "Kill Streak: 3", "Kill Streak: 5", "Kill Streak: 10", "Kill Streak: 15", "First Blood", "First Win", "Fare Well", "Evil", "Swordmaster", "Explosive", "Survivor", "Revenge", "Fair Play", "Tactical Fighting", "Boom", "Why Always Me?", "Easy Going", "100 Percent"
+		};
+	
+	public int[] point =
+		{
+			1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+		};
 
 	public Achievement(String name, int points, AchievementReason reason) {
 		this.name = name;

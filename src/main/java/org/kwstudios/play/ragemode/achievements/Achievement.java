@@ -3,7 +3,7 @@ package org.kwstudios.play.ragemode.achievements;
 public class Achievement {
 
 	public enum AchievementReason {
-		FIRST_KILL, FIRST_STREAK, FIRST_BLOOD, FIRST_WIN
+		FIRST_KILL, FIRST_STREAK_3, FIRST_STREAK_5, FIRST_STREAK_10, FIRST_STREAK_15, FIRST_BLOOD, FIRST_WIN, FARE_WELL, EVIL, SWORDMASTER, EXPLOSIVE, SURVIVOR, REVENGE, FAIR_PLAY, TAKTICAL_BACON, BOOM, WHY_ME, EASY_GOING, ONEHUNDRED 
 	}
 
 	private String name;

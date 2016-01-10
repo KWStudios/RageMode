@@ -19,7 +19,7 @@ before_deploy:
 deploy:
   - provider: releases
     api_key:
-      secure: MXvyvKNlEOhNV7um+lY1Np3aGmZlNvMXCsrRZBKkLs7EiSiinRWt5S4jjYwbXu/P+dkRK9/yV+Oth56knwVFZhgkNCOIIrKJR/rYYKAf1+wKq6VFOnQ973+mp/Gy0ZeOf19Ht4elJwrk+nfvBl41KURgRp6IyUratWq5jMYyBB4vOS6WAqdb5UAPU/wZIuiaw9hq8lKsa9NfmHv0Xxuw//vC6ICMwY9BSaTq2eFI7ZK9D4Q+4jeoPtDix/hV4NM9JuaoMp5/jOsWusFRFqtmS/e65G71uQPTplQQ2U8g6IY9ql6s+YiMz8CDMdOrLBa4JO3vvj35txcOHEtC7VNHKnrQVp10Bu9iaa5C4ftSXhrNOUs/RqeuY0qwMCPBVleqYpXPiAnl3Sb1EREU8EP001KtdyMdTZYKZzh5FYn1Y1DLpHRhww7ryDG//3uzRi6gVOuCxNlr4u97AL2lebKb0stKS6wErfo5tlUZfQn/I/azYximXgY02GMLImgV9YtrZeq7N9SUQX9Mu3n1h4Ux4Bu/+x4dV8oYyhAivNF7Ata23zm5VVuJKgzdPktJOkQEyNlgcZgJN5nhD8KVGrX1iuhNwwxeOfKyiLEfDmnvoeMaaf1UEAdZipnmD7pvX7J4Ybz4WmbiDU7kjjsaBA0Es1YIiaJynBreiBJUXtJmOtI=
+      secure: MXvyvKNlEOhNV7um+lY1Np3aGmZlNvMXCsrRZBKkLs7EiSiinRWt5S4jjYwbXu/P+$
     file_glob: true
     file: ${HOME}/build/${TRAVIS_REPO_SLUG}/target/ragemode*.jar
     skip_cleanup: true
@@ -27,12 +27,12 @@ deploy:
       repo: KWStudios/RageMode
       tags: true
   - provider: gcs
-    access_key_id: GOOGP32S45SXW73QHVJK
+    access_key_id: GOOGOORZ55TL3TFGHJHZ
     secret_access_key:
-      secure: jPl3D5QUqw6+Pl5qHCYY950BeeVTQ17jAjhd/X/6TcMFANr0KiwEfSEWb9+Hn2ieHfZyj1FBdaSXh8erfUKwOxImpLKvFJN3zizXX9yGsxyBkKEGV5VeFl0N/qOb4FUHIW2qK/tdbrgyc8fjRuG2KlMQEW5eoHJhQwahcIRZDCatg8g+esT1X1BQEvjknplYqHcY36DZnzQujYALlHiakW0BCJ/nIvhs5mXuU79sFjnfpe7hepIV1BQS2p+/H3OVPR7BwVCIhHqZfCd65dcLw3OWlkEbpXNbCvUfWSZABg/L6Rwi0VwVTAOsCGM7CjoLkjBXSVOcZ1C1hB4P4NslgU2gtNT4Vu3wEZbzms1vaAWRa9v9qtX6rjr1f44ArplZZSYk4G9ftotE1Ycx778+zepEKqmUvabTwe3/qNHZCPo7YjHCCvjuM6oHwDT5wfZl5rlkE/NieebcxSpd25x/Y1SsuPlloGic05z7GLl3xhTfx/F/t/9TI6QtXYoQIj6azeOa7bOF9MlFCcYMrRh7CDiJAcWi8DTzYHfJK7WbtAIpKr2Dha6QJ7dGuwuCZZh2G3fjebPhCJJ4O1bYjZxctiFBeAPduobpKKZTGGmpud5ytjsIbxgaYEouoop5/R5/F2mjcV1TZI90dvDUHAzxP7FjnCMF85AxlCjnyohvOo8=
+      secure: i1cuqczKWqYeoYlGlwdIJFoTTRwKJn5NZUq/OoLsqtRgjdIY41zKmZMM3Epe+c1Hl5iY7DzKDWhAbZJCOLeUDkPJC7SbgvLNEpWQd39iJGo9rhn3aa+IzN/JxKUItYdYKsx/yqbwXdnbOm/Pt+7dNhCfkj04FgJX8QrXqtuT2pBZj0oDXa9NAq5277EDB41UqqIQwdMJgbsk6XMW/uPF+VeWr4SJbbX6902t7v+LKfPyVUUuhDNVFeFHPQ6LIg2FArtDYsg8evTOIJ6Uk6lv/XvbewR7LJoN6SBMAcYiKz12tBIi71Ij4vU1UDJ6ixHlFk7P85ip2rt1xBAL0JTUayDMYp6NGjW2mCv9mJjvie9YbSv8m8brevwbT7hLFvsO33WOR98BnEFr7yYGNOPv0bGvWIBQmk8tQQjDc3K5sDg7JevWVt5u/wgV13ZRDCkEgCTqGhseXS7D5rFhe6HpuD6ZHuEcnalhi+zz8Ua7pwm9UwYPuZQdKK2rilU8LfK2qyDEGbQNGcfuyNtPxptvz2Jwo/F2QF3AaytV7/7hX12VxlviwUOV5KCbLZcRb1W5ry45LAPYi0k14Vky+WhK/VUIbgUYIO8ohiiyHhmtbvYkGGegVlmVGJfJ/owAp8qBh50QebRWU76oWSC/MW5oZeNs052ySmd6uC565YuvBSM=
     file_glob: true
     bucket: play-kwstudios-org
-    local-dir: ${HOME}/build/${TRAVIS_REPO_SLUG}/target
+    local-dir: "${HOME}/build/${TRAVIS_REPO_SLUG}/target"
     upload-dir: ragemode/travis-builds/${TRAVIS_BUILD_NUMBER}
     skip_cleanup: true
     acl: public-read

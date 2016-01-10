@@ -1,5 +1,6 @@
 {
   "VERSION": "v0.2.2-beta",
   "LINK": "https://github.com/KWStudios/RageMode/releases/download/v0.2.2-beta/ragemode-v0.2.2-beta.jar",
-  "RELEASE_NOTES": ["Changes:", "- We added the german language to this build. Run <</rm locale de>> to turn all the messages to german.", "- Fixed a bug which caused some weird double-leavings with MultiVerse Inventories.", "- Report issues on GitHub https://github.com/KWStudios/RageMode/"]
+  "RELEASE_NOTES": ["Changes:", "- We added the german language to this build. Run <</rm locale de>> to turn all the messages to german.", "- Fixed a bug which caused some weird double-leavings with MultiVerse Inventories.", "- Report issues on GitHub https://github.com/KWStudios/RageMode/"],
+  "BUCKET": "kwstudios-main-bucket"
 }

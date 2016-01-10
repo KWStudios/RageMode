@@ -33,7 +33,7 @@ deploy:
     file_glob: true
     bucket: kwstudios-main-bucket
     local-dir: "${HOME}/build/${TRAVIS_REPO_SLUG}/target"
-    upload-dir: ragemode/travis-builds/${TRAVIS_BUILD_NUMBER}
+    upload-dir: travis/ragemode/${TRAVIS_BUILD_NUMBER}
     skip_cleanup: true
     acl: public-read
     on:

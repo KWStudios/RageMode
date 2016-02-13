@@ -383,7 +383,10 @@ public class EventListener implements Listener {
 		if (PlayerList.isPlayerPlaying(event.getPlayer().getUniqueId().toString())) {
 			event.setCancelled(true);
 		}
+	}
 
+	@EventHandler(priority = EventPriority.MONITOR)
+	public void onSignBreak(BlockBreakEvent event) {
 		if (event.getBlock().getState() instanceof Sign && !event.isCancelled()) {
 			SignCreator.removeSign((Sign) event.getBlock().getState());
 		}

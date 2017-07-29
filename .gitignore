@@ -26,3 +26,10 @@ buildNumber.properties
 
 # Ignore OSX specific files
 .DS_Store
+
+# eclipse specific
+.project
+.classpath
+
+# IntelliJ IDEA specific
+.idea/

@@ -60,7 +60,7 @@ public class LobbyTimer {
 					String[] playerUUIDs = PlayerList.getPlayersInGame(gameName);
 					for (int i = 0; i < playerUUIDs.length; i++) {
 						String message = ConstantHolder.RAGEMODE_PREFIX
-								+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().LOBBY_MESSAGE
+								+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().LOBBY_MESSAGE
 										.replace("$TIME$", Integer.toString(totalMessagesBeforeTen * 10)));
 						Bukkit.getPlayer(UUID.fromString(playerUUIDs[i])).sendMessage(message);
 					}
@@ -86,7 +86,7 @@ public class LobbyTimer {
 					String[] playerUUIDs = PlayerList.getPlayersInGame(gameName);
 					for (int i = 0; i < playerUUIDs.length; i++) {
 						String message = ConstantHolder.RAGEMODE_PREFIX
-								+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().LOBBY_MESSAGE
+								+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().LOBBY_MESSAGE
 										.replace("$TIME$", Integer.toString(timesToSendMessage)));
 						Bukkit.getPlayer(UUID.fromString(playerUUIDs[i])).sendMessage(message);
 					}

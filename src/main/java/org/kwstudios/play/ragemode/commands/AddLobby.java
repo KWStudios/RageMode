@@ -29,7 +29,7 @@ public class AddLobby {
 		if (args.length >= 2) {
 			String gameName = args[1];
 			if (!fileConfiguration.isSet(GAMES_PATH + "." + gameName)) {
-				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 						PluginLoader.getMessages().NOT_SET_YET.replace("$USAGE$", "/rm add <GameName> <MaxPlayers>")));
 				return;
 			} else {
@@ -40,12 +40,12 @@ public class AddLobby {
 				ConfigFactory.setDouble(path, "z", player.getLocation().getZ(), fileConfiguration);
 				ConfigFactory.setDouble(path, "yaw", player.getLocation().getYaw(), fileConfiguration);
 				ConfigFactory.setDouble(path, "pitch", player.getLocation().getPitch(), fileConfiguration);
-				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 						PluginLoader.getMessages().LOBBY_SUCCESSFULLY.replace("$GAME$", gameName)));
 
 			}
 		} else {
-			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 					PluginLoader.getMessages().MISSING_ARGUMENTS.replace("$USAGE$", "/rm lobby <GameName>")));
 		}
 	}

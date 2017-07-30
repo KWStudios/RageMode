@@ -25,7 +25,7 @@ public class AddGame {
 	private void addGametoConfig() {
 		if (args.length < 3) {
 			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX
-					+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().MISSING_ARGUMENTS
+					+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().MISSING_ARGUMENTS
 							.replace("$USAGE$", "/rm add <GameName> <MaxPlayers>")));
 			return;
 		}
@@ -33,19 +33,19 @@ public class AddGame {
 		try {
 			x = Integer.parseInt(args[2]);
 		} catch (Exception e) {
-			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 					PluginLoader.getMessages().NOT_A_NUMBER.replace("$WRONG_NUMBER$", args[2])));
 			return;
 		}
 
 		if (fileConfiguration.isSet("settings.games." + args[1])) {
-			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 					PluginLoader.getMessages().ALREADY_EXISTS.replace("$GAME$", args[1])));
 			return;
 		}
 		
 		if(x < 2) {
-			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 					PluginLoader.getMessages().AT_LEAST_TWO));
 			return;
 		}
@@ -56,7 +56,7 @@ public class AddGame {
 		ConfigFactory.setInt("settings.games." + args[1], "maxplayers", Integer.parseInt(args[2]), fileConfiguration);
 		ConfigFactory.setString("settings.games." + args[1], "world", player.getWorld().getName(), fileConfiguration);
 
-		player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+		player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 				PluginLoader.getMessages().ADDED_SUCCESSFULLY.replace("$GAME$", args[1])));
 		return;
 	}

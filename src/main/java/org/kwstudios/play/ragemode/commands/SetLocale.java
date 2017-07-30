@@ -42,7 +42,7 @@ public class SetLocale {
 				ConfigFactory.setString("settings.global", "locale", args[1], fileConfiguration);
 				PluginLoader.getInstance().loadMessages();
 				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX
-						+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().SUCCESS));
+						+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().SUCCESS));
 			} else {
 				String message = ConstantHolder.RAGEMODE_PREFIX
 						+ "This localization file is not available! There are currently " + ChatColor.DARK_PURPLE;
@@ -53,7 +53,7 @@ public class SetLocale {
 				player.sendMessage(message);
 			}
 		} else {
-			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 					PluginLoader.getMessages().MISSING_ARGUMENTS.replace("$USAGE$", "/rm locale <Language-code>")));
 		}
 	}

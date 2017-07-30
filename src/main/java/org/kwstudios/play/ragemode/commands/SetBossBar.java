@@ -25,9 +25,9 @@ public class SetBossBar {
 		if (args.length >= 2) {
 			ConfigFactory.setBoolean("settings.global", "bossbar", Boolean.parseBoolean(args[1]), fileConfiguration);
 			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX
-					+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().SUCCESS));
+					+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().SUCCESS));
 		} else {
-			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 					PluginLoader.getMessages().MISSING_ARGUMENTS.replace("$USAGE$", "/rm bossbar <true|false>")));
 		}
 	}

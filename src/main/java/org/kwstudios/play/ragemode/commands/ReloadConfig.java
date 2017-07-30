@@ -32,7 +32,7 @@ public class ReloadConfig {
 			HoloHolder.initHoloHolder();
 
 		player.sendMessage(ConstantHolder.RAGEMODE_PREFIX
-				+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().RELOADED_SUCCESSFULLY));
+				+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().RELOADED_SUCCESSFULLY));
 		// TODO To be continued...
 	}
 

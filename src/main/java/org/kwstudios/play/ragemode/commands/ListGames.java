@@ -16,7 +16,7 @@ public class ListGames {
 			int imax = games.length;
 
 			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX
-					+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().LISTING_GAMES));
+					+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().LISTING_GAMES));
 
 			while (i < imax) {
 				if (PlayerList.isGameRunning(games[i])) {
@@ -28,7 +28,7 @@ public class ListGames {
 			}
 		} else {
 			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX
-					+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().NO_GAMES_AVAILABLE));
+					+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().NO_GAMES_AVAILABLE));
 		}
 
 	}

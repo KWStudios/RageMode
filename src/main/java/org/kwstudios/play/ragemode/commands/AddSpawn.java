@@ -23,13 +23,13 @@ public class AddSpawn {
 
 	private void addSpawnToConfig() {
 		if (args.length < 2) {
-			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 					PluginLoader.getMessages().MISSING_ARGUMENTS.replace("$USAGE$", "/rm addspawn <GameName>")));
 			return;
 		}
 		int i = 1;
 		if (!fileConfiguration.isSet("settings.games." + args[1])) {
-			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 					PluginLoader.getMessages().NOT_SET_YET.replace("$USAGE$", "/rm add <GameName> <MaxPlayers>")));
 			return;
 		}
@@ -45,7 +45,7 @@ public class AddSpawn {
 		ConfigFactory.setDouble("settings.games." + args[1] + ".spawns." + Integer.toString(i), "yaw", player.getLocation().getYaw(), fileConfiguration);
 		ConfigFactory.setDouble("settings.games." + args[1] + ".spawns." + Integer.toString(i), "pitch", player.getLocation().getPitch(), fileConfiguration);
 		player.sendMessage(ConstantHolder.RAGEMODE_PREFIX
-				+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().SPAWN_SUCCESSFULLY
+				+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().SPAWN_SUCCESSFULLY
 						.replace("$NUMBER$", Integer.toString(i)).replace("$GAME$", args[1])));
 	}
 

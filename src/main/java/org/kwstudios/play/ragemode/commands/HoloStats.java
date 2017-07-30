@@ -30,10 +30,10 @@ public class HoloStats {
 					removeHolo();
 			}
 			else
-				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().MISSING_ARGUMENTS.replace("$USAGE$", "/rm holo <add/remove>")));			
+				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().MISSING_ARGUMENTS.replace("$USAGE$", "/rm holo <add/remove>")));			
 		}
 		else
-			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().MISSING_DEPENDENCIES.replace("$DEPENDENCIE$", "HolographicDisplays & ProtocolLib")));
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().MISSING_DEPENDENCIES.replace("$DEPENDENCIE$", "HolographicDisplays & ProtocolLib")));
 	}
 
 

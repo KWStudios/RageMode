@@ -35,7 +35,7 @@ public class PlayerJoin {
 
 	private void doPlayerJoin() {
 		if (args.length < 2) {
-			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 					PluginLoader.getMessages().MISSING_ARGUMENTS.replace("$USAGE$", "/rm join <GameName>")));
 			return;
 		}
@@ -77,14 +77,14 @@ public class PlayerJoin {
 				player.getInventory().setChestplate(null);
 				player.getInventory().setLeggings(null);
 				player.getInventory().setBoots(null);
-				String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+				String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 						PluginLoader.getMessages().PLAYER_JOINED.replace("$PLAYER$", player.getName()));
 				GameBroadcast.broadcastToGame(args[1], message);
 				logger.info(message);
 				SignCreator.updateAllSigns(args[1]);
 			} else {
 				logger.info(ConstantHolder.RAGEMODE_PREFIX
-						+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().PLAYER_COULD_NOT_JOIN
+						+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().PLAYER_COULD_NOT_JOIN
 								.replace("$PLAYER$", player.getName()).replace("$GAME$", args[1])));
 			}
 

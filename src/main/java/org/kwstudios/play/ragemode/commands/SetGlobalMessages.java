@@ -40,27 +40,27 @@ public class SetGlobalMessages {
 				ConfigFactory.setBoolean("settings.global", "deathmessages", Boolean.parseBoolean(args[2]),
 						fileConfiguration);
 				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX
-						+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().SUCCESS));
+						+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().SUCCESS));
 			} else {
 				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX
-						+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().MISSING_ARGUMENTS
+						+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().MISSING_ARGUMENTS
 								.replace("$USAGE$", "/rm global globalmessages <true|false>")));
 			}
 		} else {
 			if (args.length >= 3) {
 				if (!fileConfiguration.isSet(ConstantHolder.GAME_PATH + "." + args[1])) {
 					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX
-							+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().NOT_SET_YET
+							+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().NOT_SET_YET
 									.replace("$USAGE$", "/rm add <GameName> <MaxPlayers>")));
 					return;
 				}
 				ConfigFactory.setBoolean(ConstantHolder.GAME_PATH + "." + args[1], "deathmessages",
 						Boolean.parseBoolean(args[2]), fileConfiguration);
 				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX
-						+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().SUCCESS));
+						+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().SUCCESS));
 			} else {
 				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX
-						+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().MISSING_ARGUMENTS
+						+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().MISSING_ARGUMENTS
 								.replace("$USAGE$", "/rm globalmessages <GameName> <true|false>")));
 			}
 		}

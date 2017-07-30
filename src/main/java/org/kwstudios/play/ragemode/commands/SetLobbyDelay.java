@@ -40,21 +40,21 @@ public class SetLobbyDelay {
 				if (isInt(args[2])) {
 					ConfigFactory.setInt("settings.global", "lobbydelay", Integer.parseInt(args[2]), fileConfiguration);
 					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX
-							+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().SUCCESS));
+							+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().SUCCESS));
 				} else {
-					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 							PluginLoader.getMessages().NOT_A_NUMBER.replace("$WRONG_NUMBER$", args[2])));
 				}
 			} else {
 				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX
-						+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().MISSING_ARGUMENTS
+						+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().MISSING_ARGUMENTS
 								.replace("$USAGE$", "/rm global lobbydelay <Seconds>")));
 			}
 		} else {
 			if (args.length >= 3) {
 				if (!fileConfiguration.isSet(ConstantHolder.GAME_PATH + "." + args[1])) {
 					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX
-							+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().NOT_SET_YET
+							+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().NOT_SET_YET
 									.replace("$USAGE$", "/rm add <GameName> <MaxPlayers>")));
 					return;
 				}
@@ -62,14 +62,14 @@ public class SetLobbyDelay {
 					ConfigFactory.setInt(ConstantHolder.GAME_PATH + "." + args[1], "lobbydelay",
 							Integer.parseInt(args[2]), fileConfiguration);
 					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX
-							+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().SUCCESS));
+							+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().SUCCESS));
 				} else {
-					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 							PluginLoader.getMessages().NOT_A_NUMBER.replace("$WRONG_NUMBER$", args[2])));
 				}
 			} else {
 				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX
-						+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().MISSING_ARGUMENTS
+						+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().MISSING_ARGUMENTS
 								.replace("$USAGE$", "/rm lobbydelay <GameName> <Seconds>")));
 			}
 		}

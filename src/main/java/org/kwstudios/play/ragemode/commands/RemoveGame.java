@@ -14,25 +14,25 @@ public class RemoveGame {
 			String game = args[1];
 
 			if (!GetGames.isGameExistent(game, fileConfiguration)) {
-				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 						PluginLoader.getMessages().REMOVED_NON_EXISTENT_GAME));
 				return;
 			} else {
 				if (PlayerList.isGameRunning(game)) {
 					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX
-							+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().GAME_RUNNING));
+							+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().GAME_RUNNING));
 					return;
 				} else {
 					PlayerList.deleteGameFromList(game);
 
 					fileConfiguration.set("settings.games." + game, null);
 
-					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+					player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 							PluginLoader.getMessages().REMOVED_SUCCESSFULLY.replace("$GAME$", game)));
 				}
 			}
 		} else {
-			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 					PluginLoader.getMessages().MISSING_ARGUMENTS.replace("$USAGE$", "/rm remove <GameName>")));
 			return;
 		}

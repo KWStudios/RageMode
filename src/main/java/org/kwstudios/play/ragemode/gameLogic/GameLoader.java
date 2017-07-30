@@ -82,7 +82,7 @@ public class GameLoader {
 			teleportPlayersToGameSpawns();
 		} else {
 			String message = ConstantHolder.RAGEMODE_PREFIX
-					+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().GAME_NOT_SET_UP);
+					+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().GAME_NOT_SET_UP);
 			GameBroadcast.broadcastToGame(gameName, message);
 			String[] players = PlayerList.getPlayersInGame(gameName);
 			for (String player : players) {

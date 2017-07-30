@@ -46,18 +46,18 @@ public class RageScores {
 				int newDirectArrowDeaths = oldDirectArrowDeaths + 1;
 				victimPoints.setDirectArrowDeaths(newDirectArrowDeaths);
 
-				message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+				message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 						PluginLoader.getMessages().MESSAGE_ARROW_KILL.replace("$VICTIM$", victim.getName())
 								.replace("$POINTS$", "+" + Integer.toString(bowPoints)));
 				killer.sendMessage(message);
 
 				message = ConstantHolder.RAGEMODE_PREFIX
-						+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().MESSAGE_ARROW_DEATH
+						+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().MESSAGE_ARROW_DEATH
 								.replace("$KILLER$", killer.getName()).replace("$POINTS$", ""));
 				victim.sendMessage(message);
 
 				message = ConstantHolder.RAGEMODE_PREFIX
-						+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().MESSAGE_CURRENT_POINTS
+						+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().MESSAGE_CURRENT_POINTS
 								.replace("$POINTS$", Integer.toString(totalPoints)));
 				killer.sendMessage(message);
 				break;
@@ -77,18 +77,18 @@ public class RageScores {
 				int newAxeDeaths = oldAxeDeaths + 1;
 				victimPoints.setAxeDeaths(newAxeDeaths);
 
-				message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+				message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 						PluginLoader.getMessages().MESSAGE_AXE_KILL.replace("$VICTIM$", victim.getName())
 								.replace("$POINTS$", "+" + Integer.toString(axePoints)));
 				killer.sendMessage(message);
 
-				message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+				message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 						PluginLoader.getMessages().MESSAGE_AXE_DEATH.replace("$KILLER$", killer.getName())
 								.replace("$POINTS$", Integer.toString(axeMinusPoints)));
 				victim.sendMessage(message);
 
 				message = ConstantHolder.RAGEMODE_PREFIX
-						+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().MESSAGE_CURRENT_POINTS
+						+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().MESSAGE_CURRENT_POINTS
 								.replace("$POINTS$", Integer.toString(totalPoints)));
 				killer.sendMessage(message);
 				break;
@@ -107,18 +107,18 @@ public class RageScores {
 				int newKnifeDeaths = oldKnifeDeaths + 1;
 				victimPoints.setKnifeDeaths(newKnifeDeaths);
 
-				message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+				message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 						PluginLoader.getMessages().MESSAGE_KNIFE_KILL.replace("$VICTIM$", victim.getName())
 								.replace("$POINTS$", "+" + Integer.toString(knifePoints)));
 				killer.sendMessage(message);
 
 				message = ConstantHolder.RAGEMODE_PREFIX
-						+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().MESSAGE_KNIFE_DEATH
+						+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().MESSAGE_KNIFE_DEATH
 								.replace("$KILLER$", killer.getName()).replace("$POINTS$", ""));
 				victim.sendMessage(message);
 
 				message = ConstantHolder.RAGEMODE_PREFIX
-						+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().MESSAGE_CURRENT_POINTS
+						+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().MESSAGE_CURRENT_POINTS
 								.replace("$POINTS$", Integer.toString(totalPoints)));
 				killer.sendMessage(message);
 				break;
@@ -137,18 +137,18 @@ public class RageScores {
 				int newExplosionDeaths = oldExplosionDeaths + 1;
 				victimPoints.setExplosionDeaths(newExplosionDeaths);
 
-				message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+				message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 						PluginLoader.getMessages().MESSAGE_EXPLOSION_KILL.replace("$VICTIM$", victim.getName())
 								.replace("$POINTS$", "+" + Integer.toString(explosionPoints)));
 				killer.sendMessage(message);
 
 				message = ConstantHolder.RAGEMODE_PREFIX
-						+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().MESSAGE_EXPLOSION_DEATH
+						+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().MESSAGE_EXPLOSION_DEATH
 								.replace("$KILLER$", killer.getName()).replace("$POINTS$", ""));
 				victim.sendMessage(message);
 
 				message = ConstantHolder.RAGEMODE_PREFIX
-						+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().MESSAGE_CURRENT_POINTS
+						+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().MESSAGE_CURRENT_POINTS
 								.replace("$POINTS$", Integer.toString(totalPoints)));
 				killer.sendMessage(message);
 				break;
@@ -164,7 +164,7 @@ public class RageScores {
 				currentPoints.setPoints(currentPoints.getPoints() + (currentStreak * 10));
 
 				message = ConstantHolder.RAGEMODE_PREFIX
-						+ ChatColor.translateAlternateColorCodes('ยง',
+						+ ChatColor.translateAlternateColorCodes('ง',
 								PluginLoader.getMessages().MESSAGE_STREAK
 										.replace("$NUMBER$", Integer.toString(currentStreak))
 										.replace("$POINTS$", "+" + Integer.toString(currentStreak * 10)));
@@ -177,7 +177,7 @@ public class RageScores {
 			updateScoreBoard(victim, board);
 		} else {
 			String message = ConstantHolder.RAGEMODE_PREFIX
-					+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().MESSAGE_SUICIDE);
+					+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().MESSAGE_SUICIDE);
 			killer.sendMessage(message);
 		}
 		// TabGuiUpdater.updateTabGui(PlayerList.getPlayersGame(killer));
@@ -301,7 +301,7 @@ public class RageScores {
 		if(goy == highest) {
 			i = 0;
 			while (i < imax) {
-					String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+					String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 							PluginLoader.getMessages().MESSAGE_PLAYER_WON
 									.replace("$PLAYER$", "Herobrine")
 									.replace("$GAME$", game));
@@ -316,11 +316,11 @@ public class RageScores {
 			i = 0;
 			while (i < imax) {
 				if (players[i].equals(highest)) {
-					String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+					String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 							PluginLoader.getMessages().MESSAGE_YOU_WON.replace("$GAME$", game));
 					Bukkit.getPlayer(UUID.fromString(highest)).sendMessage(message);
 				} else {
-					String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+					String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 							PluginLoader.getMessages().MESSAGE_PLAYER_WON
 									.replace("$PLAYER$", Bukkit.getPlayer(UUID.fromString(highest)).getName())
 									.replace("$GAME$", game));

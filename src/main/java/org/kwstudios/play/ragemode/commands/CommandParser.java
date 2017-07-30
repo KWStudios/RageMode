@@ -31,7 +31,7 @@ public class CommandParser {
 	private void checkCommand() {
 		if (args == null || args.length < 1) {
 			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX
-					+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().WRONG_COMMAND));
+					+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().WRONG_COMMAND));
 			return;
 		}
 		switch (label.toLowerCase()) {
@@ -57,7 +57,7 @@ public class CommandParser {
 				new AddGame(player, label, args, fileConfiguration);
 			} else {
 				player.sendMessage(
-						ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().PERMISSION_MESSAGE));
+						ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().PERMISSION_MESSAGE));
 			}
 			break;
 		case "lobby":
@@ -65,7 +65,7 @@ public class CommandParser {
 				new AddLobby(player, label, args, fileConfiguration);
 			} else {
 				player.sendMessage(
-						ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().PERMISSION_MESSAGE));
+						ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().PERMISSION_MESSAGE));
 			}
 			break;
 		case "addspawn":
@@ -73,7 +73,7 @@ public class CommandParser {
 				new AddSpawn(player, label, args, fileConfiguration);
 			} else {
 				player.sendMessage(
-						ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().PERMISSION_MESSAGE));
+						ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().PERMISSION_MESSAGE));
 			}
 			break;
 		case "join":
@@ -81,7 +81,7 @@ public class CommandParser {
 				new PlayerJoin(player, label, args, fileConfiguration);
 			} else {
 				player.sendMessage(
-						ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().PERMISSION_MESSAGE));
+						ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().PERMISSION_MESSAGE));
 			}
 			break;
 		case "leave":
@@ -89,7 +89,7 @@ public class CommandParser {
 				new PlayerLeave(player, label, args, fileConfiguration);
 			} else {
 				player.sendMessage(
-						ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().PERMISSION_MESSAGE));
+						ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().PERMISSION_MESSAGE));
 			}
 			break;
 		case "remove":
@@ -97,7 +97,7 @@ public class CommandParser {
 				new RemoveGame(player, label, args, fileConfiguration);
 			} else {
 				player.sendMessage(
-						ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().PERMISSION_MESSAGE));
+						ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().PERMISSION_MESSAGE));
 			}
 			break;
 		case "list":
@@ -105,7 +105,7 @@ public class CommandParser {
 				new ListGames(player, label, args, fileConfiguration);
 			} else {
 				player.sendMessage(
-						ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().PERMISSION_MESSAGE));
+						ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().PERMISSION_MESSAGE));
 			}
 			break;
 		case "stop":
@@ -113,7 +113,7 @@ public class CommandParser {
 				new StopGame(player, label, args, fileConfiguration);
 			} else {
 				player.sendMessage(
-						ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().PERMISSION_MESSAGE));
+						ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().PERMISSION_MESSAGE));
 			}
 			break;
 		case "reload":
@@ -121,7 +121,7 @@ public class CommandParser {
 				new ReloadConfig(player, label, args, fileConfiguration);
 			} else {
 				player.sendMessage(
-						ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().PERMISSION_MESSAGE));
+						ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().PERMISSION_MESSAGE));
 			}
 			break;
 		case "stats":
@@ -129,7 +129,7 @@ public class CommandParser {
 				new ShowStats(player, label, args, fileConfiguration);
 			} else {
 				player.sendMessage(
-						ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().PERMISSION_MESSAGE));
+						ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().PERMISSION_MESSAGE));
 			}
 			break;
 		case "lobbydelay":
@@ -137,7 +137,7 @@ public class CommandParser {
 				new SetLobbyDelay(player, label, args, fileConfiguration);
 			} else {
 				player.sendMessage(
-						ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().PERMISSION_MESSAGE));
+						ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().PERMISSION_MESSAGE));
 			}
 			break;
 		case "gametime":
@@ -145,7 +145,7 @@ public class CommandParser {
 				new SetGameTime(player, label, args, fileConfiguration);
 			} else {
 				player.sendMessage(
-						ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().PERMISSION_MESSAGE));
+						ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().PERMISSION_MESSAGE));
 			}
 			break;
 		case "globalmessages":
@@ -153,7 +153,7 @@ public class CommandParser {
 				new SetGlobalMessages(player, label, args, fileConfiguration);
 			} else {
 				player.sendMessage(
-						ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().PERMISSION_MESSAGE));
+						ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().PERMISSION_MESSAGE));
 			}
 			break;
 		case "global":
@@ -161,7 +161,7 @@ public class CommandParser {
 				parseSecondArg();
 			} else {
 				player.sendMessage(
-						ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().PERMISSION_MESSAGE));
+						ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().PERMISSION_MESSAGE));
 			}
 			break;
 		case "bossbar":
@@ -169,7 +169,7 @@ public class CommandParser {
 				new SetBossBar(player, label, args, fileConfiguration);
 			} else {
 				player.sendMessage(
-						ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().PERMISSION_MESSAGE));
+						ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().PERMISSION_MESSAGE));
 			}
 			break;
 		case "actionbar":
@@ -177,7 +177,7 @@ public class CommandParser {
 				new SetActionBar(player, label, args, fileConfiguration);
 			} else {
 				player.sendMessage(
-						ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().PERMISSION_MESSAGE));
+						ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().PERMISSION_MESSAGE));
 			}
 			break;
 		case "holo":
@@ -185,7 +185,7 @@ public class CommandParser {
 				new HoloStats(player, label, args, fileConfiguration);
 			} else {
 				player.sendMessage(
-						ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().PERMISSION_MESSAGE));
+						ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().PERMISSION_MESSAGE));
 			}
 			break;
 		case "locale":
@@ -193,7 +193,7 @@ public class CommandParser {
 				new SetLocale(player, label, args, fileConfiguration);
 			} else {
 				player.sendMessage(
-						ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().PERMISSION_MESSAGE));
+						ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().PERMISSION_MESSAGE));
 			}
 			break;
 		default:
@@ -211,7 +211,7 @@ public class CommandParser {
 					new SetLobbyDelay(player, label, args, fileConfiguration);
 				} else {
 					player.sendMessage(
-							ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().PERMISSION_MESSAGE));
+							ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().PERMISSION_MESSAGE));
 				}
 				break;
 			case "gametime":
@@ -219,7 +219,7 @@ public class CommandParser {
 					new SetGameTime(player, label, args, fileConfiguration);
 				} else {
 					player.sendMessage(
-							ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().PERMISSION_MESSAGE));
+							ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().PERMISSION_MESSAGE));
 				}
 				break;
 			case "globalmessages":
@@ -227,17 +227,17 @@ public class CommandParser {
 					new SetGlobalMessages(player, label, args, fileConfiguration);
 				} else {
 					player.sendMessage(
-							ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().PERMISSION_MESSAGE));
+							ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().PERMISSION_MESSAGE));
 				}
 				break;
 			default:
-				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+				player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 						PluginLoader.getMessages().MISSING_ARGUMENTS.replace("$USAGE$",
 								"/rm global <lobbydelay|gametime|globalmessages> <Seconds|Minutes|true,false>")));
 				break;
 			}
 		} else {
-			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+			player.sendMessage(ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 					PluginLoader.getMessages().MISSING_ARGUMENTS.replace("$USAGE$",
 							"/rm global <lobbydelay|gametime|globalmessages> <Seconds|Minutes|true,false>")));
 		}

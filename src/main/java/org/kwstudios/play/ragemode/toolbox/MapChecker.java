@@ -39,7 +39,7 @@ public class MapChecker {
 
 	private void checkMapName() {
 		if (!fileConfiguration.isSet(ConstantHolder.GAME_PATH + "." + gameName)) {
-			message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+			message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 					PluginLoader.getMessages().INVALID_GAME.replace("$GAME$", gameName));
 			isValid = false;
 		} else {
@@ -50,7 +50,7 @@ public class MapChecker {
 	private void checkBasics() {
 		String path = ConstantHolder.GAME_PATH + "." + gameName;
 		if (!fileConfiguration.isSet(path + ".maxplayers") || !fileConfiguration.isSet(path + ".world")) {
-			message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+			message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 					PluginLoader.getMessages().NAME_OR_MAXPLAYERS_NOT_SET);
 			isValid = false;
 		} else {
@@ -59,13 +59,13 @@ public class MapChecker {
 				if (maxPlayers != -32500000) {
 					isValid = true;
 				} else {
-					message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+					message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 							PluginLoader.getMessages().MAXPLAYERS_NOT_SET.replace("$GAME$", gameName));
 					isValid = false;
 				}
 			} else {
 				message = ConstantHolder.RAGEMODE_PREFIX
-						+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().WORLDNAME_NOT_SET);
+						+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().WORLDNAME_NOT_SET);
 				isValid = false;
 			}
 		}
@@ -73,7 +73,7 @@ public class MapChecker {
 
 	private void checkLobby() {
 		if (!fileConfiguration.isSet(ConstantHolder.GAME_PATH + "." + gameName + "." + "lobby")) {
-			message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+			message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 					PluginLoader.getMessages().LOBBY_NOT_SET.replace("$GAME$", gameName));
 			isValid = false;
 		} else {
@@ -89,18 +89,18 @@ public class MapChecker {
 							&& isDouble(ConfigFactory.getString(thisPath, "pitch", fileConfiguration))) {
 						isValid = true;
 					} else {
-						message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+						message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 								PluginLoader.getMessages().LOBBY_COORDINATES_NOT_SET);
 						isValid = false;
 						return;
 					}
 				} else {
 					message = ConstantHolder.RAGEMODE_PREFIX
-							+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().WORLDNAME_NOT_SET);
+							+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().WORLDNAME_NOT_SET);
 					isValid = false;
 				}
 			} else {
-				message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+				message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 						PluginLoader.getMessages().LOBBY_NOT_SET_PROPERLY);
 				isValid = false;
 			}
@@ -128,7 +128,7 @@ public class MapChecker {
 							&& isDouble(ConfigFactory.getString(path + ".spawns." + s, "pitch", fileConfiguration))) {
 						isValid = true;
 					} else {
-						message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+						message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 								PluginLoader.getMessages().SPAWNS_NOT_SET_PROPERLY);
 						isValid = false;
 						break;
@@ -136,11 +136,11 @@ public class MapChecker {
 				}
 			} else {
 				message = ConstantHolder.RAGEMODE_PREFIX
-						+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().TOO_FEW_SPAWNS);
+						+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().TOO_FEW_SPAWNS);
 				isValid = false;
 			}
 		} else {
-			message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
+			message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
 					PluginLoader.getMessages().NO_SPAWNS_CONFIGURED.replace("$GAME$", gameName));
 			isValid = false;
 		}

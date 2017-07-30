@@ -6,6 +6,7 @@
 	<version>v0.2.2-beta</version>
 	<name>RageMode</name>
 	<description>RageMode plugin for Minecraft</description>
+
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<testSourceDirectory>src/test/java</testSourceDirectory>
@@ -36,22 +37,25 @@
 			</resource>
 		</resources>
 	</build>
+
 	<url>http://mc.kwstudios.org/</url>
+
 	<repositories>
 		<repository>
 			<id>spigot-repo</id>
 			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
 		</repository>
 		<repository>
-			<id>craftbukkit-repo</id>
-			<url>http://maven.elmakers.com/repository/</url>
+			<id>bintray-ybrin</id>
+			<url>https://dl.bintray.com/ybrin/maven/</url>
 		</repository>
 	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.spigotmc</groupId>
-			<artifactId>spigot-api</artifactId>
-			<version>1.8.8-R0.1-SNAPSHOT</version>
+			<artifactId>spigot</artifactId>
+			<version>1.8.8</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -63,11 +67,6 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.36</version>
-		</dependency>
-		<dependency>
-			<groupId>org.bukkit</groupId>
-			<artifactId>craftbukkit</artifactId>
-			<version>1.8.8-R0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
     		<groupId>org.filoghosts</groupId>

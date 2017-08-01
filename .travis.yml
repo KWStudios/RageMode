@@ -1,6 +1,7 @@
+sudo: required
 language: java
 jdk:
-- oraclejdk7
+- oraclejdk8
 script: mvn clean install
 install: true
 notifications:
@@ -11,6 +12,12 @@ notifications:
     on_success: change
     on_failure: always
   webhooks: https://api.kwstudios.org/travis/webhooks/versions
+before_install:
+- ./run_buildtools.sh
+# Cache maven directory for faster builds
+cache:
+  directories:
+  - $HOME/.m2
 before_deploy:
 - ls
 - cd target/

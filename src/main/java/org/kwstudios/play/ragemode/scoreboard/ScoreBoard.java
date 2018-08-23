@@ -15,10 +15,10 @@ import org.bukkit.scoreboard.ScoreboardManager;
 
 public class ScoreBoard {
 
-	public static HashMap<String, ScoreBoard> allScoreBoards = new HashMap<String, ScoreBoard>();
-	private List<Player> player = new ArrayList<Player>();
+	public static HashMap<String, ScoreBoard> allScoreBoards = new HashMap<>();
+	private List<Player> player = new ArrayList<>();
 	private ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
-	private HashMap<Player, ScoreBoardHolder> scoreboards = new HashMap<Player, ScoreBoardHolder>();
+	private HashMap<Player, ScoreBoardHolder> scoreboards = new HashMap<>();
 
 	/**
 	 * Creates a new instance of ScoreBoard, which manages the ScoreBoards for

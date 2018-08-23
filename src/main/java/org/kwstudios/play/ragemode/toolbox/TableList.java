@@ -78,8 +78,8 @@ public class TableList<S1, S2> {
 	}
 	
 	private void createLists(){
-		firstList = new ArrayList<S1>();
-		secondList = new ArrayList<S2>();
+		firstList = new ArrayList<>();
+		secondList = new ArrayList<>();
 	}
 
 }

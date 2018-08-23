@@ -7,6 +7,9 @@ import org.bukkit.entity.Player;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 
+import org.kwstudios.play.ragemode.events.TitleSendEvent;
+import org.kwstudios.play.ragemode.events.TabTitleSendEvent;
+
 public class TitleAPI {
 
 	@Deprecated

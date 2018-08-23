@@ -15,10 +15,10 @@ import org.bukkit.scoreboard.ScoreboardManager;
 
 public class TabAPI {
 	
-	public static HashMap<String, TabAPI> allScoreBoards = new HashMap<String, TabAPI>();
-	private List<Player> player = new ArrayList<Player>();
+	public static HashMap<String, TabAPI> allScoreBoards = new HashMap<>();
+	private List<Player> player = new ArrayList<>();
 	private ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
-	private HashMap<Player, TabHolder> scoreboards = new HashMap<Player, TabHolder>();
+	private HashMap<Player, TabHolder> scoreboards = new HashMap<>();
 
 	public TabAPI(List<Player> player) {
 		this.player = player;

@@ -28,7 +28,7 @@ public class GameLoader {
 
 	private String gameName;
 	private FileConfiguration fileConfiguration;
-	private List<Location> gameSpawns = new ArrayList<Location>();
+	private List<Location> gameSpawns = new ArrayList<>();
 
 	public GameLoader(String gameName, FileConfiguration fileConfiguration) {
 		this.gameName = gameName;
@@ -82,7 +82,7 @@ public class GameLoader {
 			teleportPlayersToGameSpawns();
 		} else {
 			String message = ConstantHolder.RAGEMODE_PREFIX
-					+ ChatColor.translateAlternateColorCodes('ง', PluginLoader.getMessages().GAME_NOT_SET_UP);
+					+ ChatColor.translateAlternateColorCodes('ยง', PluginLoader.getMessages().GAME_NOT_SET_UP);
 			GameBroadcast.broadcastToGame(gameName, message);
 			String[] players = PlayerList.getPlayersInGame(gameName);
 			for (String player : players) {

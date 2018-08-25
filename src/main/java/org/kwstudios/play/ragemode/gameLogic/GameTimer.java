@@ -118,7 +118,7 @@ public class GameTimer {
 
 					if (secondsRemaining % 2 == 0) {
 						String[] playerUUIDs = PlayerList.getPlayersInGame(gameName);
-						List<PlayerPoints> playerPoints = new ArrayList<PlayerPoints>();
+						List<PlayerPoints> playerPoints = new ArrayList<>();
 						for (String playerUUID : playerUUIDs) {
 							PlayerPoints points = RageScores.getPlayerPoints(playerUUID);
 							if (points != null) {

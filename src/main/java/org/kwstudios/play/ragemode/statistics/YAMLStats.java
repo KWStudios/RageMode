@@ -194,7 +194,7 @@ public class YAMLStats {
 		if(!inited)
 			return null;
 		
-		List<RetPlayerPoints> allRPPs = new ArrayList<RetPlayerPoints>();
+		List<RetPlayerPoints> allRPPs = new ArrayList<>();
 		
 		Set<String> allUUIDs = ConfigFactory.getKeysUnderPath("data", false, statsConfiguration);
 		

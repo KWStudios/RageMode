@@ -38,10 +38,10 @@ public class HoloHolder {
 			if (holosConfiguration.getList("data.holos") != null) {
 				savedHolos = (List<Location>) holosConfiguration.getList("data.holos");
 			} else {
-				savedHolos = new ArrayList<Location>();
+				savedHolos = new ArrayList<>();
 			}
 		} else {
-			savedHolos = new ArrayList<Location>();
+			savedHolos = new ArrayList<>();
 		}
 
 		// Bukkit.getConsoleSender().sendMessage(ConstantHolder.RAGEMODE_PREFIX

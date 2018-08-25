@@ -247,7 +247,7 @@ public class PluginLoader extends JavaPlugin {
 	}
 
 	public void loadMessages() {
-		HashMap<String, Boolean> fileNames = new HashMap<String, Boolean>();
+		HashMap<String, Boolean> fileNames = new HashMap<>();
 		for (File file : listFilesForFolder(new File(getDataFolder(), "locale"))) {
 			if (!fileNames.containsKey(file.getName())) {
 				fileNames.put(file.getName(), true);
@@ -353,7 +353,7 @@ public class PluginLoader extends JavaPlugin {
 	}
 
 	public static List<File> listFilesForFolder(File folder) {
-		List<File> fileList = new ArrayList<File>();
+		List<File> fileList = new ArrayList<>();
 		if (!folder.exists()) {
 			folder.mkdirs();
 		}

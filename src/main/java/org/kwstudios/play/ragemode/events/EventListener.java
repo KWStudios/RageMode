@@ -53,9 +53,9 @@ import org.kwstudios.play.ragemode.toolbox.MapChecker;
 
 public class EventListener implements Listener {
 
-	public static HashMap<String, Boolean> waitingGames = new HashMap<String, Boolean>();
+	public static HashMap<String, Boolean> waitingGames = new HashMap<>();
 	public FileConfiguration fileConfiguration = null;
-	private Map<UUID, UUID> explosionVictims = new HashMap<UUID, UUID>(); // shot,
+	private Map<UUID, UUID> explosionVictims = new HashMap<>(); // shot,
 																			// shooter
 
 	public EventListener(PluginLoader plugin, FileConfiguration fileconfiguration) {
@@ -243,7 +243,7 @@ public class EventListener implements Listener {
 					if (deceased.getKiller() == null) {
 						if (doDeathBroadcast) {
 							String message = ConstantHolder.RAGEMODE_PREFIX
-									+ ChatColor.translateAlternateColorCodes('ง',
+									+ ChatColor.translateAlternateColorCodes('ยง',
 											PluginLoader.getMessages().BROADCAST_AXE_KILL
 													.replace("$VICTIM$", deceased.getName())
 													.replace("$KILLER$", deceased.getName()));
@@ -253,7 +253,7 @@ public class EventListener implements Listener {
 					} else {
 						if (doDeathBroadcast) {
 							String message = ConstantHolder.RAGEMODE_PREFIX
-									+ ChatColor.translateAlternateColorCodes('ง',
+									+ ChatColor.translateAlternateColorCodes('ยง',
 											PluginLoader.getMessages().BROADCAST_AXE_KILL
 													.replace("$VICTIM$", deceased.getName())
 													.replace("$KILLER$", deceased.getKiller().getName()));
@@ -265,7 +265,7 @@ public class EventListener implements Listener {
 					if (deceased.getKiller() == null) {
 						if (doDeathBroadcast) {
 							String message = ConstantHolder.RAGEMODE_PREFIX
-									+ ChatColor.translateAlternateColorCodes('ง',
+									+ ChatColor.translateAlternateColorCodes('ยง',
 											PluginLoader.getMessages().BROADCAST_ARROW_KILL
 													.replace("$VICTIM$", deceased.getName())
 													.replace("$KILLER$", deceased.getName()));
@@ -275,7 +275,7 @@ public class EventListener implements Listener {
 					} else {
 						if (doDeathBroadcast) {
 							String message = ConstantHolder.RAGEMODE_PREFIX
-									+ ChatColor.translateAlternateColorCodes('ง',
+									+ ChatColor.translateAlternateColorCodes('ยง',
 											PluginLoader.getMessages().BROADCAST_ARROW_KILL
 													.replace("$VICTIM$", deceased.getName())
 													.replace("$KILLER$", deceased.getKiller().getName()));
@@ -288,7 +288,7 @@ public class EventListener implements Listener {
 					if (deceased.getKiller() == null) {
 						if (doDeathBroadcast) {
 							String message = ConstantHolder.RAGEMODE_PREFIX
-									+ ChatColor.translateAlternateColorCodes('ง',
+									+ ChatColor.translateAlternateColorCodes('ยง',
 											PluginLoader.getMessages().BROADCAST_KNIFE_KILL
 													.replace("$VICTIM$", deceased.getName())
 													.replace("$KILLER$", deceased.getName()));
@@ -298,7 +298,7 @@ public class EventListener implements Listener {
 					} else {
 						if (doDeathBroadcast) {
 							String message = ConstantHolder.RAGEMODE_PREFIX
-									+ ChatColor.translateAlternateColorCodes('ง',
+									+ ChatColor.translateAlternateColorCodes('ยง',
 											PluginLoader.getMessages().BROADCAST_KNIFE_KILL
 													.replace("$VICTIM$", deceased.getName())
 													.replace("$KILLER$", deceased.getKiller().getName()));
@@ -311,7 +311,7 @@ public class EventListener implements Listener {
 					if (explosionVictims.containsKey(deceased.getUniqueId())) {
 						if (doDeathBroadcast) {
 							String message = ConstantHolder.RAGEMODE_PREFIX
-									+ ChatColor.translateAlternateColorCodes('ง',
+									+ ChatColor.translateAlternateColorCodes('ยง',
 											PluginLoader.getMessages().BROADCAST_EXPLOSION_KILL
 													.replace("$VICTIM$", deceased.getName()).replace("$KILLER$",
 															Bukkit.getPlayer(
@@ -324,17 +324,17 @@ public class EventListener implements Listener {
 					} else {
 						if (doDeathBroadcast) {
 							String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor
-									.translateAlternateColorCodes('ง', PluginLoader.getMessages().BROADCAST_ERROR_KILL);
+									.translateAlternateColorCodes('ยง', PluginLoader.getMessages().BROADCAST_ERROR_KILL);
 							GameBroadcast.broadcastToGame(game, message);
 						}
-						String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
+						String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
 								PluginLoader.getMessages().UNKNOWN_KILLER);
 						deceased.sendMessage(message);
 					}
 
 				} else {
 					if (doDeathBroadcast) {
-						String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ง',
+						String message = ConstantHolder.RAGEMODE_PREFIX + ChatColor.translateAlternateColorCodes('ยง',
 								PluginLoader.getMessages().UNKNOWN_WEAPON.replace("$VICTIM$", deceased.getName()));
 						GameBroadcast.broadcastToGame(game, message);
 					}
@@ -441,7 +441,7 @@ public class EventListener implements Listener {
 							args[1] = SignCreator.getGameFromSign(sign);
 							new PlayerJoin(player, args[0], args, PluginLoader.getInstance().getConfig());
 						} else {
-							player.sendMessage(ChatColor.translateAlternateColorCodes('ง',
+							player.sendMessage(ChatColor.translateAlternateColorCodes('ยง',
 									PluginLoader.getMessages().PERMISSION_MESSAGE));
 						}
 					}
